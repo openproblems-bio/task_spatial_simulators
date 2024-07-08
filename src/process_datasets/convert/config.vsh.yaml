@@ -1,0 +1,78 @@
+name: convert
+namespace: process_datasets
+description: Transform the figshare rds into an HDF5-backed AnnData file.
+argument_groups:
+  - name: Inputs
+    arguments:
+      - type: file
+        name: --input_sc
+        description: Raw single-cell dataset
+        example: resources_test/datasets_raw/MOBNEW/dataset_sc.rds
+        required: true
+
+      - type: file
+        name: --input_sp
+        description: Raw spatial dataset
+        example: resources_test/datasets_raw/MOBNEW/dataset_sp.rds
+        required: true
+  - name: Outputs
+    arguments:
+      - type: file
+        name: --output_sc
+        description: Processed single-cell dataset
+        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad
+        direction: output
+        required: true
+      
+      - type: file
+        name: --output_sp
+        description: Processed spatial dataset
+        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
+        direction: output
+        required: true
+  - name: Dataset metadata
+    arguments:
+      - type: string
+        name: --dataset_id
+        description: A unique identifier for the dataset.
+        required: true
+      - type: string
+        name: --dataset_name
+        description: A human-readable name for the dataset.
+        required: true
+      - type: string
+        name: --dataset_url
+        description: Link to the original source of the dataset.
+        required: false
+      - type: string
+        name: --dataset_reference
+        description: Bibtex reference of the paper in which the dataset was published.
+        required: false
+        multiple: true
+      - type: string
+        name: --dataset_summary
+        description: Short description of the dataset.
+        required: true
+      - type: string
+        name: --dataset_description
+        description: Long description of the dataset.
+        required: true
+      - type: string
+        name: --dataset_organism
+        description: Organism from which the dataset was derived.
+        required: true
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    setup:
+      - type: r
+        bioc: [SingleCellExperiment]
+
+runners:
+  - type: executable
+  - type: nextflow
