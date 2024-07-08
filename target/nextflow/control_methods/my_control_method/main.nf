@@ -3037,7 +3037,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/my_control_method",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "3de84d0d57886e815017857017416e1cabdd5b48",
+    "git_commit" : "e8f9b7ddd2b3b68307dba6ff2da67e469742264f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3049,12 +3049,7 @@ meta = [
         {
           "type" : "s3",
           "path" : "s3://openproblems-data/resources_test/task_spatial_simulators",
-          "dest" : "resources_test/task_spatial_simulators"
-        },
-        {
-          "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/common/",
-          "dest" : "resources_test/common"
+          "dest" : "resources_test"
         }
       ]
     },

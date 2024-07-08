@@ -13,10 +13,7 @@ info:
   test_resources:
     - type: s3
       path: s3://openproblems-data/resources_test/task_spatial_simulators
-      dest: resources_test/task_spatial_simulators
-    - type: s3
-      path: s3://openproblems-data/resources_test/common/
-      dest: resources_test/common
+      dest: resources_test
 version: build_main
 config_mods: |
   .runners[.type == "nextflow"].config.labels := { lowmem : "memory = 20.Gb", midmem : "memory = 50.Gb", highmem : "memory = 100.Gb", lowcpu : "cpus = 5", midcpu : "cpus = 15", highcpu : "cpus = 30", lowtime : "time = 1.h", midtime : "time = 4.h", hightime : "time = 8.h", veryhightime : "time = 24.h" }
