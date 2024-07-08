@@ -5,7 +5,7 @@ image: The name of the image file to use for the component on the website.
 motivation: |
   Computational methods for spatially resolved transcriptomics (SRT) are frequently developed 
   and assessed through data simulation. The effectiveness of these evaluations relies on the 
-  simulation methods’ ability to accurately reflect experimental data. However, a systematic 
+  simulation methods' ability to accurately reflect experimental data. However, a systematic 
   evaluation framework for spatial simulators is lacking. Here, we present SpatialSimBench, 
   a comprehensive evaluation framework that assesses 13 simulation methods using 10 distinct 
   STR datasets.

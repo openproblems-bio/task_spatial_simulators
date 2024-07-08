@@ -5,16 +5,117 @@ argument_groups:
 - name: "Arguments"
   arguments:
   - type: "file"
-    name: "--input_test"
+    name: "--input_spatial_dataset"
     info:
-      label: "Test data"
-      summary: "The subset of molecules used for the test dataset"
+      label: "Spatial dataset"
+      summary: "An unprocessed spatial dataset as output by a dataset loader."
+      description: "This dataset contains raw counts and metadata as output by a dataset\
+        \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema\
+        \ v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
       slots:
         layers:
         - type: "integer"
           name: "counts"
           description: "Raw counts"
           required: true
+        - type: "integer"
+          name: "logcounts"
+          description: "Log-transformed counts"
+          required: true
+        obs:
+        - type: "double"
+          name: "col"
+          description: "Column index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "row"
+          description: "Row index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "sizeFactor"
+          description: "Size factor for the cell."
+          required: true
+        - type: "integer"
+          name: "spatial_cluster"
+          description: "Spatial cluster assignment for the cell."
+          required: true
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        obsm:
+        - type: "float"
+          name: "celltype_proportions"
+          description: "Spot-by-celltype matrix of celltype proportions generated\
+            \ by CARD."
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+    example:
+    - "resources_test/common/mobnew/dataset_sp.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--input_simulated_dataset"
+    info:
+      label: "Solution"
+      summary: "The solution for the test data"
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        - type: "double"
+          name: "normalized"
+          description: "Normalized counts"
+          required: true
+        obs:
+        - "..."
+        var:
+        - "..."
+        obsm:
+        - "..."
         uns:
         - type: "string"
           name: "dataset_id"
@@ -44,40 +145,12 @@ argument_groups:
           type: "string"
           description: "The organism of the sample in the dataset."
           required: false
-        - name: "train_sum"
-          type: "integer"
-          description: "The total number of counts in the training dataset."
+        - type: "string"
+          name: "normalization_id"
+          description: "Which normalization was used"
           required: true
     example:
-    - "resources_test/denoising/pancreas/test.h5ad"
-    must_exist: true
-    create_parent: true
-    required: true
-    direction: "input"
-    multiple: false
-    multiple_sep: ";"
-  - type: "file"
-    name: "--input_prediction"
-    info:
-      label: "Predicted data"
-      summary: "A predicted dataset as output by a method."
-      slots:
-        layers:
-        - type: "integer"
-          name: "prediction"
-          description: "predicted data"
-          required: true
-        uns:
-        - type: "string"
-          name: "dataset_id"
-          description: "A unique identifier for the dataset"
-          required: true
-        - type: "string"
-          name: "method_id"
-          description: "A unique identifier for the method"
-          required: true
-    example:
-    - "resources_test/denoising/pancreas/denoised.h5ad"
+    - "resources_test/label_projection/pancreas/solution.h5ad"
     must_exist: true
     create_parent: true
     required: true
@@ -199,7 +272,7 @@ build_info:
   output: "target/executable/metrics/my_metric"
   executable: "target/executable/metrics/my_metric/my_metric"
   viash_version: "0.9.0-RC6"
-  git_commit: "8c223389d34c24582b26a40ffc295e06404a1b1b"
+  git_commit: "c691b013fcfca6b6f084685a42e5c48e11ba0fc3"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"

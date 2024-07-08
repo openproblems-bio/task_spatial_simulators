@@ -7,12 +7,12 @@ info:
     description: |
       A metric for evaluating method predictions.
 arguments:
-  - name: "--input_test"
-    __merge__: file_test_h5ad.yaml
+  - name: "--input_spatial_dataset"
+    __merge__: file_dataset_sp.yaml
     direction: input
     required: true
-  - name: "--input_prediction"
-    __merge__: file_prediction.yaml
+  - name: "--input_simulated_dataset"
+    __merge__: file_simulated_dataset.yaml
     direction: input
     required: true
   - name: "--output"

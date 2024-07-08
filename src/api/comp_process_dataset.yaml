@@ -1,4 +1,4 @@
-namespace: ""
+namespace: "process_dataset"
 info:
   type: process_dataset
   type_info:
@@ -7,20 +7,25 @@ info:
     description: |
       A component for processing a Common Dataset into a task-specific dataset.
 arguments:
-  - name: "--input"
-    __merge__: file_common_dataset.yaml
-    direction: input
+  - type: file
+    name: --input_sc
+    description: Raw single-cell dataset
+    example: resources_test/datasets_raw/MOBNEW/dataset_sc.rds
     required: true
-  - name: "--output_train"
-    __merge__: file_train.yaml
+
+  - type: file
+    name: --input_sp
+    description: Raw spatial dataset
+    example: resources_test/datasets_raw/MOBNEW/dataset_sp.rds
+    required: true
+
+  - name: --output_sc
+    __merge__: file_dataset_sc.yaml
     direction: output
     required: true
-  - name: "--output_test"
-    __merge__: file_test.yaml
-    direction: output
-    required: true
-  - name: "--output_solution"
-    __merge__: file_solution.yaml
+  
+  - name: --output_sp
+    __merge__: file_dataset_sp.yaml
     direction: output
     required: true
 test_resources:

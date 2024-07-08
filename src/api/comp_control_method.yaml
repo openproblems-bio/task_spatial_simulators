@@ -7,16 +7,12 @@ info:
     description: |
       A control method to predict effects.
 arguments:
-  - name: --input_train
-    __merge__: file_train_h5ad.yaml
+  - name: --input
+    __merge__: file_dataset_sp.yaml
     required: false
     direction: input
-  - name: --input_test
-    __merge__: file_test_h5ad.yaml
-    required: true
-    direction: input
   - name: --output
-    __merge__: file_prediction.yaml
+    __merge__: file_simulated_dataset.yaml
     required: true
     direction: output
 test_resources:
