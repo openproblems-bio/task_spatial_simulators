@@ -2905,7 +2905,7 @@ meta = [
   "status" : "enabled",
   "license" : "MIT",
   "links" : {
-    "repository" : "https://github.com/openproblems-bio/task_template",
+    "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
     "docker_registry" : "ghcr.io"
   },
   "runners" : [
@@ -2963,19 +2963,19 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/my_method",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "938955830b9701a75aad41ff6bd42f76e735c179",
+    "git_commit" : "343a3ceb597934e334bde6f42c185bf26d9a9842",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
-    "name" : "task_template",
+    "name" : "task_spatial_simulators",
     "version" : "build_main",
-    "description" : "An OpenProblems benchmark task.\n",
+    "description" : "An OpenProblems benchmark task of spatial simulators.\n",
     "info" : {
       "test_resources" : [
         {
           "type" : "s3",
-          "path" : "s3://openproblems-data/resources_test/task_template",
-          "dest" : "resources_test/task_template"
+          "path" : "s3://openproblems-data/resources_test/task_spatial_simulators",
+          "dest" : "resources_test/task_spatial_simulators"
         },
         {
           "type" : "s3",
@@ -2993,14 +2993,15 @@ meta = [
     "keywords" : [
       "single-cell",
       "openproblems",
-      "benchmark"
+      "benchmark",
+      "spatial simulation"
     ],
     "license" : "MIT",
     "organization" : "openproblems-bio",
     "links" : {
-      "repository" : "https://github.com/openproblems-bio/task_template",
+      "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
       "docker_registry" : "ghcr.io",
-      "issue_tracker" : "https://github.com/openproblems-bio/task_template/issues"
+      "issue_tracker" : "https://github.com/openproblems-bio/task_spatial_simulators/issues"
     }
   }
 }'''))
@@ -3427,7 +3428,7 @@ meta["defaults"] = [
   directives: readJsonBlob('''{
   "container" : {
     "registry" : "ghcr.io",
-    "image" : "openproblems-bio/task_template/methods/my_method",
+    "image" : "openproblems-bio/task_spatial_simulators/methods/my_method",
     "tag" : "build_main"
   },
   "label" : [

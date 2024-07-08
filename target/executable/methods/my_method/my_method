@@ -458,9 +458,9 @@ function ViashDockerfile {
 FROM ghcr.io/openproblems-bio/base_python:1.0.4
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component methods my_method"
-LABEL org.opencontainers.image.created="2024-07-08T12:18:05Z"
-LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_template"
-LABEL org.opencontainers.image.revision="938955830b9701a75aad41ff6bd42f76e735c179"
+LABEL org.opencontainers.image.created="2024-07-08T12:42:13Z"
+LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
+LABEL org.opencontainers.image.revision="343a3ceb597934e334bde6f42c185bf26d9a9842"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -683,7 +683,7 @@ if [[ "$VIASH_ENGINE_TYPE" == "docker" ]]; then
 
   # determine docker image id
   if [[ "$VIASH_ENGINE_ID" == 'docker' ]]; then
-    VIASH_DOCKER_IMAGE_ID='ghcr.io/openproblems-bio/task_template/methods/my_method:build_main'
+    VIASH_DOCKER_IMAGE_ID='ghcr.io/openproblems-bio/task_spatial_simulators/methods/my_method:build_main'
   fi
 
   # print dockerfile
