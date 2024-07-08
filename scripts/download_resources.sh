@@ -5,12 +5,8 @@ set -e
 echo ">> Downloading resources"
 
 common/sync_resources/sync_resources \
-  --input "s3://openproblems-data/resources_test/common/" \
-  --output "resources_test/common" \
+  --input "s3://openproblems-data/resources_test/spatial_simulators/" \
+  --output "resources_test" \
   --delete
 
-# After finishing the task and the task specific test_resources are uploaded to s3, uncomment:
-# common/sync_resources/sync_resources \
-#   --input "s3://openproblems-data/resources_test/<task_name>/" \
-#   --output "resources_test/<task_name>" \
-#   --delete
+# aws s3 sync --profile op resources_test s3://openproblems-data/resources_test/task_spatial_simulators/ --dryrun
