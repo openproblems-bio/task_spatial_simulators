@@ -1,30 +1,33 @@
-name: A unique identifier. Can only contain lowercase letters, numbers or underscores.
-label: A unique, human-readable, short label. Used for creating summary tables and visualisations.
-summary: A one sentence summary of purpose and methodology. Used for creating an overview tables.
+name: task_spatial_simulators
+label: spatial transcriptomics, single-cell, openproblems, benchmark, spatial simulation
+summary: Benchmark study of spatial simulation models.
 image: The name of the image file to use for the component on the website.
 motivation: |
-  Explain the motivation behind your proposed task. Describe the biological or computational 
-  problem you aim to address and why it’s important. Discuss the current state of research in
-  this area and any gaps or challenges that your task could help address. This section 
-  should convince readers of the significance and relevance of your task.
+  Computational methods for spatially resolved transcriptomics (SRT) are frequently developed 
+  and assessed through data simulation. The effectiveness of these evaluations relies on the 
+  simulation methods’ ability to accurately reflect experimental data. However, a systematic 
+  evaluation framework for spatial simulators is lacking. Here, we present SpatialSimBench, 
+  a comprehensive evaluation framework that assesses 13 simulation methods using 10 distinct 
+  STR datasets.
 description: |
-  Provide a clear and concise description of your task, detailing the specific problem it aims
-  to solve. Outline the input data types, the expected output, and any assumptions or constraints.
-  Be sure to explain any terminology or concepts that are essential for understanding the task.
+  Through SpatialSimBench, we demonstrate the feasibility of leveraging existing single-cell 
+   simulators for SRT data and highlight performance differences among methods. Additionally, 
+   we evaluate the simulation methods based on a total of 35 metrics across data property 
+   estimation, various downstream analysis and scalability. In total, we generated 4550 results 
+   from 13 simulation methods, 10 spatial datasets and 35 metrics.
 
 authors: 
-  # Full name of the author, usually in the name of FirstName MiddleName LastName.
-  - name: ... 
-    # Role of the author. Possible values:
-    # 
-    # * `"author"`: Authors who have made substantial contributions to the component.
-    # * `"maintainer"`: The maintainer of the component.
-    # * `"contributor"`: Authors who have made smaller contributions (such as code patches etc.).
-    roles: [ ... ]
-    # Additional information on the author
+  - name: Xiaoqi Liang
+    roles: [ author, maintainer ]
     info: 
-      github: ...
-      orcid: ...
-      email: ...
-      twitter: ...
-      linkedin: ...
+      github: littlecabiria
+      orcid: 0009-0004-9625-1441
+  - name: Yue Cao
+    roles: [ author, contributor ]
+    info: 
+      github: ycao6928
+  - name: Jean Yee Hwa Yang
+    roles: [ author, contributor ]
+    info: 
+      github: jeany21
+
