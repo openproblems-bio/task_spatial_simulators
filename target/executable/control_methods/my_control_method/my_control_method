@@ -180,7 +180,7 @@ function ViashHelp {
   echo ""
   echo "    --output"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: resources_test/label_projection/pancreas/solution.h5ad"
+  echo "        example: resources_test/common/mobnew/dataset_sc.h5ad"
 }
 
 # initialise variables
@@ -458,9 +458,9 @@ function ViashDockerfile {
 FROM ghcr.io/openproblems-bio/base_python:1.0.4
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component control_methods my_control_method"
-LABEL org.opencontainers.image.created="2024-07-09T11:26:12Z"
+LABEL org.opencontainers.image.created="2024-07-09T12:03:53Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="a22e0fcbbd9e00565150569beddb4cd888d43717"
+LABEL org.opencontainers.image.revision="0b91ab338d4a96e429a60d96572ee72155ef20d0"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

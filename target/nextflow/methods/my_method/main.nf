@@ -3022,7 +3022,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/label_projection/pancreas/solution.h5ad"
+            "resources_test/common/mobnew/dataset_sc.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3133,7 +3133,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/my_method",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "a22e0fcbbd9e00565150569beddb4cd888d43717",
+    "git_commit" : "0b91ab338d4a96e429a60d96572ee72155ef20d0",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
