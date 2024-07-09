@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# download and process all datasets from figshare
+# https://figshare.com/articles/dataset/SpatialSimBench_dataset/26054188
 
 cat > /tmp/params.yaml <<'EOF'
 param_list:
