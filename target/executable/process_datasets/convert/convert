@@ -505,9 +505,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2024-07-09T12:27:27Z"
+LABEL org.opencontainers.image.created="2024-07-09T12:27:59Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="f05ccb0c99d53d3acdcec4f77ddecdbac2cc5122"
+LABEL org.opencontainers.image.revision="56f81c793136dc1de4255aeda6058dec6515c8a5"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
