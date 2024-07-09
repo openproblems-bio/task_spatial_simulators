@@ -66,6 +66,12 @@ resources:
   - type: r_script
     path: script.R
 
+test_resources:
+  - path: /resources_test/datasets_raw/MOBNEW
+    dest: resources_test/datasets_raw/MOBNEW
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+
 engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
