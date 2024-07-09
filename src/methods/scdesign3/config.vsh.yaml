@@ -10,7 +10,7 @@ info:
     likelihood enable scDesign3 to generate customized in silico data and unsupervisedly
     assess the goodness-of-fit of inferred cell latent structures (for example, clusters,
     trajectories and spatial locations).
-  reference: "doi: 10.1038/s41587-023-01772-1"
+  reference: "10.1038/s41587-023-01772-1"
   documentation_url: https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html
   repository_url: https://github.com/SONGDONGYUAN1994/scDesign3
 
