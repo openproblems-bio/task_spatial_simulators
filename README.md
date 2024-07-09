@@ -34,6 +34,12 @@ If you already cloned the repository and forgot to use the `--recursive` flag, y
 git submodule update --init --recursive
 ```
 
+Once you have cloned the repository, you can start download the test resources using the following command:
+
+```bash
+scripts/download_resources.sh
+```
+
 ## What to do next
 
 Check out the [instructions](common/INSTRUCTIONS.md) for more information on how to update the example files and components. These instructions also contain information on how to build out the task and basic commands.
