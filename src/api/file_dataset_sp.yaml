@@ -1,5 +1,5 @@
 type: file
-example: "resources_test/common/mobnew/dataset_sp.h5ad"
+example: "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
 info:
   label: Spatial dataset
   summary: An unprocessed spatial dataset as output by a dataset loader.

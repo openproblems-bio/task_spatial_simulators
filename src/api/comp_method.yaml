@@ -11,6 +11,16 @@ arguments:
     __merge__: file_dataset_sp.yaml
     required: false
     direction: input
+  - name: --base
+    type: string
+    description: |
+      Type of simulation experiment. 
+
+      * `domain`: Simulate each region separately and then concatenate everything together.
+      * `tissue`: Simulate the entire slide in one go.
+    choices: [domain, tissue]
+    required: false
+    default: domain
   - name: --output
     __merge__: file_simulated_dataset.yaml
     required: true
@@ -21,5 +31,5 @@ test_resources:
   - type: python_script
     path: /common/component_tests/check_method_config.py
   - path: /common/library.bib
-  #TODO: - path: fill in e.g. /resources/denoising/pancreas
-  #TODO:   dest:  fill in e.g. resources/denoising/pancreas
+  - path: /resources_test/datasets
+    dest: resources_test/datasets
