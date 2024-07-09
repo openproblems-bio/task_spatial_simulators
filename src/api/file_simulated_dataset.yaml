@@ -1,5 +1,5 @@
 type: file
-example: "resources_test/common/mobnew/dataset_sc.h5ad"
+example: "resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
 info:
   label: "Solution"
   summary: "The solution for the test data"
@@ -9,10 +9,6 @@ info:
         name: counts
         description: Raw counts
         required: true
-      - type: integer
-        name: logcounts
-        description: Log-transformed counts
-        required: true
     obs:
       - type: double
         name: col
@@ -21,10 +17,6 @@ info:
       - type: double
         name: row
         description: Row index of the cell in the spatial grid.
-        required: true
-      - type: double
-        name: sizeFactor
-        description: Size factor for the cell.
         required: true
       - type: integer
         name: spatial_cluster
@@ -70,3 +62,7 @@ info:
         description: The organism of the sample in the dataset.
         required: false
         multiple: true
+      - name: method_id
+        type: string
+        description: A unique identifier for the method used to generate the dataset.
+        required: true
