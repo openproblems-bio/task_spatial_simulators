@@ -1,11 +1,11 @@
 import yaml
+import re
 
 ## VIASH START
 meta = {
     "config" : "foo"
 }
 ## VIASH END
-
 
 NAME_MAXLEN = 50
 
@@ -43,8 +43,17 @@ def check_url(url):
     else:
         return False
 
+def is_working_doi(doi):
+    if not re.match(r"^10.\d{4,9}/[-._;()/:A-Za-z0-9]+$", doi):
+        return False
+    
+    url = f"https://doi.org/{doi}"
+    return check_url(url)
+
 def search_ref_bib(reference):
-    import re
+    if is_working_doi(reference):
+        return True
+    
     bib = _load_bib()
     
     entry_pattern =  r"(@\w+{[^}]*" + reference + r"[^}]*}(.|\n)*?)(?=@)"
@@ -115,9 +124,9 @@ if "variants" in info:
             for arg_id in paramset:
                 assert arg_id in arg_names, f"Argument '{arg_id}' in `.info.variants['{paramset_id}']` is not an argument in `.arguments`."
 
-assert "preferred_normalization" in info, "preferred_normalization not an info field"
-norm_methods = ["log_cpm", "log_cp10k", "counts", "log_scran_pooling", "sqrt_cpm", "sqrt_cp10k", "l1_sqrt"]
-assert info["preferred_normalization"] in norm_methods, "info['preferred_normalization'] not one of '" + "', '".join(norm_methods) + "'."
+if "preferred_normalization" in info:
+    norm_methods = ["log_cpm", "log_cp10k", "counts", "log_scran_pooling", "sqrt_cpm", "sqrt_cp10k", "l1_sqrt"]
+    assert info["preferred_normalization"] in norm_methods, "info['preferred_normalization'] not one of '" + "', '".join(norm_methods) + "'."
 
 print("Check runners fields", flush=True)
 runners = config["runners"]

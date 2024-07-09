@@ -3108,7 +3108,7 @@ meta = [
     "label" : "scDesign3",
     "summary" : "A probabilistic model that unifies the generation and inference for single-cell and spatial omics data",
     "description" : "scDesign3 offers a probabilistic model that unifies the generation and inference\nfor single-cell and spatial omics data. The model's interpretable parameters and\nlikelihood enable scDesign3 to generate customized in silico data and unsupervisedly\nassess the goodness-of-fit of inferred cell latent structures (for example, clusters,\ntrajectories and spatial locations).\n",
-    "reference" : "doi: 10.1038/s41587-023-01772-1",
+    "reference" : "10.1038/s41587-023-01772-1",
     "documentation_url" : "https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html",
     "repository_url" : "https://github.com/SONGDONGYUAN1994/scDesign3",
     "type" : "method",
@@ -3183,7 +3183,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "b12e10c4b8d0bfddd66f42bce9052130eaa30f0b",
+    "git_commit" : "50a10076f53fcd82ee4b09ce64cc0d62d3276e44",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
