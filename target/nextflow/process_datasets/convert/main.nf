@@ -2823,7 +2823,7 @@ meta = [
           "name" : "--output_sc",
           "description" : "Processed single-cell dataset",
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+            "dataset_sc.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2837,7 +2837,7 @@ meta = [
           "name" : "--output_sp",
           "description" : "Processed spatial dataset",
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+            "dataset_sp.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2850,6 +2850,7 @@ meta = [
     },
     {
       "name" : "Dataset metadata",
+      "description" : "Metadata about the dataset, used for documentation and provenance.",
       "arguments" : [
         {
           "type" : "string",
@@ -2881,7 +2882,10 @@ meta = [
         {
           "type" : "string",
           "name" : "--dataset_reference",
-          "description" : "Bibtex reference of the paper in which the dataset was published.",
+          "description" : "A doi for the dataset.",
+          "example" : [
+            "10.1234/s1234-5678-9012-3"
+          ],
           "required" : false,
           "direction" : "input",
           "multiple" : true,
@@ -3002,7 +3006,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "50a10076f53fcd82ee4b09ce64cc0d62d3276e44",
+    "git_commit" : "3410b37bcc9a4c7f9f3b00c77bf5fd6616c292cd",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

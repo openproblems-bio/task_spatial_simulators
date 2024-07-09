@@ -20,17 +20,19 @@ argument_groups:
       - type: file
         name: --output_sc
         description: Processed single-cell dataset
-        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad
+        example: dataset_sc.h5ad
         direction: output
         required: true
       
       - type: file
         name: --output_sp
         description: Processed spatial dataset
-        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
+        example: dataset_sp.h5ad
         direction: output
         required: true
+
   - name: Dataset metadata
+    description: Metadata about the dataset, used for documentation and provenance.
     arguments:
       - type: string
         name: --dataset_id
@@ -46,7 +48,8 @@ argument_groups:
         required: false
       - type: string
         name: --dataset_reference
-        description: Bibtex reference of the paper in which the dataset was published.
+        description: A doi for the dataset.
+        example: 10.1234/s1234-5678-9012-3
         required: false
         multiple: true
       - type: string
