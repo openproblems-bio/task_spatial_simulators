@@ -1,4 +1,4 @@
-name: "splatter"
+name: "srtsim"
 namespace: "methods"
 version: "build_main"
 argument_groups:
@@ -206,16 +206,15 @@ test_resources:
   path: "resources_test/datasets"
   dest: "resources_test/datasets"
 info:
-  label: "Splatter"
-  summary: "A single cell RNA-seq data simulator based on a gamma-Poisson distribution."
-  description: "The Splat model is a gamma-Poisson distribution used to generate a\
-    \ gene by cell matrix of counts. Mean expression levels for each gene are simulated\
-    \ from a gamma distribution and the Biological Coefficient of Variation is used\
-    \ to enforce a mean-variance trend before counts are simulated from a Poisson\
-    \ distribution.\n"
-  reference: "10.1186/s13059-017-1305-0"
-  documentation_url: "https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html"
-  repository_url: "https://github.com/Oshlack/splatter"
+  label: "srtsim"
+  summary: "An SRT-specific simulator for scalable, reproducible, and realistic SRT\
+    \ simulations."
+  description: "A key benefit of srtsim is its ability to maintain location-wise and\
+    \ gene-wise SRT count properties and \npreserve spatial expression patterns, enabling\
+    \ evaluation of SRT method performance using synthetic data. \n"
+  reference: "110.1186/s13059-023-02879-z"
+  documentation_url: "https://xzhoulab.github.io/srtsim/"
+  repository_url: "https://github.com/xzhoulab/srtsim"
   type: "method"
   type_info:
     label: "Method"
@@ -265,16 +264,16 @@ engines:
   setup:
   - type: "r"
     bioc:
-    - "splatter"
+    - "srtsim"
     bioc_force_install: false
   entrypoint: []
   cmd: null
 build_info:
-  config: "src/methods/splatter/config.vsh.yaml"
-  runner: "executable"
+  config: "src/methods/SRTsim/config.vsh.yaml"
+  runner: "nextflow"
   engine: "docker"
-  output: "target/executable/methods/splatter"
-  executable: "target/executable/methods/splatter/splatter"
+  output: "target/nextflow/methods/srtsim"
+  executable: "target/nextflow/methods/srtsim/main.nf"
   viash_version: "0.9.0-RC6"
   git_commit: "53668223c637e802ea5e1aac78413974856786bb"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"

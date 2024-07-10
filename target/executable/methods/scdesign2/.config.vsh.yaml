@@ -1,4 +1,4 @@
-name: "splatter"
+name: "scdesign2"
 namespace: "methods"
 version: "build_main"
 argument_groups:
@@ -206,16 +206,16 @@ test_resources:
   path: "resources_test/datasets"
   dest: "resources_test/datasets"
 info:
-  label: "Splatter"
-  summary: "A single cell RNA-seq data simulator based on a gamma-Poisson distribution."
-  description: "The Splat model is a gamma-Poisson distribution used to generate a\
-    \ gene by cell matrix of counts. Mean expression levels for each gene are simulated\
-    \ from a gamma distribution and the Biological Coefficient of Variation is used\
-    \ to enforce a mean-variance trend before counts are simulated from a Poisson\
-    \ distribution.\n"
-  reference: "10.1186/s13059-017-1305-0"
-  documentation_url: "https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html"
-  repository_url: "https://github.com/Oshlack/splatter"
+  label: "scDesign2"
+  summary: "A transparent simulator that generates high-fidelity single-cell gene\
+    \ expression count data with gene correlations captured"
+  description: "scDesign2 is a transparent simulator that achieves all three goals\
+    \ (preserving genes, capturing gene correlations, and generating any \nnumber\
+    \ of cells with varying sequencing depths) and generates high-fidelity synthetic\
+    \ data for multiple single-cell gene expression \ncount-based technologies. \n"
+  reference: "10.1186/s13059-021-02367-2"
+  documentation_url: "https://htmlpreview.github.io/?https://github.com/JSB-UCLA/scDesign2/blob/master/vignettes/scDesign2.html"
+  repository_url: "https://github.com/JSB-UCLA/scDesign2"
   type: "method"
   type_info:
     label: "Method"
@@ -265,16 +265,16 @@ engines:
   setup:
   - type: "r"
     bioc:
-    - "splatter"
+    - "srtsim"
     bioc_force_install: false
   entrypoint: []
   cmd: null
 build_info:
-  config: "src/methods/splatter/config.vsh.yaml"
+  config: "src/methods/scDesign2/config.vsh.yaml"
   runner: "executable"
   engine: "docker"
-  output: "target/executable/methods/splatter"
-  executable: "target/executable/methods/splatter/splatter"
+  output: "target/executable/methods/scdesign2"
+  executable: "target/executable/methods/scdesign2/scdesign2"
   viash_version: "0.9.0-RC6"
   git_commit: "53668223c637e802ea5e1aac78413974856786bb"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
