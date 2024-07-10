@@ -3006,7 +3006,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "1b889fea1d82944e91de948bf6b3c6680ce2458e",
+    "git_commit" : "b88031980538d6faad36773e8641c37fe3c4e635",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

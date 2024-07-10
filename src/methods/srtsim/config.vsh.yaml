@@ -3,13 +3,13 @@ __merge__: ../../api/comp_method.yaml
 name: srtsim
 
 info:
-  label: srtsim
+  label: SRTsim
   summary: An SRT-specific simulator for scalable, reproducible, and realistic SRT simulations.
   description: |
     A key benefit of srtsim is its ability to maintain location-wise and gene-wise SRT count properties and 
     preserve spatial expression patterns, enabling evaluation of SRT method performance using synthetic data. 
-  reference: 110.1186/s13059-023-02879-z
-  documentation_url: https://xzhoulab.github.io/srtsim/
+  reference: 10.1186/s13059-023-02879-z
+  documentation_url: https://xzhoulab.github.io/SRTsim
   repository_url: https://github.com/xzhoulab/srtsim
 
 resources:
@@ -21,7 +21,7 @@ engines:
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
       - type: r
-        bioc: srtsim
+        cran: SRTsim
 
 runners:
   - type: executable

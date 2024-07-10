@@ -466,13 +466,13 @@ function ViashDockerfile {
     cat << 'VIASHDOCKER'
 FROM ghcr.io/openproblems-bio/base_images/r:1.1.0
 ENTRYPOINT []
-RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
-  Rscript -e 'if (!requireNamespace("srtsim", quietly = TRUE)) BiocManager::install("srtsim")'
+RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
+  Rscript -e 'remotes::install_cran(c("SRTsim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods srtsim"
-LABEL org.opencontainers.image.created="2024-07-10T23:11:04Z"
+LABEL org.opencontainers.image.created="2024-07-10T23:27:30Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="1b889fea1d82944e91de948bf6b3c6680ce2458e"
+LABEL org.opencontainers.image.revision="b88031980538d6faad36773e8641c37fe3c4e635"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -3151,12 +3151,12 @@ meta = [
     }
   ],
   "build_info" : {
-    "config" : "/home/runner/work/task_spatial_simulators/task_spatial_simulators/src/methods/scDesign2/config.vsh.yaml",
+    "config" : "/home/runner/work/task_spatial_simulators/task_spatial_simulators/src/methods/scdesign2/config.vsh.yaml",
     "runner" : "nextflow",
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign2",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "1b889fea1d82944e91de948bf6b3c6680ce2458e",
+    "git_commit" : "b88031980538d6faad36773e8641c37fe3c4e635",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
