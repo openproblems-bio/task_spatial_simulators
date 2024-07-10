@@ -1,15 +1,16 @@
 __merge__: ../../api/comp_method.yaml
 
-name: splatter
+name: srtsim
 
 info:
-  label: Splatter
-  summary: A single cell RNA-seq data simulator based on a gamma-Poisson distribution.
+  label: srtsim
+  summary: An SRT-specific simulator for scalable, reproducible, and realistic SRT simulations.
   description: |
-    The Splat model is a gamma-Poisson distribution used to generate a gene by cell matrix of counts. Mean expression levels for each gene are simulated from a gamma distribution and the Biological Coefficient of Variation is used to enforce a mean-variance trend before counts are simulated from a Poisson distribution.
-  reference: 10.1186/s13059-017-1305-0
-  documentation_url: https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html
-  repository_url: https://github.com/Oshlack/splatter
+    A key benefit of srtsim is its ability to maintain location-wise and gene-wise SRT count properties and 
+    preserve spatial expression patterns, enabling evaluation of SRT method performance using synthetic data. 
+  reference: 110.1186/s13059-023-02879-z
+  documentation_url: https://xzhoulab.github.io/srtsim/
+  repository_url: https://github.com/xzhoulab/srtsim
 
 resources:
   - type: r_script
@@ -20,7 +21,7 @@ engines:
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
       - type: r
-        bioc: splatter
+        bioc: srtsim
 
 runners:
   - type: executable

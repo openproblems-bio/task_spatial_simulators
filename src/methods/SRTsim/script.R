@@ -1,13 +1,14 @@
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
-suppressMessages(library(splatter, quietly = TRUE))
+suppressMessages(library(SRTsim, quietly = TRUE))
 
 ## VIASH START
 par <- list(
   input = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  output = "simulated_dataset.h5ad",
   base = "domain"
 )
 meta <- list(
-  name = "splatter"
+  name = "srtsim"
 )
 ## VIASH END
 
@@ -19,52 +20,40 @@ sce <- SingleCellExperiment(
   colData = input$obs
 )
 
-cat("Splatter simulation start\n")
+real_count <- counts(sce)
+real_loc <- data.frame(x = colData(sce)$row,y = colData(sce)$col, region = colData(sce)$spatial.cluster)
+rownames(real_loc) <- rownames(colData(sce))
+  
+simSRT<- createSRT(count_in=real_count,loc_in =real_loc)
 
-set.seed(1)
-if (par$base != "domain") {
-  stop("ONLY domain base")
-}
+cat("SRTsim simulation start\n")
 
-ordered_indices <- order(colData(sce)$spatial_cluster)
-sce_ordered <- sce[, ordered_indices]
+if (base == "domain"){
+    simSRT1 <- srtsim_fit(simSRT,sim_schem="domain")
+  }else if (base == "tissue"){
+    simSRT1 <- srtsim_fit(simSRT,sim_schem="tissue")
+  }else{
+    stop("wrong base parameter")
+  }
 
-simulated_result <- NULL
-for (spatial_cluster in (unique(sce_ordered$spatial_cluster))) {
-  print(spatial_cluster)
-  res <- try({
-    sce_spatial_cluster <- sce_ordered[, sce_ordered$spatial_cluster == spatial_cluster]
-    params <- splatter::splatEstimate(as.matrix(counts(sce_spatial_cluster)))
-    sim_spatial_cluster <- splatter::splatSimulate(params)
-    sim_spatial_cluster$spatial_cluster <- spatial_cluster
-    colnames(sim_spatial_cluster) <- paste0(spatial_cluster, colnames(sim_spatial_cluster))
-    names(rowData(sim_spatial_cluster)) <- paste(spatial_cluster, names(rowData(sim_spatial_cluster)))
+simSRT1 <- srtsim_count(simSRT1)
+counts_single <- as.matrix(simSRT1@simCounts)
 
-    # combine the cell types
-    if (is.null(simulated_result)) {
-      simulated_result <- sim_spatial_cluster
-    } else {
-      simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_spatial_cluster)
-    }
-  })
-}
-
-colnames(simulated_result) <- colnames(sce_ordered)
-rownames(simulated_result) <- rownames(sce_ordered)
+new_obs <- sce_simu$new_covariate
+remap <- c(
+  cell_type = "spatial_cluster",
+  row = "row",
+  col = "col"
+)
+colnames(new_obs) <- remap[colnames(new_obs)]
 
 cat("Generating output\n")
 
-simulated_result_order <- sce_ordered
-counts(simulated_result_order) <- counts(simulated_result)
-
-simulated_result_order <- simulated_result_order[, match(colnames(sce), colnames(simulated_result_order))]
-simulated_result_order <- simulated_result_order[match(rownames(sce), rownames(simulated_result_order)), ]
-
 output <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(counts(simulated_result_order))
+    counts = Matrix::t(simSRT1@simCounts)
   ),
-  obs = as.data.frame(simulated_result_order@colData),
+  obs = new_obs,
   var = input$var,
   uns = c(
     input$uns,
