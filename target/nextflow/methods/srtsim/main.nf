@@ -3156,7 +3156,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/srtsim",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "53668223c637e802ea5e1aac78413974856786bb",
+    "git_commit" : "02a0b05d342d8cc7e40ddd115bca40b1f9dbaaf0",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3256,9 +3256,8 @@ sce <- SingleCellExperiment(
   colData = input\\$obs
 )
 
-real_count <- counts(sce)
-real_loc <- data.frame(x = colData(sce)\\$row,y = colData(sce)\\$col, region = colData(sce)\\$spatial.cluster)
-rownames(real_loc) <- rownames(colData(sce))
+real_count <- as.matrix(Matrix::t(input\\$layers[["counts"]]))
+real_loc <- data.frame(x = adata\\$obs\\$row,y = adata\\$obs\\$col, region = adata\\$obs\\$spatial_cluster)
   
 simSRT<- createSRT(count_in=real_count,loc_in =real_loc)
 

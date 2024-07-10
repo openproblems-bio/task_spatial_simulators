@@ -20,9 +20,8 @@ sce <- SingleCellExperiment(
   colData = input$obs
 )
 
-real_count <- counts(sce)
-real_loc <- data.frame(x = colData(sce)$row,y = colData(sce)$col, region = colData(sce)$spatial.cluster)
-rownames(real_loc) <- rownames(colData(sce))
+real_count <- as.matrix(Matrix::t(input$layers[["counts"]]))
+real_loc <- data.frame(x = adata$obs$row,y = adata$obs$col, region = adata$obs$spatial_cluster)
   
 simSRT<- createSRT(count_in=real_count,loc_in =real_loc)
 

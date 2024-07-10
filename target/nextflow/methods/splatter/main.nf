@@ -3156,7 +3156,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/splatter",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "53668223c637e802ea5e1aac78413974856786bb",
+    "git_commit" : "02a0b05d342d8cc7e40ddd115bca40b1f9dbaaf0",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3258,7 +3258,6 @@ sce <- SingleCellExperiment(
 
 cat("Splatter simulation start\\\\n")
 
-set.seed(1)
 if (par\\$base != "domain") {
   stop("ONLY domain base")
 }

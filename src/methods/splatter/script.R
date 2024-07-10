@@ -21,7 +21,6 @@ sce <- SingleCellExperiment(
 
 cat("Splatter simulation start\n")
 
-set.seed(1)
 if (par$base != "domain") {
   stop("ONLY domain base")
 }
