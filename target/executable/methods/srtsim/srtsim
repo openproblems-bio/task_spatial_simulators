@@ -470,9 +470,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("srtsim", quietly = TRUE)) BiocManager::install("srtsim")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods srtsim"
-LABEL org.opencontainers.image.created="2024-07-10T12:16:08Z"
+LABEL org.opencontainers.image.created="2024-07-10T23:11:04Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="02a0b05d342d8cc7e40ddd115bca40b1f9dbaaf0"
+LABEL org.opencontainers.image.revision="1b889fea1d82944e91de948bf6b3c6680ce2458e"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

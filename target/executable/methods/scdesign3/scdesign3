@@ -200,7 +200,7 @@ function ViashHelp {
   echo "        'poisson', 'nb', 'zip', 'zinb' or 'gaussian', which represent 'poisson"
   echo "        distribution',"
   echo "        'negative binomial distribution', 'zero-inflated poisson distribution',"
-  echo "        'zero-inflated negative binomail distribution', and 'gaussian"
+  echo "        'zero-inflated negative binomial distribution', and 'gaussian"
   echo "        distribution'"
   echo "        respectively."
   echo ""
@@ -488,9 +488,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3"
-LABEL org.opencontainers.image.created="2024-07-10T12:16:07Z"
+LABEL org.opencontainers.image.created="2024-07-10T23:11:04Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="02a0b05d342d8cc7e40ddd115bca40b1f9dbaaf0"
+LABEL org.opencontainers.image.revision="1b889fea1d82944e91de948bf6b3c6680ce2458e"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

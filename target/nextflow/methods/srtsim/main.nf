@@ -3156,7 +3156,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/srtsim",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "02a0b05d342d8cc7e40ddd115bca40b1f9dbaaf0",
+    "git_commit" : "1b889fea1d82944e91de948bf6b3c6680ce2458e",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

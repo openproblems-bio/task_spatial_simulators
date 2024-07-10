@@ -3044,7 +3044,7 @@ meta = [
         {
           "type" : "string",
           "name" : "--family",
-          "description" : "A string or a vector of strings of the marginal distribution. Must be one of 'binomial',\n'poisson', 'nb', 'zip', 'zinb' or 'gaussian', which represent 'poisson distribution',\n'negative binomial distribution', 'zero-inflated poisson distribution',\n'zero-inflated negative binomail distribution', and 'gaussian distribution'\nrespectively.\n",
+          "description" : "A string or a vector of strings of the marginal distribution. Must be one of 'binomial',\n'poisson', 'nb', 'zip', 'zinb' or 'gaussian', which represent 'poisson distribution',\n'negative binomial distribution', 'zero-inflated poisson distribution',\n'zero-inflated negative binomial distribution', and 'gaussian distribution'\nrespectively.\n",
           "default" : [
             "nb"
           ],
@@ -3188,7 +3188,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "02a0b05d342d8cc7e40ddd115bca40b1f9dbaaf0",
+    "git_commit" : "1b889fea1d82944e91de948bf6b3c6680ce2458e",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
