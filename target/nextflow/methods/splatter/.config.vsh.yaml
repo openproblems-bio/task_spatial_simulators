@@ -1,4 +1,4 @@
-name: "scdesign3"
+name: "splatter"
 namespace: "methods"
 version: "build_main"
 argument_groups:
@@ -189,37 +189,6 @@ argument_groups:
     direction: "output"
     multiple: false
     multiple_sep: ";"
-  - type: "string"
-    name: "--family"
-    description: "A string or a vector of strings of the marginal distribution. Must\
-      \ be one of 'binomial',\n'poisson', 'nb', 'zip', 'zinb' or 'gaussian', which\
-      \ represent 'poisson distribution',\n'negative binomial distribution', 'zero-inflated\
-      \ poisson distribution',\n'zero-inflated negative binomail distribution', and\
-      \ 'gaussian distribution'\nrespectively.\n"
-    info: null
-    default:
-    - "nb"
-    required: false
-    choices:
-    - "binomial"
-    - "poisson"
-    - "nb"
-    - "zip"
-    - "zinb"
-    - "gaussian"
-    direction: "input"
-    multiple: false
-    multiple_sep: ";"
-  - type: "boolean"
-    name: "--usebam"
-    description: "Use `bam` for acceleration."
-    info: null
-    default:
-    - false
-    required: false
-    direction: "input"
-    multiple: false
-    multiple_sep: ";"
 resources:
 - type: "r_script"
   path: "script.R"
@@ -237,17 +206,16 @@ test_resources:
   path: "resources_test/datasets"
   dest: "resources_test/datasets"
 info:
-  label: "scDesign3"
-  summary: "A probabilistic model that unifies the generation and inference for single-cell\
-    \ and spatial omics data"
-  description: "scDesign3 offers a probabilistic model that unifies the generation\
-    \ and inference\nfor single-cell and spatial omics data. The model's interpretable\
-    \ parameters and\nlikelihood enable scDesign3 to generate customized in silico\
-    \ data and unsupervisedly\nassess the goodness-of-fit of inferred cell latent\
-    \ structures (for example, clusters,\ntrajectories and spatial locations).\n"
-  reference: "10.1038/s41587-023-01772-1"
-  documentation_url: "https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html"
-  repository_url: "https://github.com/SONGDONGYUAN1994/scDesign3"
+  label: "Splatter"
+  summary: "A single cell RNA-seq data simulator based on a gamma-Poisson distribution."
+  description: "The Splat model is a gamma-Poisson distribution used to generate a\
+    \ gene by cell matrix of counts. Mean expression levels for each gene are simulated\
+    \ from a gamma distribution and the Biological Coefficient of Variation is used\
+    \ to enforce a mean-variance trend before counts are simulated from a Poisson\
+    \ distribution.\n"
+  reference: "10.1186/s13059-017-1305-0"
+  documentation_url: "https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html"
+  repository_url: "https://github.com/Oshlack/splatter"
   type: "method"
   type_info:
     label: "Method"
@@ -296,17 +264,17 @@ engines:
   namespace_separator: "/"
   setup:
   - type: "r"
-    github:
-    - "SONGDONGYUAN1994/scDesign3"
+    bioc:
+    - "splatter"
     bioc_force_install: false
   entrypoint: []
   cmd: null
 build_info:
-  config: "src/methods/scdesign3/config.vsh.yaml"
-  runner: "executable"
+  config: "src/methods/splatter/config.vsh.yaml"
+  runner: "nextflow"
   engine: "docker"
-  output: "target/executable/methods/scdesign3"
-  executable: "target/executable/methods/scdesign3/scdesign3"
+  output: "target/nextflow/methods/splatter"
+  executable: "target/nextflow/methods/splatter/main.nf"
   viash_version: "0.9.0-RC6"
   git_commit: "64ba7db0573fe36c51a886502403c173342ea641"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
