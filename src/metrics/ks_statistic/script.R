@@ -46,6 +46,7 @@ output <- anndata::AnnData(
     method_id = input_simulated_dataset$uns[["method_id"]],
     metric_ids = uns_metric_ids,
     metric_values = uns_metric_values
-  )
+  ),
+  shape = c(0L, 0L)
 )
 output$write_h5ad(par[["output"]], compression = "gzip")
