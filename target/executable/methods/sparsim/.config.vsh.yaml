@@ -1,4 +1,4 @@
-name: "splatter"
+name: "sparsim"
 namespace: "methods"
 version: "build_main"
 argument_groups:
@@ -206,16 +206,14 @@ test_resources:
   path: "resources_test/datasets"
   dest: "resources_test/datasets"
 info:
-  label: "Splatter"
-  summary: "A single cell RNA-seq data simulator based on a gamma-Poisson distribution."
-  description: "The Splat model is a gamma-Poisson distribution used to generate a\
-    \ gene by cell matrix of counts. Mean expression levels for each gene are simulated\
-    \ from a gamma distribution and the Biological Coefficient of Variation is used\
-    \ to enforce a mean-variance trend before counts are simulated from a Poisson\
-    \ distribution.\n"
-  reference: "10.1186/s13059-017-1305-0"
-  documentation_url: "https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html"
-  repository_url: "https://github.com/Oshlack/splatter"
+  label: "SPARsim"
+  summary: "SPARSim single cell is a count data simulator for scRNA-seq data."
+  description: "SPARSim is a scRNA-seq count data simulator based on a Gamma-Multivariate\
+    \ Hypergeometric model. \nIt allows to generate count data that resemble real\
+    \ data in terms of count intensity, variability and sparsity.\n"
+  reference: "10.1093/bioinformatics/btz752"
+  documentation_url: "https://gitlab.com/sysbiobig/sparsim/-/blob/master/vignettes/sparsim.Rmd?ref_type=heads"
+  repository_url: "https://gitlab.com/sysbiobig/sparsim"
   type: "method"
   type_info:
     label: "Method"
@@ -265,16 +263,16 @@ engines:
   setup:
   - type: "r"
     bioc:
-    - "splatter"
+    - "SPARsim"
     bioc_force_install: false
   entrypoint: []
   cmd: null
 build_info:
-  config: "src/methods/splatter/config.vsh.yaml"
-  runner: "nextflow"
+  config: "src/methods/sparsim/config.vsh.yaml"
+  runner: "executable"
   engine: "docker"
-  output: "target/nextflow/methods/splatter"
-  executable: "target/nextflow/methods/splatter/main.nf"
+  output: "target/executable/methods/sparsim"
+  executable: "target/executable/methods/sparsim/sparsim"
   viash_version: "0.9.0-RC6"
   git_commit: "9665d7456b547b186aaef7cd728609977165263e"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
