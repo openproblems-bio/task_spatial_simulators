@@ -29,8 +29,7 @@ arguments:
     direction: output
     required: true
 test_resources:
-  - path: /resources_test/common/pancreas
-    dest: resources_test/common/pancreas
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
-      
+  - path: /resources_test/datasets
+    dest: resources_test/datasets

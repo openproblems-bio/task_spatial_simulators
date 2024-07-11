@@ -3198,10 +3198,6 @@ meta = [
     },
     {
       "type" : "file",
-      "path" : "/common/library.bib"
-    },
-    {
-      "type" : "file",
       "path" : "/resources_test/datasets",
       "dest" : "resources_test/datasets"
     }
@@ -3304,7 +3300,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "545483130158c33a70d46588f6cc1644820a97f1",
+    "git_commit" : "436db1b768a88b474c09811b96b4dc655be0640d",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
