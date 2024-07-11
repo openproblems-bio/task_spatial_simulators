@@ -1,0 +1,30 @@
+__merge__: ../../api/comp_method.yaml
+
+name: symsim
+
+info:
+  label: symsim
+  summary: Simulating multiple faceted variability in single cell RNA sequencing
+  description: |
+    SymSim is a simulator for modeling single-cell RNA-Seq data, accounting for three primary sources of variation: intrinsic transcription noise, extrinsic variation from different cell states, 
+    and technical variation from measurement noise and bias.
+  reference: 10.1038/s41467-019-10500-w
+  documentation_url: https://github.com/YosefLab/SymSim/blob/master/vignettes/SymSimTutorial.Rmd
+  repository_url: https://github.com/YosefLab/SymSim
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    setup:
+      - type: r
+        bioc: symsim
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]
