@@ -52,10 +52,7 @@ def run_and_check_outputs(arguments, cmd):
     print(f">> Running script as test", flush=True)
     out = subprocess.run(cmd)
 
-    if out.returncode != 0:
-        import sys
-        print("Script exited with an error. Return code:", out.returncode, flush=True)
-        sys.exit(out.returncode)
+    assert out.returncode == 0, f"Script exited with an error. Return code: {out.returncode}"
 
     print(">> Checking whether output file exists", flush=True)
     for arg in arguments:

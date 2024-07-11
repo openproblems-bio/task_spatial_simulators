@@ -469,9 +469,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("ks"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic"
-LABEL org.opencontainers.image.created="2024-07-11T13:17:46Z"
+LABEL org.opencontainers.image.created="2024-07-11T13:37:57Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="1c29ffff70b0592a8c70b3bc27465aedd824abd3"
+LABEL org.opencontainers.image.revision="c454d26cbb477391062050b33f24f0df4b9137ef"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

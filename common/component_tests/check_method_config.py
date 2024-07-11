@@ -20,7 +20,10 @@ MEM_LABELS = ["lowmem", "midmem", "highmem"]
 CPU_LABELS = ["lowcpu", "midcpu", "highcpu"]
 
 def _load_bib():
+    import os
     bib_path = meta["resources_dir"]+"/library.bib"
+    if not os.path.exists(bib_path):
+        return None
     with open(bib_path, "r") as file:
         return file.read()
 
