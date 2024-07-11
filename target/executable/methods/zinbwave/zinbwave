@@ -470,9 +470,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("zinbwave", quietly = TRUE)) BiocManager::install("zinbwave")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2024-07-11T12:52:06Z"
+LABEL org.opencontainers.image.created="2024-07-11T13:03:02Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="bb2e59c7a849255bbbeb7b8e097599c408305357"
+LABEL org.opencontainers.image.revision="f0265bf468c42092691ce89796a228b1af196729"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

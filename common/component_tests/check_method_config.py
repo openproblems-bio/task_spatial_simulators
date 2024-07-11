@@ -43,40 +43,41 @@ def check_url(url):
     else:
         return False
 
-def is_working_doi(doi):
-    if not re.match(r"^10.\d{4,9}/[-._;()/:A-Za-z0-9]+$", doi):
-        return False
-    
-    url = f"https://doi.org/{doi}"
-    return check_url(url)
-
-def search_ref_bib(reference):
-    if is_working_doi(reference):
-        return True
+def check_reference(reference) -> str | None:
+    # reference is a doi
+    if re.match(r"^10.\d{4,9}/[-._;()/:A-Za-z0-9]+$", reference):
+        print(f"Checking DOI: {reference}", flush=True)
+        url = f"https://doi.org/{reference}"
+        if check_url(url):
+            return None
+        else:
+            return f"DOI {reference} is not reachable"
     
     bib = _load_bib()
+    if not bib:
+        return f"Could not load bibtex file"
     
     entry_pattern =  r"(@\w+{[^}]*" + reference + r"[^}]*}(.|\n)*?)(?=@)"
 
     bib_entry = re.search(entry_pattern, bib)
 
-    if bib_entry:
+    if not bib_entry:
+        return f"reference {reference} not found in bibtex file"
 
-        type_pattern = r"@(.*){" + reference
-        doi_pattern = r"(?=[Dd][Oo][Ii]\s*=\s*{([^,}]+)})"
+    type_pattern = r"@(.*){" + reference
+    doi_pattern = r"(?=[Dd][Oo][Ii]\s*=\s*{([^,}]+)})"
 
-        entry_type = re.search(type_pattern, bib_entry.group(1))
+    entry_type = re.search(type_pattern, bib_entry.group(1))
 
-        if not (entry_type.group(1) == "misc" or reference in _MISSING_DOIS):
-            entry_doi = re.search(doi_pattern, bib_entry.group(1))
-            assert entry_doi.group(1), "doi not found in bibtex reference"
-            url = f"https://doi.org/{entry_doi.group(1)}"
-            assert check_url(url), f"{url} is not reachable, ref= {reference}."
+    if not (entry_type.group(1) == "misc" or reference in _MISSING_DOIS):
+        entry_doi = re.search(doi_pattern, bib_entry.group(1))
+        if not entry_doi:
+            return "No DOI found in reference"
+        url = f"https://doi.org/{entry_doi.group(1)}"
+        if not check_url(url):
+            return f"doi {entry_doi.group(1)} is not reachable"
 
-        return True
-
-    else:
-        return False
+    return None
 
 print("Load config data", flush=True)
 with open(meta["config"], "r") as file:
@@ -106,7 +107,8 @@ if info["type"] == "method":
         if not isinstance(reference, list):
             reference = [reference]
         for ref in reference:
-            assert search_ref_bib(ref), f"reference {ref} not added to library.bib"
+            out = check_reference(ref)
+            assert out is None, out
     assert "documentation_url" in info is not None, "documentation_url not an info field or is empty"
     assert "repository_url" in info is not None, "repository_url not an info field or is empty"
     assert check_url(info["documentation_url"]), f"{info['documentation_url']} is not reachable"
