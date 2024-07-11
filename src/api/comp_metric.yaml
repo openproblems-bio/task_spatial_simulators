@@ -11,6 +11,10 @@ arguments:
     __merge__: file_dataset_sp.yaml
     direction: input
     required: true
+  - name: "--input_singlecell_dataset"
+    __merge__: file_dataset_sc.yaml
+    direction: input
+    required: true
   - name: "--input_simulated_dataset"
     __merge__: file_simulated_dataset.yaml
     direction: input
