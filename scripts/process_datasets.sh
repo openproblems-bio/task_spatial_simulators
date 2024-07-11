@@ -30,6 +30,7 @@ param_list:
     dataset_organism: "homo_sapiens"
     # note: Where is the single-cell data coming from? 
     #   The DOI above only seems to contain MERFISH data
+    #   -> https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE152048 10X chromium BC22
 
 publish_dir: "resources/datasets"
 output_sc: "$id/output_sc.h5ad"
