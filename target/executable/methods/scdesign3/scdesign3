@@ -488,9 +488,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3"
-LABEL org.opencontainers.image.created="2024-07-11T12:24:39Z"
+LABEL org.opencontainers.image.created="2024-07-11T12:52:06Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="436db1b768a88b474c09811b96b4dc655be0640d"
+LABEL org.opencontainers.image.revision="bb2e59c7a849255bbbeb7b8e097599c408305357"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

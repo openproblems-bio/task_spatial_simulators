@@ -2955,12 +2955,6 @@ meta = [
                   "name" : "row",
                   "description" : "Row index of the cell in the spatial grid.",
                   "required" : true
-                },
-                {
-                  "type" : "integer",
-                  "name" : "spatial_cluster",
-                  "description" : "Spatial cluster assignment for the cell.",
-                  "required" : true
                 }
               ],
               "var" : [
@@ -3152,7 +3146,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/srtsim",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "436db1b768a88b474c09811b96b4dc655be0640d",
+    "git_commit" : "bb2e59c7a849255bbbeb7b8e097599c408305357",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3200,7 +3194,7 @@ def innerWorkflowFactory(args) {
   def rawScript = '''set -e
 tempscript=".viash_script.sh"
 cat > "$tempscript" << VIASHMAIN
-suppressMessages(library(SingleCellExperiment, quietly = TRUE))
+# suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 suppressMessages(library(SRTsim, quietly = TRUE))
 
 ## VIASH START
@@ -3247,44 +3241,36 @@ rm(.viash_orig_warn)
 cat("Reading input files\\\\n")
 input <- anndata::read_h5ad(par\\$input)
 
-sce <- SingleCellExperiment(
-  list(counts = Matrix::t(input\\$layers[["counts"]])),
-  colData = input\\$obs
-)
+real_count <- Matrix::t(input\\$layers["counts"])
+real_loc <- data.frame(x = input\\$obs["row"],y = input\\$obs["col"], region = input\\$obs["spatial_cluster"])
+rownames(real_loc) <- rownames(input\\$obs)
 
-real_count <- as.matrix(Matrix::t(input\\$layers[["counts"]]))
-real_loc <- data.frame(x = adata\\$obs\\$row,y = adata\\$obs\\$col, region = adata\\$obs\\$spatial_cluster)
-  
 simSRT<- createSRT(count_in=real_count,loc_in =real_loc)
-
-cat("SRTsim simulation start\\\\n")
-
-if (base == "domain"){
-    simSRT1 <- srtsim_fit(simSRT,sim_schem="domain")
-  }else if (base == "tissue"){
-    simSRT1 <- srtsim_fit(simSRT,sim_schem="tissue")
-  }else{
-    stop("wrong base parameter")
-  }
+  
+if (par\\$base == "domain"){
+  simSRT1 <- srtsim_fit(simSRT,sim_schem="domain")
+}else if (par\\$base == "tissue"){
+  simSRT1 <- srtsim_fit(simSRT,sim_schem="tissue")
+}else{
+  stop("wrong base parameter")
+}
 
 simSRT1 <- srtsim_count(simSRT1)
 counts_single <- as.matrix(simSRT1@simCounts)
 
-new_obs <- sce_simu\\$new_covariate
-remap <- c(
-  cell_type = "spatial_cluster",
-  row = "row",
-  col = "col"
+col_data <- data.frame(
+  row = data.frame(simSRT1@simcolData)\\$x,
+  col = data.frame(simSRT1@simcolData)\\$y,
+  row.names = rownames(data.frame(simSRT1@simcolData))
 )
-colnames(new_obs) <- remap[colnames(new_obs)]
 
 cat("Generating output\\\\n")
 
 output <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(simSRT1@simCounts)
+    counts = Matrix::t(counts_single)
   ),
-  obs = new_obs,
+  obs = col_data,
   var = input\\$var,
   uns = c(
     input\\$uns,

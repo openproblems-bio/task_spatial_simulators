@@ -2955,12 +2955,6 @@ meta = [
                   "name" : "row",
                   "description" : "Row index of the cell in the spatial grid.",
                   "required" : true
-                },
-                {
-                  "type" : "integer",
-                  "name" : "spatial_cluster",
-                  "description" : "Spatial cluster assignment for the cell.",
-                  "required" : true
                 }
               ],
               "var" : [
@@ -3152,7 +3146,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/splatter",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "436db1b768a88b474c09811b96b4dc655be0640d",
+    "git_commit" : "bb2e59c7a849255bbbeb7b8e097599c408305357",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
