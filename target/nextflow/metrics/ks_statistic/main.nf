@@ -3298,7 +3298,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "c454d26cbb477391062050b33f24f0df4b9137ef",
+    "git_commit" : "76718cd42a46f4d8ee6f550bde87ad6862dfed77",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3399,22 +3399,48 @@ real_counts <- input_spatial_dataset\\$layers[["counts"]]
 sim_counts <- input_simulated_dataset\\$layers[["counts"]]
 
 cat("Compute ks statistic\\\\n")
+# ks_statistic_frac_zero_genes
 frac_zero_real_genes <- colMeans(real_counts == 0)
 frac_zero_sim_genes <- colMeans(sim_counts == 0)
 ks_statistic_frac_zero_genes <- ks::kde.test(x1 = frac_zero_real_genes, x2 = frac_zero_sim_genes)
 
+# ks_statistic_frac_zero_cells
 frac_zero_real_cells <- rowMeans(real_counts == 0)
 frac_zero_sim_cells <- rowMeans(sim_counts == 0)
 ks_statistic_frac_zero_cells <- ks::kde.test(x1 = frac_zero_real_cells, x2 = frac_zero_sim_cells)
 
+# ks_statistics_lib_size_cells
+lib_size_real_cells <- log1p(rowSums(real_counts))
+lib_size_sim_cells <- log1p(rowSums(sim_counts))
+ks_statistics_lib_size_cells <- ks::kde.test(x1 = lib_size_real_cells, x2 = lib_size_sim_cells)
+
+# ks_statistic_efflib_size_cells
+# ks_statistic_tmm_cells
+# ks_statistic_scaled_var_cells
+# ks_statistic_scaled_mean_cells
+# ks_statistic_lib_fraczero_cells
+# ks_statistic_pearson_cells
+
+# ks_statistic_scaled_var_genes
+# ks_statistic_scaled_mean_genes
+# ks_statistic_pearson_genes
+# ks_statistic_mean_var_genes
+# ks_statistic_mean_fraczeron_genes
+
+
+
+
+
 cat("Combine metric values\\\\n")
 uns_metric_ids <- c(
   "ks_statistic_frac_zero_genes",
-  "ks_statistic_frac_zero_cells"
+  "ks_statistic_frac_zero_cells",
+  "ks_statistics_lib_size_cells"
 )
 uns_metric_values <- c(
   ks_statistic_frac_zero_genes\\$zstat,
-  ks_statistic_frac_zero_cells\\$zstat
+  ks_statistic_frac_zero_cells\\$zstat,
+  ks_statistics_lib_size_cells\\$zstat
 )
 
 cat("Write output AnnData to file\\\\n")
