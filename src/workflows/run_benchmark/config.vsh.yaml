@@ -54,13 +54,13 @@ dependencies:
     repository: openproblems_v2
   - name: common/extract_metadata
     repository: openproblems_v2
-  # - name: methods/scdesign2
+  - name: methods/scdesign2
   - name: methods/scdesign3
-  # - name: methods/sparsim
+  - name: methods/sparsim
   - name: methods/splatter
   - name: methods/srtsim
-  # - name: methods/symsim
-  # - name: methods/zinbwave
+  - name: methods/symsim
+  - name: methods/zinbwave
   - name: metrics/ks_statistic
 repositories:
   - name: openproblems_v2

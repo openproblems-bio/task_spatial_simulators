@@ -3119,7 +3119,19 @@ meta = [
       }
     },
     {
+      "name" : "methods/scdesign2",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "methods/scdesign3",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/sparsim",
       "repository" : {
         "type" : "local"
       }
@@ -3132,6 +3144,18 @@ meta = [
     },
     {
       "name" : "methods/srtsim",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/symsim",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/zinbwave",
       "repository" : {
         "type" : "local"
       }
@@ -3199,7 +3223,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "c15ac0d1a2cd04bd48167e2e80136060321f3f4f",
+    "git_commit" : "504fac07c6e5ffcce985cc9c9074e5572f22c00e",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3242,9 +3266,13 @@ meta = [
 meta["root_dir"] = getRootDir()
 include { check_dataset_schema } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/check_dataset_schema/main.nf"
 include { extract_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/extract_metadata/main.nf"
+include { scdesign2 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign2/main.nf"
 include { scdesign3 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign3/main.nf"
+include { sparsim } from "${meta.resources_dir}/../../../nextflow/methods/sparsim/main.nf"
 include { splatter } from "${meta.resources_dir}/../../../nextflow/methods/splatter/main.nf"
 include { srtsim } from "${meta.resources_dir}/../../../nextflow/methods/srtsim/main.nf"
+include { symsim } from "${meta.resources_dir}/../../../nextflow/methods/symsim/main.nf"
+include { zinbwave } from "${meta.resources_dir}/../../../nextflow/methods/zinbwave/main.nf"
 include { ks_statistic } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic/main.nf"
 
 // inner workflow
@@ -3264,13 +3292,13 @@ workflow run_wf {
 
   // construct list of methods
   methods = [
-    // scdesign2,
+    scdesign2,
     scdesign3,
-    // sparsim,
+    sparsim,
     splatter,
     srtsim,
-    // symsim,
-    // zinbwave
+    symsim,
+    zinbwave
   ]
 
   // construct list of metrics
