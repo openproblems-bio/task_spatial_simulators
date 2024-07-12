@@ -466,13 +466,17 @@ function ViashDockerfile {
     cat << 'VIASHDOCKER'
 FROM ghcr.io/openproblems-bio/base_images/r:1.1.0
 ENTRYPOINT []
-RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
-  Rscript -e 'if (!requireNamespace("SPARsim", quietly = TRUE)) BiocManager::install("SPARsim")'
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y git r-bioc-singlecellexperiment && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
+  Rscript -e 'remotes::install_gitlab(c("sysbiobig/sparsim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods sparsim"
-LABEL org.opencontainers.image.created="2024-07-12T12:00:46Z"
+LABEL org.opencontainers.image.created="2024-07-12T12:26:50Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="76718cd42a46f4d8ee6f550bde87ad6862dfed77"
+LABEL org.opencontainers.image.revision="65295fb12d986fa47b413da8f3f9bf8e0aa86e79"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
