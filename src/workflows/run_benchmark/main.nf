@@ -13,13 +13,13 @@ workflow run_wf {
 
   // construct list of methods
   methods = [
-    // scdesign2,
+    scdesign2,
     scdesign3,
-    // sparsim,
+    sparsim,
     splatter,
     srtsim,
-    // symsim,
-    // zinbwave
+    symsim,
+    zinbwave
   ]
 
   // construct list of metrics
