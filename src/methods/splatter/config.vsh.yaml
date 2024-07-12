@@ -19,8 +19,8 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
-      - type: r
-        bioc: splatter
+      - type: apt
+        packages: r-bioc-splatter
 
 runners:
   - type: executable

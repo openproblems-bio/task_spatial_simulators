@@ -21,8 +21,10 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
+      - type: apt
+        packages: [r-bioc-singlecellexperiment, git]
       - type: r
-        bioc: srtsim
+        github: JSB-UCLA/scDesign2
 
 runners:
   - type: executable

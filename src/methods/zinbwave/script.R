@@ -1,5 +1,5 @@
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
-suppressMessages(library(splatter, quietly = TRUE))
+suppressMessages(library(zinbwave, quietly = TRUE))
 
 ## VIASH START
 par <- list(

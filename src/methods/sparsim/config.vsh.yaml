@@ -20,8 +20,10 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
+      - type: apt
+        packages: [git, r-bioc-singlecellexperiment]
       - type: r
-        bioc: SPARsim
+        gitlab: sysbiobig/sparsim
 
 runners:
   - type: executable
