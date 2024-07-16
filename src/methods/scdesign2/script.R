@@ -7,7 +7,7 @@ par <- list(
   base = "domain"
 )
 meta <- list(
-  name = "scDesign2",
+  name = "scdesign2",
   cpus = 8L
 )
 ## VIASH END

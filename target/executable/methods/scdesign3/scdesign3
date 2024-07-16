@@ -492,9 +492,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3"
-LABEL org.opencontainers.image.created="2024-07-16T08:11:15Z"
+LABEL org.opencontainers.image.created="2024-07-16T08:42:27Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="3945462403a52b103eb6823d5ca3189b10831a47"
+LABEL org.opencontainers.image.revision="6c05dd8e378ba7c70222fc57e24bc6c921d4d241"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1114,8 +1114,6 @@ rm(.viash_orig_warn)
 cat("Read input files\\n")
 input <- anndata::read_h5ad(par\$input)
 
-
-
 sce <- SingleCellExperiment(
   list(counts = Matrix::t(input\$layers[["counts"]])),
   colData = input\$obs
@@ -1153,13 +1151,7 @@ sce_simu <- scdesign3(
 )
 
 cat("Generating output file\\n")
-new_obs <- sce_simu\$new_covariate
-remap <- c(
-  cell_type = "spatial_cluster",
-  row = "row",
-  col = "col"
-)
-colnames(new_obs) <- remap[colnames(new_obs)]
+new_obs <- sce_simu\$new_covariate[c("row", "col")]
 
 output <- anndata::AnnData(
   layers = list(
