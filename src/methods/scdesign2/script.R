@@ -1,4 +1,4 @@
-requireNamespace("scDesign2", quietly = TRUE)
+# requireNamespace("scDesign2", quietly = TRUE)
 
 ## VIASH START
 par <- list(
@@ -7,7 +7,7 @@ par <- list(
   base = "domain"
 )
 meta <- list(
-  name = "scDesign2",
+  name = "scdesign2",
   cpus = 8L
 )
 ## VIASH END
@@ -22,30 +22,32 @@ if (par$base != "domain") {
 cat("scDesign2 simulation start\n")
 counts <- as.matrix(Matrix::t(input$layers[["counts"]]))
 colnames(counts) <- as.character(input$obs$spatial_cluster)
+spatial_cluster_prop <- table(input$obs$spatial_cluster)
 
-sim_out <- scDesign2::fit_model_scDesign2(
+copula_result <- scDesign2::fit_model_scDesign2(
   data_mat = counts,
   cell_type_sel = unique(colnames(counts)),
   sim_method = "copula",
-  ncores = meta$cpus
+  ncores = ifelse(!is.null(meta$cpus), meta$cpus, 8L)
 )
-  
-sim_out <- simulate_count_scDesign2(copula_result, ncol(counts),sim_method = 'copula',cell_type_prop = prop.table( spatial_cluster_prop))
 
-new_obs <- sce_simu$new_covariate
-remap <- c(
-  row = "row",
-  col = "col"
+sim_out <- scDesign2::simulate_count_scDesign2(
+  copula_result,
+  ncol(counts),
+  sim_method = "copula",
+  cell_type_prop = prop.table(spatial_cluster_prop)
 )
-colnames(new_obs) <- remap[colnames(new_obs)]
+
+colnames(sim_out) <- colnames(t(input$layers[["counts"]]))
+rownames(sim_out) <- rownames(t(input$layers[["counts"]]))
 
 cat("Generating output\n")
 
 output <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(out)
+    counts = Matrix::t(sim_out)
   ),
-  obs = new_obs,
+  obs = input$obs[c("row", "col")],
   var = input$var,
   uns = c(
     input$uns,

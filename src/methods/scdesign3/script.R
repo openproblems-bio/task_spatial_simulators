@@ -9,12 +9,13 @@ par <- list(
   family = "nb",
   usebam = FALSE
 )
+meta <- list(
+  name = "scdesign3"
+)
 ## VIASH END
 
 cat("Read input files\n")
 input <- anndata::read_h5ad(par$input)
-
-
 
 sce <- SingleCellExperiment(
   list(counts = Matrix::t(input$layers[["counts"]])),
@@ -53,13 +54,7 @@ sce_simu <- scdesign3(
 )
 
 cat("Generating output file\n")
-new_obs <- sce_simu$new_covariate
-remap <- c(
-  cell_type = "spatial_cluster",
-  row = "row",
-  col = "col"
-)
-colnames(new_obs) <- remap[colnames(new_obs)]
+new_obs <- sce_simu$new_covariate[c("row", "col")]
 
 output <- anndata::AnnData(
   layers = list(
