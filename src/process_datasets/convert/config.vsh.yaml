@@ -21,13 +21,13 @@ argument_groups:
       - type: file
         name: --output_sc
         description: Processed single-cell dataset
-        example: dataset_sc.h5ad
+        __merge__: ../../api/file_dataset_sc.yaml
         direction: output
         required: true     
       - type: file
         name: --output_sp
         description: Processed spatial dataset
-        example: dataset_sp.h5ad
+        __merge__: ../../api/file_dataset_sp.yaml
         direction: output
         required: true
 

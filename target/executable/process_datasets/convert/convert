@@ -189,12 +189,12 @@ function ViashHelp {
   echo "Outputs:"
   echo "    --output_sc"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: dataset_sc.h5ad"
+  echo "        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad"
   echo "        Processed single-cell dataset"
   echo ""
   echo "    --output_sp"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: dataset_sp.h5ad"
+  echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
   echo "        Processed spatial dataset"
   echo ""
   echo "Dataset metadata:"
@@ -508,9 +508,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2024-07-16T08:42:28Z"
+LABEL org.opencontainers.image.created="2024-07-16T11:47:13Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="6c05dd8e378ba7c70222fc57e24bc6c921d4d241"
+LABEL org.opencontainers.image.revision="4aa3b7b2d619297bb3541b3e486f962523f414ea"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
