@@ -58,12 +58,13 @@ counts(simulated_result_order) <- counts(simulated_result)
 
 simulated_result_order <- simulated_result_order[, match(colnames(sce), colnames(simulated_result_order))]
 simulated_result_order <- simulated_result_order[match(rownames(sce), rownames(simulated_result_order)), ]
+new_obs <- as.data.frame(simulated_result_order@colData[c("row", "col")])
 
 output <- anndata::AnnData(
   layers = list(
     counts = Matrix::t(counts(simulated_result_order))
   ),
-  obs = as.data.frame(simulated_result_order@colData),
+  obs = new_obs,
   var = input$var,
   uns = c(
     input$uns,
