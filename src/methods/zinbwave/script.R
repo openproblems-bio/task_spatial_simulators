@@ -1,5 +1,6 @@
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
-suppressMessages(library(zinbwave, quietly = TRUE))
+suppressMessages(library(splatter, quietly = TRUE))
+suppressMessages(library(BiocParallel, quietly = TRUE))
 
 ## VIASH START
 par <- list(
@@ -19,8 +20,8 @@ sce <- SingleCellExperiment(
   colData = input$obs
 )
 
-ordered_indices <- order(colData(sce)$spatial.cluster)
-sce_ordered <- real_sce[, ordered_indices]
+ordered_indices <- order(colData(sce)$spatial_cluster)
+sce_ordered <- sce[, ordered_indices]
 
 cat("ZINB-WaVE simulation start\n")
 
@@ -30,24 +31,25 @@ if (par$base != "domain") {
 
 multicoreParam <- MulticoreParam(workers = 8)
 
-X = model.matrix(~spatial.cluster, data=colData(real_sce_ordered))
-params <- zinbEstimate(as.matrix(counts(real_sce_ordered)), design.samples=X, BPPARAM = multicoreParam)
-simulated_result <- zinbSimulate(params)
+X = model.matrix(~spatial_cluster, data=colData(sce_ordered))
+params <- splatter::zinbEstimate(as.matrix(counts(sce_ordered)), design.samples = X, BPPARAM = multicoreParam)
+simulated_result <- splatter::zinbSimulate(params)
 
-colnames(simulated_result) <- colnames(real_sce_ordered)
-rownames(simulated_result) <- rownames(real_sce_ordered)
+colnames(simulated_result) <- colnames(sce_ordered)
+rownames(simulated_result) <- rownames(sce_ordered)
 
-simulated_result_order <- real_sce_ordered
+simulated_result_order <- sce_ordered
 counts(simulated_result_order) <- counts(simulated_result)
   
-simulated_result_order <- simulated_result_order[,match(colnames(real_sce), colnames(simulated_result_order))]
-simulated_result_order <- simulated_result_order[match(rownames(real_sce), rownames(simulated_result_order)),]
+simulated_result_order <- simulated_result_order[,match(colnames(sce), colnames(simulated_result_order))]
+simulated_result_order <- simulated_result_order[match(rownames(sce), rownames(simulated_result_order)),]
+new_obs <- as.data.frame(simulated_result_order@colData[c("row", "col")])
 
 output <- anndata::AnnData(
   layers = list(
     counts = Matrix::t(counts(simulated_result_order))
   ),
-  obs = as.data.frame(simulated_result_order@colData),
+  obs = new_obs,
   var = input$var,
   uns = c(
     input$uns,

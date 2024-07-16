@@ -3121,7 +3121,10 @@ meta = [
           "midtime" : "time = 4.h",
           "hightime" : "time = 8.h",
           "veryhightime" : "time = 24.h"
-        }
+        },
+        "script" : [
+          "process.errorStrategy = 'ignore'"
+        ]
       },
       "debug" : false,
       "container" : "docker"
@@ -3150,7 +3153,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/srtsim",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "908466d29f171f1fdb681ca335eeb6c5e95a60ad",
+    "git_commit" : "3945462403a52b103eb6823d5ca3189b10831a47",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3170,7 +3173,7 @@ meta = [
     "source" : "src",
     "target" : "target",
     "config_mods" : [
-      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }"
+      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }\n.runners[.type == \\"nextflow\\"].config.script := \\"process.errorStrategy = 'ignore'\\""
     ],
     "keywords" : [
       "single-cell",
@@ -3198,7 +3201,6 @@ def innerWorkflowFactory(args) {
   def rawScript = '''set -e
 tempscript=".viash_script.sh"
 cat > "$tempscript" << VIASHMAIN
-# suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 suppressMessages(library(SRTsim, quietly = TRUE))
 
 ## VIASH START
@@ -3245,17 +3247,19 @@ rm(.viash_orig_warn)
 cat("Reading input files\\\\n")
 input <- anndata::read_h5ad(par\\$input)
 
+cat("SRTsim simulation start\\\\n")
+
 real_count <- Matrix::t(input\\$layers["counts"])
-real_loc <- data.frame(x = input\\$obs["row"],y = input\\$obs["col"], region = input\\$obs["spatial_cluster"])
+real_loc <- data.frame(x = input\\$obs["row"], y = input\\$obs["col"], region = input\\$obs["spatial_cluster"])
 rownames(real_loc) <- rownames(input\\$obs)
 
-simSRT<- createSRT(count_in=real_count,loc_in =real_loc)
-  
-if (par\\$base == "domain"){
-  simSRT1 <- srtsim_fit(simSRT,sim_schem="domain")
-}else if (par\\$base == "tissue"){
-  simSRT1 <- srtsim_fit(simSRT,sim_schem="tissue")
-}else{
+simSRT <- createSRT(count_in = real_count, loc_in = real_loc)
+
+if (par\\$base == "domain") {
+  simSRT1 <- srtsim_fit(simSRT, sim_schem = "domain")
+} else if (par\\$base == "tissue") {
+  simSRT1 <- srtsim_fit(simSRT, sim_schem = "tissue")
+} else {
   stop("wrong base parameter")
 }
 

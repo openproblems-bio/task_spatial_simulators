@@ -1,4 +1,3 @@
-# suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 suppressMessages(library(SRTsim, quietly = TRUE))
 
 ## VIASH START
@@ -15,17 +14,19 @@ meta <- list(
 cat("Reading input files\n")
 input <- anndata::read_h5ad(par$input)
 
+cat("SRTsim simulation start\n")
+
 real_count <- Matrix::t(input$layers["counts"])
-real_loc <- data.frame(x = input$obs["row"],y = input$obs["col"], region = input$obs["spatial_cluster"])
+real_loc <- data.frame(x = input$obs["row"], y = input$obs["col"], region = input$obs["spatial_cluster"])
 rownames(real_loc) <- rownames(input$obs)
 
-simSRT<- createSRT(count_in=real_count,loc_in =real_loc)
-  
-if (par$base == "domain"){
-  simSRT1 <- srtsim_fit(simSRT,sim_schem="domain")
-}else if (par$base == "tissue"){
-  simSRT1 <- srtsim_fit(simSRT,sim_schem="tissue")
-}else{
+simSRT <- createSRT(count_in = real_count, loc_in = real_loc)
+
+if (par$base == "domain") {
+  simSRT1 <- srtsim_fit(simSRT, sim_schem = "domain")
+} else if (par$base == "tissue") {
+  simSRT1 <- srtsim_fit(simSRT, sim_schem = "tissue")
+} else {
   stop("wrong base parameter")
 }
 

@@ -2856,6 +2856,9 @@ meta = [
           "type" : "string",
           "name" : "--dataset_id",
           "description" : "A unique identifier for the dataset.",
+          "info" : {
+            "test_default" : "mobnew"
+          },
           "required" : true,
           "direction" : "input",
           "multiple" : false,
@@ -2865,6 +2868,9 @@ meta = [
           "type" : "string",
           "name" : "--dataset_name",
           "description" : "A human-readable name for the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
           "required" : true,
           "direction" : "input",
           "multiple" : false,
@@ -2895,6 +2901,9 @@ meta = [
           "type" : "string",
           "name" : "--dataset_summary",
           "description" : "Short description of the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
           "required" : true,
           "direction" : "input",
           "multiple" : false,
@@ -2904,6 +2913,9 @@ meta = [
           "type" : "string",
           "name" : "--dataset_description",
           "description" : "Long description of the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
           "required" : true,
           "direction" : "input",
           "multiple" : false,
@@ -2913,6 +2925,9 @@ meta = [
           "type" : "string",
           "name" : "--dataset_organism",
           "description" : "Organism from which the dataset was derived.",
+          "info" : {
+            "test_default" : "mus_musculus"
+          },
           "required" : true,
           "direction" : "input",
           "multiple" : false,
@@ -2977,7 +2992,10 @@ meta = [
           "midtime" : "time = 4.h",
           "hightime" : "time = 8.h",
           "veryhightime" : "time = 24.h"
-        }
+        },
+        "script" : [
+          "process.errorStrategy = 'ignore'"
+        ]
       },
       "debug" : false,
       "container" : "docker"
@@ -3006,7 +3024,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "908466d29f171f1fdb681ca335eeb6c5e95a60ad",
+    "git_commit" : "3945462403a52b103eb6823d5ca3189b10831a47",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3026,7 +3044,7 @@ meta = [
     "source" : "src",
     "target" : "target",
     "config_mods" : [
-      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }"
+      ".runners[.type == \\"nextflow\\"].config.labels := { lowmem : \\"memory = 20.Gb\\", midmem : \\"memory = 50.Gb\\", highmem : \\"memory = 100.Gb\\", lowcpu : \\"cpus = 5\\", midcpu : \\"cpus = 15\\", highcpu : \\"cpus = 30\\", lowtime : \\"time = 1.h\\", midtime : \\"time = 4.h\\", hightime : \\"time = 8.h\\", veryhightime : \\"time = 24.h\\" }\n.runners[.type == \\"nextflow\\"].config.script := \\"process.errorStrategy = 'ignore'\\""
     ],
     "keywords" : [
       "single-cell",

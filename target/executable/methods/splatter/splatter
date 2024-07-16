@@ -471,9 +471,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2024-07-16T02:05:13Z"
+LABEL org.opencontainers.image.created="2024-07-16T08:11:15Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="908466d29f171f1fdb681ca335eeb6c5e95a60ad"
+LABEL org.opencontainers.image.revision="3945462403a52b103eb6823d5ca3189b10831a47"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1089,12 +1089,13 @@ counts(simulated_result_order) <- counts(simulated_result)
 
 simulated_result_order <- simulated_result_order[, match(colnames(sce), colnames(simulated_result_order))]
 simulated_result_order <- simulated_result_order[match(rownames(sce), rownames(simulated_result_order)), ]
+new_obs <- as.data.frame(simulated_result_order@colData[c("row", "col")])
 
 output <- anndata::AnnData(
   layers = list(
     counts = Matrix::t(counts(simulated_result_order))
   ),
-  obs = as.data.frame(simulated_result_order@colData),
+  obs = new_obs,
   var = input\$var,
   uns = c(
     input\$uns,

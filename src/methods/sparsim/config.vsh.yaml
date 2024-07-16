@@ -9,7 +9,7 @@ info:
     SPARSim is a scRNA-seq count data simulator based on a Gamma-Multivariate Hypergeometric model. 
     It allows to generate count data that resemble real data in terms of count intensity, variability and sparsity.
   reference: 10.1093/bioinformatics/btz752
-  documentation_url: https://gitlab.com/sysbiobig/sparsim/-/blob/master/vignettes/sparsim.Rmd?ref_type=heads
+  documentation_url: https://gitlab.com/sysbiobig/sparsim/-/blob/master/vignettes/sparsim.Rmd
   repository_url: https://gitlab.com/sysbiobig/sparsim
 
 resources:
