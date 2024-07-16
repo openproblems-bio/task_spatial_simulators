@@ -20,8 +20,9 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
-      - type: apt
-        packages: [r-bioc-splatter, r-bioc-singlecelldataset]
+      - type: r
+        bioc: SingleCellExperiment
+        github: YosefLab/SymSim
 
 runners:
   - type: executable
