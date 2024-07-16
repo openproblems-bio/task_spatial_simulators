@@ -1,6 +1,5 @@
 import yaml
 import re
-from typing import Optional
 
 ## VIASH START
 meta = {
@@ -47,7 +46,7 @@ def check_url(url):
     else:
         return False
 
-def check_reference(reference) -> Optional[str]:
+def check_reference(reference) -> str | None:
     # reference is a doi
     if re.match(r"^10.\d{4,9}/[-._;()/:A-Za-z0-9]+$", reference):
         print(f"Checking DOI: {reference}", flush=True)
