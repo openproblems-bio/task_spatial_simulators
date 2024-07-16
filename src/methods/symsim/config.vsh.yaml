@@ -21,7 +21,8 @@ engines:
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
       - type: r
-        bioc: symsim
+        bioc: SingleCellExperiment
+        github: YosefLab/SymSim
 
 runners:
   - type: executable
