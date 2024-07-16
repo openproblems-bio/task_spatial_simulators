@@ -38,6 +38,8 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
+      - type: apt
+        packages: [r-bioc-singlecellexperiment, git]
       - type: r
         github: SONGDONGYUAN1994/scDesign3
 

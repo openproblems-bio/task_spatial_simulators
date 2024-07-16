@@ -20,8 +20,8 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
-      - type: r
-        bioc: zinbwave
+      - type: apt
+        packages: [r-bioc-zinbwave, r-bioc-singlecellexperiment]
 
 runners:
   - type: executable
