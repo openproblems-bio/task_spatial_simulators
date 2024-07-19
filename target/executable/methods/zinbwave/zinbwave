@@ -471,9 +471,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2024-07-16T12:06:10Z"
+LABEL org.opencontainers.image.created="2024-07-19T10:12:16Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="1279d0cf2eb2922c590ff3726ba8f6c08820f617"
+LABEL org.opencontainers.image.revision="55ef3e61d67a4cfe36bddce917f5e3d9229e6cb6"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

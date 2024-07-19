@@ -3296,12 +3296,12 @@ meta = [
     }
   ],
   "build_info" : {
-    "config" : "/home/runner/work/task_spatial_simulators/task_spatial_simulators/src/metrics/ks_statistic/config.vsh.yaml",
+    "config" : "/home/runner/work/task_spatial_simulators/task_spatial_simulators/src/metrics/ks_statistic_gene_cell/config.vsh.yaml",
     "runner" : "nextflow",
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "1279d0cf2eb2922c590ff3726ba8f6c08820f617",
+    "git_commit" : "55ef3e61d67a4cfe36bddce917f5e3d9229e6cb6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
