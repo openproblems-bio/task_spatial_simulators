@@ -1,4 +1,8 @@
 requireNamespace("anndata", quietly = TRUE)
+requireNamespace("edgeR", quietly = TRUE)
+requireNamespace("ks", quietly = TRUE)
+requireNamespace("resample", quietly = TRUE)
+requireNamespace("reshape2", quietly = TRUE)
 
 ## VIASH START
 par <- list(
