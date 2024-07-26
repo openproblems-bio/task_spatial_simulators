@@ -1,12 +1,12 @@
 __merge__: ../../api/comp_metric.yaml
 
-name: ks_statistic
+name: ks_statistic_gene_cell
 
 info:
   metrics:
     - name: ks_statistic_frac_zero_genes
       label: Fraction of zeros in genes
-      summary: Ks Statistic of the fraction of zeroes in the genes
+      summary: KS Statistic of the fraction of zeroes in the genes
       description: |
         The Kolmogorov-Smirnov statistic comparing the fraction of zeros in the
         genes of the real counts versus the fraction of zeros in the genes of
@@ -19,7 +19,7 @@ info:
       maximize: false
     - name: ks_statistic_frac_zero_cells
       label: Fraction of zeros in cells
-      summary: Ks Statistic of the fraction of zeroes in the cells
+      summary: KS Statistic of the fraction of zeroes in the cells
       description: |
         The Kolmogorov-Smirnov statistic comparing the fraction of zeros in the
         cells of the real counts versus the fraction of zeros in the cells of
@@ -39,11 +39,16 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
-      - type: r
-        cran: ks
+      - type: apt
+        packages: 
+          - git
+          - r-bioc-edger
+          - r-cran-ks
+          - r-cran-resample
+          - r-cran-reshape2
 
 runners:
   - type: executable
   - type: nextflow
     directives:
-      label: [midtime,midmem,midcpu]
+      label: [midtime, midmem, midcpu]

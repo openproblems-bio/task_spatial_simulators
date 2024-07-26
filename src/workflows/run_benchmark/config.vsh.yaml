@@ -61,7 +61,7 @@ dependencies:
   - name: methods/srtsim
   - name: methods/symsim
   - name: methods/zinbwave
-  - name: metrics/ks_statistic
+  - name: metrics/ks_statistic_gene_cell
 repositories:
   - name: openproblems_v2
     type: github

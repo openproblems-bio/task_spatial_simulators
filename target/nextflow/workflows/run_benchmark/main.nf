@@ -3161,7 +3161,7 @@ meta = [
       }
     },
     {
-      "name" : "metrics/ks_statistic",
+      "name" : "metrics/ks_statistic_gene_cell",
       "repository" : {
         "type" : "local"
       }
@@ -3226,7 +3226,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "55ef3e61d67a4cfe36bddce917f5e3d9229e6cb6",
+    "git_commit" : "4c7120731ed86740682cb287bed7423ffbe02905",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3276,7 +3276,7 @@ include { splatter } from "${meta.resources_dir}/../../../nextflow/methods/splat
 include { srtsim } from "${meta.resources_dir}/../../../nextflow/methods/srtsim/main.nf"
 include { symsim } from "${meta.resources_dir}/../../../nextflow/methods/symsim/main.nf"
 include { zinbwave } from "${meta.resources_dir}/../../../nextflow/methods/zinbwave/main.nf"
-include { ks_statistic } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic/main.nf"
+include { ks_statistic_gene_cell } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_gene_cell/main.nf"
 
 // inner workflow
 // user-provided Nextflow code
