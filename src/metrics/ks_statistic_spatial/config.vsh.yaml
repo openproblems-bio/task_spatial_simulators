@@ -1,0 +1,33 @@
+__merge__: ../../api/comp_metric.yaml
+
+name: ks_statistic
+
+info:
+  metrics:
+    - name: ks_statistic_frac_zero_genes
+      label: Fraction of zeros in genes
+      summary: Ks Statistic of the fraction of zeroes in the genes
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the fraction of zeros in the
+        genes of the real counts versus the fraction of zeros in the genes of
+        the predicted counts.
+      # reference: doi?
+      # documentation_url: https://url.to/the/documentation
+      # repository_url: https://github.com/organisation/repository
+      min: -Inf
+      max: +Inf
+      maximize: false
+
+resources:
+  - type: python_script
+    path: script.py
+
+engines:
+  - type: docker
+    image: ghcr.io/openproblems-bio/base_images/python:1.1.0
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime,midmem,midcpu]
