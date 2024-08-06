@@ -1,6 +1,6 @@
-name: convert
+name: sc_features
 namespace: process_datasets
-description: Add scFeature in adata
+description: Add scFeatures in adata
 argument_groups:
   - name: Inputs
     arguments:
@@ -12,8 +12,9 @@ argument_groups:
       - type: string
         name: --sc_species
         description: species of the dataset
-        # example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
         required: true
+        info: 
+          test_default: Mus musculus
 
   - name: Outputs
     arguments:
@@ -39,7 +40,7 @@ engines:
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
       - type: r
-        bioc: [SingleCellExperiment]
+        bioc: [SingleCellExperiment, SingleCellSignalR, EnsDb.Mmusculus.v79, scater]
         github: [SydneyBioX/scFeatures]
 
 runners:
