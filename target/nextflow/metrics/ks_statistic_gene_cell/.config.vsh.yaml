@@ -299,20 +299,176 @@ test_resources:
 info:
   metrics:
   - name: "ks_statistic_frac_zero_genes"
-    label: "Fraction of zeros in genes"
-    summary: "KS Statistic of the fraction of zeroes in the genes"
+    label: "Fraction of zeros per gene"
+    summary: "KS statistic of the fraction of zeros per gene."
     description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
-      \ in the\ngenes of the real counts versus the fraction of zeros in the genes\
-      \ of\nthe predicted counts.\n"
+      \ per gene in the real datasets versus the fraction of zeros per gene in the\
+      \ simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
     min: "-Inf"
     max: "+Inf"
     maximize: false
   - name: "ks_statistic_frac_zero_cells"
-    label: "Fraction of zeros in cells"
-    summary: "KS Statistic of the fraction of zeroes in the cells"
+    label: "Fraction of zeros per cell"
+    summary: "KS statistic of the fraction of zeros per spot (cell)."
     description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
-      \ in the\ncells of the real counts versus the fraction of zeros in the cells\
-      \ of\nthe predicted counts.\n"
+      \ per spot (cell) in the real datasets versus the fraction of zeros per spot\
+      \ (cell) in the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_lib_size_cells"
+    label: "Library size"
+    summary: "KS statistic of the library size."
+    description: "The Kolmogorov-Smirnov statistic comparing the total sum of UMI\
+      \ counts across all genes in the real datasets versus the total sum of UMI counts\
+      \ across all genes in the simmulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_efflib_size_cells"
+    label: "Effective library size"
+    summary: "KS statistic of the effective library size."
+    description: "The Kolmogorov-Smirnov statistic comparing the feffective library\
+      \ size of the real datasets versus the effective library size of the simulated\
+      \ datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_tmm_cells"
+    label: "TMM"
+    summary: "KS statistic of the weight trimmed mean of M-values normalization factor\
+      \ (TMM)."
+    description: "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean\
+      \ of M-values normalization factor for the real datasets versus the weight trimmed\
+      \ mean of M-values normalization factor for the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_scaled_var_cells"
+    label: "Scaled variance cell"
+    summary: "KS statistic of the spot- (or cell-) level scaled variance of the expression\
+      \ matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the spot-level z-score\
+      \ standardization of the variance of expression matrix in terms of log2(CPM)\
+      \ in the real datasets versus the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_scaled_mean_cells"
+    label: "Scaled mean cells"
+    summary: "KS statistic of the spot- (or cell-) level scaled mean of the expression\
+      \ matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the z-score standardization\
+      \ of the mean of expression matrix in terms of log2(CPM) in the real datasets\
+      \ versus the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_lib_fraczero_cells"
+    label: "Library size vs fraction zero"
+    summary: "KS statistic of the relationship between library size and the proportion\
+      \ of zeros per spot (cell)."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ library size and the proportion of zeros per spot (cell) in the real datasets\
+      \ versus the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_pearson_cells"
+    label: "Sample Pearson correlation"
+    summary: "KS statistic of the sample Pearson correlation."
+    description: "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation\
+      \ of the real datasets versus the sample Pearson correlation of the simulated\
+      \ datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_scaled_var_genes"
+    label: "Scaled variance genes"
+    summary: "KS statistic of the gene-level scaled variance of the expression matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene-level z-score\
+      \ standardization of the variance of expression matrix in terms of log2(CPM)\
+      \ in the real datasets versus the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_scaled_mean_genes"
+    label: "Scaled mean genes"
+    summary: "KS statistic of the gene-level scaled mean of the expression matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene-level z-score\
+      \ standardization of the mean of expression matrix in terms of log2(CPM) in\
+      \ the real datasets versus the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_pearson_genes"
+    label: "Gene Pearson correlation"
+    summary: "KS statistic of the gene Pearson correlation."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation\
+      \ of the real datasets versus the gene Pearson correlation of the simulated\
+      \ datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_mean_var_genes"
+    label: "Mean vs variance"
+    summary: "KS statistic of the relationship between mean expression and variance\
+      \ expression."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ mean expression and variance expression in the real datasets versus the simulated\
+      \ datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_mean_fraczero_genes"
+    label: "Mean vs fraction zero"
+    summary: "KS statistic of the relationship between mean expression and the proportion\
+      \ of zero per gene."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ mean expression and the proportion of zero per gene in the real datasets versus\
+      \ the simulated datasets.\n"
+    reference: "10.1201/9780429485572"
+    documentation_url: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+    repository_url: "https://cran.r-project.org/web/packages/ks/"
     min: "-Inf"
     max: "+Inf"
     maximize: false
@@ -382,7 +538,7 @@ build_info:
   output: "target/nextflow/metrics/ks_statistic_gene_cell"
   executable: "target/nextflow/metrics/ks_statistic_gene_cell/main.nf"
   viash_version: "0.9.0-RC6"
-  git_commit: "af4b689691fe4513f702ac8781311dfcea9b2dca"
+  git_commit: "b40de2612a4b134b1c64d5dab3919aca89f0d6a6"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"

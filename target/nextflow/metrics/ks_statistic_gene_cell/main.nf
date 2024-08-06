@@ -3204,18 +3204,168 @@ meta = [
     "metrics" : [
       {
         "name" : "ks_statistic_frac_zero_genes",
-        "label" : "Fraction of zeros in genes",
-        "summary" : "KS Statistic of the fraction of zeroes in the genes",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros in the\ngenes of the real counts versus the fraction of zeros in the genes of\nthe predicted counts.\n",
+        "label" : "Fraction of zeros per gene",
+        "summary" : "KS statistic of the fraction of zeros per gene.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
       },
       {
         "name" : "ks_statistic_frac_zero_cells",
-        "label" : "Fraction of zeros in cells",
-        "summary" : "KS Statistic of the fraction of zeroes in the cells",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros in the\ncells of the real counts versus the fraction of zeros in the cells of\nthe predicted counts.\n",
+        "label" : "Fraction of zeros per cell",
+        "summary" : "KS statistic of the fraction of zeros per spot (cell).",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_lib_size_cells",
+        "label" : "Library size",
+        "summary" : "KS statistic of the library size.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_efflib_size_cells",
+        "label" : "Effective library size",
+        "summary" : "KS statistic of the effective library size.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the feffective library size of the real datasets versus the effective library size of the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_tmm_cells",
+        "label" : "TMM",
+        "summary" : "KS statistic of the weight trimmed mean of M-values normalization factor (TMM).",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_scaled_var_cells",
+        "label" : "Scaled variance cell",
+        "summary" : "KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_scaled_mean_cells",
+        "label" : "Scaled mean cells",
+        "summary" : "KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_lib_fraczero_cells",
+        "label" : "Library size vs fraction zero",
+        "summary" : "KS statistic of the relationship between library size and the proportion of zeros per spot (cell).",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_pearson_cells",
+        "label" : "Sample Pearson correlation",
+        "summary" : "KS statistic of the sample Pearson correlation.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_scaled_var_genes",
+        "label" : "Scaled variance genes",
+        "summary" : "KS statistic of the gene-level scaled variance of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_scaled_mean_genes",
+        "label" : "Scaled mean genes",
+        "summary" : "KS statistic of the gene-level scaled mean of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_pearson_genes",
+        "label" : "Gene Pearson correlation",
+        "summary" : "KS statistic of the gene Pearson correlation.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_mean_var_genes",
+        "label" : "Mean vs variance",
+        "summary" : "KS statistic of the relationship between mean expression and variance expression.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_mean_fraczero_genes",
+        "label" : "Mean vs fraction zero",
+        "summary" : "KS statistic of the relationship between mean expression and the proportion of zero per gene.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.\n",
+        "reference" : "10.1201/9780429485572",
+        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3305,7 +3455,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.0-RC6",
-    "git_commit" : "af4b689691fe4513f702ac8781311dfcea9b2dca",
+    "git_commit" : "b40de2612a4b134b1c64d5dab3919aca89f0d6a6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3409,86 +3559,85 @@ input_simulated_dataset <- anndata::read_h5ad(par[["input_simulated_dataset"]])
 real_counts <- input_spatial_dataset\\$layers[["counts"]]
 sim_counts <- input_simulated_dataset\\$layers[["counts"]]
 
-cat("Compute ks statistic\\\\n")
-# ks_statistic_frac_zero_genes
+cat("Computing ks statistic of fraction of zeros per gene\\\\n")
 frac_zero_real_genes <- colMeans(real_counts == 0)
 frac_zero_sim_genes <- colMeans(sim_counts == 0)
 ks_statistic_frac_zero_genes <- ks::kde.test(x1 = frac_zero_real_genes, x2 = frac_zero_sim_genes)
 
-# ks_statistic_frac_zero_cells
+cat("Computing ks statistic of fraction of zeros per cell\\\\n")
 frac_zero_real_cells <- rowMeans(real_counts == 0)
 frac_zero_sim_cells <- rowMeans(sim_counts == 0)
 ks_statistic_frac_zero_cells <- ks::kde.test(x1 = frac_zero_real_cells, x2 = frac_zero_sim_cells)
 
-# ks_statistics_lib_size_cells
+cat("Computing ks statistic of the library size\\\\n")
 lib_size_real_cells <- log1p(rowSums(real_counts))
 lib_size_sim_cells <- log1p(rowSums(sim_counts))
 ks_statistic_lib_size_cells <- ks::kde.test(x1 = lib_size_real_cells, x2 = lib_size_sim_cells)
 
-# ks_statistic_efflib_size_cells
+cat("Computing ks statistic of the effective library size\\\\n")
 efflib_size_real_cells <- log1p(rowSums(real_counts))
 efflib_size_sim_cells <- log1p(rowSums(sim_counts))
 ks_statistic_efflib_size_cells <- ks::kde.test(x1 = efflib_size_real_cells, x2 = efflib_size_sim_cells)
 
-# ks_statistic_tmm_cells (works only for variability in the data)
-tmm_real_cells <- edgeR::DGEList(counts = Matrix::t(real_counts))\\$samples\\$norm.factors
-tmm_sim_cells <- edgeR::DGEList(counts = Matrix::t(sim_counts))\\$samples\\$norm.factors
+cat("Computing ks statistic of TMM\\\\n")
+real_dge <- edgeR::DGEList(counts = Matrix::t(real_counts))
+sim_dge <- edgeR::DGEList(counts = Matrix::t(sim_counts))
+tmm_real_cells <- edgeR::calcNormFactors(real_dge, method = "TMM")\\$samples\\$norm.factors
+tmm_sim_cells <- edgeR::calcNormFactors(sim_dge, method = "TMM")\\$samples\\$norm.factors
 ks_statistic_tmm_cells <- ks::kde.test(x1 = tmm_real_cells, x2 = tmm_sim_cells)
 
-# ks_statistic_scaled_var_cells
+cat("Computing ks statistic of the cell-level scaled variance\\\\n")
 scaled_var_real_cells <- scale(resample::colVars(Matrix::t(real_counts)))
 scaled_var_sim_cells <- scale(resample::colVars(Matrix::t(sim_counts)))
 ks_statistic_scaled_var_cells <- ks::kde.test(x1 = as.numeric(scaled_var_sim_cells), x2 = as.numeric(scaled_var_sim_cells))
 
-# ks_statistic_scaled_mean_cells
+cat("Computing ks statistic of the cell-level scaled mean\\\\n")
 scaled_mean_real_cells <- scale(colMeans(Matrix::t(real_counts)))
 scaled_mean_sim_cells <- scale(colMeans(Matrix::t(sim_counts)))
 ks_statistic_scaled_mean_cells <- ks::kde.test(x1 = as.numeric(scaled_mean_sim_cells), x2 = as.numeric(scaled_mean_sim_cells))
 
-# ks_statistic_lib_fraczero_cells
+cat("Computing ks statistic of the library size vs fraction of zeros per cell\\\\n")
 lib_fraczero_real_cells <- data.frame(lib = lib_size_real_cells, fraczero = frac_zero_real_cells)
 lib_fraczero_sim_cells <- data.frame(lib = lib_size_sim_cells, fraczero = frac_zero_sim_cells)
 ks_statistic_lib_fraczero_cells <- ks::kde.test(x1 = lib_fraczero_real_cells, x2 = lib_fraczero_sim_cells)
 
-# ks_statistic_pearson_cells
+cat("Computing ks statistic of the sample Pearson correlation\\\\n")
 pearson_real_cells <- reshape2::melt(cor(as.matrix(Matrix::t(real_counts)), method = "pearson"))
 pearson_sim_cells <- reshape2::melt(cor(as.matrix(Matrix::t(sim_counts)), method = "pearson"))
 ks_statistic_pearson_cells <- ks::kde.test(x1 = as.numeric(pearson_real_cells\\$value), x2 = as.numeric(pearson_sim_cells\\$value))
 
-# ks_statistic_scaled_var_genes
+cat("Computing ks statistic of the gene-level scaled variance\\\\n")
 scaled_var_real_genes <- scale(resample::colVars(real_counts))
 scaled_var_sim_genes <- scale(resample::colVars(sim_counts))
 ks_statistic_scaled_var_genes <- ks::kde.test(x1 = as.numeric(scaled_var_sim_genes), x2 = as.numeric(scaled_var_sim_genes))
 
-# ks_statistic_scaled_mean_genes
+cat("Computing ks statistic of the gene-level scaled mean\\\\n")
 scaled_mean_real_genes <- scale(colMeans(real_counts))
 scaled_mean_sim_genes <- scale(colMeans(sim_counts))
 ks_statistic_scaled_mean_genes <- ks::kde.test(x1 = as.numeric(scaled_mean_real_genes), x2 = as.numeric(scaled_mean_sim_genes))
 
-# ks_statistic_pearson_genes
+cat("Computing ks statistic of the gene Pearson correlation\\\\n")
 pearson_real_genes <- reshape2::melt(cor(as.matrix(real_counts), method = "pearson"))
 pearson_sim_genes <- reshape2::melt(cor(as.matrix(sim_counts), method = "pearson"))
 ks_statistic_pearson_genes <- ks::kde.test(x1 = as.numeric(pearson_real_genes\\$value), x2 = as.numeric(pearson_sim_genes\\$value))
 
-# ks_statistic_mean_var_genes
+cat("Computing ks statistic of the mean expression vs variance expression\\\\n")
 mean_var_real_genes <- data.frame(mean = colMeans(real_counts), var = resample::colVars(real_counts))
 mean_var_sim_genes <- data.frame(mean = colMeans(sim_counts), var = resample::colVars(sim_counts))
 ks_statistic_mean_var_genes <- ks::kde.test(x1 = mean_var_real_genes, x2 = mean_var_sim_genes)
 
-# ks_statistic_mean_fraczero_genes
+cat("Computing ks statistic of the mean expression vs fraction of zeros per gene\\\\n")
 mean_fraczero_real_genes <- data.frame(mean = colMeans(real_counts), fraczero = frac_zero_real_genes)
 mean_fraczero_sim_genes <- data.frame(mean = colMeans(sim_counts), fraczero = frac_zero_sim_genes)
 ks_statistic_mean_fraczero_genes <- ks::kde.test(x1 = mean_fraczero_real_genes, x2 = mean_fraczero_sim_genes)
 
-
-
-
-cat("Combine metric values\\\\n")
+cat("Combining metric values\\\\n")
 uns_metric_ids <- c(
   "ks_statistic_frac_zero_genes",
   "ks_statistic_frac_zero_cells",
   "ks_statistic_lib_size_cells",
   "ks_statistic_efflib_size_cells",
+  "ks_statistic_tmm_cells",
   "ks_statistic_scaled_var_cells",
   "ks_statistic_scaled_mean_cells",
   "ks_statistic_lib_fraczero_cells",
@@ -3504,6 +3653,7 @@ uns_metric_values <- c(
   ks_statistic_frac_zero_cells\\$zstat,
   ks_statistic_lib_size_cells\\$zstat,
   ks_statistic_efflib_size_cells\\$zstat,
+  ks_statistic_tmm_cells\\$zstat,
   ks_statistic_scaled_var_cells\\$zstat,
   ks_statistic_scaled_mean_cells\\$zstat,
   ks_statistic_lib_fraczero_cells\\$zstat,
@@ -3515,7 +3665,7 @@ uns_metric_values <- c(
   ks_statistic_mean_fraczero_genes\\$zstat
 )
 
-cat("Write output AnnData to file\\\\n")
+cat("Writing output AnnData to file\\\\n")
 output <- anndata::AnnData(
   uns = list(
     dataset_id = input_simulated_dataset\\$uns[["dataset_id"]],

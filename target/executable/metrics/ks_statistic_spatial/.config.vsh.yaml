@@ -1,4 +1,4 @@
-name: "ks_statistic"
+name: "ks_statistic_spatial"
 namespace: "metrics"
 version: "build_main"
 argument_groups:
@@ -298,12 +298,45 @@ test_resources:
   dest: "resources_test/datasets"
 info:
   metrics:
-  - name: "ks_statistic_frac_zero_genes"
-    label: "Fraction of zeros in genes"
-    summary: "Ks Statistic of the fraction of zeroes in the genes"
-    description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
-      \ in the\ngenes of the real counts versus the fraction of zeros in the genes\
-      \ of\nthe predicted counts.\n"
+  - name: "ks_statistic_transition_matrix"
+    label: "Transition matrix"
+    summary: "KS Statistic of the transition matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the transition matrix\
+      \ of the real dataset versus the simulated dataset. The transition matrix elucidates\
+      \ the interrelationships among spatial clusters in each space. Each element\
+      \ in the matrix signifies the transition probability from one spatial cluster\
+      \ to another, thereby mapping the dynamic interplay of spatial clusters.\n"
+    documentation_url: "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html"
+    repository_url: "https://github.com/scipy/scipy/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_central_score"
+    label: "Centralized score"
+    summary: "Ks Statistic of the centralized score matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the centralized score\
+      \ matrix of the real dataset versus the simulated dataset. The centralized score\
+      \ matrix is a vector of the group degree centrality (inter-cluster connectivity),\
+      \ average clustering coefficient (propensity for a spot within a spatial cluster\
+      \ to be connected to spots in another cluster), and the group closeness centrality\
+      \ (relative proximity or accessibility of one cluster to all spots in another).\
+      \ \n"
+    documentation_url: "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html"
+    repository_url: "https://github.com/scipy/scipy/"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+  - name: "ks_statistic_enrichment"
+    label: "Neighborhood enrichment"
+    summary: "Ks Statistic of the neighborhood enrichment."
+    description: "The Kolmogorov-Smirnov statistic comparing the neighborhood enrichment\
+      \ matrices of the real dataset versus the simulated dataset. The neighborhood\
+      \ enrichment matrix quantifies the enrichment observed between each pair of\
+      \ spatial clusters. It serves to systematically assess the interaction between\
+      \ different clusters within a spatial context, providing insights into the relative\
+      \ connectivity between various spatial clusters.\n"
+    documentation_url: "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html"
+    repository_url: "https://github.com/scipy/scipy/"
     min: "-Inf"
     max: "+Inf"
     maximize: false
@@ -355,16 +388,25 @@ engines:
   id: "docker"
   image: "ghcr.io/openproblems-bio/base_images/python:1.1.0"
   namespace_separator: "/"
+  setup:
+  - type: "python"
+    user: false
+    packages:
+    - "numpy"
+    - "scikit-learn"
+    - "squidpy"
+    - "scipy"
+    upgrade: true
   entrypoint: []
   cmd: null
 build_info:
   config: "src/metrics/ks_statistic_spatial/config.vsh.yaml"
   runner: "executable"
   engine: "docker"
-  output: "target/executable/metrics/ks_statistic"
-  executable: "target/executable/metrics/ks_statistic/ks_statistic"
+  output: "target/executable/metrics/ks_statistic_spatial"
+  executable: "target/executable/metrics/ks_statistic_spatial/ks_statistic_spatial"
   viash_version: "0.9.0-RC6"
-  git_commit: "af4b689691fe4513f702ac8781311dfcea9b2dca"
+  git_commit: "b40de2612a4b134b1c64d5dab3919aca89f0d6a6"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"
