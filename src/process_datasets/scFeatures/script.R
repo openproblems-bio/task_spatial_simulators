@@ -31,13 +31,13 @@ prob_matrix <- sce@metadata$celltype_prop
 colnames(prob_matrix) <- paste0("ct", seq_len(ncol(prob_matrix)))
 rownames(prob_matrix) <- colnames(log_count)
 
-scfeatures <- scFeatures::scFeatures(log_count,
+scfeatures_result <- scFeatures::scFeatures(log_count,
                                 sample = rep("sample1", ncol(log_count)),
                                 spatialCoords = list(colData(sce)$row,colData(sce)$col),
-                                feature_types = feat_types,
+                                feature_types = c("L_stats","celltype_interaction","nn_correlation","morans_I"),
                                 type = "spatial_t",
                                 species = sc_species,
-                                spotProbability =  prob_matrix)
+                                spotProbability =  t(prob_matrix))
 cat("Transforming spatial into AnnData\n")
 
 # scFeatures
@@ -61,10 +61,10 @@ output_sp <- anndata::AnnData(
   ),
   obsm = list(
     celltype_proportions = celltype_proportions,
-    L_stats = scFeatures$L_stats,
-    celltype_interaction = scFeatures$celltype_interaction,
-    nn_correlation = scFeatures$nn_correlation,
-    morans_I = scFeatures$morans_I
+    L_stats = scfeatures_result$L_stats,
+    celltype_interaction = scfeatures_result$celltype_interaction,
+    nn_correlation = scfeatures_result$nn_correlation,
+    morans_I = scfeatures_result$morans_I
 
   ),
   uns = list(
