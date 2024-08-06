@@ -2,11 +2,7 @@ import anndata as ad
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import LabelEncoder
-import matplotlib.pyplot as plt
-import seaborn as sns
-import warnings
 import squidpy as sq
-import pandas as pd
 from scipy.stats import ks_2samp
 
 ## VIASH START
@@ -17,7 +13,7 @@ par = {
   'output': 'output.h5ad'
 }
 meta = {
-  'name': 'my_metric'
+  'name': 'ks_statistic_spatial'
 }
 
 ## VIASH END

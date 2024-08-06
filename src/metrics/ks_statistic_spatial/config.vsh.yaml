@@ -1,19 +1,36 @@
 __merge__: ../../api/comp_metric.yaml
 
-name: ks_statistic
+name: ks_statistic_spatial
 
 info:
   metrics:
-    - name: ks_statistic_frac_zero_genes
-      label: Fraction of zeros in genes
-      summary: Ks Statistic of the fraction of zeroes in the genes
+    - name: ks_statistic_transition_matrix
+      label: Transition matrix
+      summary: KS Statistic of the transition matrix.
       description: |
-        The Kolmogorov-Smirnov statistic comparing the fraction of zeros in the
-        genes of the real counts versus the fraction of zeros in the genes of
-        the predicted counts.
-      # reference: doi?
-      # documentation_url: https://url.to/the/documentation
-      # repository_url: https://github.com/organisation/repository
+        The Kolmogorov-Smirnov statistic comparing the transition matrix of the real dataset versus the simulated dataset. The transition matrix elucidates the interrelationships among spatial clusters in each space. Each element in the matrix signifies the transition probability from one spatial cluster to another, thereby mapping the dynamic interplay of spatial clusters.
+      documentation_url: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html
+      repository_url: https://github.com/scipy/scipy/
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_central_score
+      label: Centralized score
+      summary: Ks Statistic of the centralized score matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the centralized score matrix of the real dataset versus the simulated dataset. The centralized score matrix is a vector of the group degree centrality (inter-cluster connectivity), average clustering coefficient (propensity for a spot within a spatial cluster to be connected to spots in another cluster), and the group closeness centrality (relative proximity or accessibility of one cluster to all spots in another). 
+      documentation_url: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html
+      repository_url: https://github.com/scipy/scipy/
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_enrichment
+      label: Neighborhood enrichment
+      summary: Ks Statistic of the neighborhood enrichment.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the neighborhood enrichment matrices of the real dataset versus the simulated dataset. The neighborhood enrichment matrix quantifies the enrichment observed between each pair of spatial clusters. It serves to systematically assess the interaction between different clusters within a spatial context, providing insights into the relative connectivity between various spatial clusters.
+      documentation_url: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html
+      repository_url: https://github.com/scipy/scipy/
       min: -Inf
       max: +Inf
       maximize: false
@@ -25,6 +42,13 @@ resources:
 engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/python:1.1.0
+    setup:
+      - type: python
+        packages:
+          - numpy
+          - scikit-learn
+          - squidpy 
+          - scipy
 
 runners:
   - type: executable
