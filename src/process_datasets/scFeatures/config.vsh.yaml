@@ -1,0 +1,47 @@
+name: convert
+namespace: process_datasets
+description: Add scFeature in adata
+argument_groups:
+  - name: Inputs
+    arguments:
+      - type: file
+        name: --input_sp
+        description: Raw spatial dataset
+        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
+        required: true
+      - type: string
+        name: --sc_species
+        description: species of the dataset
+        # example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
+        required: true
+
+  - name: Outputs
+    arguments:
+      - type: file
+        name: --output_sp
+        description: Processed spatial dataset
+        example: dataset_sp.h5ad
+        direction: output
+        required: true
+
+resources:
+  - type: r_script
+    path: script.R
+
+test_resources:
+  - path: /resources_test/datasets/MOBNEW
+    dest: resources_test/datasets/MOBNEW
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+
+engines:
+  - type: docker
+    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    setup:
+      - type: r
+        bioc: [SingleCellExperiment]
+        github: [SydneyBioX/scFeatures]
+
+runners:
+  - type: executable
+  - type: nextflow
