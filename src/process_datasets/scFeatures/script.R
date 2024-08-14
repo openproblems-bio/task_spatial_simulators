@@ -44,28 +44,21 @@ cat("Transforming spatial into AnnData\n")
 
 output_sp <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(assay(input_sp, "counts")),
-    logcounts = Matrix::t(assay(input_sp, "logcounts"))
+    counts =input_sp$layers[['counts']],
+    logcounts = input_sp$layers[['logcounts']]
   ),
-  obs = data.frame(
-    row.names = colnames(input_sp),
-    col = colData(input_sp)$col,
-    row = colData(input_sp)$row,
-    sizeFactor = colData(input_sp)$sizeFactor,
-    spatial_cluster = colData(input_sp)$spatial.cluster
-  ),
+  obs = input_sp$obs,
   var = data.frame(
     row.names = rownames(input_sp),
     feature_id = rownames(input_sp),
     feature_name = rownames(input_sp)
   ),
   obsm = list(
-    celltype_proportions = celltype_proportions,
+    celltype_proportions = input_sp$obsm[['celltype_proportions']],
     L_stats = scfeatures_result$L_stats,
     celltype_interaction = scfeatures_result$celltype_interaction,
     nn_correlation = scfeatures_result$nn_correlation,
     morans_I = scfeatures_result$morans_I
-
   ),
   uns = list(
     dataset_id = par$dataset_id,
