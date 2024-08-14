@@ -44,30 +44,24 @@ cat("Transforming spatial into AnnData\n")
 
 output_sp <- anndata::AnnData(
   layers = list(
-    counts =input_sp$layers[['counts']],
-    logcounts = input_sp$layers[['logcounts']]
+    counts = input_sp$layers[["counts"]],
+    logcounts = input_sp$layers[["logcounts"]]
   ),
   obs = input_sp$obs,
-  var = data.frame(
-    row.names = rownames(input_sp),
-    feature_id = rownames(input_sp),
-    feature_name = rownames(input_sp)
-  ),
-  obsm = list(
-    celltype_proportions = input_sp$obsm[['celltype_proportions']],
+  var = input_sp$var,
+  obsm = input_sp$obsm,
+  uns = list(
+    dataset_id = input_sp$uns["dataset_id"],
+    dataset_name = input_sp$uns["dataset_name"],
+    dataset_description = input_sp$uns["dataset_description"],
+    dataset_url = input_sp$uns["dataset_url"],
+    dataset_reference = input_sp$uns["dataset_reference"],
+    dataset_summary = input_sp$uns["dataset_summary"],
+    dataset_organism = input_sp$uns["dataset_organism"],
     L_stats = scfeatures_result$L_stats,
     celltype_interaction = scfeatures_result$celltype_interaction,
     nn_correlation = scfeatures_result$nn_correlation,
     morans_I = scfeatures_result$morans_I
-  ),
-  uns = list(
-    dataset_id = par$dataset_id,
-    dataset_name = par$dataset_name,
-    dataset_description = par$dataset_description,
-    dataset_url = par$dataset_url,
-    dataset_reference = par$dataset_reference,
-    dataset_summary = par$dataset_summary,
-    dataset_organism = par$dataset_organism
   )
 )
 
