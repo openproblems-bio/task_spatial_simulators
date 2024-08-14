@@ -1,0 +1,72 @@
+__merge__: ../../api/comp_metric.yaml
+
+name: ks_statistic_scFeatures
+
+info:
+  metrics:
+    - name: ks_statistic_L_stats
+      label: L statistics
+      summary: KS statistic of the L statistics
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the L statistics in the real datasets versus the L statistics in the simulated datasets.
+      reference: 10.1201/9780429485572
+      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
+      repository_url: https://cran.r-project.org/web/packages/ks/
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_celltype_interaction
+      label: Celltype interaction
+      summary: KS statistic of the celltype interaction
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the Celltype interaction in the real datasets versus the Celltype interaction in the simulated datasets.
+      reference: 10.1201/9780429485572
+      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
+      repository_url: https://cran.r-project.org/web/packages/ks/
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_nn_correlation
+      label: Library size
+      summary: KS statistic of the library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simmulated datasets.
+      reference: 10.1201/9780429485572
+      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
+      repository_url: https://cran.r-project.org/web/packages/ks/
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_morans_I
+      label: Effective library size
+      summary: KS statistic of the effective library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the morans I of the real datasets versus the morans I of the simulated datasets.
+      reference: 10.1201/9780429485572
+      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
+      repository_url: https://cran.r-project.org/web/packages/ks/
+      min: -Inf
+      max: +Inf
+      maximize: false
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    setup:
+      - type: apt
+        packages: 
+          - git
+          - r-bioc-edger
+          - r-cran-ks
+          - r-cran-resample
+          - r-cran-reshape2
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]
