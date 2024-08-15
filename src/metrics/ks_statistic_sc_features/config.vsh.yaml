@@ -1,6 +1,6 @@
 __merge__: ../../api/comp_metric.yaml
 
-name: ks_statistic_scFeatures
+name: ks_statistic_sc_features
 
 info:
   metrics:

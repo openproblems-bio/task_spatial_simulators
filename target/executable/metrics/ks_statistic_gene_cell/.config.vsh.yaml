@@ -478,10 +478,15 @@ info:
     summary: "A metric."
     description: "A metric for evaluating method predictions.\n"
 status: "enabled"
+repositories:
+- type: "github"
+  name: "openproblems_v2"
+  repo: "openproblems-bio/openproblems-v2"
+  tag: "main_build"
 license: "MIT"
 links:
   repository: "https://github.com/openproblems-bio/task_spatial_simulators"
-  docker_registry: "ghcr.io"
+  docker_registry: "ghcr.io."
 runners:
 - type: "executable"
   id: "executable"
@@ -537,19 +542,33 @@ build_info:
   engine: "docker"
   output: "target/executable/metrics/ks_statistic_gene_cell"
   executable: "target/executable/metrics/ks_statistic_gene_cell/ks_statistic_gene_cell"
-  viash_version: "0.9.0-RC6"
-  git_commit: "90b91dba88ff03e50f15592b9e59db8b7bee61e2"
+  viash_version: "0.9.0-RC7"
+  git_commit: "5021f0761f04b0ad22e4f81f91d083cbfc88ca85"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"
   version: "build_main"
-  description: "An OpenProblems benchmark task of spatial simulators.\n"
+  label: "Spatial Simulators"
+  summary: "Assessing the quality of spatial transcriptomics simulators"
+  description: "The research goal of this benchmark is to systematically evaluate\
+    \ and compare the performance of various simulation methods for spatial transcriptomics\
+    \ (ST) data.\nIt aims to address the lack of a comprehensive evaluation framework\
+    \ for spatial simulators and explore the feasibility of leveraging existing single-cell\
+    \ simulators for ST data.\n\nThe experimental setup involves collecting public\
+    \ spatial transcriptomics datasets and corresponding scRNA-seq datasets.\nThe\
+    \ spatial and scRNA-seq datasets can originate from different study but should\
+    \ consist of similar cell types from similar tissues.\n"
   info:
     test_resources:
     - type: "s3"
       path: "s3://openproblems-data/resources_test/task_spatial_simulators"
       dest: "resources_test"
-  viash_version: "0.9.0-RC6"
+  repositories:
+  - type: "github"
+    name: "openproblems_v2"
+    repo: "openproblems-bio/openproblems-v2"
+    tag: "main_build"
+  viash_version: "0.9.0-RC7"
   source: "src"
   target: "target"
   config_mods:
@@ -559,14 +578,49 @@ package_config:
     , midtime : \"time = 4.h\", hightime : \"time = 8.h\", veryhightime : \"time =\
     \ 24.h\" }\n.runners[.type == \"nextflow\"].config.script := \"process.errorStrategy\
     \ = 'ignore'\""
+  authors:
+  - name: "Xiaoqi Liang"
+    roles:
+    - "author"
+    - "maintainer"
+    info:
+      orcid: "0009-0004-9625-1441"
+      github: "littlecabiria"
+  - name: "Yue Cao"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-2356-4031"
+      github: "ycao6928"
+  - name: "Jean Yang"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-5271-2603"
+      github: "jeany21"
+  - name: "Robrecht Cannoodt"
+    roles:
+    - "contributor"
+    info:
+      github: "rcannood"
+      orcid: "0000-0003-3641-729X"
+  - name: "Sai Nirmayi Yasa"
+    roles:
+    - "contributor"
+    info:
+      github: "sainirmayi"
+      orcid: "0009-0003-6319-9803"
   keywords:
   - "single-cell"
-  - "openproblems"
-  - "benchmark"
+  - "spatial transcriptomics"
+  - "in-silico"
   - "spatial simulation"
   license: "MIT"
   organization: "openproblems-bio"
+  references:
+    doi:
+    - "10.1101/2024.05.29.596418"
   links:
     repository: "https://github.com/openproblems-bio/task_spatial_simulators"
-    docker_registry: "ghcr.io"
+    docker_registry: "ghcr.io."
     issue_tracker: "https://github.com/openproblems-bio/task_spatial_simulators/issues"
