@@ -8,11 +8,21 @@ license: MIT
 label: Spatial Simulators
 summary: Assessing the quality of spatial transcriptomics simulators
 description: |
-  The research goal of this benchmark is to systematically evaluate and compare the performance of various simulation methods for spatial transcriptomics (ST) data.
-  It aims to address the lack of a comprehensive evaluation framework for spatial simulators and explore the feasibility of leveraging existing single-cell simulators for ST data.
+  Computational methods for spatially resolved transcriptomics (SRT) are frequently developed 
+  and assessed through data simulation. The effectiveness of these evaluations relies on the 
+  simulation methods' ability to accurately reflect experimental data. However, a systematic 
+  evaluation framework for spatial simulators is lacking. Here, we present SpatialSimBench, 
+  a comprehensive evaluation framework that assesses 13 simulation methods using 10 distinct 
+  STR datasets.
 
-  The experimental setup involves collecting public spatial transcriptomics datasets and corresponding scRNA-seq datasets.
-  The spatial and scRNA-seq datasets can originate from different study but should consist of similar cell types from similar tissues.
+  The research goal of this benchmark is to systematically evaluate and compare the
+  performance of various simulation methods for spatial transcriptomics (ST) data.
+  It aims to address the lack of a comprehensive evaluation framework for spatial simulators
+  and explore the feasibility of leveraging existing single-cell simulators for ST data.
+  The experimental setup involves collecting public spatial transcriptomics datasets and
+  corresponding scRNA-seq datasets.
+  The spatial and scRNA-seq datasets can originate from different study but should consist
+  of similar cell types from similar tissues.
 keywords: [single-cell, spatial transcriptomics, in-silico, spatial simulation]
 references:
   doi:
