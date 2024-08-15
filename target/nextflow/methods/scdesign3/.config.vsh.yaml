@@ -316,21 +316,27 @@ build_info:
   output: "target/nextflow/methods/scdesign3"
   executable: "target/nextflow/methods/scdesign3/main.nf"
   viash_version: "0.9.0-RC7"
-  git_commit: "5021f0761f04b0ad22e4f81f91d083cbfc88ca85"
+  git_commit: "a6f9ea6c786add156ffb5c93d4c720c115debcc9"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"
   version: "build_main"
   label: "Spatial Simulators"
   summary: "Assessing the quality of spatial transcriptomics simulators"
-  description: "The research goal of this benchmark is to systematically evaluate\
-    \ and compare the performance of various simulation methods for spatial transcriptomics\
+  description: "Computational methods for spatially resolved transcriptomics (SRT)\
+    \ are frequently developed \nand assessed through data simulation. The effectiveness\
+    \ of these evaluations relies on the \nsimulation methods' ability to accurately\
+    \ reflect experimental data. However, a systematic \nevaluation framework for\
+    \ spatial simulators is lacking. Here, we present SpatialSimBench, \na comprehensive\
+    \ evaluation framework that assesses 13 simulation methods using 10 distinct \n\
+    STR datasets.\n\nThe research goal of this benchmark is to systematically evaluate\
+    \ and compare the\nperformance of various simulation methods for spatial transcriptomics\
     \ (ST) data.\nIt aims to address the lack of a comprehensive evaluation framework\
-    \ for spatial simulators and explore the feasibility of leveraging existing single-cell\
-    \ simulators for ST data.\n\nThe experimental setup involves collecting public\
-    \ spatial transcriptomics datasets and corresponding scRNA-seq datasets.\nThe\
-    \ spatial and scRNA-seq datasets can originate from different study but should\
-    \ consist of similar cell types from similar tissues.\n"
+    \ for spatial simulators\nand explore the feasibility of leveraging existing single-cell\
+    \ simulators for ST data.\nThe experimental setup involves collecting public spatial\
+    \ transcriptomics datasets and\ncorresponding scRNA-seq datasets.\nThe spatial\
+    \ and scRNA-seq datasets can originate from different study but should consist\n\
+    of similar cell types from similar tissues.\n"
   info:
     test_resources:
     - type: "s3"
