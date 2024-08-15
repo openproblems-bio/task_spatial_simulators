@@ -64,6 +64,7 @@ engines:
           - r-cran-ks
           - r-cran-resample
           - r-cran-reshape2
+          - r-bioc-scater
 
 runners:
   - type: executable
