@@ -471,9 +471,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2024-08-15T14:40:30Z"
+LABEL org.opencontainers.image.created="2024-08-15T14:54:14Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="a6f9ea6c786add156ffb5c93d4c720c115debcc9"
+LABEL org.opencontainers.image.revision="b2736c6caaab9efdd762aa1a0ceafbc62bc2ddf6"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -743,7 +743,7 @@ if [[ "$VIASH_ENGINE_TYPE" == "docker" ]]; then
 
   # determine docker image id
   if [[ "$VIASH_ENGINE_ID" == 'docker' ]]; then
-    VIASH_DOCKER_IMAGE_ID='ghcr.io./openproblems-bio/task_spatial_simulators/metrics/ks_statistic_sc_features:build_main'
+    VIASH_DOCKER_IMAGE_ID='ghcr.io/openproblems-bio/task_spatial_simulators/metrics/ks_statistic_sc_features:build_main'
   fi
 
   # print dockerfile

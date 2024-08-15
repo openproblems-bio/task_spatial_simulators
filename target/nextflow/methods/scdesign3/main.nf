@@ -3144,7 +3144,7 @@ meta = [
   "license" : "MIT",
   "links" : {
     "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
-    "docker_registry" : "ghcr.io."
+    "docker_registry" : "ghcr.io"
   },
   "runners" : [
     {
@@ -3221,7 +3221,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "a6f9ea6c786add156ffb5c93d4c720c115debcc9",
+    "git_commit" : "b2736c6caaab9efdd762aa1a0ceafbc62bc2ddf6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3321,7 +3321,7 @@ meta = [
     },
     "links" : {
       "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
-      "docker_registry" : "ghcr.io.",
+      "docker_registry" : "ghcr.io",
       "issue_tracker" : "https://github.com/openproblems-bio/task_spatial_simulators/issues"
     }
   }
@@ -3795,7 +3795,7 @@ meta["defaults"] = [
   // default directives
   directives: readJsonBlob('''{
   "container" : {
-    "registry" : "ghcr.io.",
+    "registry" : "ghcr.io",
     "image" : "openproblems-bio/task_spatial_simulators/methods/scdesign3",
     "tag" : "build_main"
   },
