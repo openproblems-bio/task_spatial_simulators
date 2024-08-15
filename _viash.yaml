@@ -61,7 +61,7 @@ authors:
 links:
   issue_tracker: https://github.com/openproblems-bio/task_spatial_simulators/issues
   repository: https://github.com/openproblems-bio/task_spatial_simulators
-  docker_registry: ghcr.io.
+  docker_registry: ghcr.io
 
 info:
   # image: thumbnail.svg
