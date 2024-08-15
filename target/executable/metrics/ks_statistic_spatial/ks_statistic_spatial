@@ -470,9 +470,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2024-08-15T14:54:13Z"
+LABEL org.opencontainers.image.created="2024-08-15T15:14:23Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="b2736c6caaab9efdd762aa1a0ceafbc62bc2ddf6"
+LABEL org.opencontainers.image.revision="3392c285b8a565e11c756a5b56756cccd84686d1"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
