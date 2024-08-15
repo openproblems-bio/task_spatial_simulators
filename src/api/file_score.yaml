@@ -1,8 +1,8 @@
 type: file
 example: resources/score.h5ad
+label: Score
+summary: "File indicating the score of a metric."
 info:
-  label: Score
-  summary: "File indicating the score of a metric."
   file_type: h5ad
   slots:
     uns:

@@ -48,7 +48,9 @@ resources:
     path: main.nf
     entrypoint: run_wf
   - type: file
-    path: "../../api/task_info.yaml"
+    path: /_viash.yaml
+  - type: file
+    path: /src/api/task_info.yaml # TODO: remove this
 dependencies:
   - name: common/check_dataset_schema
     repository: openproblems_v2
@@ -62,5 +64,7 @@ dependencies:
   - name: methods/symsim
   - name: methods/zinbwave
   - name: metrics/ks_statistic_gene_cell
+  - name: metrics/ks_statistic_sc_features
+  - name: metrics/ks_statistic_spatial
 runners:
   - type: nextflow

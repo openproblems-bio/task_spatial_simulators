@@ -1,13 +1,14 @@
 __merge__: ../../api/comp_method.yaml
 
 name: splatter
+label: Splatter
+summary: A single cell RNA-seq data simulator based on a gamma-Poisson distribution.
+description: |
+  The Splat model is a gamma-Poisson distribution used to generate a gene by cell matrix of counts. Mean expression levels for each gene are simulated from a gamma distribution and the Biological Coefficient of Variation is used to enforce a mean-variance trend before counts are simulated from a Poisson distribution.
+references:
+  doi: 10.1186/s13059-017-1305-0
 
 info:
-  label: Splatter
-  summary: A single cell RNA-seq data simulator based on a gamma-Poisson distribution.
-  description: |
-    The Splat model is a gamma-Poisson distribution used to generate a gene by cell matrix of counts. Mean expression levels for each gene are simulated from a gamma distribution and the Biological Coefficient of Variation is used to enforce a mean-variance trend before counts are simulated from a Poisson distribution.
-  reference: 10.1186/s13059-017-1305-0
   documentation_url: https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html
   repository_url: https://github.com/Oshlack/splatter
 
@@ -17,7 +18,7 @@ resources:
 
 engines:
   - type: docker
-    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    image: openproblems/base_r:1.0.0
     setup:
       - type: apt
         packages: r-bioc-splatter

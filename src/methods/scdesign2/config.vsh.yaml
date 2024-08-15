@@ -1,15 +1,16 @@
 __merge__: ../../api/comp_method.yaml
 
 name: scdesign2
+label: scDesign2
+summary:  A transparent simulator that generates high-fidelity single-cell gene expression count data with gene correlations captured
+description: |
+  scDesign2 is a transparent simulator that achieves all three goals (preserving genes, capturing gene correlations, and generating any 
+  number of cells with varying sequencing depths) and generates high-fidelity synthetic data for multiple single-cell gene expression 
+  count-based technologies.
 
+references:
+  doi: 10.1186/s13059-021-02367-2
 info:
-  label: scDesign2
-  summary:  A transparent simulator that generates high-fidelity single-cell gene expression count data with gene correlations captured
-  description: |
-    scDesign2 is a transparent simulator that achieves all three goals (preserving genes, capturing gene correlations, and generating any 
-    number of cells with varying sequencing depths) and generates high-fidelity synthetic data for multiple single-cell gene expression 
-    count-based technologies. 
-  reference: 10.1186/s13059-021-02367-2
   documentation_url: https://htmlpreview.github.io/?https://github.com/JSB-UCLA/scDesign2/blob/master/vignettes/scDesign2.html
   repository_url: https://github.com/JSB-UCLA/scDesign2
 
@@ -19,7 +20,7 @@ resources:
 
 engines:
   - type: docker
-    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    image: openproblems/base_r:1.0.0
     setup:
       - type: apt
         packages: [r-bioc-singlecellexperiment, git]
