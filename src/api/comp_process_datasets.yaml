@@ -6,28 +6,77 @@ info:
     description: |
       A component for preprocessing spatial transcriptomics and single-cell transcriptomics for
       use in the spatial simulator benchmark.
-arguments:
-  - type: file
-    name: --input_sc
-    description: Raw single-cell dataset
-    example: resources_test/datasets_raw/MOBNEW/dataset_sc.rds
-    required: true
 
-  - type: file
-    name: --input_sp
-    description: Raw spatial dataset
-    example: resources_test/datasets_raw/MOBNEW/dataset_sp.rds
-    required: true
+argument_groups:
+  - name: Inputs
+    arguments:
+      - type: file
+        name: --input_sc
+        description: Raw single-cell dataset
+        example: resources_test/datasets_raw/MOBNEW/dataset_sc.rds
+        required: true
+      - type: file
+        name: --input_sp
+        description: Raw spatial dataset
+        example: resources_test/datasets_raw/MOBNEW/dataset_sp.rds
+        required: true
 
-  - name: --output_sc
-    __merge__: file_dataset_sc.yaml
-    direction: output
-    required: true
-  
-  - name: --output_sp
-    __merge__: file_dataset_sp.yaml
-    direction: output
-    required: true
+  - name: Outputs
+    arguments:
+      - type: file
+        name: --output_sc
+        description: Processed single-cell dataset
+        direction: output
+        required: true     
+      - type: file
+        name: --output_sp
+        description: Processed spatial dataset
+        direction: output
+        required: true
+
+  - name: Dataset metadata
+    description: Metadata about the dataset, used for documentation and provenance.
+    arguments:
+      - type: string
+        name: --dataset_id
+        description: A unique identifier for the dataset.
+        required: true
+        info: 
+          test_default: mobnew
+      - type: string
+        name: --dataset_name
+        description: A human-readable name for the dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_url
+        description: Link to the original source of the dataset.
+        required: false
+      - type: string
+        name: --dataset_reference
+        description: A doi for the dataset.
+        example: 10.1234/s1234-5678-9012-3
+        required: false
+        multiple: true
+      - type: string
+        name: --dataset_summary
+        description: Short description of the dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_description
+        description: Long description of the dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_organism
+        description: Organism from which the dataset was derived.
+        required: true
+        info:
+          test_default: mus_musculus
 test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
