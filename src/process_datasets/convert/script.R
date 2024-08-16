@@ -34,7 +34,8 @@ print(input_sp)
 cat("Transforming single cell into AnnData\n")
 output_sc <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(assay(input_sc, "counts"))
+    counts = Matrix::t(assay(input_sc, "counts")),
+    logcounts = Matrix::t(assay(input_sc, "logcounts"))
   ),
   obs = data.frame(
     row.names = colnames(input_sc),
