@@ -1,6 +1,6 @@
-name: downstream
+name: precompute_downstream
 namespace: process_datasets
-description: four downstream analytical tasks will add into the real data
+description: Precompute values for the downstream analysis
 argument_groups:
   - name: Inputs
     arguments:
