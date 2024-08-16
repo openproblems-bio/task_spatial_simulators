@@ -1,3 +1,5 @@
+# todo: this file will be removed in the near future.
+# use _viash.yaml instead.
 name: task_spatial_simulators
 label: spatial transcriptomics, single-cell, openproblems, benchmark, spatial simulation
 summary: Benchmark study of spatial simulation models.

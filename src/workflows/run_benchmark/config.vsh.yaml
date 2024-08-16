@@ -62,10 +62,5 @@ dependencies:
   - name: methods/symsim
   - name: methods/zinbwave
   - name: metrics/ks_statistic_gene_cell
-repositories:
-  - name: openproblems_v2
-    type: github
-    repo: openproblems-bio/openproblems-v2
-    tag: main_build
 runners:
   - type: nextflow
