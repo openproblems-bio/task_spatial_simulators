@@ -27,12 +27,14 @@ argument_groups:
         name: --output_sc
         description: Processed single-cell dataset
         direction: output
-        required: true     
+        required: true
+        default: '$id/output_sc.h5ad'
       - type: file
         name: --output_sp
         description: Processed spatial dataset
         direction: output
         required: true
+        default: '$id/output_sp.h5ad'
 
   - name: Dataset metadata
     description: Metadata about the dataset, used for documentation and provenance.
