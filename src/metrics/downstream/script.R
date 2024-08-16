@@ -1,5 +1,3 @@
-
-
 ## VIASH START
 par <- list(
   input_spatial_dataset = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
@@ -31,10 +29,17 @@ ctdeconvolute_rmse <- generate_jds(real_ct_prop, sim_ct_prop)
 ctdeconcolute_jsd <- generate_rmse(real_ct_prop, sim_ct_prop)
 
 cat("spatial autocorrelation evaluation\n")
-# TODO
+counts <- input_simulated_sp$layers[["counts"]]
+logcounts <- log1p(counts)
+input_simulated_sp$layers[["logcounts"]] <- logcounts
+real_moransI <- generate_moransI(input_real_sp)
+sim_moransI <- generate_moransI(input_simulated_sp)
+crosscor_cosin <- generate_cosine(real_moransI, sim_moransI)
+crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
 cat("spatial clustering evaluation\n")
 # TODO
+
 
 
 cat("Combining metric values\n")
@@ -42,14 +47,18 @@ uns_metric_ids <- c(
   "svg_precision",
   "svg_recall",
   "ctdeconvolute_rmse",
-  "ctdeconcolute_jsd"
+  "ctdeconcolute_jsd",
+  "crosscor_cosine",
+  "crosscor_mantel"
 )
 
 uns_metric_values <- c(
   svg_precision,
   svg_recall,
   ctdeconvolute_rmse,
-  ctdeconcolute_jsd
+  ctdeconcolute_jsd,
+  crosscor_cosine,
+  crosscor_mantel
 )
 
 cat("Writing output AnnData to file\n")
