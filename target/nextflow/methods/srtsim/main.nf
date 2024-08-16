@@ -2808,10 +2808,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input",
+          "label" : "Spatial Dataset",
+          "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Spatial dataset",
-            "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -2951,9 +2951,9 @@ meta = [
         {
           "type" : "file",
           "name" : "--output",
+          "label" : "Solution",
+          "summary" : "The solution for the test data",
           "info" : {
-            "label" : "Solution",
-            "summary" : "The solution for the test data",
             "slots" : {
               "layers" : [
                 {
@@ -3065,6 +3065,9 @@ meta = [
       "is_executable" : true
     }
   ],
+  "label" : "SRTsim",
+  "summary" : "An SRT-specific simulator for scalable, reproducible, and realistic SRT simulations.",
+  "description" : "A key benefit of srtsim is its ability to maintain location-wise and gene-wise SRT count properties and \npreserve spatial expression patterns, enabling evaluation of SRT method performance using synthetic data. \n",
   "test_resources" : [
     {
       "type" : "python_script",
@@ -3073,12 +3076,8 @@ meta = [
     },
     {
       "type" : "python_script",
-      "path" : "/common/component_tests/check_method_config.py",
+      "path" : "/common/component_tests/check_config.py",
       "is_executable" : true
-    },
-    {
-      "type" : "file",
-      "path" : "/common/library.bib"
     },
     {
       "type" : "file",
@@ -3087,17 +3086,13 @@ meta = [
     }
   ],
   "info" : {
-    "label" : "SRTsim",
-    "summary" : "An SRT-specific simulator for scalable, reproducible, and realistic SRT simulations.",
-    "description" : "A key benefit of srtsim is its ability to maintain location-wise and gene-wise SRT count properties and \npreserve spatial expression patterns, enabling evaluation of SRT method performance using synthetic data. \n",
-    "reference" : "10.1186/s13059-023-02879-z",
     "documentation_url" : "https://xzhoulab.github.io/SRTsim",
     "repository_url" : "https://github.com/xzhoulab/srtsim",
     "type" : "method",
     "type_info" : {
       "label" : "Method",
       "summary" : "A method.",
-      "description" : "A method to predict the task effects.\n"
+      "description" : "A spatial transcriptomics simulation method.\n"
     }
   },
   "status" : "enabled",
@@ -3110,6 +3105,11 @@ meta = [
     }
   ],
   "license" : "MIT",
+  "references" : {
+    "doi" : [
+      "10.1186/s13059-023-02879-z"
+    ]
+  },
   "links" : {
     "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
     "docker_registry" : "ghcr.io"
@@ -3162,7 +3162,7 @@ meta = [
     {
       "type" : "docker",
       "id" : "docker",
-      "image" : "ghcr.io/openproblems-bio/base_images/r:1.1.0",
+      "image" : "openproblems/base_r:1.0.0",
       "namespace_separator" : "/",
       "setup" : [
         {
@@ -3181,7 +3181,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/srtsim",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "a71b4c5e4686d94a03127612878f8fe9619fa34c",
+    "git_commit" : "0189f1ad5f750db8c97c338547f5fc7818c9486a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

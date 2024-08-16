@@ -1,8 +1,13 @@
 __merge__: ../../api/comp_metric.yaml
 
 name: ks_statistic_gene_cell
+references:
+  doi: 10.1201/9780429485572
 
 info:
+  documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
+  repository_url: https://cran.r-project.org/web/packages/ks
+
   metrics:
     - name: ks_statistic_frac_zero_genes
       label: Fraction of zeros per gene
@@ -10,8 +15,6 @@ info:
       description: |
         The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.
       reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -20,9 +23,6 @@ info:
       summary: KS statistic of the fraction of zeros per spot (cell).
       description: |
         The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -31,9 +31,6 @@ info:
       summary: KS statistic of the library size.
       description: |
         The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -41,10 +38,7 @@ info:
       label: Effective library size
       summary: KS statistic of the effective library size.
       description: |
-        The Kolmogorov-Smirnov statistic comparing the feffective library size of the real datasets versus the effective library size of the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
+        The Kolmogorov-Smirnov statistic comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.
       min: -Inf
       max: +Inf
       maximize: false
@@ -53,9 +47,6 @@ info:
       summary: KS statistic of the weight trimmed mean of M-values normalization factor (TMM).
       description: |
         The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -64,9 +55,6 @@ info:
       summary: KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.
       description: |
         The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -75,9 +63,6 @@ info:
       summary: KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.
       description: |
         The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -86,9 +71,6 @@ info:
       summary: KS statistic of the relationship between library size and the proportion of zeros per spot (cell).
       description: |
         The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -97,9 +79,6 @@ info:
       summary: KS statistic of the sample Pearson correlation.
       description: |
         The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -108,9 +87,6 @@ info:
       summary: KS statistic of the gene-level scaled variance of the expression matrix.
       description: |
         The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -119,9 +95,6 @@ info:
       summary: KS statistic of the gene-level scaled mean of the expression matrix.
       description: |
         The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -130,9 +103,6 @@ info:
       summary: KS statistic of the gene Pearson correlation.
       description: |
         The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -141,9 +111,6 @@ info:
       summary: KS statistic of the relationship between mean expression and variance expression.
       description: |
         The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -152,9 +119,6 @@ info:
       summary: KS statistic of the relationship between mean expression and the proportion of zero per gene.
       description: |
         The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -165,7 +129,7 @@ resources:
 
 engines:
   - type: docker
-    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    image: openproblems/base_r:1.0.0
     setup:
       - type: apt
         packages: 

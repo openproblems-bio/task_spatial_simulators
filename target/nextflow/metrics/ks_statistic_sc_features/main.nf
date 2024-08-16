@@ -2808,10 +2808,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_spatial_dataset",
+          "label" : "Spatial Dataset",
+          "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Spatial dataset",
-            "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -2935,10 +2935,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_singlecell_dataset",
+          "label" : "Single-Cell Dataset",
+          "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Single-cell dataset",
-            "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -3037,9 +3037,9 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_simulated_dataset",
+          "label" : "Solution",
+          "summary" : "The solution for the test data",
           "info" : {
-            "label" : "Solution",
-            "summary" : "The solution for the test data",
             "slots" : {
               "layers" : [
                 {
@@ -3144,9 +3144,9 @@ meta = [
         {
           "type" : "file",
           "name" : "--output",
+          "label" : "Score",
+          "summary" : "File indicating the score of a metric.",
           "info" : {
-            "label" : "Score",
-            "summary" : "File indicating the score of a metric.",
             "file_type" : "h5ad",
             "slots" : {
               "uns" : [
@@ -3202,12 +3202,12 @@ meta = [
   "test_resources" : [
     {
       "type" : "python_script",
-      "path" : "/common/component_tests/check_metric_config.py",
+      "path" : "/common/component_tests/run_and_check_output.py",
       "is_executable" : true
     },
     {
       "type" : "python_script",
-      "path" : "/common/component_tests/run_and_check_output.py",
+      "path" : "/common/component_tests/check_config.py",
       "is_executable" : true
     },
     {
@@ -3221,15 +3221,14 @@ meta = [
     }
   ],
   "info" : {
+    "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
+    "repository_url" : "https://cran.r-project.org/web/packages/ks/",
     "metrics" : [
       {
         "name" : "ks_statistic_L_stats",
         "label" : "L statistics",
         "summary" : "KS statistic of the L statistics",
         "description" : "The Kolmogorov-Smirnov statistic comparing the L statistics in the real datasets versus the L statistics in the simulated datasets.\n",
-        "reference" : "10.1201/9780429485572",
-        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
-        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3239,9 +3238,6 @@ meta = [
         "label" : "Celltype interaction",
         "summary" : "KS statistic of the celltype interaction",
         "description" : "The Kolmogorov-Smirnov statistic comparing the Celltype interaction in the real datasets versus the Celltype interaction in the simulated datasets.\n",
-        "reference" : "10.1201/9780429485572",
-        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
-        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3251,9 +3247,6 @@ meta = [
         "label" : "Library size",
         "summary" : "KS statistic of the library size.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simmulated datasets.\n",
-        "reference" : "10.1201/9780429485572",
-        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
-        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3263,9 +3256,6 @@ meta = [
         "label" : "Effective library size",
         "summary" : "KS statistic of the effective library size.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the morans I of the real datasets versus the morans I of the simulated datasets.\n",
-        "reference" : "10.1201/9780429485572",
-        "documentation_url" : "https://cran.r-project.org/web/packages/ks/ks.pdf",
-        "repository_url" : "https://cran.r-project.org/web/packages/ks/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3275,7 +3265,7 @@ meta = [
     "type_info" : {
       "label" : "Metric",
       "summary" : "A metric.",
-      "description" : "A metric for evaluating method predictions.\n"
+      "description" : "A metric for evaluating spatial transcriptomics simulation methods.\n"
     }
   },
   "status" : "enabled",
@@ -3288,6 +3278,11 @@ meta = [
     }
   ],
   "license" : "MIT",
+  "references" : {
+    "doi" : [
+      "10.1201/9780429485572"
+    ]
+  },
   "links" : {
     "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
     "docker_registry" : "ghcr.io"
@@ -3340,7 +3335,7 @@ meta = [
     {
       "type" : "docker",
       "id" : "docker",
-      "image" : "ghcr.io/openproblems-bio/base_images/r:1.1.0",
+      "image" : "openproblems/base_r:1.0.0",
       "namespace_separator" : "/",
       "setup" : [
         {
@@ -3364,7 +3359,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "a71b4c5e4686d94a03127612878f8fe9619fa34c",
+    "git_commit" : "0189f1ad5f750db8c97c338547f5fc7818c9486a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

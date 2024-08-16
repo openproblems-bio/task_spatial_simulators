@@ -177,10 +177,20 @@ function ViashHelp {
   echo "    --input_spatial_dataset"
   echo "        type: file, required parameter, file must exist"
   echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+  echo "        This dataset contains raw counts and metadata as output by a dataset"
+  echo "        loader."
+  echo "        The format of this file is derived from the [CELLxGENE schema"
+  echo "       "
+  echo "v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md)."
   echo ""
   echo "    --input_singlecell_dataset"
   echo "        type: file, required parameter, file must exist"
   echo "        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+  echo "        This dataset contains raw counts and metadata as output by a dataset"
+  echo "        loader."
+  echo "        The format of this file is derived from the [CELLxGENE schema"
+  echo "       "
+  echo "v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md)."
   echo ""
   echo "    --input_simulated_dataset"
   echo "        type: file, required parameter, file must exist"
@@ -464,16 +474,16 @@ function ViashDockerfile {
 
   if [[ "$engine_id" == "docker" ]]; then
     cat << 'VIASHDOCKER'
-FROM ghcr.io/openproblems-bio/base_images/r:1.1.0
+FROM openproblems/base_r:1.0.0
 ENTRYPOINT []
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y git r-bioc-edger r-cran-ks r-cran-resample r-cran-reshape2 && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_gene_cell"
-LABEL org.opencontainers.image.created="2024-08-16T10:56:05Z"
+LABEL org.opencontainers.image.created="2024-08-16T10:58:00Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="a71b4c5e4686d94a03127612878f8fe9619fa34c"
+LABEL org.opencontainers.image.revision="0189f1ad5f750db8c97c338547f5fc7818c9486a"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

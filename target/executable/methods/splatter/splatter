@@ -173,10 +173,21 @@ VIASH_META_TEMP_DIR="$VIASH_TEMP"
 function ViashHelp {
   echo "splatter build_main"
   echo ""
+  echo "The Splat model is a gamma-Poisson distribution used to generate a gene by cell"
+  echo "matrix of counts. Mean expression levels for each gene are simulated from a"
+  echo "gamma distribution and the Biological Coefficient of Variation is used to"
+  echo "enforce a mean-variance trend before counts are simulated from a Poisson"
+  echo "distribution."
+  echo ""
   echo "Arguments:"
   echo "    --input"
   echo "        type: file, file must exist"
   echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+  echo "        This dataset contains raw counts and metadata as output by a dataset"
+  echo "        loader."
+  echo "        The format of this file is derived from the [CELLxGENE schema"
+  echo "       "
+  echo "v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md)."
   echo ""
   echo "    --base"
   echo "        type: string"
@@ -465,16 +476,16 @@ function ViashDockerfile {
 
   if [[ "$engine_id" == "docker" ]]; then
     cat << 'VIASHDOCKER'
-FROM ghcr.io/openproblems-bio/base_images/r:1.1.0
+FROM openproblems/base_r:1.0.0
 ENTRYPOINT []
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y r-bioc-splatter && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2024-08-16T10:56:05Z"
+LABEL org.opencontainers.image.created="2024-08-16T10:58:00Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="a71b4c5e4686d94a03127612878f8fe9619fa34c"
+LABEL org.opencontainers.image.revision="0189f1ad5f750db8c97c338547f5fc7818c9486a"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

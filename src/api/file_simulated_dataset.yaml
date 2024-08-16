@@ -1,8 +1,8 @@
 type: file
 example: "resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
+label: "Solution"
+summary: "The solution for the test data"
 info:
-  label: "Solution"
-  summary: "The solution for the test data"
   slots:
     layers: 
       - type: integer

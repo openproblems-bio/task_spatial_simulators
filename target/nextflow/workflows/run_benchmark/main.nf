@@ -2808,10 +2808,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_spatial_dataset",
+          "label" : "Spatial Dataset",
+          "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Spatial dataset",
-            "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -2935,10 +2935,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_singlecell_dataset",
+          "label" : "Single-Cell Dataset",
+          "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Single-cell dataset",
-            "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -3117,7 +3117,11 @@ meta = [
     },
     {
       "type" : "file",
-      "path" : "../../api/task_info.yaml"
+      "path" : "/_viash.yaml"
+    },
+    {
+      "type" : "file",
+      "path" : "/src/api/task_info.yaml"
     }
   ],
   "status" : "enabled",
@@ -3185,6 +3189,18 @@ meta = [
       "repository" : {
         "type" : "local"
       }
+    },
+    {
+      "name" : "metrics/ks_statistic_sc_features",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "metrics/ks_statistic_spatial",
+      "repository" : {
+        "type" : "local"
+      }
     }
   ],
   "repositories" : [
@@ -3246,7 +3262,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "a71b4c5e4686d94a03127612878f8fe9619fa34c",
+    "git_commit" : "0189f1ad5f750db8c97c338547f5fc7818c9486a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3365,6 +3381,8 @@ include { srtsim } from "${meta.resources_dir}/../../../nextflow/methods/srtsim/
 include { symsim } from "${meta.resources_dir}/../../../nextflow/methods/symsim/main.nf"
 include { zinbwave } from "${meta.resources_dir}/../../../nextflow/methods/zinbwave/main.nf"
 include { ks_statistic_gene_cell } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_gene_cell/main.nf"
+include { ks_statistic_sc_features } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_sc_features/main.nf"
+include { ks_statistic_spatial } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_spatial/main.nf"
 
 // inner workflow
 // user-provided Nextflow code

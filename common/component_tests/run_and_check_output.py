@@ -2,8 +2,8 @@ import anndata as ad
 import pandas as pd
 import subprocess
 from os import path
-import yaml
 import re
+import openproblems
 
 ## VIASH START
 meta = {
@@ -88,29 +88,9 @@ def run_and_check_outputs(arguments, cmd):
     print("All checks succeeded!", flush=True)
 
 
-def process_argument(argument: dict) -> dict:
-    argument["clean_name"] = argument["name"].removeprefix("-").removeprefix("-")
-    return argument
 
 # read viash config
-with open(meta["config"], "r") as file:
-    config = yaml.safe_load(file)
-
-arggroup_args = []
-standalone_args = []
-# process arguments
-if "argument_groups" in config:
-    arggroup_args = [
-        process_argument(arg)
-        for arg_group in config["argument_groups"]
-        for arg in arg_group["arguments"]
-    ]
-if "arguments" in config:
-    standalone_args = [
-        process_argument(arg)
-        for arg in config["arguments"]
-    ]
-config["all_arguments"] = arggroup_args + standalone_args
+config = openproblems.project.read_viash_config(meta["config"])
 
 # get resources
 arguments = []
@@ -136,11 +116,11 @@ for arg in config["all_arguments"]:
     
     arguments.append(new_arg)
 
-fun_info = config.get("info") or {}
-if "test_setup" not in fun_info:
+config_info = config.get("info") or {}
+if "test_setup" not in config_info:
     argument_sets = {"run": arguments}
 else:
-    test_setup = fun_info["test_setup"]
+    test_setup = config_info["test_setup"]
     argument_sets = {}
     for name, test_instance in test_setup.items():
         new_arguments = []

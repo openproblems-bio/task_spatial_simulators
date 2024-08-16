@@ -1,17 +1,17 @@
 __merge__: ../../api/comp_metric.yaml
 
 name: ks_statistic_sc_features
-
+references:
+  doi: 10.1201/9780429485572
 info:
+  documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
+  repository_url: https://cran.r-project.org/web/packages/ks/
   metrics:
     - name: ks_statistic_L_stats
       label: L statistics
       summary: KS statistic of the L statistics
       description: |
         The Kolmogorov-Smirnov statistic comparing the L statistics in the real datasets versus the L statistics in the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -20,9 +20,6 @@ info:
       summary: KS statistic of the celltype interaction
       description: |
         The Kolmogorov-Smirnov statistic comparing the Celltype interaction in the real datasets versus the Celltype interaction in the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -31,9 +28,6 @@ info:
       summary: KS statistic of the library size.
       description: |
         The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simmulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -42,9 +36,6 @@ info:
       summary: KS statistic of the effective library size.
       description: |
         The Kolmogorov-Smirnov statistic comparing the morans I of the real datasets versus the morans I of the simulated datasets.
-      reference: 10.1201/9780429485572
-      documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-      repository_url: https://cran.r-project.org/web/packages/ks/
       min: -Inf
       max: +Inf
       maximize: false
@@ -55,7 +46,7 @@ resources:
 
 engines:
   - type: docker
-    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    image: openproblems/base_r:1.0.0
     setup:
       - type: apt
         packages: 

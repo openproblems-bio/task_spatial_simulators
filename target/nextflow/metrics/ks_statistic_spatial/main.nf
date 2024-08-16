@@ -2808,10 +2808,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_spatial_dataset",
+          "label" : "Spatial Dataset",
+          "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Spatial dataset",
-            "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -2935,10 +2935,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_singlecell_dataset",
+          "label" : "Single-Cell Dataset",
+          "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
+          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
           "info" : {
-            "label" : "Single-cell dataset",
-            "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -3037,9 +3037,9 @@ meta = [
         {
           "type" : "file",
           "name" : "--input_simulated_dataset",
+          "label" : "Solution",
+          "summary" : "The solution for the test data",
           "info" : {
-            "label" : "Solution",
-            "summary" : "The solution for the test data",
             "slots" : {
               "layers" : [
                 {
@@ -3144,9 +3144,9 @@ meta = [
         {
           "type" : "file",
           "name" : "--output",
+          "label" : "Score",
+          "summary" : "File indicating the score of a metric.",
           "info" : {
-            "label" : "Score",
-            "summary" : "File indicating the score of a metric.",
             "file_type" : "h5ad",
             "slots" : {
               "uns" : [
@@ -3202,12 +3202,12 @@ meta = [
   "test_resources" : [
     {
       "type" : "python_script",
-      "path" : "/common/component_tests/check_metric_config.py",
+      "path" : "/common/component_tests/run_and_check_output.py",
       "is_executable" : true
     },
     {
       "type" : "python_script",
-      "path" : "/common/component_tests/run_and_check_output.py",
+      "path" : "/common/component_tests/check_config.py",
       "is_executable" : true
     },
     {
@@ -3221,14 +3221,14 @@ meta = [
     }
   ],
   "info" : {
+    "documentation_url" : "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html",
+    "repository_url" : "https://github.com/scipy/scipy/",
     "metrics" : [
       {
         "name" : "ks_statistic_transition_matrix",
         "label" : "Transition matrix",
         "summary" : "KS Statistic of the transition matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the transition matrix of the real dataset versus the simulated dataset. The transition matrix elucidates the interrelationships among spatial clusters in each space. Each element in the matrix signifies the transition probability from one spatial cluster to another, thereby mapping the dynamic interplay of spatial clusters.\n",
-        "documentation_url" : "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html",
-        "repository_url" : "https://github.com/scipy/scipy/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3238,8 +3238,6 @@ meta = [
         "label" : "Centralized score",
         "summary" : "Ks Statistic of the centralized score matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the centralized score matrix of the real dataset versus the simulated dataset. The centralized score matrix is a vector of the group degree centrality (inter-cluster connectivity), average clustering coefficient (propensity for a spot within a spatial cluster to be connected to spots in another cluster), and the group closeness centrality (relative proximity or accessibility of one cluster to all spots in another). \n",
-        "documentation_url" : "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html",
-        "repository_url" : "https://github.com/scipy/scipy/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3249,8 +3247,6 @@ meta = [
         "label" : "Neighborhood enrichment",
         "summary" : "Ks Statistic of the neighborhood enrichment.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the neighborhood enrichment matrices of the real dataset versus the simulated dataset. The neighborhood enrichment matrix quantifies the enrichment observed between each pair of spatial clusters. It serves to systematically assess the interaction between different clusters within a spatial context, providing insights into the relative connectivity between various spatial clusters.\n",
-        "documentation_url" : "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html",
-        "repository_url" : "https://github.com/scipy/scipy/",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3260,7 +3256,7 @@ meta = [
     "type_info" : {
       "label" : "Metric",
       "summary" : "A metric.",
-      "description" : "A metric for evaluating method predictions.\n"
+      "description" : "A metric for evaluating spatial transcriptomics simulation methods.\n"
     }
   },
   "status" : "enabled",
@@ -3325,7 +3321,7 @@ meta = [
     {
       "type" : "docker",
       "id" : "docker",
-      "image" : "ghcr.io/openproblems-bio/base_images/python:1.1.0",
+      "image" : "openproblems/base_python:1.0.0",
       "namespace_separator" : "/",
       "setup" : [
         {
@@ -3348,7 +3344,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_spatial",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "a71b4c5e4686d94a03127612878f8fe9619fa34c",
+    "git_commit" : "0189f1ad5f750db8c97c338547f5fc7818c9486a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

@@ -2841,11 +2841,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--output_sc",
+          "label" : "Single-Cell Dataset",
+          "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
           "description" : "Processed single-cell dataset",
           "info" : {
-            "label" : "Single-cell dataset",
-            "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -2944,11 +2943,10 @@ meta = [
         {
           "type" : "file",
           "name" : "--output_sp",
+          "label" : "Spatial Dataset",
+          "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
           "description" : "Processed spatial dataset",
           "info" : {
-            "label" : "Spatial dataset",
-            "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
-            "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
             "slots" : {
               "layers" : [
                 {
@@ -3236,7 +3234,7 @@ meta = [
     {
       "type" : "docker",
       "id" : "docker",
-      "image" : "ghcr.io/openproblems-bio/base_images/r:1.1.0",
+      "image" : "openproblems/base_r:1.0.0",
       "namespace_separator" : "/",
       "setup" : [
         {
@@ -3255,7 +3253,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "a71b4c5e4686d94a03127612878f8fe9619fa34c",
+    "git_commit" : "0189f1ad5f750db8c97c338547f5fc7818c9486a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

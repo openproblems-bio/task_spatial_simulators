@@ -6,12 +6,11 @@ argument_groups:
   arguments:
   - type: "file"
     name: "--input"
+    label: "Spatial Dataset"
+    summary: "An unprocessed spatial dataset as output by a dataset loader."
+    description: "This dataset contains raw counts and metadata as output by a dataset\
+      \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
     info:
-      label: "Spatial dataset"
-      summary: "An unprocessed spatial dataset as output by a dataset loader."
-      description: "This dataset contains raw counts and metadata as output by a dataset\
-        \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema\
-        \ v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
       slots:
         layers:
         - type: "integer"
@@ -112,9 +111,9 @@ argument_groups:
     multiple_sep: ";"
   - type: "file"
     name: "--output"
+    label: "Solution"
+    summary: "The solution for the test data"
     info:
-      label: "Solution"
-      summary: "The solution for the test data"
       slots:
         layers:
         - type: "integer"
@@ -220,35 +219,32 @@ resources:
 - type: "r_script"
   path: "script.R"
   is_executable: true
+label: "scDesign3"
+summary: "A probabilistic model that unifies the generation and inference for single-cell\
+  \ and spatial omics data"
+description: "scDesign3 offers a probabilistic model that unifies the generation and\
+  \ inference\nfor single-cell and spatial omics data. The model's interpretable parameters\
+  \ and\nlikelihood enable scDesign3 to generate customized in silico data and unsupervisedly\n\
+  assess the goodness-of-fit of inferred cell latent structures (for example, clusters,\n\
+  trajectories and spatial locations).\n"
 test_resources:
 - type: "python_script"
   path: "run_and_check_output.py"
   is_executable: true
 - type: "python_script"
-  path: "check_method_config.py"
+  path: "check_config.py"
   is_executable: true
-- type: "file"
-  path: "library.bib"
 - type: "file"
   path: "resources_test/datasets"
   dest: "resources_test/datasets"
 info:
-  label: "scDesign3"
-  summary: "A probabilistic model that unifies the generation and inference for single-cell\
-    \ and spatial omics data"
-  description: "scDesign3 offers a probabilistic model that unifies the generation\
-    \ and inference\nfor single-cell and spatial omics data. The model's interpretable\
-    \ parameters and\nlikelihood enable scDesign3 to generate customized in silico\
-    \ data and unsupervisedly\nassess the goodness-of-fit of inferred cell latent\
-    \ structures (for example, clusters,\ntrajectories and spatial locations).\n"
-  reference: "10.1038/s41587-023-01772-1"
   documentation_url: "https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html"
   repository_url: "https://github.com/SONGDONGYUAN1994/scDesign3"
   type: "method"
   type_info:
     label: "Method"
     summary: "A method."
-    description: "A method to predict the task effects.\n"
+    description: "A spatial transcriptomics simulation method.\n"
 status: "enabled"
 repositories:
 - type: "github"
@@ -256,6 +252,9 @@ repositories:
   repo: "openproblems-bio/openproblems-v2"
   tag: "main_build"
 license: "MIT"
+references:
+  doi:
+  - "10.1038/s41587-023-01772-1"
 links:
   repository: "https://github.com/openproblems-bio/task_spatial_simulators"
   docker_registry: "ghcr.io"
@@ -295,7 +294,7 @@ runners:
 engines:
 - type: "docker"
   id: "docker"
-  image: "ghcr.io/openproblems-bio/base_images/r:1.1.0"
+  image: "openproblems/base_r:1.0.0"
   namespace_separator: "/"
   setup:
   - type: "apt"
@@ -316,7 +315,7 @@ build_info:
   output: "target/executable/methods/scdesign3"
   executable: "target/executable/methods/scdesign3/scdesign3"
   viash_version: "0.9.0-RC7"
-  git_commit: "a71b4c5e4686d94a03127612878f8fe9619fa34c"
+  git_commit: "0189f1ad5f750db8c97c338547f5fc7818c9486a"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"

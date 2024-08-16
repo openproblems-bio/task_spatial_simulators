@@ -1,14 +1,15 @@
 __merge__: ../../api/comp_method.yaml
 
 name: sparsim
+label: SPARsim
+summary: SPARSim single cell is a count data simulator for scRNA-seq data.
+description: |
+  SPARSim is a scRNA-seq count data simulator based on a Gamma-Multivariate Hypergeometric model. 
+  It allows to generate count data that resemble real data in terms of count intensity, variability and sparsity.
+references:
+  doi: 10.1093/bioinformatics/btz752
 
 info:
-  label: SPARsim
-  summary: SPARSim single cell is a count data simulator for scRNA-seq data.
-  description: |
-    SPARSim is a scRNA-seq count data simulator based on a Gamma-Multivariate Hypergeometric model. 
-    It allows to generate count data that resemble real data in terms of count intensity, variability and sparsity.
-  reference: 10.1093/bioinformatics/btz752
   documentation_url: https://gitlab.com/sysbiobig/sparsim/-/blob/master/vignettes/sparsim.Rmd
   repository_url: https://gitlab.com/sysbiobig/sparsim
 
@@ -18,7 +19,7 @@ resources:
 
 engines:
   - type: docker
-    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    image: openproblems/base_r:1.0.0
     setup:
       - type: apt
         packages: [git, r-bioc-singlecellexperiment]
