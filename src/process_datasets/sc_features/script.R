@@ -45,4 +45,4 @@ cat("Output dataset:\n")
 print(input_sp)
 
 cat("Write output files\n")
-output_sp$write_h5ad(par$output_sp, compression = "gzip")
+input_sp$write_h5ad(par$output_sp, compression = "gzip")
