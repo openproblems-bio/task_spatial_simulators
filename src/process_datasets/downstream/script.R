@@ -37,7 +37,7 @@ generate_svg_sparkx <- function(adata) {
 }
 
 sparkx_out <- generate_svg_sparkx(input_sp)
-input_sp$obsm$spatial_variable_genes <- sparkx_out$res_mtest
+input_sp$varm$spatial_variable_genes <- sparkx_out$res_mtest
 
 cat("spatial autocorrelation task:\n")
 generate_moransI <- function(adata){
