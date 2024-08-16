@@ -190,12 +190,20 @@ function ViashHelp {
   echo "    --output_sc"
   echo "        type: file, required parameter, output, file must exist"
   echo "        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad"
-  echo "        Processed single-cell dataset"
+  echo "        This dataset contains raw counts and metadata as output by a dataset"
+  echo "        loader."
+  echo "        The format of this file is derived from the [CELLxGENE schema"
+  echo "       "
+  echo "v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md)."
   echo ""
   echo "    --output_sp"
   echo "        type: file, required parameter, output, file must exist"
   echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
-  echo "        Processed spatial dataset"
+  echo "        This dataset contains raw counts and metadata as output by a dataset"
+  echo "        loader."
+  echo "        The format of this file is derived from the [CELLxGENE schema"
+  echo "       "
+  echo "v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md)."
   echo ""
   echo "Dataset metadata:"
   echo "    Metadata about the dataset, used for documentation and provenance."
@@ -509,9 +517,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2024-08-16T11:00:36Z"
+LABEL org.opencontainers.image.created="2024-08-16T11:38:45Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="1c59c45bceba1001f1bfea142af5fbb1432f835d"
+LABEL org.opencontainers.image.revision="13ca262b3d7e52ebf9c1944abbbe66bfd3f53328"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1253,7 +1261,8 @@ print(input_sp)
 cat("Transforming single cell into AnnData\\n")
 output_sc <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(assay(input_sc, "counts"))
+    counts = Matrix::t(assay(input_sc, "counts")),
+    logcounts = Matrix::t(assay(input_sc, "logcounts"))
   ),
   obs = data.frame(
     row.names = colnames(input_sc),

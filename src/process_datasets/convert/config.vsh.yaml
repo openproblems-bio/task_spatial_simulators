@@ -18,15 +18,11 @@ argument_groups:
 
   - name: Outputs
     arguments:
-      - type: file
-        name: --output_sc
-        description: Processed single-cell dataset
+      - name: --output_sc
         __merge__: ../../api/file_dataset_sc.yaml
         direction: output
         required: true     
-      - type: file
-        name: --output_sp
-        description: Processed spatial dataset
+      - name: --output_sp
         __merge__: ../../api/file_dataset_sp.yaml
         direction: output
         required: true

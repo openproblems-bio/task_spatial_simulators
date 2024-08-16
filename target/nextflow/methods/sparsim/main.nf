@@ -3189,7 +3189,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/sparsim",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "1c59c45bceba1001f1bfea142af5fbb1432f835d",
+    "git_commit" : "13ca262b3d7e52ebf9c1944abbbe66bfd3f53328",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
