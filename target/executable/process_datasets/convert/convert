@@ -517,9 +517,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2024-08-16T11:38:45Z"
+LABEL org.opencontainers.image.created="2024-08-16T12:16:58Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="13ca262b3d7e52ebf9c1944abbbe66bfd3f53328"
+LABEL org.opencontainers.image.revision="e882e300d2258aeae6b1143e6f94909e641934d1"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1286,7 +1286,7 @@ output_sc <- anndata::AnnData(
 )
 
 cat("Transforming spatial into AnnData\\n")
-celltype_proportions <- metadata(input_sp)[["celltype_prop"]]
+celltype_proportions <- as.data.frame(metadata(input_sp)[["celltype_prop"]])
 
 output_sp <- anndata::AnnData(
   layers = list(

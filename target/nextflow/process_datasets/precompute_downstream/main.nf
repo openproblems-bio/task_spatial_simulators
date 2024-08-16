@@ -2942,7 +2942,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/precompute_downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "13ca262b3d7e52ebf9c1944abbbe66bfd3f53328",
+    "git_commit" : "e882e300d2258aeae6b1143e6f94909e641934d1",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3117,7 +3117,7 @@ input_sp\\$varm\\$spatial_variable_genes <- sparkx_out\\$res_mtest
 
 cat("Computing spatial autocorrelation with moransI\\\\n")
 moransI_out <- generate_moransI(input_sp)
-input_sp\\$varm\\$spatial_autocorrelation <- moransI_out\\$Morans.I
+input_sp\\$varm\\$spatial_autocorrelation <- as.data.frame(moransI_out\\$Morans.I)
 
 cat("Output:\\\\n")
 print(input_sp)

@@ -6,7 +6,7 @@ requireNamespace("spots", quietly = TRUE)
 ## VIASH START
 par <- list(
   # inputs
-  input_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  input_sp = "resources_test/datasets/MOBNEW/temp_dataset_sp_part2.h5ad",
   # outputs
   output_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
 )
@@ -29,7 +29,7 @@ input_sp$varm$spatial_variable_genes <- sparkx_out$res_mtest
 
 cat("Computing spatial autocorrelation with moransI\n")
 moransI_out <- generate_moransI(input_sp)
-input_sp$varm$spatial_autocorrelation <- moransI_out$Morans.I
+input_sp$varm$spatial_autocorrelation <- as.data.frame(moransI_out$Morans.I)
 
 cat("Output:\n")
 print(input_sp)

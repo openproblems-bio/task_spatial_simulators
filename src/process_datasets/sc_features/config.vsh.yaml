@@ -9,12 +9,6 @@ argument_groups:
         description: Raw spatial dataset
         example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
         required: true
-      - type: string
-        name: --sc_species
-        description: species of the dataset
-        required: true
-        info: 
-          test_default: Mus musculus
 
   - name: Outputs
     arguments:
@@ -40,7 +34,6 @@ engines:
     image: openproblems/base_r:1.0.0
     setup:
       - type: r
-        bioc: [SingleCellExperiment, SingleCellSignalR, EnsDb.Mmusculus.v79, scater]
         github: [SydneyBioX/scFeatures]
 
 runners:

@@ -59,7 +59,7 @@ output_sc <- anndata::AnnData(
 )
 
 cat("Transforming spatial into AnnData\n")
-celltype_proportions <- metadata(input_sp)[["celltype_prop"]]
+celltype_proportions <- as.data.frame(metadata(input_sp)[["celltype_prop"]])
 
 output_sp <- anndata::AnnData(
   layers = list(

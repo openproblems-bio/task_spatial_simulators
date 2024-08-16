@@ -467,9 +467,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("xzhoulab/SPARK", "stevexniu/spots"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets precompute_downstream"
-LABEL org.opencontainers.image.created="2024-08-16T11:38:44Z"
+LABEL org.opencontainers.image.created="2024-08-16T12:16:57Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="13ca262b3d7e52ebf9c1944abbbe66bfd3f53328"
+LABEL org.opencontainers.image.revision="e882e300d2258aeae6b1143e6f94909e641934d1"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1057,7 +1057,7 @@ input_sp\$varm\$spatial_variable_genes <- sparkx_out\$res_mtest
 
 cat("Computing spatial autocorrelation with moransI\\n")
 moransI_out <- generate_moransI(input_sp)
-input_sp\$varm\$spatial_autocorrelation <- moransI_out\$Morans.I
+input_sp\$varm\$spatial_autocorrelation <- as.data.frame(moransI_out\$Morans.I)
 
 cat("Output:\\n")
 print(input_sp)
