@@ -1,0 +1,116 @@
+__merge__: ../../api/comp_metric.yaml
+
+name: downstream
+
+info:
+  metrics:
+    - name: 
+      label: clustering_ari
+      summary: ARI
+      description: |
+        Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: -Inf
+      max: +Inf
+      maximize: true
+    - name: 
+      label: clustering_nmi
+      summary: NMI
+      description: |
+        Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: 0
+      max: 1
+      maximize: true
+    - name: 
+      label: svg_recall
+      summary: Recall
+      description: |
+        Recall used in identifying spatial variable genes, measuring the true positive rate.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: 0
+      max: 1
+      maximize: true
+    - name: 
+      label: svg_precision
+      summary: Precision (Spatial Variable Gene)
+      description: |
+        Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: 0
+      max: 1
+      maximize: true
+    - name: 
+      label: ctdeconvolute_rmse
+      summary: RMSE
+      description: |
+        Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: 0
+      max: +Inf
+      maximize: false
+    - name: 
+      label: ctdeconcolute_jsd
+      summary: JSD
+      description: |
+        Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: 0
+      max: 1
+      maximize: false
+    - name: 
+      label: crosscor_mantel
+      summary: Mantel Statistic
+      description: |
+        Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: -1
+      max: 1
+      maximize: true
+    - name: 
+      label: crosscor_cosin
+      summary: Cosine Similarity
+      description: |
+        Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.
+      reference: TODO
+      documentation_url: TODO
+      repository_url: TODO
+      min: 0
+      max: 1
+      maximize: true
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    setup:
+      - type: apt
+        packages: 
+          - git
+          - r-bioc-edger
+          - r-cran-ks
+          - r-cran-resample
+          - r-cran-reshape2
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]
