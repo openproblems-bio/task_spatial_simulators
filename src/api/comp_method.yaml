@@ -5,7 +5,7 @@ info:
     label: Method
     summary: A method.
     description: |
-      A method to predict the task effects.
+      A spatial transcriptomics simulation method.
 arguments:
   - name: --input
     __merge__: file_dataset_sp.yaml
@@ -29,7 +29,6 @@ test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
   - type: python_script
-    path: /common/component_tests/check_method_config.py
-  - path: /common/library.bib
+    path: /common/component_tests/check_config.py
   - path: /resources_test/datasets
     dest: resources_test/datasets

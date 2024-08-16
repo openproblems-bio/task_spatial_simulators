@@ -5,7 +5,7 @@ info:
     label: Control Method
     summary: A control method.
     description: |
-      A control method to predict effects.
+      A quality control for the spatial simulator benchmark.
 arguments:
   - name: --input
     __merge__: file_dataset_sp.yaml
@@ -19,7 +19,6 @@ test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
   - type: python_script
-    path: /common/component_tests/check_method_config.py
-  - path: /common/library.bib
+    path: /common/component_tests/check_config.py
   - path: /resources_test/datasets
     dest: resources_test/datasets
