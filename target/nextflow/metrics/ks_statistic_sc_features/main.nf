@@ -3364,7 +3364,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "aeeb239de3397d705051c94506b3b78f2cb1502e",
+    "git_commit" : "228f965eb929a9851e11cef9194ddb5215c62b1b",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
