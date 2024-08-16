@@ -1,12 +1,12 @@
 type: file
 example: "resources_test/datasets/MOBNEW/dataset_sc.h5ad"
-info:
-  label: Single-cell dataset
-  summary: An unprocessed single-cell dataset as output by a dataset loader.
-  description: |
-    This dataset contains raw counts and metadata as output by a dataset loader.
+label: Single-Cell Dataset
+summary: An unprocessed single-cell dataset as output by a dataset loader.
+description: |
+  This dataset contains raw counts and metadata as output by a dataset loader.
 
-    The format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).
+  The format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).
+info:
   slots:
     layers: 
       - type: integer

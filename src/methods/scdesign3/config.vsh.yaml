@@ -1,16 +1,18 @@
 __merge__: ../../api/comp_method.yaml
 
 name: scdesign3
+label: scDesign3
+summary: A probabilistic model that unifies the generation and inference for single-cell and spatial omics data
+description: |
+  scDesign3 offers a probabilistic model that unifies the generation and inference
+  for single-cell and spatial omics data. The model's interpretable parameters and
+  likelihood enable scDesign3 to generate customized in silico data and unsupervisedly
+  assess the goodness-of-fit of inferred cell latent structures (for example, clusters,
+  trajectories and spatial locations).
+references:
+  doi: 10.1038/s41587-023-01772-1
+
 info:
-  label: scDesign3
-  summary: A probabilistic model that unifies the generation and inference for single-cell and spatial omics data
-  description: |
-    scDesign3 offers a probabilistic model that unifies the generation and inference
-    for single-cell and spatial omics data. The model's interpretable parameters and
-    likelihood enable scDesign3 to generate customized in silico data and unsupervisedly
-    assess the goodness-of-fit of inferred cell latent structures (for example, clusters,
-    trajectories and spatial locations).
-  reference: "10.1038/s41587-023-01772-1"
   documentation_url: https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html
   repository_url: https://github.com/SONGDONGYUAN1994/scDesign3
 
@@ -36,7 +38,7 @@ resources:
 
 engines:
   - type: docker
-    image: ghcr.io/openproblems-bio/base_images/r:1.1.0
+    image: openproblems/base_r:1.0.0
     setup:
       - type: apt
         packages: [r-bioc-singlecellexperiment, git]
