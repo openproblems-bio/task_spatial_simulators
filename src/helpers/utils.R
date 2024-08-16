@@ -1,42 +1,54 @@
 # library(dplyr) need this package
 requireNamespace("dplyr", quietly = TRUE)
+requireNamespace("spots", quietly = TRUE)
+
 # spatial autocorrelation
 generate_moransI <- function(adata){
+  # get count matrix
   sp_count <- adata$layers[["logcounts"]]
-  W <- cbind.data.frame(row = as.numeric(sapply(strsplit(rownames(sp_count),split="x"),"[",1)),
-                        col = as.numeric(sapply(strsplit(rownames(sp_count),split="x"),"[",2)))
-  W <- 1/as.matrix(dist(W))
-  diag(W) <- 0
-  res <- spots::BivariateMoransI( X =  sp_count , W =  W)
-  return(res$Morans.I)
-}
 
-# real <- generate_moransI(input_real_sp)
-# sim <- generate_moransI(input_simulated_sp)
+  # get location as a matrix
+  loc <- as.matrix(adata$obs[, c("row", "col")])
+
+  # compute inverse distance matrix
+  weights <- 1 / as.matrix(dist(loc))
+  diag(weights) <- 0
+
+  # run moransI
+  res <- spots::BivariateMoransI(X =  sp_count, W = weights)
+
+  return(res)
+}
 
 generate_cosine <- function(real, sim){
   real_new <- real[!is.na(real) & !is.na(sim)]
   sim_new <- sim[!is.na(real) & !is.na(sim)]
-  similarity <- cosine(as.textmatrix(cbind(as.vector(real_new), as.vector(sim_new))))
+  similarity <- lsa::cosine(lsa::as.textmatrix(cbind(as.vector(real_new), as.vector(sim_new))))
   return(mean(similarity))
-
 }
+
+generate_mantel <- function(real, sim){
+  mantel_test <- vegan::mantel( real , sim, na.rm = T, method="pearson")
+  return(mantel_test$statistic)
+}
+
+mantel.test <- vegan::mantel( real_moransI , sim_moransI, na.rm = T, method="pearson")
 
 # Spatial varianble gene
 generate_svg_sparkx <- function(adata) {
+  # get count matrix
   sp_count <- Matrix::t(adata$layers[["counts"]])
   
-  info <- cbind.data.frame(x=as.numeric(sapply(strsplit(colnames(sp_count),split="x"),"[",1)),
-                          y=as.numeric(sapply(strsplit(colnames(sp_count),split="x"),"[",2)))
-  
-  rownames(info) <- colnames(sp_count)
-  
-  location <- as.matrix(info)
-  mt_idx <- grep("mt-", rownames(sp_count))
-  if (length(mt_idx) != 0) {
-    sp_count <- sp_count[-mt_idx, ]
-  }
+  # format location as a matrix
+  location <- as.matrix(adata$obs[, c("col", "row")])
+  rownames(location) <- colnames(sp_count)
+
+  # remove mitochondrial genes
+  sp_count <- sp_count[!grepl("^(MT|mt)-", rownames(sp_count)), ]
+
+  # run sparkx
   sparkX <- SPARK::sparkx(sp_count, location, numCores = 1, option = "mixture")
+  
   return(sparkX)
 }
 
