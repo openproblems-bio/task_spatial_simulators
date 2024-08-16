@@ -486,9 +486,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("JSB-UCLA/scDesign2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign2"
-LABEL org.opencontainers.image.created="2024-08-16T10:58:00Z"
+LABEL org.opencontainers.image.created="2024-08-16T11:00:35Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="0189f1ad5f750db8c97c338547f5fc7818c9486a"
+LABEL org.opencontainers.image.revision="1c59c45bceba1001f1bfea142af5fbb1432f835d"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
