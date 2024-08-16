@@ -481,9 +481,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2024-08-16T12:16:58Z"
+LABEL org.opencontainers.image.created="2024-08-16T12:20:48Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="e882e300d2258aeae6b1143e6f94909e641934d1"
+LABEL org.opencontainers.image.revision="c09fea06e6188bd697a215b8fe606d6fefabda11"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

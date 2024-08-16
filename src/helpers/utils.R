@@ -136,6 +136,40 @@ generate_rmse <- function(real, sim) {
 }
 
 
-
 # spatial clustering
-
+reclassify_simsce <- function(location, real_cluster, sim_cluster){
+  test <- data.frame(loc = location, real = real_cluster, sim = sim_cluster)
+  
+  matrix_counts <- matrix(0, nrow = 4, ncol = 4, 
+                          dimnames = list(paste0("real", 1:4), paste0("sim", 1:4)))
+  
+  for(r in 1:4) {
+    for(s in 1:4) {
+      subset_data <- subset(test, real == r & sim == s)
+      matrix_counts[r, s] <- length(unique(subset_data$loc))
+    }
+  }
+  
+  reclassification <- numeric(4)
+  
+  for(i in 1:4) {
+    max_value <- max(matrix_counts)
+    if (max_value == 0) break 
+    
+    indices <- which(matrix_counts == max_value, arr.ind = TRUE)
+    real_index <- indices[1, 1]
+    sim_index <- indices[1, 2]
+    
+    reclassification[sim_index] <- real_index
+    
+    matrix_counts[real_index, ] <- -Inf
+    matrix_counts[, sim_index] <- -Inf
+  }
+  
+  
+  cluster_map <- setNames(reclassification, seq_along(reclassification))
+  sim_reclassify_cluster <- cluster_map[sim_cluster]
+  
+  return(sim_reclassify_cluster)
+  
+}

@@ -10,8 +10,8 @@ info:
       description: |
         Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.
       reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
+      documentation_url: https://cran.r-project.org/web/packages/aricode/index.html
+      repository_url: https://github.com/jchiquet/aricode
       min: -Inf
       max: +Inf
       maximize: true
@@ -21,8 +21,8 @@ info:
       description: |
         Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].
       reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
+      documentation_url: https://cran.r-project.org/web/packages/aricode/index.html
+      repository_url: https://github.com/jchiquet/aricode
       min: 0
       max: 1
       maximize: true
@@ -64,9 +64,9 @@ info:
       summary: JSD
       description: |
         Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.
-      reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
+      reference: 10.21105/joss.00765
+      documentation_url: https://cran.r-project.org/web/packages/philentropy/index.html
+      repository_url: https://github.com/drostlab/philentropy
       min: 0
       max: 1
       maximize: false
@@ -82,7 +82,7 @@ info:
       max: 1
       maximize: true
     - name: 
-      label: crosscor_cosin
+      label: crosscor_cosine
       summary: Cosine Similarity
       description: |
         Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.
@@ -104,9 +104,10 @@ engines:
       - type: apt
         packages: 
           - git
-          - r-bioc-edger
-          - r-cran-ks
-          - r-cran-resample
+          - r-bioc-scater
+          - r-bioc-BayesSpace
+          - r-cran-aricode
+          - r-cran-anndata
           - r-cran-reshape2
 
 runners:
