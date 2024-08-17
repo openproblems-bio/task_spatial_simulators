@@ -3229,7 +3229,6 @@ meta = [
         "label" : "Fraction of zeros per gene",
         "summary" : "KS statistic of the fraction of zeros per gene.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.\n",
-        "reference" : "10.1201/9780429485572",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3430,15 +3429,16 @@ meta = [
       "namespace_separator" : "/",
       "setup" : [
         {
-          "type" : "apt",
-          "packages" : [
-            "git",
-            "r-bioc-edger",
-            "r-cran-ks",
-            "r-cran-resample",
-            "r-cran-reshape2"
+          "type" : "r",
+          "cran" : [
+            "ks",
+            "resample",
+            "reshape2"
           ],
-          "interactive" : false
+          "bioc" : [
+            "edger"
+          ],
+          "bioc_force_install" : false
         }
       ]
     }
@@ -3449,7 +3449,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "0857e4d4dc96075ce560aae74d41777bb9d377bf",
+    "git_commit" : "4464e4c064fdd91b16f68ce8df56af1ce06bdc41",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

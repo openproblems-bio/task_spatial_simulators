@@ -3339,16 +3339,17 @@ meta = [
       "namespace_separator" : "/",
       "setup" : [
         {
-          "type" : "apt",
-          "packages" : [
-            "git",
-            "r-bioc-edger",
-            "r-cran-ks",
-            "r-cran-resample",
-            "r-cran-reshape2",
-            "r-bioc-scater"
+          "type" : "r",
+          "cran" : [
+            "ks",
+            "resample",
+            "reshape2"
           ],
-          "interactive" : false
+          "bioc" : [
+            "edger",
+            "scater"
+          ],
+          "bioc_force_install" : false
         }
       ]
     }
@@ -3359,7 +3360,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "0857e4d4dc96075ce560aae74d41777bb9d377bf",
+    "git_commit" : "4464e4c064fdd91b16f68ce8df56af1ce06bdc41",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
