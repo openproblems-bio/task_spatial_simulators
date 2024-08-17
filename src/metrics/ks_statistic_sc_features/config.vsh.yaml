@@ -48,14 +48,14 @@ engines:
   - type: docker
     image: openproblems/base_r:1.0.0
     setup:
-      - type: apt
-        packages: 
-          - git
-          - r-bioc-edger
-          - r-cran-ks
-          - r-cran-resample
-          - r-cran-reshape2
-          - r-bioc-scater
+      - type: r
+        bioc:
+          - edger
+          - scater
+        cran:
+          - ks
+          - resample
+          - reshape2
 
 runners:
   - type: executable
