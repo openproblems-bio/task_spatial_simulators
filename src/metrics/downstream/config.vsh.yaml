@@ -9,7 +9,7 @@ info:
       summary: ARI
       description: |
         Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.
-      reference: TODO
+      reference: 10.1145/1553374.1553511
       documentation_url: https://cran.r-project.org/web/packages/aricode/index.html
       repository_url: https://github.com/jchiquet/aricode
       min: -Inf
@@ -20,7 +20,7 @@ info:
       summary: NMI
       description: |
         Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].
-      reference: TODO
+      reference: 10.1145/1553374.1553511
       documentation_url: https://cran.r-project.org/web/packages/aricode/index.html
       repository_url: https://github.com/jchiquet/aricode
       min: 0
@@ -31,9 +31,6 @@ info:
       summary: Recall
       description: |
         Recall used in identifying spatial variable genes, measuring the true positive rate.
-      reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
       min: 0
       max: 1
       maximize: true
@@ -42,9 +39,6 @@ info:
       summary: Precision (Spatial Variable Gene)
       description: |
         Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.
-      reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
       min: 0
       max: 1
       maximize: true
@@ -53,9 +47,9 @@ info:
       summary: RMSE
       description: |
         Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.
-      reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
+      reference: NA
+      documentation_url: https://cran.r-project.org/web/packages/Metrics/Metrics.pdf
+      repository_url: https://github.com/mfrasco/Metrics
       min: 0
       max: +Inf
       maximize: false
@@ -75,9 +69,9 @@ info:
       summary: Mantel Statistic
       description: |
         Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.
-      reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
+      reference: 10.1111/2041-210X.12425
+      documentation_url: https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html
+      repository_url: https://github.com/vegandevs/vegan
       min: -1
       max: 1
       maximize: true
@@ -86,9 +80,9 @@ info:
       summary: Cosine Similarity
       description: |
         Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.
-      reference: TODO
-      documentation_url: TODO
-      repository_url: TODO
+      reference: 10.1002/asi.20130
+      documentation_url: https://cran.r-project.org/web/packages/lsa/lsa.pdf
+      repository_url: https://github.com/cran/lsa
       min: 0
       max: 1
       maximize: true
