@@ -173,3 +173,26 @@ reclassify_simsce <- function(location, real_cluster, sim_cluster){
   return(sim_reclassify_cluster)
   
 }
+
+# generate sparial clustering in simulated data
+generate_sim_spatialCluster <- function(real_adata, sim_adata){
+  sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
+    list(counts = Matrix::t(sim_adata$layers[["counts"]])),
+    colData = sim_adata$obs,
+    metadata = sim_adata$obsm
+    ))
+  
+  sim_sce <- BayesSpace::spatialPreprocess(sim_sce, platform=par$plat, 
+                              n.PCs=7, n.HVGs=2000, log.normalize=FALSE)
+                              
+  sim_sce <- BayesSpace::spatialCluster(sim_sce,
+  q=max(unique(real_adata$obs[,c("spatial_cluster")])), 
+  platform=par$plat, 
+  d=7,
+  init.method="mclust", model="t", gamma=2,
+  nrep=1000, burn.in=100,
+  save.chain=TRUE)
+  sim_cluster <- sim_sce$spatial.cluster
+  return(sim_cluster)
+}
+

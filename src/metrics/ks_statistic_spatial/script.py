@@ -102,7 +102,9 @@ ks_central, p_value = ks_2samp(real_central_real_ds, real_central_sim_ds)
 
 # transition matrix
 real = np.array(input_spatial_dataset.obs['spatial_cluster'].values.tolist())
-sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
+# sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
+sim <- generate_sim_spatialCluster(input_spatial_dataset, input_simulated_dataset)
+
 
 transition_matrix_real = get_trans(adata=input_spatial_dataset, ct=real)
 transition_matrix_sim = get_trans(adata=input_simulated_dataset, ct=sim)
@@ -111,7 +113,8 @@ error = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
 transition_matrix_real_ds = transition_matrix_real.flatten()
 transition_matrix_sim_ds = transition_matrix_sim.flatten()
 ks_stat_error, p_value = ks_2samp(transition_matrix_real_ds, transition_matrix_sim_ds)
-    
+
+
 uns_metric_ids = [
   "ks_statistic_transition_matrix",
   "ks_statistic_central_score",
