@@ -8,6 +8,16 @@ meta = {
 }
 ## VIASH END
 
+# TODO: check whether arguments have:
+#  - label
+#  - summary
+#  - description (optional)
+#  - example
+# If defined, check whether these are in the right format:
+#  - info.file_format
+#  - info.file_format.file_type
+#  - slots, columns, depending on the file_type
+
 ## CONSTANTS AND HELPER FUNCTIONS
 NAME_MAXLEN = 50
 LABEL_MAXLEN = 50
