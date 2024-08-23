@@ -23,14 +23,14 @@ argument_groups:
 
   - name: Outputs
     arguments:
-      - type: file
-        name: --output_sc
+      - name: --output_sc
+        __merge__: file_dataset_sc.yaml
         description: Processed single-cell dataset
         direction: output
         required: true
         default: '$id/output_sc.h5ad'
-      - type: file
-        name: --output_sp
+      - name: --output_sp
+        __merge__: file_dataset_sp.yaml
         description: Processed spatial dataset
         direction: output
         required: true
