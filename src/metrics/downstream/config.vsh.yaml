@@ -95,14 +95,14 @@ engines:
   - type: docker
     image: ghcr.io/openproblems-bio/base_images/r:1.1.0
     setup:
-      - type: apt
-        packages: 
-          - git
-          - r-bioc-scater
-          - r-bioc-BayesSpace
-          - r-cran-aricode
-          - r-cran-anndata
-          - r-cran-reshape2
+      - type: r
+        bioc: 
+          - scater
+          - BayesSpace
+        cran:
+          - aricode
+          - anndata
+          - reshape2
 
 runners:
   - type: executable

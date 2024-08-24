@@ -282,6 +282,8 @@ resources:
 - type: "r_script"
   path: "script.R"
   is_executable: true
+- type: "file"
+  path: "utils.R"
 test_resources:
 - type: "python_script"
   path: "run_and_check_output.py"
@@ -306,6 +308,8 @@ info:
     min: "-Inf"
     max: "+Inf"
     maximize: false
+    references:
+      doi: "10.1201/9780429485572"
   - name: "ks_statistic_celltype_interaction"
     label: "Celltype interaction"
     summary: "KS statistic of the celltype interaction"
@@ -314,6 +318,8 @@ info:
     min: "-Inf"
     max: "+Inf"
     maximize: false
+    references:
+      doi: "10.1201/9780429485572"
   - name: "ks_statistic_nn_correlation"
     label: "Library size"
     summary: "KS statistic of the library size."
@@ -322,6 +328,8 @@ info:
     min: "-Inf"
     max: "+Inf"
     maximize: false
+    references:
+      doi: "10.1201/9780429485572"
   - name: "ks_statistic_morans_I"
     label: "Effective library size"
     summary: "KS statistic of the effective library size."
@@ -330,6 +338,8 @@ info:
     min: "-Inf"
     max: "+Inf"
     maximize: false
+    references:
+      doi: "10.1201/9780429485572"
   type: "metric"
   type_info:
     label: "Metric"
@@ -342,9 +352,6 @@ repositories:
   repo: "openproblems-bio/openproblems-v2"
   tag: "main_build"
 license: "MIT"
-references:
-  doi:
-  - "10.1201/9780429485572"
 links:
   repository: "https://github.com/openproblems-bio/task_spatial_simulators"
   docker_registry: "ghcr.io"
@@ -395,6 +402,13 @@ engines:
     bioc:
     - "edger"
     - "scater"
+    - "SingleCellExperiment"
+    - "SummarizedExperiment"
+    - "TOAST"
+    github:
+    - "xuranw/MuSiC"
+    - "YingMa0107/CARD"
+    - "SydneyBioX/scFeatures"
     bioc_force_install: false
   entrypoint: []
   cmd: null
@@ -405,7 +419,7 @@ build_info:
   output: "target/executable/metrics/ks_statistic_sc_features"
   executable: "target/executable/metrics/ks_statistic_sc_features/ks_statistic_sc_features"
   viash_version: "0.9.0-RC7"
-  git_commit: "b400237eaeb0c5390df5fe134b763df6c801524f"
+  git_commit: "5a969e035bc9c802207c39e292fa594995ceeaf0"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"

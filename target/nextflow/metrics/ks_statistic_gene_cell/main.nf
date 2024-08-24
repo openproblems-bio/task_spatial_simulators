@@ -3231,7 +3231,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_frac_zero_cells",
@@ -3240,7 +3243,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_lib_size_cells",
@@ -3249,7 +3255,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_efflib_size_cells",
@@ -3258,7 +3267,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_tmm_cells",
@@ -3267,7 +3279,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_scaled_var_cells",
@@ -3276,7 +3291,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_scaled_mean_cells",
@@ -3285,7 +3303,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_lib_fraczero_cells",
@@ -3294,7 +3315,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_pearson_cells",
@@ -3303,7 +3327,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_scaled_var_genes",
@@ -3312,7 +3339,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_scaled_mean_genes",
@@ -3321,7 +3351,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_pearson_genes",
@@ -3330,7 +3363,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_mean_var_genes",
@@ -3339,7 +3375,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       },
       {
         "name" : "ks_statistic_mean_fraczero_genes",
@@ -3348,7 +3387,10 @@ meta = [
         "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
-        "maximize" : false
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
       }
     ],
     "type" : "metric",
@@ -3368,11 +3410,6 @@ meta = [
     }
   ],
   "license" : "MIT",
-  "references" : {
-    "doi" : [
-      "10.1201/9780429485572"
-    ]
-  },
   "links" : {
     "repository" : "https://github.com/openproblems-bio/task_spatial_simulators",
     "docker_registry" : "ghcr.io"
@@ -3449,7 +3486,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "b400237eaeb0c5390df5fe134b763df6c801524f",
+    "git_commit" : "5a969e035bc9c802207c39e292fa594995ceeaf0",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

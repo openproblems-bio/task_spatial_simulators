@@ -476,14 +476,16 @@ function ViashDockerfile {
     cat << 'VIASHDOCKER'
 FROM ghcr.io/openproblems-bio/base_images/r:1.1.0
 ENTRYPOINT []
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y git r-bioc-scater r-bioc-BayesSpace r-cran-aricode r-cran-anndata r-cran-reshape2 && \
-  rm -rf /var/lib/apt/lists/*
+RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
+  Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
+  Rscript -e 'if (!requireNamespace("scater", quietly = TRUE)) BiocManager::install("scater")' && \
+  Rscript -e 'if (!requireNamespace("BayesSpace", quietly = TRUE)) BiocManager::install("BayesSpace")' && \
+  Rscript -e 'remotes::install_cran(c("aricode", "anndata", "reshape2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics downstream"
-LABEL org.opencontainers.image.created="2024-08-23T20:37:49Z"
+LABEL org.opencontainers.image.created="2024-08-24T14:36:47Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="b400237eaeb0c5390df5fe134b763df6c801524f"
+LABEL org.opencontainers.image.revision="5a969e035bc9c802207c39e292fa594995ceeaf0"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

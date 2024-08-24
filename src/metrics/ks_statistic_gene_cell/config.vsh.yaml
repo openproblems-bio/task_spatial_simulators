@@ -1,8 +1,7 @@
 __merge__: ../../api/comp_metric.yaml
 
 name: ks_statistic_gene_cell
-references:
-  doi: 10.1201/9780429485572
+
 
 info:
   documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
@@ -17,6 +16,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_frac_zero_cells
       label: Fraction of zeros per cell
       summary: KS statistic of the fraction of zeros per spot (cell).
@@ -25,6 +26,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_lib_size_cells
       label: Library size
       summary: KS statistic of the library size.
@@ -33,6 +36,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_efflib_size_cells
       label: Effective library size
       summary: KS statistic of the effective library size.
@@ -41,6 +46,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_tmm_cells
       label: TMM
       summary: KS statistic of the weight trimmed mean of M-values normalization factor (TMM).
@@ -49,6 +56,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_scaled_var_cells
       label: Scaled variance cell
       summary: KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.
@@ -57,6 +66,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_scaled_mean_cells
       label: Scaled mean cells
       summary: KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.
@@ -65,6 +76,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_lib_fraczero_cells
       label: Library size vs fraction zero
       summary: KS statistic of the relationship between library size and the proportion of zeros per spot (cell).
@@ -73,6 +86,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_pearson_cells
       label: Sample Pearson correlation
       summary: KS statistic of the sample Pearson correlation.
@@ -81,6 +96,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_scaled_var_genes
       label: Scaled variance genes
       summary: KS statistic of the gene-level scaled variance of the expression matrix.
@@ -89,6 +106,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_scaled_mean_genes
       label: Scaled mean genes
       summary: KS statistic of the gene-level scaled mean of the expression matrix.
@@ -97,6 +116,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_pearson_genes
       label: Gene Pearson correlation
       summary: KS statistic of the gene Pearson correlation.
@@ -105,6 +126,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_mean_var_genes
       label: Mean vs variance
       summary: KS statistic of the relationship between mean expression and variance expression.
@@ -113,6 +136,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_mean_fraczero_genes
       label: Mean vs fraction zero
       summary: KS statistic of the relationship between mean expression and the proportion of zero per gene.
@@ -121,6 +146,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
 
 resources:
   - type: r_script

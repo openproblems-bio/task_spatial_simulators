@@ -3378,16 +3378,17 @@ meta = [
       "namespace_separator" : "/",
       "setup" : [
         {
-          "type" : "apt",
-          "packages" : [
-            "git",
-            "r-bioc-scater",
-            "r-bioc-BayesSpace",
-            "r-cran-aricode",
-            "r-cran-anndata",
-            "r-cran-reshape2"
+          "type" : "r",
+          "cran" : [
+            "aricode",
+            "anndata",
+            "reshape2"
           ],
-          "interactive" : false
+          "bioc" : [
+            "scater",
+            "BayesSpace"
+          ],
+          "bioc_force_install" : false
         }
       ]
     }
@@ -3398,7 +3399,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "b400237eaeb0c5390df5fe134b763df6c801524f",
+    "git_commit" : "5a969e035bc9c802207c39e292fa594995ceeaf0",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

@@ -1,8 +1,7 @@
 __merge__: ../../api/comp_metric.yaml
 
 name: ks_statistic_sc_features
-references:
-  doi: 10.1201/9780429485572
+
 info:
   documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
   repository_url: https://cran.r-project.org/web/packages/ks/
@@ -15,6 +14,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_celltype_interaction
       label: Celltype interaction
       summary: KS statistic of the celltype interaction
@@ -23,6 +24,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_nn_correlation
       label: Library size
       summary: KS statistic of the library size.
@@ -31,6 +34,8 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
     - name: ks_statistic_morans_I
       label: Effective library size
       summary: KS statistic of the effective library size.
@@ -39,10 +44,14 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+      references:
+        doi: 10.1201/9780429485572
 
 resources:
   - type: r_script
     path: script.R
+  - path: /src/helpers/utils.R
+
 
 engines:
   - type: docker
@@ -52,10 +61,17 @@ engines:
         bioc:
           - edger
           - scater
+          - SingleCellExperiment
+          - SummarizedExperiment
+          - TOAST
         cran:
           - ks
           - resample
           - reshape2
+        github: 
+          - xuranw/MuSiC
+          - YingMa0107/CARD
+          - SydneyBioX/scFeatures
 
 runners:
   - type: executable
