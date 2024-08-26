@@ -102,8 +102,7 @@ ks_central, p_value = ks_2samp(real_central_real_ds, real_central_sim_ds)
 
 # transition matrix
 real = np.array(input_spatial_dataset.obs['spatial_cluster'].values.tolist())
-# sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
-sim <- generate_sim_spatialCluster(input_spatial_dataset, input_simulated_dataset)
+sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
 
 
 transition_matrix_real = get_trans(adata=input_spatial_dataset, ct=real)

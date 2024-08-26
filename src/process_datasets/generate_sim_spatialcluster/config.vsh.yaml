@@ -1,0 +1,55 @@
+name: generate_sim_sparialcluster
+namespace: process_datasets
+description: generate spatial cluster of simulated dataset before run metrics folder
+argument_groups:
+  - name: Inputs
+    arguments:
+      - type: file
+        name: --input_sp
+        description: Raw spatial dataset
+        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
+        required: true
+      - type: file
+        name: --input_sp_sim
+        description: similated spatial dataset
+        example: resources_test/datasets/MOBNEW/simulated_dataset.h5ad
+        required: true
+
+  - name: Outputs
+    arguments:
+      - type: file
+        name: --output_sp
+        description: Processed simulated spatial dataset
+        example: simulated_dataset.h5ad
+        direction: output
+        required: true
+
+resources:
+  - type: r_script
+    path: script.R
+  - path: /src/helpers/utils.R
+
+test_resources:
+  - path: /resources_test/datasets/MOBNEW
+    dest: resources_test/datasets/MOBNEW
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1.0.0
+    setup:
+      - type: r
+        bioc: 
+          - scater
+          - BayesSpace
+          - SingleCellExperiment
+        cran:
+          - aricode
+          - anndata
+          - reshape2
+
+
+runners:
+  - type: executable
+  - type: nextflow
