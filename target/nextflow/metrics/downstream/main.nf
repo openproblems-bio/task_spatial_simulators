@@ -3197,6 +3197,10 @@ meta = [
       "type" : "r_script",
       "path" : "script.R",
       "is_executable" : true
+    },
+    {
+      "type" : "file",
+      "path" : "/src/helpers/utils.R"
     }
   ],
   "test_resources" : [
@@ -3399,7 +3403,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "7fb85e61ed58e723c4ce5d0ee7b1525965fe4265",
+    "git_commit" : "ce87a6944d39241e0d8352748957a8201d8bb5d9",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

@@ -7,9 +7,11 @@ par <- list(
   output = "output.h5ad"
 )
 meta <- list(
-  name = "downstream"
-  # resources_dir = "target/executable/metrics/ks_statistics_scFeatures"
+  name = "downstream",
+  resources_dir = "target/executable/metrics/downstream"
 )
+
+source(paste0(meta[["resources_dir"]], "/utils.R"))
 
 ## VIASH END
 input_real_sp <- anndata::read_h5ad(par$input_spatial_dataset)
