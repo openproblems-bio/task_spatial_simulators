@@ -90,6 +90,7 @@ info:
 resources:
   - type: r_script
     path: script.R
+  - path: /src/helpers/utils.R
 
 engines:
   - type: docker
