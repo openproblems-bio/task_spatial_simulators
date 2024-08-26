@@ -41,11 +41,11 @@ crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
 cat("spatial clustering evaluation\n")
 # TODO
-# sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
-#   list(counts = Matrix::t(input_simulated_sp$layers[["counts"]])),
-#   colData = input_simulated_sp$obs,
-#   metadata = input_simulated_sp$obsm
-# ))
+sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
+  list(counts = Matrix::t(input_simulated_sp$layers[["counts"]])),
+  colData = input_simulated_sp$obs,
+  metadata = input_simulated_sp$obsm
+))
 
 # generate the simulated clustering result first by BayersSpace
 # sim_sce <- BayesSpace::spatialPreprocess(sim_sce, platform=par$plat, 

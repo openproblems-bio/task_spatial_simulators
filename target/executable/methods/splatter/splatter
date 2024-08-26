@@ -483,9 +483,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2024-08-26T06:38:01Z"
+LABEL org.opencontainers.image.created="2024-08-26T07:00:58Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="90bcfbe4f4e4c133285e674f48346a0ea018c275"
+LABEL org.opencontainers.image.revision="97f1e78dc0496623ab6a670e37a9f91492a06f75"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

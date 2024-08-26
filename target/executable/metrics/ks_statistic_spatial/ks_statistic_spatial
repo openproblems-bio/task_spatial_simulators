@@ -480,9 +480,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2024-08-26T06:38:02Z"
+LABEL org.opencontainers.image.created="2024-08-26T07:00:58Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="90bcfbe4f4e4c133285e674f48346a0ea018c275"
+LABEL org.opencontainers.image.revision="97f1e78dc0496623ab6a670e37a9f91492a06f75"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1182,8 +1182,7 @@ ks_central, p_value = ks_2samp(real_central_real_ds, real_central_sim_ds)
 
 # transition matrix
 real = np.array(input_spatial_dataset.obs['spatial_cluster'].values.tolist())
-# sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
-sim <- generate_sim_spatialCluster(input_spatial_dataset, input_simulated_dataset)
+sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
 
 
 transition_matrix_real = get_trans(adata=input_spatial_dataset, ct=real)
