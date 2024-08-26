@@ -10,10 +10,9 @@ meta <- list(
   name = "downstream",
   resources_dir = "target/executable/metrics/downstream"
 )
+## VIASH END
 
 source(paste0(meta[["resources_dir"]], "/utils.R"))
-
-## VIASH END
 input_real_sp <- anndata::read_h5ad(par$input_spatial_dataset)
 input_sc <- anndata::read_h5ad(par$input_singlecell_dataset)
 input_simulated_sp <- anndata::read_h5ad(par$input_simulated_dataset)
