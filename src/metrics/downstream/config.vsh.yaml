@@ -9,7 +9,8 @@ info:
       summary: ARI
       description: |
         Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.
-      reference: 10.1145/1553374.1553511
+      reference: 
+        doi: 10.1145/1553374.1553511
       documentation_url: https://cran.r-project.org/web/packages/aricode/index.html
       repository_url: https://github.com/jchiquet/aricode
       min: -Inf
@@ -20,7 +21,8 @@ info:
       summary: NMI
       description: |
         Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].
-      reference: 10.1145/1553374.1553511
+      reference:
+        doi: 10.1145/1553374.1553511
       documentation_url: https://cran.r-project.org/web/packages/aricode/index.html
       repository_url: https://github.com/jchiquet/aricode
       min: 0
@@ -31,6 +33,8 @@ info:
       summary: Recall
       description: |
         Recall used in identifying spatial variable genes, measuring the true positive rate.
+      reference:
+        doi: 10.9735/2229-3981
       min: 0
       max: 1
       maximize: true
@@ -39,6 +43,8 @@ info:
       summary: Precision (Spatial Variable Gene)
       description: |
         Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.
+      reference:
+        doi: 10.9735/2229-3981
       min: 0
       max: 1
       maximize: true
@@ -47,7 +53,8 @@ info:
       summary: RMSE
       description: |
         Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.
-      reference: NA
+      reference: 
+        doi: 10.5194/gmd-15-5481-2022
       documentation_url: https://cran.r-project.org/web/packages/Metrics/Metrics.pdf
       repository_url: https://github.com/mfrasco/Metrics
       min: 0
@@ -58,7 +65,8 @@ info:
       summary: JSD
       description: |
         Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.
-      reference: 10.21105/joss.00765
+      reference: 
+        doi: 10.21105/joss.00765
       documentation_url: https://cran.r-project.org/web/packages/philentropy/index.html
       repository_url: https://github.com/drostlab/philentropy
       min: 0
@@ -69,7 +77,8 @@ info:
       summary: Mantel Statistic
       description: |
         Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.
-      reference: 10.1111/2041-210X.12425
+      reference: 
+        doi: 10.1111/2041-210X.12425
       documentation_url: https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html
       repository_url: https://github.com/vegandevs/vegan
       min: -1
@@ -80,7 +89,8 @@ info:
       summary: Cosine Similarity
       description: |
         Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.
-      reference: 10.1002/asi.20130
+      reference: 
+        doi: 10.1002/asi.20130
       documentation_url: https://cran.r-project.org/web/packages/lsa/lsa.pdf
       repository_url: https://github.com/cran/lsa
       min: 0
@@ -104,6 +114,11 @@ engines:
           - aricode
           - anndata
           - reshape2
+          - dplyr
+        github:
+          - xzhoulab/SPARK
+          - xuranw/MuSiC
+          - YingMa0107/CARD
 
 runners:
   - type: executable

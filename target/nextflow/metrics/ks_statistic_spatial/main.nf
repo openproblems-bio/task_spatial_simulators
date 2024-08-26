@@ -3229,6 +3229,9 @@ meta = [
         "label" : "Transition matrix",
         "summary" : "KS Statistic of the transition matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the transition matrix of the real dataset versus the simulated dataset. The transition matrix elucidates the interrelationships among spatial clusters in each space. Each element in the matrix signifies the transition probability from one spatial cluster to another, thereby mapping the dynamic interplay of spatial clusters.\n",
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        },
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3238,6 +3241,9 @@ meta = [
         "label" : "Centralized score",
         "summary" : "Ks Statistic of the centralized score matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the centralized score matrix of the real dataset versus the simulated dataset. The centralized score matrix is a vector of the group degree centrality (inter-cluster connectivity), average clustering coefficient (propensity for a spot within a spatial cluster to be connected to spots in another cluster), and the group closeness centrality (relative proximity or accessibility of one cluster to all spots in another). \n",
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        },
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3247,6 +3253,9 @@ meta = [
         "label" : "Neighborhood enrichment",
         "summary" : "Ks Statistic of the neighborhood enrichment.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the neighborhood enrichment matrices of the real dataset versus the simulated dataset. The neighborhood enrichment matrix quantifies the enrichment observed between each pair of spatial clusters. It serves to systematically assess the interaction between different clusters within a spatial context, providing insights into the relative connectivity between various spatial clusters.\n",
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        },
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
@@ -3344,7 +3353,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_spatial",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "97f1e78dc0496623ab6a670e37a9f91492a06f75",
+    "git_commit" : "3458d6c4b2fbbfce6ce805393e48ec1279f41fd7",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

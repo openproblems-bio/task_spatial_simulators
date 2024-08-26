@@ -3230,7 +3230,9 @@ meta = [
         "label" : "clustering_ari",
         "summary" : "ARI",
         "description" : "Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.\n",
-        "reference" : "10.1145/1553374.1553511",
+        "reference" : {
+          "doi" : "10.1145/1553374.1553511"
+        },
         "documentation_url" : "https://cran.r-project.org/web/packages/aricode/index.html",
         "repository_url" : "https://github.com/jchiquet/aricode",
         "min" : "-Inf",
@@ -3241,7 +3243,9 @@ meta = [
         "label" : "clustering_nmi",
         "summary" : "NMI",
         "description" : "Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].\n",
-        "reference" : "10.1145/1553374.1553511",
+        "reference" : {
+          "doi" : "10.1145/1553374.1553511"
+        },
         "documentation_url" : "https://cran.r-project.org/web/packages/aricode/index.html",
         "repository_url" : "https://github.com/jchiquet/aricode",
         "min" : 0,
@@ -3252,6 +3256,9 @@ meta = [
         "label" : "svg_recall",
         "summary" : "Recall",
         "description" : "Recall used in identifying spatial variable genes, measuring the true positive rate.\n",
+        "reference" : {
+          "doi" : "10.9735/2229-3981"
+        },
         "min" : 0,
         "max" : 1,
         "maximize" : true
@@ -3260,6 +3267,9 @@ meta = [
         "label" : "svg_precision",
         "summary" : "Precision (Spatial Variable Gene)",
         "description" : "Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.\n",
+        "reference" : {
+          "doi" : "10.9735/2229-3981"
+        },
         "min" : 0,
         "max" : 1,
         "maximize" : true
@@ -3268,7 +3278,9 @@ meta = [
         "label" : "ctdeconvolute_rmse",
         "summary" : "RMSE",
         "description" : "Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.\n",
-        "reference" : "NA",
+        "reference" : {
+          "doi" : "10.5194/gmd-15-5481-2022"
+        },
         "documentation_url" : "https://cran.r-project.org/web/packages/Metrics/Metrics.pdf",
         "repository_url" : "https://github.com/mfrasco/Metrics",
         "min" : 0,
@@ -3279,7 +3291,9 @@ meta = [
         "label" : "ctdeconcolute_jsd",
         "summary" : "JSD",
         "description" : "Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.\n",
-        "reference" : "10.21105/joss.00765",
+        "reference" : {
+          "doi" : "10.21105/joss.00765"
+        },
         "documentation_url" : "https://cran.r-project.org/web/packages/philentropy/index.html",
         "repository_url" : "https://github.com/drostlab/philentropy",
         "min" : 0,
@@ -3290,7 +3304,9 @@ meta = [
         "label" : "crosscor_mantel",
         "summary" : "Mantel Statistic",
         "description" : "Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.\n",
-        "reference" : "10.1111/2041-210X.12425",
+        "reference" : {
+          "doi" : "10.1111/2041-210X.12425"
+        },
         "documentation_url" : "https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html",
         "repository_url" : "https://github.com/vegandevs/vegan",
         "min" : -1,
@@ -3301,7 +3317,9 @@ meta = [
         "label" : "crosscor_cosine",
         "summary" : "Cosine Similarity",
         "description" : "Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.\n",
-        "reference" : "10.1002/asi.20130",
+        "reference" : {
+          "doi" : "10.1002/asi.20130"
+        },
         "documentation_url" : "https://cran.r-project.org/web/packages/lsa/lsa.pdf",
         "repository_url" : "https://github.com/cran/lsa",
         "min" : 0,
@@ -3386,11 +3404,17 @@ meta = [
           "cran" : [
             "aricode",
             "anndata",
-            "reshape2"
+            "reshape2",
+            "dplyr"
           ],
           "bioc" : [
             "scater",
             "BayesSpace"
+          ],
+          "github" : [
+            "xzhoulab/SPARK",
+            "xuranw/MuSiC",
+            "YingMa0107/CARD"
           ],
           "bioc_force_install" : false
         }
@@ -3403,7 +3427,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "97f1e78dc0496623ab6a670e37a9f91492a06f75",
+    "git_commit" : "3458d6c4b2fbbfce6ce805393e48ec1279f41fd7",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3560,6 +3584,8 @@ options(.viash_orig_warn)
 rm(.viash_orig_warn)
 
 ## VIASH END
+
+source(paste0(meta[["resources_dir"]], "/utils.R"))
 input_real_sp <- anndata::read_h5ad(par\\$input_spatial_dataset)
 input_sc <- anndata::read_h5ad(par\\$input_singlecell_dataset)
 input_simulated_sp <- anndata::read_h5ad(par\\$input_simulated_dataset)

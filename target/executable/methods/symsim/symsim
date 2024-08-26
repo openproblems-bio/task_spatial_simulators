@@ -483,9 +483,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("YosefLab/SymSim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods symsim"
-LABEL org.opencontainers.image.created="2024-08-26T07:00:58Z"
+LABEL org.opencontainers.image.created="2024-08-26T12:32:05Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="97f1e78dc0496623ab6a670e37a9f91492a06f75"
+LABEL org.opencontainers.image.revision="3458d6c4b2fbbfce6ce805393e48ec1279f41fd7"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

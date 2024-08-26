@@ -54,10 +54,8 @@ generate_svg_sparkx <- function(adata) {
 }
 
 calculate_precision <- function(real_svg, sim_svg) {
-  filtered_real_data <- real_svg$res_mtest %>% 
-    dplyr::filter(adjustedPval < 0.05)
-  filtered_compared_data <- sim_svg$res_mtest %>% 
-    dplyr::filter(adjustedPval < 0.05)
+  filtered_real_data <- dplyr::filter(real_svg$res_mtest, adjustedPval < 0.05)
+  filtered_compared_data <- dplyr::filter(sim_svg$res_mtest, adjustedPval < 0.05)
   tp <- length(intersect(row.names(filtered_real_data), row.names(filtered_compared_data)))
   fp <- length(setdiff(row.names(filtered_compared_data), row.names(filtered_real_data)))
   precision <- ifelse((tp + fp) > 0, tp / (tp + fp), NA)
@@ -65,10 +63,8 @@ calculate_precision <- function(real_svg, sim_svg) {
 }
 
 calculate_recall <- function(real_svg, sim_svg) {
-  filtered_real_data <- real_svg$res_mtest %>% 
-    filter(adjustedPval < 0.05)
-  filtered_compared_data <- sim_svg$res_mtest %>% 
-    filter(adjustedPval < 0.05)
+  filtered_real_data <- dplyr::filter(real_svg$res_mtest, adjustedPval < 0.05)
+  filtered_compared_data <- dplyr::filter(sim_svg$res_mtest, adjustedPval < 0.05)
   tp <- length(intersect(row.names(filtered_real_data), row.names(filtered_compared_data)))
   fn <- length(setdiff(row.names(filtered_real_data), row.names(filtered_compared_data)))
   recall <- ifelse((tp + fn) > 0, tp / (tp + fn), NA)
