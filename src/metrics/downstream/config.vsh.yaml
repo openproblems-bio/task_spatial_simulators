@@ -110,15 +110,21 @@ engines:
         bioc: 
           - scater
           - BayesSpace
+          - TOAST
         cran:
           - aricode
           - anndata
           - reshape2
           - dplyr
+          - philentropy
+          - lsa
+          - vegan
+          - Metrics
         github:
           - xzhoulab/SPARK
           - YingMa0107/CARD
           - xuranw/MuSiC
+          - stevexniu/spots
 
 runners:
   - type: executable
