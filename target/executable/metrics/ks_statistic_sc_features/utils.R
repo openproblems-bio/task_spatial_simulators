@@ -75,8 +75,8 @@ calculate_recall <- function(real_svg, sim_svg) {
 CARD_processing <- function(sp_adata, sc_adata){
   # sp_adata <- input_real_sp
   # sc_adata <- input_sc
-  library(MuSiC)
-  library(CARD)
+  requireNamespace("MuSiC", quietly = TRUE)
+  requireNamespace("CARD", quietly = TRUE)
   spatial_count <- Matrix::t(sp_adata$layers[["counts"]])
   spatial_location <- cbind.data.frame(
     x = as.numeric(sapply(strsplit(colnames(spatial_count),split="x"),"[",1)),
