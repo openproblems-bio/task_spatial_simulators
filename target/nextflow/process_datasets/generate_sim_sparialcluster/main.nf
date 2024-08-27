@@ -2962,7 +2962,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/generate_sim_sparialcluster",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "956ca1252b4b03e13dfa75587b8db66d4ceed5d5",
+    "git_commit" : "bf3f65db0926109d2373c8247f471ed206842647",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3136,7 +3136,7 @@ sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 
 # need reclassify again
 real_cluster <- input_real_sp\\$obs[,c("spatial_cluster")]
-location <- colnames(counts(sim_sce))
+location <- colnames(SingleCellExperiment::counts(sim_sce))
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
 
 input_simulated_sp\\$obs\\$spatial_cluster <- sim_new_cluster
