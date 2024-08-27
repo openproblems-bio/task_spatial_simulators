@@ -3231,7 +3231,7 @@ meta = [
         "label" : "clustering_ari",
         "summary" : "ARI",
         "description" : "Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.1145/1553374.1553511"
         },
         "documentation_url" : "https://cran.r-project.org/web/packages/aricode/index.html",
@@ -3245,7 +3245,7 @@ meta = [
         "label" : "clustering_nmi",
         "summary" : "NMI",
         "description" : "Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.1145/1553374.1553511"
         },
         "documentation_url" : "https://cran.r-project.org/web/packages/aricode/index.html",
@@ -3259,7 +3259,7 @@ meta = [
         "label" : "svg_recall",
         "summary" : "Recall",
         "description" : "Recall used in identifying spatial variable genes, measuring the true positive rate.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.9735/2229-3981"
         },
         "min" : 0,
@@ -3271,7 +3271,7 @@ meta = [
         "label" : "svg_precision",
         "summary" : "Precision (Spatial Variable Gene)",
         "description" : "Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.9735/2229-3981"
         },
         "min" : 0,
@@ -3283,7 +3283,7 @@ meta = [
         "label" : "ctdeconvolute_rmse",
         "summary" : "RMSE",
         "description" : "Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.5194/gmd-15-5481-2022"
         },
         "documentation_url" : "https://cran.r-project.org/web/packages/Metrics/Metrics.pdf",
@@ -3297,7 +3297,7 @@ meta = [
         "label" : "ctdeconcolute_jsd",
         "summary" : "JSD",
         "description" : "Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.21105/joss.00765"
         },
         "documentation_url" : "https://cran.r-project.org/web/packages/philentropy/index.html",
@@ -3311,7 +3311,7 @@ meta = [
         "label" : "crosscor_mantel",
         "summary" : "Mantel Statistic",
         "description" : "Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.1111/2041-210X.12425"
         },
         "documentation_url" : "https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html",
@@ -3325,7 +3325,7 @@ meta = [
         "label" : "crosscor_cosine",
         "summary" : "Cosine Similarity",
         "description" : "Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.\n",
-        "reference" : {
+        "references" : {
           "doi" : "10.1002/asi.20130"
         },
         "documentation_url" : "https://cran.r-project.org/web/packages/lsa/lsa.pdf",
@@ -3435,7 +3435,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "0d0f7e96d6c6ec68d540812b203c086aaa45700f",
+    "git_commit" : "efa30488af2a7278305b56ddd2aa44c0794e5b57",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
