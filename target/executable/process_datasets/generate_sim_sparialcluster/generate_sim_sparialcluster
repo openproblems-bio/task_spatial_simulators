@@ -476,9 +476,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("aricode", "anndata", "reshape2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets generate_sim_sparialcluster"
-LABEL org.opencontainers.image.created="2024-08-26T20:21:21Z"
+LABEL org.opencontainers.image.created="2024-08-27T00:12:06Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="7f3a5fbf99c6dc98a20a14e3ccdc9e0ebc8f5b18"
+LABEL org.opencontainers.image.revision="956ca1252b4b03e13dfa75587b8db66d4ceed5d5"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1075,8 +1075,8 @@ rm(.viash_orig_warn)
 source(file.path(meta\$resources_dir, "utils.R"))
 
 cat("Read input files\\n")
-input_real_sp <- anndata::read_h5ad(par\$input_spatial_dataset)
-input_simulated_sp <- anndata::read_h5ad(par\$input_simulated_dataset)
+input_real_sp <- anndata::read_h5ad(par\$input_sp)
+input_simulated_sp <- anndata::read_h5ad(par\$input_sp_sim)
 
 sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
   list(counts = Matrix::t(input_simulated_sp\$layers[["counts"]])),

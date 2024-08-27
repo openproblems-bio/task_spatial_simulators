@@ -2879,7 +2879,7 @@ meta = [
     "platform" : "nextflow",
     "output" : "/home/runner/work/openproblems-v2/openproblems-v2/target/nextflow/common/extract_metadata",
     "viash_version" : "0.8.0",
-    "git_commit" : "d0bc03fb05d43fb26f51c6fe6aa2e2a2f7ff5ade",
+    "git_commit" : "41fc02751dc001bc76c8c3e073f93df9fcb4234d",
     "git_remote" : "https://github.com/openproblems-bio/openproblems-v2"
   }
 }'''))
