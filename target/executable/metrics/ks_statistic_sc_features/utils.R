@@ -23,13 +23,13 @@ generate_cosine <- function(real, sim) {
 
   real_new <- real[!is.na(real) & !is.na(sim)]
   sim_new <- sim[!is.na(real) & !is.na(sim)]
-  similarity <- lsa::cosine(lsa::as.textmatrix(cbind(as.vector(real_new), as.vector(sim_new))))
+  similarity <- lsa::cosine(lsa::as.textmatrix(cbind(as.vector(real_new$Morans.I), as.vector(sim_new$Morans.I))))
   return(mean(similarity))
 }
 
 generate_mantel <- function(real, sim) {
   requireNamespace("vegan", quietly = TRUE)
-  mantel_test <- vegan::mantel(real, sim, na.rm = TRUE, method = "pearson")
+  mantel_test <- vegan::mantel(real$Morans.I, sim$Morans.I, na.rm = TRUE, method = "pearson")
   return(mantel_test$statistic)
 }
 
@@ -193,4 +193,6 @@ generate_sim_spatialCluster <- function(real_adata, sim_adata){
   sim_cluster <- sim_sce$spatial.cluster
   return(sim_cluster)
 }
+
+
 
