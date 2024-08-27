@@ -3441,7 +3441,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "f10acef13c71962893d1ed1ea54bbe70b8ddd094",
+    "git_commit" : "2d0aa0dac4d99af8e51d87254ce9a0ab8601faa6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3676,8 +3676,8 @@ uns_metric_values <- c(
 cat("Writing output AnnData to file\\\\n")
 output <- anndata::AnnData(
   uns = list(
-    dataset_id = input_simulated_dataset\\$uns[["dataset_id"]],
-    method_id = input_simulated_dataset\\$uns[["method_id"]],
+    dataset_id = input_simulated_sp\\$uns[["dataset_id"]],
+    method_id = input_simulated_sp\\$uns[["method_id"]],
     metric_ids = uns_metric_ids,
     metric_values = uns_metric_values
   ),
