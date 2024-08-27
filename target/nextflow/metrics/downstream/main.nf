@@ -3227,6 +3227,7 @@ meta = [
   "info" : {
     "metrics" : [
       {
+        "name" : "clustering_ari",
         "label" : "clustering_ari",
         "summary" : "ARI",
         "description" : "Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.\n",
@@ -3240,6 +3241,7 @@ meta = [
         "maximize" : true
       },
       {
+        "name" : "clustering_nmi",
         "label" : "clustering_nmi",
         "summary" : "NMI",
         "description" : "Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].\n",
@@ -3253,6 +3255,7 @@ meta = [
         "maximize" : true
       },
       {
+        "name" : "svg_recall",
         "label" : "svg_recall",
         "summary" : "Recall",
         "description" : "Recall used in identifying spatial variable genes, measuring the true positive rate.\n",
@@ -3264,6 +3267,7 @@ meta = [
         "maximize" : true
       },
       {
+        "name" : "svg_precision",
         "label" : "svg_precision",
         "summary" : "Precision (Spatial Variable Gene)",
         "description" : "Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.\n",
@@ -3275,6 +3279,7 @@ meta = [
         "maximize" : true
       },
       {
+        "name" : "ctdeconvolute_rmse",
         "label" : "ctdeconvolute_rmse",
         "summary" : "RMSE",
         "description" : "Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.\n",
@@ -3288,6 +3293,7 @@ meta = [
         "maximize" : false
       },
       {
+        "name" : "ctdeconcolute_jsd",
         "label" : "ctdeconcolute_jsd",
         "summary" : "JSD",
         "description" : "Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.\n",
@@ -3301,6 +3307,7 @@ meta = [
         "maximize" : false
       },
       {
+        "name" : "crosscor_mantel",
         "label" : "crosscor_mantel",
         "summary" : "Mantel Statistic",
         "description" : "Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.\n",
@@ -3314,6 +3321,7 @@ meta = [
         "maximize" : true
       },
       {
+        "name" : "crosscor_cosine",
         "label" : "crosscor_cosine",
         "summary" : "Cosine Similarity",
         "description" : "Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.\n",
@@ -3427,7 +3435,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "677ac6f55d4c74b8918a8671b9c10407c7a46ba0",
+    "git_commit" : "0d0f7e96d6c6ec68d540812b203c086aaa45700f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

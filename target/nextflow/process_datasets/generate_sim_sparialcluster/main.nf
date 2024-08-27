@@ -2962,7 +2962,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/generate_sim_sparialcluster",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "677ac6f55d4c74b8918a8671b9c10407c7a46ba0",
+    "git_commit" : "0d0f7e96d6c6ec68d540812b203c086aaa45700f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
