@@ -117,8 +117,8 @@ engines:
           - dplyr
         github:
           - xzhoulab/SPARK
-          - xuranw/MuSiC
           - YingMa0107/CARD
+          - xuranw/MuSiC
 
 runners:
   - type: executable
