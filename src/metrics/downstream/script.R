@@ -35,7 +35,7 @@ logcounts <- log1p(counts)
 input_simulated_sp$layers[["logcounts"]] <- logcounts
 real_moransI <- generate_moransI(input_real_sp)
 sim_moransI <- generate_moransI(input_simulated_sp)
-crosscor_cosin <- generate_cosine(real_moransI, sim_moransI)
+crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
 cat("spatial clustering evaluation\n")
