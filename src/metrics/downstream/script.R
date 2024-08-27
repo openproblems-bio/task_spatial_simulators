@@ -1,3 +1,14 @@
+requireNamespace("anndata", quietly = TRUE)
+requireNamespace("edgeR", quietly = TRUE)
+requireNamespace("ks", quietly = TRUE)
+requireNamespace("resample", quietly = TRUE)
+requireNamespace("reshape2", quietly = TRUE)
+requireNamespace("MuSiC", quietly = TRUE)
+requireNamespace("CARD", quietly = TRUE)
+requireNamespace("SingleCellExperiment", quietly = TRUE)
+requireNamespace("SummarizedExperiment", quietly = TRUE)
+
+
 ## VIASH START
 par <- list(
   input_spatial_dataset = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",

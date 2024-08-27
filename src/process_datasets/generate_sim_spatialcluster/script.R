@@ -3,8 +3,8 @@
 ## VIASH START
 par <- list(
   # inputs
-  input_spatial_dataset = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
-  input_simulated_dataset = "resources_test/datasets/MOBNEW/simulated_dataset.h5ad",
+  input_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  input_sp_sim = "resources_test/datasets/MOBNEW/simulated_dataset.h5ad",
   # outputs
   output_sp = "resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
 )
@@ -15,8 +15,8 @@ meta <- list(
 source(file.path(meta$resources_dir, "utils.R"))
 
 cat("Read input files\n")
-input_real_sp <- anndata::read_h5ad(par$input_spatial_dataset)
-input_simulated_sp <- anndata::read_h5ad(par$input_simulated_dataset)
+input_real_sp <- anndata::read_h5ad(par$input_sp)
+input_simulated_sp <- anndata::read_h5ad(par$input_sp_sim)
 
 sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
   list(counts = Matrix::t(input_simulated_sp$layers[["counts"]])),
