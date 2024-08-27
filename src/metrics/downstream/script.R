@@ -89,8 +89,8 @@ uns_metric_values <- c(
 cat("Writing output AnnData to file\n")
 output <- anndata::AnnData(
   uns = list(
-    dataset_id = input_simulated_dataset$uns[["dataset_id"]],
-    method_id = input_simulated_dataset$uns[["method_id"]],
+    dataset_id = input_simulated_sp$uns[["dataset_id"]],
+    method_id = input_simulated_sp$uns[["method_id"]],
     metric_ids = uns_metric_ids,
     metric_values = uns_metric_values
   ),
