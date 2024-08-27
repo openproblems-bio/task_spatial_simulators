@@ -4,7 +4,7 @@ name: downstream
 
 info:
   metrics:
-    - name: 
+    - name: clustering_ari
       label: clustering_ari
       summary: ARI
       description: |
@@ -16,7 +16,7 @@ info:
       min: -Inf
       max: +Inf
       maximize: true
-    - name: 
+    - name: clustering_nmi
       label: clustering_nmi
       summary: NMI
       description: |
@@ -28,7 +28,7 @@ info:
       min: 0
       max: 1
       maximize: true
-    - name: 
+    - name: svg_recall
       label: svg_recall
       summary: Recall
       description: |
@@ -38,7 +38,7 @@ info:
       min: 0
       max: 1
       maximize: true
-    - name: 
+    - name: svg_precision
       label: svg_precision
       summary: Precision (Spatial Variable Gene)
       description: |
@@ -48,7 +48,7 @@ info:
       min: 0
       max: 1
       maximize: true
-    - name: 
+    - name: ctdeconvolute_rmse
       label: ctdeconvolute_rmse
       summary: RMSE
       description: |
@@ -60,7 +60,7 @@ info:
       min: 0
       max: +Inf
       maximize: false
-    - name: 
+    - name: ctdeconcolute_jsd
       label: ctdeconcolute_jsd
       summary: JSD
       description: |
@@ -72,7 +72,7 @@ info:
       min: 0
       max: 1
       maximize: false
-    - name: 
+    - name: crosscor_mantel
       label: crosscor_mantel
       summary: Mantel Statistic
       description: |
@@ -84,7 +84,7 @@ info:
       min: -1
       max: 1
       maximize: true
-    - name: 
+    - name: crosscor_cosine
       label: crosscor_cosine
       summary: Cosine Similarity
       description: |
