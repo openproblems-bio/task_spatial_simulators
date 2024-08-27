@@ -3413,16 +3413,22 @@ meta = [
             "aricode",
             "anndata",
             "reshape2",
-            "dplyr"
+            "dplyr",
+            "philentropy",
+            "lsa",
+            "vegan",
+            "Metrics"
           ],
           "bioc" : [
             "scater",
-            "BayesSpace"
+            "BayesSpace",
+            "TOAST"
           ],
           "github" : [
             "xzhoulab/SPARK",
             "YingMa0107/CARD",
-            "xuranw/MuSiC"
+            "xuranw/MuSiC",
+            "stevexniu/spots"
           ],
           "bioc_force_install" : false
         }
@@ -3435,7 +3441,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "efa30488af2a7278305b56ddd2aa44c0794e5b57",
+    "git_commit" : "fa0406cdc1a0f7daff704d7c098237daa2909989",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
