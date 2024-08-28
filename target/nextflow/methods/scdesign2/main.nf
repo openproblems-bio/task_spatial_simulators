@@ -3189,7 +3189,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign2",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "2d0aa0dac4d99af8e51d87254ce9a0ab8601faa6",
+    "git_commit" : "304d7a97164bf5965912711958e7422255ca61d4",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

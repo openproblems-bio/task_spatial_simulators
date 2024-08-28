@@ -1,4 +1,4 @@
-name: generate_sim_sparialcluster
+name: generate_sim_spatialcluster
 namespace: process_datasets
 description: generate spatial cluster of simulated dataset before run metrics folder
 argument_groups:
