@@ -5,5 +5,5 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     uses: openproblems-bio/actions/.github/workflows/test.yml@main
