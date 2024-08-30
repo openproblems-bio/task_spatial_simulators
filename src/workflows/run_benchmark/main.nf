@@ -5,28 +5,29 @@ workflow auto {
     )
 }
 
+// construct list of methods
+methods = [
+  scdesign2,
+  scdesign3,
+  sparsim,
+  splatter,
+  srtsim,
+  symsim,
+  zinbwave
+]
+
+// construct list of metrics
+metrics = [
+  ks_statistic_gene_cell,
+  ks_statistic_sc_features,
+  ks_statistic_spatial
+]
+
 workflow run_wf {
   take:
   input_ch
 
   main:
-
-  // construct list of methods
-  methods = [
-    scdesign2,
-    scdesign3,
-    sparsim,
-    splatter,
-    srtsim,
-    symsim,
-    zinbwave
-  ]
-
-  // construct list of metrics
-  metrics = [
-    ks_statistic
-  ]
-
 
   /****************************
    * EXTRACT DATASET METADATA *

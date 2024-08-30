@@ -4,7 +4,7 @@ suppressMessages(library(BiocParallel, quietly = TRUE))
 
 ## VIASH START
 par <- list(
-  input = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  input = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
   base = "domain"
 )
 meta <- list(

@@ -87,6 +87,8 @@ Arguments:
 | `--dataset_summary` | `string` | NA. |
 | `--dataset_description` | `string` | NA. |
 | `--dataset_organism` | `string` | NA. |
+| `--dataset_assay_spatial` | `string` | NA. |
+| `--dataset_assay_singlecell` | `string` | NA. |
 
 </div>
 
@@ -94,7 +96,7 @@ Arguments:
 
 An unprocessed single-cell dataset as output by a dataset loader.
 
-Example file: `resources_test/datasets/MOBNEW/dataset_sc.h5ad`
+Example file: `resources_test/spatialsimbench_mobnew/dataset_sc.h5ad`
 
 Description:
 
@@ -108,7 +110,7 @@ v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/
 
 An unprocessed spatial dataset as output by a dataset loader.
 
-Example file: `resources_test/datasets/MOBNEW/dataset_sp.h5ad`
+Example file: `resources_test/spatialsimbench_mobnew/dataset_sp.h5ad`
 
 Description:
 
@@ -171,11 +173,12 @@ Arguments:
 
 File indicating the score of a metric.
 
-Example file: `resources/score.h5ad`
+Example file: `resources_test/spatialsimbench_mobnew/score.h5ad`
 
 ## File format: Solution
 
 The solution for the test data
 
-Example file: `resources_test/datasets/MOBNEW/simulated_dataset.h5ad`
+Example file:
+`resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad`
 

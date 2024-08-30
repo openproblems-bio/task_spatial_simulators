@@ -7,17 +7,23 @@ par <- list(
   input_sp = "resources_test/datasets_raw/MOBNEW/dataset_sp.rds",
 
   # outputs
-  output_sc = "resources_test/datasets/MOBNEW/dataset_sc.h5ad",
-  output_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  output_sc = "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds",
+  output_sp = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
 
   # dataset metadata
   dataset_id = "MOBNEW",
   dataset_name = "MOBNEW",
   dataset_description = "MOBNEW",
-  dataset_url = "...",
-  dataset_reference = "...",
+  dataset_url = NULL,
+  dataset_url_spatial = "...",
+  dataset_url_singlecell = "...",
+  dataset_reference = NULL,
+  dataset_reference_singlecell = "...",
+  dataset_reference_spatial = "...",
   dataset_summary = "...",
-  dataset_organism = "..."
+  dataset_organism = "...",
+  dataset_assay_spatial = "...",
+  dataset_assay_singlecell = "..."
 )
 ## VIASH END
 
@@ -30,6 +36,15 @@ print(input_sc)
 
 cat("Spatial dataset:\n")
 print(input_sp)
+
+cat("Construct uns\n")
+uns <- list(
+  dataset_id = par$dataset_id,
+  dataset_name = par$dataset_name,
+  dataset_description = par$dataset_description,
+  dataset_summary = par$dataset_summary,
+  dataset_organism = par$dataset_organism
+)
 
 cat("Transforming single cell into AnnData\n")
 output_sc <- anndata::AnnData(
@@ -47,14 +62,13 @@ output_sc <- anndata::AnnData(
     feature_id = rownames(input_sc),
     feature_name = rownames(input_sc)
   ),
-  uns = list(
-    dataset_id = par$dataset_id,
-    dataset_name = par$dataset_name,
-    dataset_description = par$dataset_description,
-    dataset_url = par$dataset_url,
-    dataset_reference = par$dataset_reference,
-    dataset_summary = par$dataset_summary,
-    dataset_organism = par$dataset_organism
+  uns = c(
+    uns,
+    list(
+      dataset_url = par$dataset_url_singlecell %||% par$dataset_url,
+      dataset_reference = par$dataset_reference_singlecell %||% par$dataset_reference,
+      dataset_assay = par$dataset_assay_singlecell
+    )
   )
 )
 
@@ -81,14 +95,13 @@ output_sp <- anndata::AnnData(
   obsm = list(
     celltype_proportions = celltype_proportions
   ),
-  uns = list(
-    dataset_id = par$dataset_id,
-    dataset_name = par$dataset_name,
-    dataset_description = par$dataset_description,
-    dataset_url = par$dataset_url,
-    dataset_reference = par$dataset_reference,
-    dataset_summary = par$dataset_summary,
-    dataset_organism = par$dataset_organism
+  uns = c(
+    uns,
+    list(
+      dataset_url = par$dataset_url_spatial %||% par$dataset_url,
+      dataset_reference = par$dataset_reference_spatial %||% par$dataset_reference,
+      dataset_assay = par$dataset_assay_spatial
+    )
   )
 )
 
