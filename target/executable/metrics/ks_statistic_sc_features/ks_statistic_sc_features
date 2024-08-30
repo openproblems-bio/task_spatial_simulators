@@ -176,7 +176,7 @@ function ViashHelp {
   echo "Arguments:"
   echo "    --input_spatial_dataset"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+  echo "        example: resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
   echo "        This dataset contains raw counts and metadata as output by a dataset"
   echo "        loader."
   echo "        The format of this file is derived from the [CELLxGENE schema"
@@ -185,7 +185,7 @@ function ViashHelp {
   echo ""
   echo "    --input_singlecell_dataset"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+  echo "        example: resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
   echo "        This dataset contains raw counts and metadata as output by a dataset"
   echo "        loader."
   echo "        The format of this file is derived from the [CELLxGENE schema"
@@ -194,11 +194,12 @@ function ViashHelp {
   echo ""
   echo "    --input_simulated_dataset"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
+  echo "        example:"
+  echo "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad"
   echo ""
   echo "    --output"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: resources/score.h5ad"
+  echo "        example: resources_test/spatialsimbench_mobnew/score.h5ad"
 }
 
 # initialise variables
@@ -487,9 +488,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("xuranw/MuSiC", "YingMa0107/CARD", "SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2024-08-30T12:14:20Z"
+LABEL org.opencontainers.image.created="2024-08-30T12:28:20Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="e5a5b10125528f46b838fb5538af82cc5888025e"
+LABEL org.opencontainers.image.revision="cc6e2ff4e28059e88477009286cc8ee15d5175ce"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -178,18 +178,18 @@ function ViashHelp {
   echo "Inputs:"
   echo "    --input_sc"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets_raw/MOBNEW/dataset_sc.rds"
+  echo "        example: resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds"
   echo "        Raw single-cell dataset"
   echo ""
   echo "    --input_sp"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets_raw/MOBNEW/dataset_sp.rds"
+  echo "        example: resources_test/spatialsimbench_mobnew/MOBNEW.rds"
   echo "        Raw spatial dataset"
   echo ""
   echo "Outputs:"
   echo "    --output_sc"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+  echo "        example: resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
   echo "        This dataset contains raw counts and metadata as output by a dataset"
   echo "        loader."
   echo "        The format of this file is derived from the [CELLxGENE schema"
@@ -198,7 +198,7 @@ function ViashHelp {
   echo ""
   echo "    --output_sp"
   echo "        type: file, required parameter, output, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+  echo "        example: resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
   echo "        This dataset contains raw counts and metadata as output by a dataset"
   echo "        loader."
   echo "        The format of this file is derived from the [CELLxGENE schema"
@@ -236,6 +236,14 @@ function ViashHelp {
   echo "    --dataset_organism"
   echo "        type: string, required parameter"
   echo "        Organism from which the dataset was derived."
+  echo ""
+  echo "    --dataset_assay_spatial"
+  echo "        type: string, required parameter"
+  echo "        Assay used for spatial data."
+  echo ""
+  echo "    --dataset_assay_singlecell"
+  echo "        type: string, required parameter"
+  echo "        Assay used for single-cell data."
 }
 
 # initialise variables
@@ -517,9 +525,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2024-08-30T12:14:21Z"
+LABEL org.opencontainers.image.created="2024-08-30T12:28:21Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="e5a5b10125528f46b838fb5538af82cc5888025e"
+LABEL org.opencontainers.image.revision="cc6e2ff4e28059e88477009286cc8ee15d5175ce"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -786,6 +794,28 @@ while [[ $# -gt 0 ]]; do
             VIASH_PAR_DATASET_ORGANISM=$(ViashRemoveFlags "$1")
             shift 1
             ;;
+        --dataset_assay_spatial)
+            [ -n "$VIASH_PAR_DATASET_ASSAY_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_assay_spatial\': \'$VIASH_PAR_DATASET_ASSAY_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_ASSAY_SPATIAL="$2"
+            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_assay_spatial. Use "--help" to get more information on the parameters. && exit 1
+            shift 2
+            ;;
+        --dataset_assay_spatial=*)
+            [ -n "$VIASH_PAR_DATASET_ASSAY_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_assay_spatial=*\': \'$VIASH_PAR_DATASET_ASSAY_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_ASSAY_SPATIAL=$(ViashRemoveFlags "$1")
+            shift 1
+            ;;
+        --dataset_assay_singlecell)
+            [ -n "$VIASH_PAR_DATASET_ASSAY_SINGLECELL" ] && ViashError Bad arguments for option \'--dataset_assay_singlecell\': \'$VIASH_PAR_DATASET_ASSAY_SINGLECELL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_ASSAY_SINGLECELL="$2"
+            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_assay_singlecell. Use "--help" to get more information on the parameters. && exit 1
+            shift 2
+            ;;
+        --dataset_assay_singlecell=*)
+            [ -n "$VIASH_PAR_DATASET_ASSAY_SINGLECELL" ] && ViashError Bad arguments for option \'--dataset_assay_singlecell=*\': \'$VIASH_PAR_DATASET_ASSAY_SINGLECELL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_ASSAY_SINGLECELL=$(ViashRemoveFlags "$1")
+            shift 1
+            ;;
         ---engine)
             VIASH_ENGINE_ID="$2"
             shift 2
@@ -990,6 +1020,14 @@ if [ -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then
 fi
 if [ -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then
   ViashError '--dataset_organism' is a required argument. Use "--help" to get more information on the parameters.
+  exit 1
+fi
+if [ -z ${VIASH_PAR_DATASET_ASSAY_SPATIAL+x} ]; then
+  ViashError '--dataset_assay_spatial' is a required argument. Use "--help" to get more information on the parameters.
+  exit 1
+fi
+if [ -z ${VIASH_PAR_DATASET_ASSAY_SINGLECELL+x} ]; then
+  ViashError '--dataset_assay_singlecell' is a required argument. Use "--help" to get more information on the parameters.
   exit 1
 fi
 if [ -z ${VIASH_META_NAME+x} ]; then
@@ -1215,7 +1253,9 @@ par <- list(
   "dataset_reference" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE+x} ]; then echo -n "strsplit('"; echo -n "$VIASH_PAR_DATASET_REFERENCE" | sed "s#['\\]#\\\\&#g"; echo "', split = ';')[[1]]"; else echo NULL; fi ),
   "dataset_summary" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_description" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi )
+  "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_assay_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SPATIAL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_assay_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SINGLECELL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi )
 )
 meta <- list(
   "name" = $( if [ ! -z ${VIASH_META_NAME+x} ]; then echo -n "'"; echo -n "$VIASH_META_NAME" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
@@ -1258,6 +1298,19 @@ print(input_sc)
 cat("Spatial dataset:\\n")
 print(input_sp)
 
+cat("Construct uns\\n")
+uns <- list(
+  dataset_id = par\$dataset_id,
+  dataset_name = par\$dataset_name,
+  dataset_description = par\$dataset_description,
+  dataset_url = par\$dataset_url,
+  dataset_reference = par\$dataset_reference,
+  dataset_summary = par\$dataset_summary,
+  dataset_organism = par\$dataset_organism,
+  dataset_assay_spatial = par\$dataset_assay_spatial,
+  dataset_assay_singlecell = par\$dataset_assay_singlecell
+)
+
 cat("Transforming single cell into AnnData\\n")
 output_sc <- anndata::AnnData(
   layers = list(
@@ -1274,15 +1327,7 @@ output_sc <- anndata::AnnData(
     feature_id = rownames(input_sc),
     feature_name = rownames(input_sc)
   ),
-  uns = list(
-    dataset_id = par\$dataset_id,
-    dataset_name = par\$dataset_name,
-    dataset_description = par\$dataset_description,
-    dataset_url = par\$dataset_url,
-    dataset_reference = par\$dataset_reference,
-    dataset_summary = par\$dataset_summary,
-    dataset_organism = par\$dataset_organism
-  )
+  uns = uns
 )
 
 cat("Transforming spatial into AnnData\\n")
@@ -1308,15 +1353,7 @@ output_sp <- anndata::AnnData(
   obsm = list(
     celltype_proportions = celltype_proportions
   ),
-  uns = list(
-    dataset_id = par\$dataset_id,
-    dataset_name = par\$dataset_name,
-    dataset_description = par\$dataset_description,
-    dataset_url = par\$dataset_url,
-    dataset_reference = par\$dataset_reference,
-    dataset_summary = par\$dataset_summary,
-    dataset_organism = par\$dataset_organism
-  )
+  uns = uns
 )
 
 cat("Write output files\\n")

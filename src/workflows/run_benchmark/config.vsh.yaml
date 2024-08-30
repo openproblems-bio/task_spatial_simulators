@@ -11,10 +11,6 @@ argument_groups:
         __merge__: ../../api/file_dataset_sc.yaml
         direction: input
         required: true
-      # - name: "--input_simulated_dataset"
-      #   __merge__: ../../api/file_simulated_dataset.yaml
-      #   direction: input
-      #   required: true
   - name: Outputs
     arguments:
       - name: "--output_scores"
@@ -49,8 +45,6 @@ resources:
     entrypoint: run_wf
   - type: file
     path: /_viash.yaml
-  - type: file
-    path: /src/api/task_info.yaml # TODO: remove this
 dependencies:
   - name: common/check_dataset_schema
     repository: openproblems_v2

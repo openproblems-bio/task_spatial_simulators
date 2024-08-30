@@ -1,5 +1,5 @@
 type: file
-example: "resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
+example: "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad"
 label: "Solution"
 summary: "The solution for the test data"
 info:

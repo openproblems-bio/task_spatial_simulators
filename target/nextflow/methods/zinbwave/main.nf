@@ -2923,7 +2923,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3046,7 +3046,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
+            "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3081,8 +3081,8 @@ meta = [
     },
     {
       "type" : "file",
-      "path" : "/resources_test/datasets",
-      "dest" : "resources_test/datasets"
+      "path" : "/resources_test/spatialsimbench_mobnew",
+      "dest" : "resources_test/spatialsimbench_mobnew"
     }
   ],
   "info" : {
@@ -3183,7 +3183,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/zinbwave",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e5a5b10125528f46b838fb5538af82cc5888025e",
+    "git_commit" : "cc6e2ff4e28059e88477009286cc8ee15d5175ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

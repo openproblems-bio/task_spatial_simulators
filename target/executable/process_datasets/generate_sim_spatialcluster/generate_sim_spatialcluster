@@ -178,13 +178,14 @@ function ViashHelp {
   echo "Inputs:"
   echo "    --input_sp"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+  echo "        example: resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
   echo "        Raw spatial dataset"
   echo ""
   echo "    --input_sp_sim"
   echo "        type: file, required parameter, file must exist"
-  echo "        example: resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
-  echo "        similated spatial dataset"
+  echo "        example:"
+  echo "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad"
+  echo "        simulated spatial dataset"
   echo ""
   echo "Outputs:"
   echo "    --output_sp"
@@ -476,9 +477,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("aricode", "anndata", "reshape2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets generate_sim_spatialcluster"
-LABEL org.opencontainers.image.created="2024-08-30T12:14:20Z"
+LABEL org.opencontainers.image.created="2024-08-30T12:28:20Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="e5a5b10125528f46b838fb5538af82cc5888025e"
+LABEL org.opencontainers.image.revision="cc6e2ff4e28059e88477009286cc8ee15d5175ce"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

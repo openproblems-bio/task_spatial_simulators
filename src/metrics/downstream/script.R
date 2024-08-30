@@ -1,8 +1,8 @@
 ## VIASH START
 par <- list(
-  input_spatial_dataset = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
-  input_singlecell_dataset = "resources_test/datasets/MOBNEW/dataset_sc.h5ad",
-  input_simulated_dataset = "resources_test/datasets/MOBNEW/simulated_dataset.h5ad",
+  input_spatial_dataset = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
+  input_singlecell_dataset = "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds",
+  input_simulated_dataset = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad",
   plat = "ST", # new here
   output = "output.h5ad"
 )

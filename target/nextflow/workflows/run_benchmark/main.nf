@@ -2923,7 +2923,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3025,7 +3025,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3118,10 +3118,6 @@ meta = [
     {
       "type" : "file",
       "path" : "/_viash.yaml"
-    },
-    {
-      "type" : "file",
-      "path" : "/src/api/task_info.yaml"
     }
   ],
   "status" : "enabled",
@@ -3262,7 +3258,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e5a5b10125528f46b838fb5538af82cc5888025e",
+    "git_commit" : "cc6e2ff4e28059e88477009286cc8ee15d5175ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3393,28 +3389,29 @@ workflow auto {
     )
 }
 
+// construct list of methods
+methods = [
+  scdesign2,
+  scdesign3,
+  sparsim,
+  splatter,
+  srtsim,
+  symsim,
+  zinbwave
+]
+
+// construct list of metrics
+metrics = [
+  ks_statistic_gene_cell,
+  ks_statistic_sc_features,
+  ks_statistic_spatial
+]
+
 workflow run_wf {
   take:
   input_ch
 
   main:
-
-  // construct list of methods
-  methods = [
-    scdesign2,
-    scdesign3,
-    sparsim,
-    splatter,
-    srtsim,
-    symsim,
-    zinbwave
-  ]
-
-  // construct list of metrics
-  metrics = [
-    ks_statistic
-  ]
-
 
   /****************************
    * EXTRACT DATASET METADATA *

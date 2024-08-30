@@ -3,10 +3,10 @@
 ## VIASH START
 par <- list(
   # inputs
-  input_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
-  input_sp_sim = "resources_test/datasets/MOBNEW/simulated_dataset.h5ad",
+  input_sp = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
+  input_sp_sim = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad",
   # outputs
-  output_sp = "resources_test/datasets/MOBNEW/simulated_dataset.h5ad"
+  output_sp = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad"
 )
 meta <- list(
   resources_dir = "target/executable/process_datasets/generate_sim_sparialCluster"

@@ -1,5 +1,5 @@
 type: file
-example: "resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+example: "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
 label: Single-Cell Dataset
 summary: An unprocessed single-cell dataset as output by a dataset loader.
 description: |

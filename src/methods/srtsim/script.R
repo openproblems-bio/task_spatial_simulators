@@ -2,7 +2,7 @@ suppressMessages(library(SRTsim, quietly = TRUE))
 
 ## VIASH START
 par <- list(
-  input = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  input = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
   output = "simulated_dataset.h5ad",
   base = "domain"
 )

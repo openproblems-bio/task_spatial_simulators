@@ -2810,7 +2810,7 @@ meta = [
           "name" : "--input_sc",
           "description" : "Raw single-cell dataset",
           "example" : [
-            "resources_test/datasets_raw/MOBNEW/dataset_sc.rds"
+            "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2824,7 +2824,7 @@ meta = [
           "name" : "--input_sp",
           "description" : "Raw spatial dataset",
           "example" : [
-            "resources_test/datasets_raw/MOBNEW/dataset_sp.rds"
+            "resources_test/spatialsimbench_mobnew/MOBNEW.rds"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2931,7 +2931,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3058,7 +3058,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -3146,8 +3146,29 @@ meta = [
           "type" : "string",
           "name" : "--dataset_organism",
           "description" : "Organism from which the dataset was derived.",
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_assay_spatial",
+          "description" : "Assay used for spatial data.",
           "info" : {
-            "test_default" : "mus_musculus"
+            "test_default" : "Visium"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_assay_singlecell",
+          "description" : "Assay used for single-cell data.",
+          "info" : {
+            "test_default" : "Chromium"
           },
           "required" : true,
           "direction" : "input",
@@ -3168,8 +3189,8 @@ meta = [
   "test_resources" : [
     {
       "type" : "file",
-      "path" : "/resources_test/datasets_raw/MOBNEW",
-      "dest" : "resources_test/datasets_raw/MOBNEW"
+      "path" : "/resources_test/spatialsimbench_mobnew",
+      "dest" : "resources_test/spatialsimbench_mobnew"
     },
     {
       "type" : "python_script",
@@ -3253,7 +3274,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e5a5b10125528f46b838fb5538af82cc5888025e",
+    "git_commit" : "cc6e2ff4e28059e88477009286cc8ee15d5175ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3387,7 +3408,9 @@ par <- list(
   "dataset_reference" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE+x} ]; then echo -n "strsplit('"; echo -n "$VIASH_PAR_DATASET_REFERENCE" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "', split = ';')[[1]]"; else echo NULL; fi ),
   "dataset_summary" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_description" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi )
+  "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_assay_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_assay_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi )
 )
 meta <- list(
   "name" = $( if [ ! -z ${VIASH_META_NAME+x} ]; then echo -n "'"; echo -n "$VIASH_META_NAME" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
@@ -3430,6 +3453,19 @@ print(input_sc)
 cat("Spatial dataset:\\\\n")
 print(input_sp)
 
+cat("Construct uns\\\\n")
+uns <- list(
+  dataset_id = par\\$dataset_id,
+  dataset_name = par\\$dataset_name,
+  dataset_description = par\\$dataset_description,
+  dataset_url = par\\$dataset_url,
+  dataset_reference = par\\$dataset_reference,
+  dataset_summary = par\\$dataset_summary,
+  dataset_organism = par\\$dataset_organism,
+  dataset_assay_spatial = par\\$dataset_assay_spatial,
+  dataset_assay_singlecell = par\\$dataset_assay_singlecell
+)
+
 cat("Transforming single cell into AnnData\\\\n")
 output_sc <- anndata::AnnData(
   layers = list(
@@ -3446,15 +3482,7 @@ output_sc <- anndata::AnnData(
     feature_id = rownames(input_sc),
     feature_name = rownames(input_sc)
   ),
-  uns = list(
-    dataset_id = par\\$dataset_id,
-    dataset_name = par\\$dataset_name,
-    dataset_description = par\\$dataset_description,
-    dataset_url = par\\$dataset_url,
-    dataset_reference = par\\$dataset_reference,
-    dataset_summary = par\\$dataset_summary,
-    dataset_organism = par\\$dataset_organism
-  )
+  uns = uns
 )
 
 cat("Transforming spatial into AnnData\\\\n")
@@ -3480,15 +3508,7 @@ output_sp <- anndata::AnnData(
   obsm = list(
     celltype_proportions = celltype_proportions
   ),
-  uns = list(
-    dataset_id = par\\$dataset_id,
-    dataset_name = par\\$dataset_name,
-    dataset_description = par\\$dataset_description,
-    dataset_url = par\\$dataset_url,
-    dataset_reference = par\\$dataset_reference,
-    dataset_summary = par\\$dataset_summary,
-    dataset_organism = par\\$dataset_organism
-  )
+  uns = uns
 )
 
 cat("Write output files\\\\n")

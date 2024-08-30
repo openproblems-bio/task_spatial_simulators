@@ -2810,7 +2810,7 @@ meta = [
           "name" : "--input_sc",
           "description" : "Raw single-cell dataset",
           "example" : [
-            "resources_test/datasets_raw/MOBNEW/dataset_sc.rds"
+            "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2824,7 +2824,7 @@ meta = [
           "name" : "--input_sp",
           "description" : "Raw spatial dataset",
           "example" : [
-            "resources_test/datasets_raw/MOBNEW/dataset_sp.rds"
+            "resources_test/spatialsimbench_mobnew/MOBNEW.rds"
           ],
           "must_exist" : true,
           "create_parent" : true,
@@ -2931,7 +2931,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sc.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
           ],
           "default" : [
             "$id/output_sc.h5ad"
@@ -3061,7 +3061,7 @@ meta = [
             }
           },
           "example" : [
-            "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+            "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
           ],
           "default" : [
             "$id/output_sp.h5ad"
@@ -3159,6 +3159,30 @@ meta = [
           "direction" : "input",
           "multiple" : false,
           "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_assay_spatial",
+          "description" : "Assay used for spatial data.",
+          "info" : {
+            "test_default" : "Visium"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_assay_singlecell",
+          "description" : "Assay used for single-cell data.",
+          "info" : {
+            "test_default" : "Chromium"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
         }
       ]
     }
@@ -3183,8 +3207,8 @@ meta = [
     },
     {
       "type" : "file",
-      "path" : "/resources_test/datasets",
-      "dest" : "resources_test/datasets"
+      "path" : "/resources_test/spatialsimbench_mobnew",
+      "dest" : "resources_test/spatialsimbench_mobnew"
     }
   ],
   "info" : {
@@ -3291,7 +3315,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e5a5b10125528f46b838fb5538af82cc5888025e",
+    "git_commit" : "cc6e2ff4e28059e88477009286cc8ee15d5175ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3435,7 +3459,9 @@ workflow run_wf {
         "dataset_reference",
         "dataset_summary",
         "dataset_description",
-        "dataset_organism"
+        "dataset_organism",
+        "dataset_assay_spatial",
+        "dataset_assay_singlecell"
       ],
       toState: [
         "output_sc",

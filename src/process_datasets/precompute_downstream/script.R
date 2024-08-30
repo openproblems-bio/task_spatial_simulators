@@ -6,9 +6,9 @@ requireNamespace("spots", quietly = TRUE)
 ## VIASH START
 par <- list(
   # inputs
-  input_sp = "resources_test/datasets/MOBNEW/temp_dataset_sp_part2.h5ad",
+  input_sp = "resources_test/spatialsimbench_mobnew/temp_dataset_sp_part2.h5ad",
   # outputs
-  output_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad"
+  output_sp = "resources_test/spatialsimbench_mobnew/MOBNEW.rds"
 )
 meta <- list(
   resources_dir = "src/helpers"

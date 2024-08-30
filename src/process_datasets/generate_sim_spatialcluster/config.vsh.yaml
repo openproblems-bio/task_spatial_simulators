@@ -4,16 +4,14 @@ description: generate spatial cluster of simulated dataset before run metrics fo
 argument_groups:
   - name: Inputs
     arguments:
-      - type: file
-        name: --input_sp
+      - name: --input_sp
         description: Raw spatial dataset
-        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
         required: true
-      - type: file
-        name: --input_sp_sim
-        description: similated spatial dataset
-        example: resources_test/datasets/MOBNEW/simulated_dataset.h5ad
+        __merge__: /src/api/file_dataset_sp.yaml
+      - name: --input_sp_sim
+        description: simulated spatial dataset
         required: true
+        __merge__: /src/api/file_simulated_dataset.yaml
 
   - name: Outputs
     arguments:
@@ -30,8 +28,8 @@ resources:
   - path: /src/helpers/utils.R
 
 test_resources:
-  - path: /resources_test/datasets/MOBNEW
-    dest: resources_test/datasets/MOBNEW
+  - path: /resources_test/spatialsimbench_mobnew
+    dest: resources_test/spatialsimbench_mobnew
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
 

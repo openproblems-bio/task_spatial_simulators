@@ -23,7 +23,7 @@ nextflow run . \
   -resume \
   -c common/nextflow_helpers/labels_ci.config \
   --id test \
-  --input_spatial_dataset resources_test/datasets/MOBNEW/dataset_sp.h5ad \
-  --input_singlecell_dataset resources_test/datasets/MOBNEW/dataset_sc.h5ad \
+  --input_spatial_dataset resources_test/spatialsimbench_mobnew/MOBNEW.rds \
+  --input_singlecell_dataset resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds \
   --publish_dir $OUTPUT_DIR \
   --output_state "state.yaml"
