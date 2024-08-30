@@ -56,11 +56,28 @@ argument_groups:
         description: Link to the original source of the dataset.
         required: false
       - type: string
+        name: --dataset_url_spatial
+        description: Link to the original source of the dataset.
+        required: false
+      - type: string
+        name: --dataset_url_singlecell
+        description: Link to the original source of the dataset.
+        required: false
+      - type: string
         name: --dataset_reference
         description: A doi for the dataset.
         example: 10.1234/s1234-5678-9012-3
         required: false
-        multiple: true
+      - type: string
+        name: --dataset_reference_spatial
+        description: A doi for the dataset.
+        example: 10.1234/s1234-5678-9012-3
+        required: false
+      - type: string
+        name: --dataset_reference_singlecell
+        description: A doi for the dataset.
+        example: 10.1234/s1234-5678-9012-3
+        required: false
       - type: string
         name: --dataset_summary
         description: Short description of the dataset.
@@ -91,6 +108,7 @@ argument_groups:
         required: true
         info:
           test_default: Chromium
+
 test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py

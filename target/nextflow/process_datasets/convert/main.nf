@@ -2843,7 +2843,7 @@ meta = [
           "name" : "--output_sc",
           "label" : "Single-Cell Dataset",
           "summary" : "An unprocessed single-cell dataset as output by a dataset loader.",
-          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
+          "description" : "Processed single-cell dataset",
           "info" : {
             "slots" : {
               "layers" : [
@@ -2933,6 +2933,9 @@ meta = [
           "example" : [
             "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
           ],
+          "default" : [
+            "$id/output_sc.h5ad"
+          ],
           "must_exist" : true,
           "create_parent" : true,
           "required" : true,
@@ -2945,7 +2948,7 @@ meta = [
           "name" : "--output_sp",
           "label" : "Spatial Dataset",
           "summary" : "An unprocessed spatial dataset as output by a dataset loader.",
-          "description" : "This dataset contains raw counts and metadata as output by a dataset loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n",
+          "description" : "Processed spatial dataset",
           "info" : {
             "slots" : {
               "layers" : [
@@ -3060,6 +3063,9 @@ meta = [
           "example" : [
             "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
           ],
+          "default" : [
+            "$id/output_sp.h5ad"
+          ],
           "must_exist" : true,
           "create_parent" : true,
           "required" : true,
@@ -3108,6 +3114,24 @@ meta = [
         },
         {
           "type" : "string",
+          "name" : "--dataset_url_spatial",
+          "description" : "Link to the original source of the dataset.",
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_url_singlecell",
+          "description" : "Link to the original source of the dataset.",
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
           "name" : "--dataset_reference",
           "description" : "A doi for the dataset.",
           "example" : [
@@ -3115,7 +3139,31 @@ meta = [
           ],
           "required" : false,
           "direction" : "input",
-          "multiple" : true,
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_reference_spatial",
+          "description" : "A doi for the dataset.",
+          "example" : [
+            "10.1234/s1234-5678-9012-3"
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_reference_singlecell",
+          "description" : "A doi for the dataset.",
+          "example" : [
+            "10.1234/s1234-5678-9012-3"
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
           "multiple_sep" : ";"
         },
         {
@@ -3146,6 +3194,9 @@ meta = [
           "type" : "string",
           "name" : "--dataset_organism",
           "description" : "Organism from which the dataset was derived.",
+          "info" : {
+            "test_default" : "mus_musculus"
+          },
           "required" : true,
           "direction" : "input",
           "multiple" : false,
@@ -3188,16 +3239,24 @@ meta = [
   "description" : "Transform the figshare rds into an HDF5-backed AnnData file.",
   "test_resources" : [
     {
-      "type" : "file",
-      "path" : "/resources_test/spatialsimbench_mobnew",
-      "dest" : "resources_test/spatialsimbench_mobnew"
-    },
-    {
       "type" : "python_script",
       "path" : "/common/component_tests/run_and_check_output.py",
       "is_executable" : true
+    },
+    {
+      "type" : "file",
+      "path" : "/resources_test/spatialsimbench_mobnew",
+      "dest" : "resources_test/spatialsimbench_mobnew"
     }
   ],
+  "info" : {
+    "type" : "process_dataset",
+    "type_info" : {
+      "label" : "Process Dataset",
+      "summary" : "Preprocessing of spatial transcriptomics and single-cell transcriptomics datasets.",
+      "description" : "A component for preprocessing spatial transcriptomics and single-cell transcriptomics for\nuse in the spatial simulator benchmark.\n"
+    }
+  },
   "status" : "enabled",
   "repositories" : [
     {
@@ -3274,7 +3333,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "cc6e2ff4e28059e88477009286cc8ee15d5175ce",
+    "git_commit" : "f56d59b2f247dda8fc4a468c361ab32293cd2129",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3405,7 +3464,11 @@ par <- list(
   "dataset_id" = $( if [ ! -z ${VIASH_PAR_DATASET_ID+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ID" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_name" = $( if [ ! -z ${VIASH_PAR_DATASET_NAME+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_NAME" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_url" = $( if [ ! -z ${VIASH_PAR_DATASET_URL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_reference" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE+x} ]; then echo -n "strsplit('"; echo -n "$VIASH_PAR_DATASET_REFERENCE" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "', split = ';')[[1]]"; else echo NULL; fi ),
+  "dataset_url_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_URL_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_url_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_URL_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_reference" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_reference_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_reference_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_summary" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_description" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
@@ -3458,12 +3521,8 @@ uns <- list(
   dataset_id = par\\$dataset_id,
   dataset_name = par\\$dataset_name,
   dataset_description = par\\$dataset_description,
-  dataset_url = par\\$dataset_url,
-  dataset_reference = par\\$dataset_reference,
   dataset_summary = par\\$dataset_summary,
-  dataset_organism = par\\$dataset_organism,
-  dataset_assay_spatial = par\\$dataset_assay_spatial,
-  dataset_assay_singlecell = par\\$dataset_assay_singlecell
+  dataset_organism = par\\$dataset_organism
 )
 
 cat("Transforming single cell into AnnData\\\\n")
@@ -3482,7 +3541,14 @@ output_sc <- anndata::AnnData(
     feature_id = rownames(input_sc),
     feature_name = rownames(input_sc)
   ),
-  uns = uns
+  uns = c(
+    uns,
+    list(
+      dataset_url = par\\$dataset_url_singlecell %||% par\\$dataset_url,
+      dataset_reference = par\\$dataset_reference_singlecell %||% par\\$dataset_reference,
+      dataset_assay = par\\$dataset_assay_singlecell
+    )
+  )
 )
 
 cat("Transforming spatial into AnnData\\\\n")
@@ -3508,7 +3574,14 @@ output_sp <- anndata::AnnData(
   obsm = list(
     celltype_proportions = celltype_proportions
   ),
-  uns = uns
+  uns = c(
+    uns,
+    list(
+      dataset_url = par\\$dataset_url_spatial %||% par\\$dataset_url,
+      dataset_reference = par\\$dataset_reference_spatial %||% par\\$dataset_reference,
+      dataset_assay = par\\$dataset_assay_spatial
+    )
+  )
 )
 
 cat("Write output files\\\\n")

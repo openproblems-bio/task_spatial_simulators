@@ -3114,6 +3114,24 @@ meta = [
         },
         {
           "type" : "string",
+          "name" : "--dataset_url_spatial",
+          "description" : "Link to the original source of the dataset.",
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_url_singlecell",
+          "description" : "Link to the original source of the dataset.",
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
           "name" : "--dataset_reference",
           "description" : "A doi for the dataset.",
           "example" : [
@@ -3121,7 +3139,31 @@ meta = [
           ],
           "required" : false,
           "direction" : "input",
-          "multiple" : true,
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_reference_spatial",
+          "description" : "A doi for the dataset.",
+          "example" : [
+            "10.1234/s1234-5678-9012-3"
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_reference_singlecell",
+          "description" : "A doi for the dataset.",
+          "example" : [
+            "10.1234/s1234-5678-9012-3"
+          ],
+          "required" : false,
+          "direction" : "input",
+          "multiple" : false,
           "multiple_sep" : ";"
         },
         {
@@ -3315,7 +3357,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "cc6e2ff4e28059e88477009286cc8ee15d5175ce",
+    "git_commit" : "f56d59b2f247dda8fc4a468c361ab32293cd2129",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
