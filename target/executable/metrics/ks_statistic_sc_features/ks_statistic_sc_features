@@ -488,9 +488,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("xuranw/MuSiC", "YingMa0107/CARD", "SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2024-08-30T12:47:12Z"
+LABEL org.opencontainers.image.created="2024-08-30T13:21:06Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="f56d59b2f247dda8fc4a468c361ab32293cd2129"
+LABEL org.opencontainers.image.revision="c4c630ca03deb67383c877b92c1bbe3c4ec1f30f"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
