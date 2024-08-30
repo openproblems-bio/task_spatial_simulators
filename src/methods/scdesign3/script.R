@@ -3,7 +3,7 @@ suppressMessages(library(scDesign3, quietly = TRUE))
 
 ## VIASH START
 par <- list(
-  input = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  input = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
   base = "domain",
   output = "simulated_dataset.h5ad",
   family = "nb",

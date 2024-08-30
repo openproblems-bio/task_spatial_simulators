@@ -13,12 +13,12 @@ argument_groups:
       - type: file
         name: --input_sc
         description: Raw single-cell dataset
-        example: resources_test/datasets_raw/MOBNEW/dataset_sc.rds
+        example: resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds
         required: true
       - type: file
         name: --input_sp
         description: Raw spatial dataset
-        example: resources_test/datasets_raw/MOBNEW/dataset_sp.rds
+        example: resources_test/spatialsimbench_mobnew/MOBNEW.rds
         required: true
 
   - name: Outputs
@@ -79,8 +79,20 @@ argument_groups:
         required: true
         info:
           test_default: mus_musculus
+      - type: string
+        name: --dataset_assay_spatial
+        description: "Assay used for spatial data."
+        required: true
+        info:
+          test_default: Visium
+      - type: string
+        name: --dataset_assay_singlecell
+        description: "Assay used for single-cell data."
+        required: true
+        info:
+          test_default: Chromium
 test_resources:
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
-  - path: /resources_test/datasets
-    dest: resources_test/datasets
+  - path: /resources_test/spatialsimbench_mobnew
+    dest: resources_test/spatialsimbench_mobnew

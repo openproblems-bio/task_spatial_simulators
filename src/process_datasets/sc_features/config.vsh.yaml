@@ -4,11 +4,10 @@ description: Add scFeatures in adata
 argument_groups:
   - name: Inputs
     arguments:
-      - type: file
-        name: --input_sp
+      - name: --input_sp
         description: Raw spatial dataset
-        example: resources_test/datasets/MOBNEW/dataset_sp.h5ad
         required: true
+        __merge__: /src/api/file_dataset_sc.yaml
 
   - name: Outputs
     arguments:
@@ -24,8 +23,8 @@ resources:
     path: script.R
 
 test_resources:
-  - path: /resources_test/datasets/MOBNEW
-    dest: resources_test/datasets/MOBNEW
+  - path: /resources_test/spatialsimbench_mobnew
+    dest: resources_test/spatialsimbench_mobnew
   - type: python_script
     path: /common/component_tests/run_and_check_output.py
 

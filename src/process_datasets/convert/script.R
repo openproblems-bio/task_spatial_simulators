@@ -7,8 +7,8 @@ par <- list(
   input_sp = "resources_test/datasets_raw/MOBNEW/dataset_sp.rds",
 
   # outputs
-  output_sc = "resources_test/datasets/MOBNEW/dataset_sc.h5ad",
-  output_sp = "resources_test/datasets/MOBNEW/dataset_sp.h5ad",
+  output_sc = "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds",
+  output_sp = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
 
   # dataset metadata
   dataset_id = "MOBNEW",
@@ -17,7 +17,9 @@ par <- list(
   dataset_url = "...",
   dataset_reference = "...",
   dataset_summary = "...",
-  dataset_organism = "..."
+  dataset_organism = "...",
+  dataset_assay_spatial = "...",
+  dataset_assay_singlecell = "..."
 )
 ## VIASH END
 
@@ -30,6 +32,19 @@ print(input_sc)
 
 cat("Spatial dataset:\n")
 print(input_sp)
+
+cat("Construct uns\n")
+uns <- list(
+  dataset_id = par$dataset_id,
+  dataset_name = par$dataset_name,
+  dataset_description = par$dataset_description,
+  dataset_url = par$dataset_url,
+  dataset_reference = par$dataset_reference,
+  dataset_summary = par$dataset_summary,
+  dataset_organism = par$dataset_organism,
+  dataset_assay_spatial = par$dataset_assay_spatial,
+  dataset_assay_singlecell = par$dataset_assay_singlecell
+)
 
 cat("Transforming single cell into AnnData\n")
 output_sc <- anndata::AnnData(
@@ -47,15 +62,7 @@ output_sc <- anndata::AnnData(
     feature_id = rownames(input_sc),
     feature_name = rownames(input_sc)
   ),
-  uns = list(
-    dataset_id = par$dataset_id,
-    dataset_name = par$dataset_name,
-    dataset_description = par$dataset_description,
-    dataset_url = par$dataset_url,
-    dataset_reference = par$dataset_reference,
-    dataset_summary = par$dataset_summary,
-    dataset_organism = par$dataset_organism
-  )
+  uns = uns
 )
 
 cat("Transforming spatial into AnnData\n")
@@ -81,15 +88,7 @@ output_sp <- anndata::AnnData(
   obsm = list(
     celltype_proportions = celltype_proportions
   ),
-  uns = list(
-    dataset_id = par$dataset_id,
-    dataset_name = par$dataset_name,
-    dataset_description = par$dataset_description,
-    dataset_url = par$dataset_url,
-    dataset_reference = par$dataset_reference,
-    dataset_summary = par$dataset_summary,
-    dataset_organism = par$dataset_organism
-  )
+  uns = uns
 )
 
 cat("Write output files\n")

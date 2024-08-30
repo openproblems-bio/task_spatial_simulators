@@ -25,7 +25,9 @@ workflow run_wf {
         "dataset_reference",
         "dataset_summary",
         "dataset_description",
-        "dataset_organism"
+        "dataset_organism",
+        "dataset_assay_spatial",
+        "dataset_assay_singlecell"
       ],
       toState: [
         "output_sc",
