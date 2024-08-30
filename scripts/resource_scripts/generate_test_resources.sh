@@ -23,6 +23,7 @@ nextflow run . \
   --dataset_description "..." \
   --dataset_summary "..." \
   --dataset_reference "..." \
+  --dataset_url "..." \
   --dataset_organism "mus_musculus" \
   --dataset_assay_spatial Visium \
   --dataset_assay_singlecell Chromium \
