@@ -7,7 +7,7 @@ argument_groups:
       - name: --input_sp
         description: Raw spatial dataset
         required: true
-        __merge__: /src/api/file_dataset_sc.yaml
+        __merge__: /src/api/file_dataset_sp.yaml
 
   - name: Outputs
     arguments:

@@ -1,12 +1,14 @@
+requireNamespace("anndata", quietly = TRUE)
+requireNamespace("scFeatures", quietly = TRUE)
+
 ## VIASH START
 par <- list(
   # inputs
-  input_sp = "resources_test/spatialsimbench_mobnew/temp_dataset_sp_part1.h5ad",
+  input_sp = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
   # outputs
-  output_sp = "resources_test/spatialsimbench_mobnew/temp_dataset_sp_part2.h5ad"
+  output_sp = "output.h5ad"
 )
 ## VIASH END
-
 
 cat("Read input files\n")
 input_sp <- anndata::read_h5ad(par$input_sp)
@@ -26,10 +28,7 @@ cat("Run scFeatures\n")
 scfeatures_result <- scFeatures::scFeatures(
   data = Matrix::t(input_sp$layers[["logcounts"]]),
   sample = rep("sample1", input_sp$n_obs),
-  spatialCoords = list(
-    input_sp$obs$row,
-    input_sp$obs$col
-  ),
+  spatialCoords = input_sp$obs[, c("row", "col")],
   feature_types = c("L_stats", "celltype_interaction", "nn_correlation", "morans_I"),
   type = "spatial_t",
   species = species,
