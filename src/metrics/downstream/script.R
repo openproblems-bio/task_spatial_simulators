@@ -55,10 +55,10 @@ sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
 #                            save.chain=TRUE)
 # reclassify the clustering result
 real_cluster <- input_real_sp$obs[,c("spatial_cluster")]
-# sim_cluster <- sim_sce$spatial.cluster
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 location <- colnames(counts(sim_sce))
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
+
 # ART and NMI
 clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
 clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)

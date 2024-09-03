@@ -3189,7 +3189,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/zinbwave",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
+    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3374,9 +3374,11 @@ if (par\\$base != "domain") {
   stop("ONLY domain base")
 }
 
-multicoreParam <- MulticoreParam(workers = 8)
+cpus <- if (is.null(meta\\$cpus)) 2L else meta\\$cpus
 
-X = model.matrix(~spatial_cluster, data=colData(sce_ordered))
+multicoreParam <- MulticoreParam(workers = cpus)
+
+X <- model.matrix(~spatial_cluster, data=colData(sce_ordered))
 params <- splatter::zinbEstimate(as.matrix(counts(sce_ordered)), design.samples = X, BPPARAM = multicoreParam)
 simulated_result <- splatter::zinbSimulate(params)
 

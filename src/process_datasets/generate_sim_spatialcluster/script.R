@@ -27,7 +27,7 @@ cat("add spatial cluster in simulated dataset:\n")
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 
 # need reclassify again
-real_cluster <- input_real_sp$obs[,c("spatial_cluster")]
+real_cluster <- input_real_sp$obs[, c("spatial_cluster")]
 location <- colnames(SingleCellExperiment::counts(sim_sce))
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
 

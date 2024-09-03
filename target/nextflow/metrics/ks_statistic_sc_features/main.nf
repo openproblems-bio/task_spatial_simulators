@@ -3381,7 +3381,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
+    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3587,23 +3587,23 @@ sim_log_count <- SummarizedExperiment::assay(sim_sce, "logcounts")
 # build cell type deconvolution in simulated data
 sim_prob_matrix <- CARD_processing(input_real_sp, input_sc)
 
-feat_types <- c("L_stats","celltype_interaction","nn_correlation","morans_I")
+feat_types <- c("L_stats", "celltype_interaction", "nn_correlation", "morans_I")
 
 real_scfeatures_result <- scFeatures::scFeatures(real_log_count,
-                                sample = rep("sample1", ncol(real_log_count)),
-                                spatialCoords = list(SingleCellExperiment::colData(real_sce)\\$row,SingleCellExperiment::colData(real_sce)\\$col),
-                                feature_types = feat_types,
-                                type = "spatial_t",
-                                species = sc_species,
-                                spotProbability =  t(real_prob_matrix))
+  sample = rep("sample1", ncol(real_log_count)),
+  spatialCoords = list(SingleCellExperiment::colData(real_sce)\\$row,SingleCellExperiment::colData(real_sce)\\$col),
+  feature_types = feat_types,
+  type = "spatial_t",
+  species = sc_species,
+  spotProbability =  t(real_prob_matrix))
 
 sim_scfeatures_result <- scFeatures::scFeatures(sim_log_count,
-                                sample = rep("sample1", ncol(sim_log_count)),
-                                spatialCoords = list(SingleCellExperiment::colData(sim_sce)\\$row,SingleCellExperiment::colData(sim_sce)\\$col),
-                                feature_types = feat_types,
-                                type = "spatial_t",
-                                species = sc_species,
-                                spotProbability =  t(sim_prob_matrix))
+  sample = rep("sample1", ncol(sim_log_count)),
+  spatialCoords = list(SingleCellExperiment::colData(sim_sce)\\$row,SingleCellExperiment::colData(sim_sce)\\$col),
+  feature_types = feat_types,
+  type = "spatial_t",
+  species = sc_species,
+  spotProbability =  t(sim_prob_matrix))
 
 ks_statistic_L_stats <- ks::kde.test(x1 = as.numeric(real_scfeatures_result\\$L_stats), x2 = as.numeric(sim_scfeatures_result\\$L_stats))
 ks_statistic_celltype_interaction <- ks::kde.test(x1 = as.numeric(real_scfeatures_result\\$celltype_interaction), x2 = as.numeric(sim_scfeatures_result\\$celltype_interaction))

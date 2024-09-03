@@ -3264,22 +3264,6 @@ meta = [
   "status" : "enabled",
   "dependencies" : [
     {
-      "name" : "common/check_dataset_schema",
-      "repository" : {
-        "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
-      }
-    },
-    {
-      "name" : "common/extract_metadata",
-      "repository" : {
-        "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
-      }
-    },
-    {
       "name" : "process_datasets/convert",
       "repository" : {
         "type" : "local"
@@ -3364,7 +3348,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
+    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3480,8 +3464,6 @@ meta = [
 
 // resolve dependencies dependencies (if any)
 meta["root_dir"] = getRootDir()
-include { check_dataset_schema } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/check_dataset_schema/main.nf"
-include { extract_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/extract_metadata/main.nf"
 include { convert } from "${meta.resources_dir}/../../../nextflow/process_datasets/convert/main.nf"
 include { sc_features } from "${meta.resources_dir}/../../../nextflow/process_datasets/sc_features/main.nf"
 include { precompute_downstream } from "${meta.resources_dir}/../../../nextflow/process_datasets/precompute_downstream/main.nf"

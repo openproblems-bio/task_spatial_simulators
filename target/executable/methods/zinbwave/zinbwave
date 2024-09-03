@@ -483,9 +483,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2024-09-03T05:31:37Z"
+LABEL org.opencontainers.image.created="2024-09-03T05:41:36Z"
 LABEL org.opencontainers.image.source="https://github.com/drisso/zinbwave"
-LABEL org.opencontainers.image.revision="e362cd138d9e5b26bcd4db841a26032235da7fd6"
+LABEL org.opencontainers.image.revision="aa8258bcfe58a21ff9fffe8eef2beee55c7f487f"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1101,9 +1101,11 @@ if (par\$base != "domain") {
   stop("ONLY domain base")
 }
 
-multicoreParam <- MulticoreParam(workers = 8)
+cpus <- if (is.null(meta\$cpus)) 2L else meta\$cpus
 
-X = model.matrix(~spatial_cluster, data=colData(sce_ordered))
+multicoreParam <- MulticoreParam(workers = cpus)
+
+X <- model.matrix(~spatial_cluster, data=colData(sce_ordered))
 params <- splatter::zinbEstimate(as.matrix(counts(sce_ordered)), design.samples = X, BPPARAM = multicoreParam)
 simulated_result <- splatter::zinbSimulate(params)
 

@@ -41,7 +41,7 @@ workflow run_wf {
     }
     
     // extract the dataset metadata
-    | extract_metadata.run(
+    | extract_uns_metadata.run(
       fromState: [input: "input_spatial_dataset"],
       toState: { id, output, state ->
         state + [
@@ -151,7 +151,7 @@ workflow run_wf {
       def metric_configs_file = tempFile("metric_configs.yaml")
       metric_configs_file.write(metric_configs_yaml_blob)
 
-      def task_info_file = meta.resources_dir.resolve("task_info.yaml")
+      def task_info_file = meta.resources_dir.resolve("_viash.yaml")
 
       // store the scores in a file
       def score_uns = states.collect{it.score_uns}

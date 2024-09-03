@@ -3456,7 +3456,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
+    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3664,10 +3664,10 @@ sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
 #                            save.chain=TRUE)
 # reclassify the clustering result
 real_cluster <- input_real_sp\\$obs[,c("spatial_cluster")]
-# sim_cluster <- sim_sce\\$spatial.cluster
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 location <- colnames(counts(sim_sce))
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
+
 # ART and NMI
 clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
 clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)

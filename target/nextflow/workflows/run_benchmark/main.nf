@@ -3123,19 +3123,12 @@ meta = [
   "status" : "enabled",
   "dependencies" : [
     {
-      "name" : "common/check_dataset_schema",
+      "name" : "h5ad/extract_uns_metadata",
       "repository" : {
         "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
-      }
-    },
-    {
-      "name" : "common/extract_metadata",
-      "repository" : {
-        "type" : "github",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/add_common_components",
+        "path" : "viash/core"
       }
     },
     {
@@ -3277,7 +3270,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
+    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3393,8 +3386,7 @@ meta = [
 
 // resolve dependencies dependencies (if any)
 meta["root_dir"] = getRootDir()
-include { check_dataset_schema } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/check_dataset_schema/main.nf"
-include { extract_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems-v2/main_build/nextflow/common/extract_metadata/main.nf"
+include { extract_uns_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/core/build/add_common_components/nextflow/h5ad/extract_uns_metadata/main.nf"
 include { scdesign2 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign2/main.nf"
 include { scdesign3 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign3/main.nf"
 include { sparsim } from "${meta.resources_dir}/../../../nextflow/methods/sparsim/main.nf"
@@ -3453,7 +3445,7 @@ workflow run_wf {
     }
     
     // extract the dataset metadata
-    | extract_metadata.run(
+    | extract_uns_metadata.run(
       fromState: [input: "input_spatial_dataset"],
       toState: { id, output, state ->
         state + [
@@ -3563,7 +3555,7 @@ workflow run_wf {
       def metric_configs_file = tempFile("metric_configs.yaml")
       metric_configs_file.write(metric_configs_yaml_blob)
 
-      def task_info_file = meta.resources_dir.resolve("task_info.yaml")
+      def task_info_file = meta.resources_dir.resolve("_viash.yaml")
 
       // store the scores in a file
       def score_uns = states.collect{it.score_uns}

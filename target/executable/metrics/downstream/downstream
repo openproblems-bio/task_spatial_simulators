@@ -486,9 +486,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("xzhoulab/SPARK", "YingMa0107/CARD", "xuranw/MuSiC", "stevexniu/spots"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics downstream"
-LABEL org.opencontainers.image.created="2024-09-03T05:31:37Z"
+LABEL org.opencontainers.image.created="2024-09-03T05:41:36Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="e362cd138d9e5b26bcd4db841a26032235da7fd6"
+LABEL org.opencontainers.image.revision="aa8258bcfe58a21ff9fffe8eef2beee55c7f487f"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1148,10 +1148,10 @@ sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
 #                            save.chain=TRUE)
 # reclassify the clustering result
 real_cluster <- input_real_sp\$obs[,c("spatial_cluster")]
-# sim_cluster <- sim_sce\$spatial.cluster
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 location <- colnames(counts(sim_sce))
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
+
 # ART and NMI
 clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
 clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)
