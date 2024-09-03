@@ -2,9 +2,11 @@ __merge__: ../../api/comp_metric.yaml
 
 name: ks_statistic_sc_features
 
+links:
+  documentation: https://cran.r-project.org/web/packages/ks/ks.pdf
+  repository: https://cran.r-project.org/web/packages/ks/
+
 info:
-  documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-  repository_url: https://cran.r-project.org/web/packages/ks/
   metrics:
     - name: ks_statistic_L_stats
       label: L statistics

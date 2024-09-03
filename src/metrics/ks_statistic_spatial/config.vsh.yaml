@@ -2,10 +2,11 @@ __merge__: ../../api/comp_metric.yaml
 
 name: ks_statistic_spatial
 
-info:
-  documentation_url: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html
-  repository_url: https://github.com/scipy/scipy/
+links:
+  documentation: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html
+  repository: https://github.com/scipy/scipy/
 
+info:
   metrics:
     - name: ks_statistic_transition_matrix
       label: Transition matrix

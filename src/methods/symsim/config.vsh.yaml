@@ -8,10 +8,9 @@ description: |
   and technical variation from measurement noise and bias.
 references:
   doi: 10.1038/s41467-019-10500-w
-
-info:
-  documentation_url: https://github.com/YosefLab/SymSim/blob/master/vignettes/SymSimTutorial.Rmd
-  repository_url: https://github.com/YosefLab/SymSim
+links:
+  documentation: https://github.com/YosefLab/SymSim/blob/master/vignettes/SymSimTutorial.Rmd
+  repository: https://github.com/YosefLab/SymSim
 
 resources:
   - type: r_script

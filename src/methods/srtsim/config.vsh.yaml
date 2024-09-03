@@ -8,10 +8,9 @@ description: |
   preserve spatial expression patterns, enabling evaluation of SRT method performance using synthetic data. 
 references:
   doi: 10.1186/s13059-023-02879-z
-
-info:
-  documentation_url: https://xzhoulab.github.io/SRTsim
-  repository_url: https://github.com/xzhoulab/srtsim
+links:
+  documentation: https://xzhoulab.github.io/SRTsim
+  repository: https://github.com/xzhoulab/srtsim
 
 resources:
   - type: r_script
