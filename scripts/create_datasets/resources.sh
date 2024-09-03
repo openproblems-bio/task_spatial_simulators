@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# download and process all datasets from figshare
-# https://figshare.com/articles/dataset/SpatialSimBench_dataset/26054188
+CACHE_DIR="$HOME/.cache/openproblems/figshare/SpatialSimBench_dataset/26054188"
+DATASET_ID="spatialsimbench_mobnew"
+OUTPUT_DIR="resources_test/$DATASET_ID"
 
-cat > /tmp/params.yaml <<'EOF'
+if [[ ! -f "$CACHE_DIR/PDAC.rds" ]]; then
+  echo "Run 'scripts/create_datasets/cache.sh' first!"
+  exit 1
+fi
+
+cat > /tmp/params.yaml <<EOF
 param_list:
   - id: breast
-    input_sc: resources/datasets_raw/BREAST_sc.rds
-    input_sp: resources/datasets_raw/BREAST.rds
+    input_sc: "$CACHE_DIR/BREAST_sc.rds"
+    input_sp: "$CACHE_DIR/BREAST.rds"
     dataset_id: breast
     dataset_name: Breast
     dataset_url_spatial: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176078
@@ -19,12 +25,12 @@ param_list:
     dataset_description_singlecell: "This study presents a single cell analysis of human breast cancers."
     dataset_reference_singlecell: 10.1038/s41588-021-00911-1
     dataset_organism: "homo_sapiens"
-    dataset_assay_spatial: Visium # EFO:0010961
+    dataset_assay_spatial: Visium
     dataset_assay_singlecell: Chromium
   
   - id: osteosarcoma
-    input_sc: resources/datasets_raw/HOSTEOSARCOMA_sc.rds
-    input_sp: resources/datasets_raw/HOSTEOSARCOMA.rds
+    input_sc: "$CACHE_DIR/HOSTEOSARCOMA_sc.rds"
+    input_sp: "$CACHE_DIR/HOSTEOSARCOMA.rds"
     dataset_id: osteosarcoma
     dataset_name: Osteosarcoma
     dataset_url_spatial: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176078 
@@ -40,8 +46,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: prostate
-    input_sc: resources/datasets_raw/HPROSTATE_sc.rds
-    input_sp: resources/datasets_raw/HPROSTATE.rds
+    input_sc: "$CACHE_DIR/HPROSTATE_sc.rds"
+    input_sp: "$CACHE_DIR/HPROSTATE.rds"
     dataset_id: prostate
     dataset_name: Prostate
     dataset_url_spatial: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE159697
@@ -57,8 +63,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: brain
-    input_sc: resources/datasets_raw/MBRAIN_sc.rds
-    input_sp: resources/datasets_raw/BRAIN.rds
+    input_sc: "$CACHE_DIR/MBRAIN_sc.rds"
+    input_sp: "$CACHE_DIR/MBRAIN.rds"
     dataset_id: brain
     dataset_name: Brain
     dataset_url_spatial: https://github.com/BayraktarLab/cell2location
@@ -74,8 +80,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: fibrosarcoma
-    input_sc: resources/datasets_raw/MCATUMOR_sc.rds
-    input_sp: resources/datasets_raw/MCATUMOR.rds
+    input_sc: "$CACHE_DIR/MCATUMOR_sc.rds"
+    input_sp: "$CACHE_DIR/MCATUMOR.rds"
     dataset_id: fibrosarcoma
     dataset_name: Fibrosarcoma
     dataset_url_spatial: https://github.com/romain-lopez/DestVI-reproducibility
@@ -91,8 +97,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: cortex
-    input_sc: resources/datasets_raw/MCORTEX_sc.rds
-    input_sp: resources/datasets_raw/MCORTEX.rds
+    input_sc: "$CACHE_DIR/MCORTEX_sc.rds"
+    input_sp: "$CACHE_DIR/MCORTEX.rds"
     dataset_id: cortex
     dataset_name: Cortex
     dataset_url_spatial: https://zenodo.org/records/2669683
@@ -108,8 +114,8 @@ param_list:
     dataset_assay_singlecell: Smart-seq
 
   - id: gastrulation
-    input_sc: resources/datasets_raw/MGASTRULA_sc.rds
-    input_sp: resources/datasets_raw/MGASTRULA.rds
+    input_sc: "$CACHE_DIR/MGASTRULA_sc.rds"
+    input_sp: "$CACHE_DIR/MGASTRULA.rds"
     dataset_id: gastrulation
     dataset_name: Gastrulation
     dataset_url_spatial: https://content.cruk.cam.ac.uk/jmlab/SpatialMouseAtlas2020/
@@ -125,8 +131,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: olfactorybulb
-    input_sc: resources/datasets_raw/MOBNEW_sc.rds
-    input_sp: resources/datasets_raw/MOBNEW.rds
+    input_sc: "$CACHE_DIR/MOBNEW_sc.rds"
+    input_sp: "$CACHE_DIR/MOBNEW.rds"
     dataset_id: olfactorybulb
     dataset_name: Olfactorybulb
     dataset_url_spatial: http://ww1.spatialtranscriptomicsresearch.org/?usid=24&utid=8672855942
@@ -142,8 +148,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: hindlimbmuscle
-    input_sc: resources/datasets_raw/MUSCLE_sc.rds
-    input_sp: resources/datasets_raw/MUSCLE.rds
+    input_sc: "$CACHE_DIR/MUSCLE_sc.rds"
+    input_sp: "$CACHE_DIR/MUSCLE.rds"
     dataset_id: hindlimbmuscle
     dataset_name: Hindlimbmuscle
     dataset_url_spatial: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161318
@@ -159,8 +165,8 @@ param_list:
     dataset_assay_singlecell: Chromium
 
   - id: pdac
-    input_sc: resources/datasets_raw/PDAC_sc.rds
-    input_sp: resources/datasets_raw/PDAC.rds
+    input_sc: "$CACHE_DIR/PDAC_sc.rds"
+    input_sp: "$CACHE_DIR/PDAC.rds"
     dataset_id: pdac
     dataset_name: pancreatic ductal adenocarcinomas
     dataset_url_spatial: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE111672
@@ -175,13 +181,25 @@ param_list:
     dataset_assay_spatial: ST 
     dataset_assay_singlecell: Chromium
 
-publish_dir: "resources/datasets"
-output_sc: "$id/output_sc.h5ad"
-output_sp: "$id/output_sp.h5ad"
-output_state: "$id/state.yaml"
+output_sc: "\$id/output_sc.h5ad"
+output_sp: "\$id/output_sp.h5ad"
+output_state: "\$id/state.yaml"
+# publish_dir: "s3://openproblems-data/resources/task_spatial_simulators/datasets/"
+publish_dir: resources/task_spatial_simulators/datasets/
 EOF
 
+# tw launch https://github.com/openproblems-bio/task_spatial_simulators.git \
+#   --revision build/main \
+#   --pull-latest \
+#   --main-script target/nextflow/workflows/process_datasets/main.nf \
+#   --workspace 53907369739130 \
+#   --compute-env 6TeIFgV5OY4pJCk8I0bfOh \
+#   --params-file /tmp/params.yaml \
+#   --entry-name auto \
+#   --config common/nextflow_helpers/labels_tw.config \
+#   --labels task_spatial_simulators,process_datasets
+
 nextflow run . \
-  -main-script target/nextflow/process_datasets/convert/main.nf \
   -profile docker \
+  -main-script target/nextflow/workflows/process_datasets/main.nf \
   -params-file /tmp/params.yaml

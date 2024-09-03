@@ -5,7 +5,7 @@ DATASET_ID="spatialsimbench_mobnew"
 OUTPUT_DIR="resources_test/$DATASET_ID"
 
 if [[ ! -f "$CACHE_DIR/PDAC.rds" ]]; then
-  echo "Run 'scripts/resource_scripts/create_cache.sh' first!"
+  echo "Run 'scripts/create_datasets/cache.sh' first!"
   exit 1
 fi
 

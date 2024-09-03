@@ -3105,15 +3105,6 @@ meta = [
         },
         {
           "type" : "string",
-          "name" : "--dataset_url",
-          "description" : "Link to the original source of the dataset.",
-          "required" : false,
-          "direction" : "input",
-          "multiple" : false,
-          "multiple_sep" : ";"
-        },
-        {
-          "type" : "string",
           "name" : "--dataset_url_spatial",
           "description" : "Link to the original source of the dataset.",
           "required" : false,
@@ -3168,7 +3159,7 @@ meta = [
         },
         {
           "type" : "string",
-          "name" : "--dataset_summary",
+          "name" : "--dataset_summary_spatial",
           "description" : "Short description of the dataset.",
           "info" : {
             "test_default" : "MOBNEW"
@@ -3180,7 +3171,31 @@ meta = [
         },
         {
           "type" : "string",
-          "name" : "--dataset_description",
+          "name" : "--dataset_summary_singlecell",
+          "description" : "Short description of the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_description_spatial",
+          "description" : "Long description of the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_description_singlecell",
           "description" : "Long description of the dataset.",
           "info" : {
             "test_default" : "MOBNEW"
@@ -3348,7 +3363,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/process_datasets",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
+    "git_commit" : "9eae5a0ce613f7eac3c742c9a0917a71ba1edc14",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3493,10 +3508,14 @@ workflow run_wf {
         "input_sp",
         "dataset_id",
         "dataset_name",
-        "dataset_url",
-        "dataset_reference",
-        "dataset_summary",
-        "dataset_description",
+        "dataset_url_spatial",
+        "dataset_url_singlecell",
+        "dataset_reference_spatial",
+        "dataset_reference_singlecell",
+        "dataset_summary_spatial",
+        "dataset_summary_singlecell",
+        "dataset_description_spatial",
+        "dataset_description_singlecell",
         "dataset_organism",
         "dataset_assay_spatial",
         "dataset_assay_singlecell"

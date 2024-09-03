@@ -3105,15 +3105,6 @@ meta = [
         },
         {
           "type" : "string",
-          "name" : "--dataset_url",
-          "description" : "Link to the original source of the dataset.",
-          "required" : false,
-          "direction" : "input",
-          "multiple" : false,
-          "multiple_sep" : ";"
-        },
-        {
-          "type" : "string",
           "name" : "--dataset_url_spatial",
           "description" : "Link to the original source of the dataset.",
           "required" : false,
@@ -3168,7 +3159,7 @@ meta = [
         },
         {
           "type" : "string",
-          "name" : "--dataset_summary",
+          "name" : "--dataset_summary_spatial",
           "description" : "Short description of the dataset.",
           "info" : {
             "test_default" : "MOBNEW"
@@ -3180,7 +3171,31 @@ meta = [
         },
         {
           "type" : "string",
-          "name" : "--dataset_description",
+          "name" : "--dataset_summary_singlecell",
+          "description" : "Short description of the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_description_spatial",
+          "description" : "Long description of the dataset.",
+          "info" : {
+            "test_default" : "MOBNEW"
+          },
+          "required" : true,
+          "direction" : "input",
+          "multiple" : false,
+          "multiple_sep" : ";"
+        },
+        {
+          "type" : "string",
+          "name" : "--dataset_description_singlecell",
           "description" : "Long description of the dataset.",
           "info" : {
             "test_default" : "MOBNEW"
@@ -3340,7 +3355,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "aa8258bcfe58a21ff9fffe8eef2beee55c7f487f",
+    "git_commit" : "9eae5a0ce613f7eac3c742c9a0917a71ba1edc14",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3477,14 +3492,15 @@ par <- list(
   "output_sp" = $( if [ ! -z ${VIASH_PAR_OUTPUT_SP+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_OUTPUT_SP" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_id" = $( if [ ! -z ${VIASH_PAR_DATASET_ID+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ID" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_name" = $( if [ ! -z ${VIASH_PAR_DATASET_NAME+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_NAME" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_url" = $( if [ ! -z ${VIASH_PAR_DATASET_URL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_url_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_URL_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_url_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_URL_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_reference" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_reference_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_reference_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_summary" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_description" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_summary_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_summary_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_description_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_description_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_assay_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SPATIAL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_assay_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SINGLECELL" | sed "s#['\\\\]#\\\\\\\\&#g"; echo "'"; else echo NULL; fi )
@@ -3534,8 +3550,6 @@ cat("Construct uns\\\\n")
 uns <- list(
   dataset_id = par\\$dataset_id,
   dataset_name = par\\$dataset_name,
-  dataset_description = par\\$dataset_description,
-  dataset_summary = par\\$dataset_summary,
   dataset_organism = par\\$dataset_organism
 )
 
@@ -3558,8 +3572,10 @@ output_sc <- anndata::AnnData(
   uns = c(
     uns,
     list(
-      dataset_url = par\\$dataset_url_singlecell %||% par\\$dataset_url,
-      dataset_reference = par\\$dataset_reference_singlecell %||% par\\$dataset_reference,
+      dataset_summary = par\\$dataset_summary_singlecell,
+      dataset_description = par\\$dataset_description_singlecell,
+      dataset_url = par\\$dataset_url_singlecell,
+      dataset_reference = par\\$dataset_reference_singlecell,
       dataset_assay = par\\$dataset_assay_singlecell
     )
   )
@@ -3591,8 +3607,10 @@ output_sp <- anndata::AnnData(
   uns = c(
     uns,
     list(
-      dataset_url = par\\$dataset_url_spatial %||% par\\$dataset_url,
-      dataset_reference = par\\$dataset_reference_spatial %||% par\\$dataset_reference,
+      dataset_summary = par\\$dataset_summary_spatial,
+      dataset_description = par\\$dataset_description_spatial,
+      dataset_url = par\\$dataset_url_spatial,
+      dataset_reference = par\\$dataset_reference_spatial,
       dataset_assay = par\\$dataset_assay_spatial
     )
   )

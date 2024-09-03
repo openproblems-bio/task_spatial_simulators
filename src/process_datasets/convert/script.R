@@ -1,10 +1,11 @@
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 
 ## VIASH START
+base <- ".cache/openproblems/figshare/SpatialSimBench_dataset/26054188/PDAC"
 par <- list(
   # inputs
-  input_sc = "resources_test/datasets_raw/MOBNEW/dataset_sc.rds",
-  input_sp = "resources_test/datasets_raw/MOBNEW/dataset_sp.rds",
+  input_sc = paste0(base, "_sc.rds"),
+  input_sp = paste0(base, ".rds"),
 
   # outputs
   output_sc = "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds",
@@ -13,14 +14,14 @@ par <- list(
   # dataset metadata
   dataset_id = "MOBNEW",
   dataset_name = "MOBNEW",
-  dataset_description = "MOBNEW",
-  dataset_url = NULL,
+  dataset_description_spatial = "MOBNEW",
+  dataset_description_singlecell = "MOBNEW",
   dataset_url_spatial = "...",
   dataset_url_singlecell = "...",
-  dataset_reference = NULL,
   dataset_reference_singlecell = "...",
   dataset_reference_spatial = "...",
-  dataset_summary = "...",
+  dataset_summary_singlecell = "...",
+  dataset_summary_spatial = "...",
   dataset_organism = "...",
   dataset_assay_spatial = "...",
   dataset_assay_singlecell = "..."
@@ -41,8 +42,6 @@ cat("Construct uns\n")
 uns <- list(
   dataset_id = par$dataset_id,
   dataset_name = par$dataset_name,
-  dataset_description = par$dataset_description,
-  dataset_summary = par$dataset_summary,
   dataset_organism = par$dataset_organism
 )
 
@@ -65,8 +64,10 @@ output_sc <- anndata::AnnData(
   uns = c(
     uns,
     list(
-      dataset_url = par$dataset_url_singlecell %||% par$dataset_url,
-      dataset_reference = par$dataset_reference_singlecell %||% par$dataset_reference,
+      dataset_summary = par$dataset_summary_singlecell,
+      dataset_description = par$dataset_description_singlecell,
+      dataset_url = par$dataset_url_singlecell,
+      dataset_reference = par$dataset_reference_singlecell,
       dataset_assay = par$dataset_assay_singlecell
     )
   )
@@ -98,8 +99,10 @@ output_sp <- anndata::AnnData(
   uns = c(
     uns,
     list(
-      dataset_url = par$dataset_url_spatial %||% par$dataset_url,
-      dataset_reference = par$dataset_reference_spatial %||% par$dataset_reference,
+      dataset_summary = par$dataset_summary_spatial,
+      dataset_description = par$dataset_description_spatial,
+      dataset_url = par$dataset_url_spatial,
+      dataset_reference = par$dataset_reference_spatial,
       dataset_assay = par$dataset_assay_spatial
     )
   )

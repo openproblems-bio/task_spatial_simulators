@@ -210,10 +210,6 @@ function ViashHelp {
   echo "        type: string, required parameter"
   echo "        A human-readable name for the dataset."
   echo ""
-  echo "    --dataset_url"
-  echo "        type: string"
-  echo "        Link to the original source of the dataset."
-  echo ""
   echo "    --dataset_url_spatial"
   echo "        type: string"
   echo "        Link to the original source of the dataset."
@@ -237,11 +233,19 @@ function ViashHelp {
   echo "        example: 10.1234/s1234-5678-9012-3"
   echo "        A doi for the dataset."
   echo ""
-  echo "    --dataset_summary"
+  echo "    --dataset_summary_spatial"
   echo "        type: string, required parameter"
   echo "        Short description of the dataset."
   echo ""
-  echo "    --dataset_description"
+  echo "    --dataset_summary_singlecell"
+  echo "        type: string, required parameter"
+  echo "        Short description of the dataset."
+  echo ""
+  echo "    --dataset_description_spatial"
+  echo "        type: string, required parameter"
+  echo "        Long description of the dataset."
+  echo ""
+  echo "    --dataset_description_singlecell"
   echo "        type: string, required parameter"
   echo "        Long description of the dataset."
   echo ""
@@ -537,9 +541,9 @@ RUN Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.pa
   Rscript -e 'if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2024-09-03T05:41:37Z"
+LABEL org.opencontainers.image.created="2024-09-03T14:11:58Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="aa8258bcfe58a21ff9fffe8eef2beee55c7f487f"
+LABEL org.opencontainers.image.revision="9eae5a0ce613f7eac3c742c9a0917a71ba1edc14"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -745,17 +749,6 @@ while [[ $# -gt 0 ]]; do
             VIASH_PAR_DATASET_NAME=$(ViashRemoveFlags "$1")
             shift 1
             ;;
-        --dataset_url)
-            [ -n "$VIASH_PAR_DATASET_URL" ] && ViashError Bad arguments for option \'--dataset_url\': \'$VIASH_PAR_DATASET_URL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
-            VIASH_PAR_DATASET_URL="$2"
-            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_url. Use "--help" to get more information on the parameters. && exit 1
-            shift 2
-            ;;
-        --dataset_url=*)
-            [ -n "$VIASH_PAR_DATASET_URL" ] && ViashError Bad arguments for option \'--dataset_url=*\': \'$VIASH_PAR_DATASET_URL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
-            VIASH_PAR_DATASET_URL=$(ViashRemoveFlags "$1")
-            shift 1
-            ;;
         --dataset_url_spatial)
             [ -n "$VIASH_PAR_DATASET_URL_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_url_spatial\': \'$VIASH_PAR_DATASET_URL_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
             VIASH_PAR_DATASET_URL_SPATIAL="$2"
@@ -811,26 +804,48 @@ while [[ $# -gt 0 ]]; do
             VIASH_PAR_DATASET_REFERENCE_SINGLECELL=$(ViashRemoveFlags "$1")
             shift 1
             ;;
-        --dataset_summary)
-            [ -n "$VIASH_PAR_DATASET_SUMMARY" ] && ViashError Bad arguments for option \'--dataset_summary\': \'$VIASH_PAR_DATASET_SUMMARY\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
-            VIASH_PAR_DATASET_SUMMARY="$2"
-            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_summary. Use "--help" to get more information on the parameters. && exit 1
+        --dataset_summary_spatial)
+            [ -n "$VIASH_PAR_DATASET_SUMMARY_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_summary_spatial\': \'$VIASH_PAR_DATASET_SUMMARY_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_SUMMARY_SPATIAL="$2"
+            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_summary_spatial. Use "--help" to get more information on the parameters. && exit 1
             shift 2
             ;;
-        --dataset_summary=*)
-            [ -n "$VIASH_PAR_DATASET_SUMMARY" ] && ViashError Bad arguments for option \'--dataset_summary=*\': \'$VIASH_PAR_DATASET_SUMMARY\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
-            VIASH_PAR_DATASET_SUMMARY=$(ViashRemoveFlags "$1")
+        --dataset_summary_spatial=*)
+            [ -n "$VIASH_PAR_DATASET_SUMMARY_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_summary_spatial=*\': \'$VIASH_PAR_DATASET_SUMMARY_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_SUMMARY_SPATIAL=$(ViashRemoveFlags "$1")
             shift 1
             ;;
-        --dataset_description)
-            [ -n "$VIASH_PAR_DATASET_DESCRIPTION" ] && ViashError Bad arguments for option \'--dataset_description\': \'$VIASH_PAR_DATASET_DESCRIPTION\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
-            VIASH_PAR_DATASET_DESCRIPTION="$2"
-            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_description. Use "--help" to get more information on the parameters. && exit 1
+        --dataset_summary_singlecell)
+            [ -n "$VIASH_PAR_DATASET_SUMMARY_SINGLECELL" ] && ViashError Bad arguments for option \'--dataset_summary_singlecell\': \'$VIASH_PAR_DATASET_SUMMARY_SINGLECELL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_SUMMARY_SINGLECELL="$2"
+            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_summary_singlecell. Use "--help" to get more information on the parameters. && exit 1
             shift 2
             ;;
-        --dataset_description=*)
-            [ -n "$VIASH_PAR_DATASET_DESCRIPTION" ] && ViashError Bad arguments for option \'--dataset_description=*\': \'$VIASH_PAR_DATASET_DESCRIPTION\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
-            VIASH_PAR_DATASET_DESCRIPTION=$(ViashRemoveFlags "$1")
+        --dataset_summary_singlecell=*)
+            [ -n "$VIASH_PAR_DATASET_SUMMARY_SINGLECELL" ] && ViashError Bad arguments for option \'--dataset_summary_singlecell=*\': \'$VIASH_PAR_DATASET_SUMMARY_SINGLECELL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_SUMMARY_SINGLECELL=$(ViashRemoveFlags "$1")
+            shift 1
+            ;;
+        --dataset_description_spatial)
+            [ -n "$VIASH_PAR_DATASET_DESCRIPTION_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_description_spatial\': \'$VIASH_PAR_DATASET_DESCRIPTION_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_DESCRIPTION_SPATIAL="$2"
+            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_description_spatial. Use "--help" to get more information on the parameters. && exit 1
+            shift 2
+            ;;
+        --dataset_description_spatial=*)
+            [ -n "$VIASH_PAR_DATASET_DESCRIPTION_SPATIAL" ] && ViashError Bad arguments for option \'--dataset_description_spatial=*\': \'$VIASH_PAR_DATASET_DESCRIPTION_SPATIAL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_DESCRIPTION_SPATIAL=$(ViashRemoveFlags "$1")
+            shift 1
+            ;;
+        --dataset_description_singlecell)
+            [ -n "$VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL" ] && ViashError Bad arguments for option \'--dataset_description_singlecell\': \'$VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL="$2"
+            [ $# -lt 2 ] && ViashError Not enough arguments passed to --dataset_description_singlecell. Use "--help" to get more information on the parameters. && exit 1
+            shift 2
+            ;;
+        --dataset_description_singlecell=*)
+            [ -n "$VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL" ] && ViashError Bad arguments for option \'--dataset_description_singlecell=*\': \'$VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL\' \& \'$2\' - you should provide exactly one argument for this option. && exit 1
+            VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL=$(ViashRemoveFlags "$1")
             shift 1
             ;;
         --dataset_organism)
@@ -1060,12 +1075,20 @@ if [ -z ${VIASH_PAR_DATASET_NAME+x} ]; then
   ViashError '--dataset_name' is a required argument. Use "--help" to get more information on the parameters.
   exit 1
 fi
-if [ -z ${VIASH_PAR_DATASET_SUMMARY+x} ]; then
-  ViashError '--dataset_summary' is a required argument. Use "--help" to get more information on the parameters.
+if [ -z ${VIASH_PAR_DATASET_SUMMARY_SPATIAL+x} ]; then
+  ViashError '--dataset_summary_spatial' is a required argument. Use "--help" to get more information on the parameters.
   exit 1
 fi
-if [ -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then
-  ViashError '--dataset_description' is a required argument. Use "--help" to get more information on the parameters.
+if [ -z ${VIASH_PAR_DATASET_SUMMARY_SINGLECELL+x} ]; then
+  ViashError '--dataset_summary_singlecell' is a required argument. Use "--help" to get more information on the parameters.
+  exit 1
+fi
+if [ -z ${VIASH_PAR_DATASET_DESCRIPTION_SPATIAL+x} ]; then
+  ViashError '--dataset_description_spatial' is a required argument. Use "--help" to get more information on the parameters.
+  exit 1
+fi
+if [ -z ${VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL+x} ]; then
+  ViashError '--dataset_description_singlecell' is a required argument. Use "--help" to get more information on the parameters.
   exit 1
 fi
 if [ -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then
@@ -1299,14 +1322,15 @@ par <- list(
   "output_sp" = $( if [ ! -z ${VIASH_PAR_OUTPUT_SP+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_OUTPUT_SP" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_id" = $( if [ ! -z ${VIASH_PAR_DATASET_ID+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ID" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_name" = $( if [ ! -z ${VIASH_PAR_DATASET_NAME+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_NAME" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_url" = $( if [ ! -z ${VIASH_PAR_DATASET_URL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_url_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_URL_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL_SPATIAL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_url_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_URL_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_URL_SINGLECELL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_reference" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_reference_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE_SPATIAL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_reference_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_REFERENCE_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_REFERENCE_SINGLECELL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_summary" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
-  "dataset_description" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_summary_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY_SPATIAL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_summary_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_SUMMARY_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_SUMMARY_SINGLECELL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_description_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION_SPATIAL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
+  "dataset_description_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_DESCRIPTION_SINGLECELL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_organism" = $( if [ ! -z ${VIASH_PAR_DATASET_ORGANISM+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ORGANISM" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_assay_spatial" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SPATIAL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SPATIAL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi ),
   "dataset_assay_singlecell" = $( if [ ! -z ${VIASH_PAR_DATASET_ASSAY_SINGLECELL+x} ]; then echo -n "'"; echo -n "$VIASH_PAR_DATASET_ASSAY_SINGLECELL" | sed "s#['\\]#\\\\&#g"; echo "'"; else echo NULL; fi )
@@ -1356,8 +1380,6 @@ cat("Construct uns\\n")
 uns <- list(
   dataset_id = par\$dataset_id,
   dataset_name = par\$dataset_name,
-  dataset_description = par\$dataset_description,
-  dataset_summary = par\$dataset_summary,
   dataset_organism = par\$dataset_organism
 )
 
@@ -1380,8 +1402,10 @@ output_sc <- anndata::AnnData(
   uns = c(
     uns,
     list(
-      dataset_url = par\$dataset_url_singlecell %||% par\$dataset_url,
-      dataset_reference = par\$dataset_reference_singlecell %||% par\$dataset_reference,
+      dataset_summary = par\$dataset_summary_singlecell,
+      dataset_description = par\$dataset_description_singlecell,
+      dataset_url = par\$dataset_url_singlecell,
+      dataset_reference = par\$dataset_reference_singlecell,
       dataset_assay = par\$dataset_assay_singlecell
     )
   )
@@ -1413,8 +1437,10 @@ output_sp <- anndata::AnnData(
   uns = c(
     uns,
     list(
-      dataset_url = par\$dataset_url_spatial %||% par\$dataset_url,
-      dataset_reference = par\$dataset_reference_spatial %||% par\$dataset_reference,
+      dataset_summary = par\$dataset_summary_spatial,
+      dataset_description = par\$dataset_description_spatial,
+      dataset_url = par\$dataset_url_spatial,
+      dataset_reference = par\$dataset_reference_spatial,
       dataset_assay = par\$dataset_assay_spatial
     )
   )
