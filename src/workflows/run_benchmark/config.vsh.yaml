@@ -46,10 +46,8 @@ resources:
   - type: file
     path: /_viash.yaml
 dependencies:
-  - name: common/check_dataset_schema
-    repository: openproblems_v2
-  - name: common/extract_metadata
-    repository: openproblems_v2
+  - name: h5ad/extract_uns_metadata
+    repository: core
   - name: methods/scdesign2
   - name: methods/scdesign3
   - name: methods/sparsim

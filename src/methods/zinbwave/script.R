@@ -29,9 +29,11 @@ if (par$base != "domain") {
   stop("ONLY domain base")
 }
 
-multicoreParam <- MulticoreParam(workers = 8)
+cpus <- if (is.null(meta$cpus)) 2L else meta$cpus
 
-X = model.matrix(~spatial_cluster, data=colData(sce_ordered))
+multicoreParam <- MulticoreParam(workers = cpus)
+
+X <- model.matrix(~spatial_cluster, data=colData(sce_ordered))
 params <- splatter::zinbEstimate(as.matrix(counts(sce_ordered)), design.samples = X, BPPARAM = multicoreParam)
 simulated_result <- splatter::zinbSimulate(params)
 

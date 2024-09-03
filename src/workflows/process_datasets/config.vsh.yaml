@@ -7,10 +7,6 @@ resources:
     entrypoint: run_wf
   - path: /common/nextflow_helpers/helper.nf
 dependencies:
-  - name: common/check_dataset_schema
-    repository: openproblems_v2
-  - name: common/extract_metadata
-    repository: openproblems_v2
   - name: process_datasets/convert
   - name: process_datasets/sc_features
   - name: process_datasets/precompute_downstream
