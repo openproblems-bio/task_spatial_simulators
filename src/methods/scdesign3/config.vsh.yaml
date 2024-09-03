@@ -11,10 +11,9 @@ description: |
   trajectories and spatial locations).
 references:
   doi: 10.1038/s41587-023-01772-1
-
-info:
-  documentation_url: https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html
-  repository_url: https://github.com/SONGDONGYUAN1994/scDesign3
+links:
+  documentation: https://www.bioconductor.org/packages/release/bioc/html/scDesign3.html
+  repository: https://github.com/SONGDONGYUAN1994/scDesign3
 
 arguments:
   - name: "--family"

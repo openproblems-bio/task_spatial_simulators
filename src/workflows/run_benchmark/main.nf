@@ -13,7 +13,9 @@ methods = [
   splatter,
   srtsim,
   symsim,
-  zinbwave
+  zinbwave,
+  positive,
+  negative
 ]
 
 // construct list of metrics

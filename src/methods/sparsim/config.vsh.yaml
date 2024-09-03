@@ -8,10 +8,9 @@ description: |
   It allows to generate count data that resemble real data in terms of count intensity, variability and sparsity.
 references:
   doi: 10.1093/bioinformatics/btz752
-
-info:
-  documentation_url: https://gitlab.com/sysbiobig/sparsim/-/blob/master/vignettes/sparsim.Rmd
-  repository_url: https://gitlab.com/sysbiobig/sparsim
+links:
+  documentation: https://gitlab.com/sysbiobig/sparsim/-/blob/master/vignettes/sparsim.Rmd
+  repository: https://gitlab.com/sysbiobig/sparsim
 
 resources:
   - type: r_script
@@ -24,7 +23,7 @@ engines:
       - type: apt
         packages: [git, r-bioc-singlecellexperiment]
       - type: r
-        gitlab: sysbiobig/sparsim
+        gitlab: sysbiobig/SPARSim
 
 runners:
   - type: executable

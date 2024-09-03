@@ -57,6 +57,8 @@ dependencies:
   - name: methods/srtsim
   - name: methods/symsim
   - name: methods/zinbwave
+  - name: control_methods/positive
+  - name: control_methods/negative
   - name: metrics/ks_statistic_gene_cell
   - name: metrics/ks_statistic_sc_features
   - name: metrics/ks_statistic_spatial

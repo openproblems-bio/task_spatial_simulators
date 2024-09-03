@@ -8,10 +8,9 @@ description: |
   of the data that account for zero inflation (dropouts), over-dispersion, and the count nature of the data.
 references:
   doi: 10.1038/s41467-017-02554-5
-
-info:
-  documentation_url: https://bioconductor.org/packages/release/bioc/html/zinbwave.html
-  repository_url: https://github.com/drisso/zinbwave
+links:
+  documentation: https://bioconductor.org/packages/release/bioc/html/zinbwave.html
+  repository: https://github.com/drisso/zinbwave
 
 resources:
   - type: r_script

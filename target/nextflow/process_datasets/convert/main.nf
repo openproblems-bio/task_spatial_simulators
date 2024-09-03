@@ -3264,6 +3264,13 @@ meta = [
       "name" : "openproblems_v2",
       "repo" : "openproblems-bio/openproblems-v2",
       "tag" : "main_build"
+    },
+    {
+      "type" : "github",
+      "name" : "core",
+      "repo" : "openproblems-bio/core",
+      "tag" : "build/add_common_components",
+      "path" : "viash/core"
     }
   ],
   "license" : "MIT",
@@ -3333,7 +3340,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "c4c630ca03deb67383c877b92c1bbe3c4ec1f30f",
+    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3357,6 +3364,13 @@ meta = [
         "name" : "openproblems_v2",
         "repo" : "openproblems-bio/openproblems-v2",
         "tag" : "main_build"
+      },
+      {
+        "type" : "github",
+        "name" : "core",
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/add_common_components",
+        "path" : "viash/core"
       }
     ],
     "viash_version" : "0.9.0-RC7",

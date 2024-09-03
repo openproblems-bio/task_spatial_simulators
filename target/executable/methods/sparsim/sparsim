@@ -483,12 +483,12 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
-  Rscript -e 'remotes::install_gitlab(c("sysbiobig/sparsim"), repos = "https://cran.rstudio.com")'
+  Rscript -e 'remotes::install_gitlab(c("sysbiobig/SPARSim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods sparsim"
-LABEL org.opencontainers.image.created="2024-08-30T13:21:07Z"
-LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="c4c630ca03deb67383c877b92c1bbe3c4ec1f30f"
+LABEL org.opencontainers.image.created="2024-09-03T05:31:37Z"
+LABEL org.opencontainers.image.source="https://gitlab.com/sysbiobig/sparsim"
+LABEL org.opencontainers.image.revision="e362cd138d9e5b26bcd4db841a26032235da7fd6"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

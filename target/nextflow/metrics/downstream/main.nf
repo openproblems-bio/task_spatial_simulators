@@ -3230,8 +3230,10 @@ meta = [
         "references" : {
           "doi" : "10.1145/1553374.1553511"
         },
-        "documentation_url" : "https://cran.r-project.org/web/packages/aricode/index.html",
-        "repository_url" : "https://github.com/jchiquet/aricode",
+        "links" : {
+          "documentation" : "https://cran.r-project.org/web/packages/aricode/index.html",
+          "repository" : "https://github.com/jchiquet/aricode"
+        },
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : true
@@ -3244,8 +3246,10 @@ meta = [
         "references" : {
           "doi" : "10.1145/1553374.1553511"
         },
-        "documentation_url" : "https://cran.r-project.org/web/packages/aricode/index.html",
-        "repository_url" : "https://github.com/jchiquet/aricode",
+        "links" : {
+          "documentation" : "https://cran.r-project.org/web/packages/aricode/index.html",
+          "repository" : "https://github.com/jchiquet/aricode"
+        },
         "min" : 0,
         "max" : 1,
         "maximize" : true
@@ -3282,8 +3286,10 @@ meta = [
         "references" : {
           "doi" : "10.5194/gmd-15-5481-2022"
         },
-        "documentation_url" : "https://cran.r-project.org/web/packages/Metrics/Metrics.pdf",
-        "repository_url" : "https://github.com/mfrasco/Metrics",
+        "links" : {
+          "documentation" : "https://cran.r-project.org/web/packages/Metrics/Metrics.pdf",
+          "repository" : "https://github.com/mfrasco/Metrics"
+        },
         "min" : 0,
         "max" : "+Inf",
         "maximize" : false
@@ -3296,8 +3302,10 @@ meta = [
         "references" : {
           "doi" : "10.21105/joss.00765"
         },
-        "documentation_url" : "https://cran.r-project.org/web/packages/philentropy/index.html",
-        "repository_url" : "https://github.com/drostlab/philentropy",
+        "links" : {
+          "documentation" : "https://cran.r-project.org/web/packages/philentropy/index.html",
+          "repository" : "https://github.com/drostlab/philentropy"
+        },
         "min" : 0,
         "max" : 1,
         "maximize" : false
@@ -3310,8 +3318,10 @@ meta = [
         "references" : {
           "doi" : "10.1111/2041-210X.12425"
         },
-        "documentation_url" : "https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html",
-        "repository_url" : "https://github.com/vegandevs/vegan",
+        "links" : {
+          "documentation" : "https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html",
+          "repository" : "https://github.com/vegandevs/vegan"
+        },
         "min" : -1,
         "max" : 1,
         "maximize" : true
@@ -3324,8 +3334,10 @@ meta = [
         "references" : {
           "doi" : "10.1002/asi.20130"
         },
-        "documentation_url" : "https://cran.r-project.org/web/packages/lsa/lsa.pdf",
-        "repository_url" : "https://github.com/cran/lsa",
+        "links" : {
+          "documentation" : "https://cran.r-project.org/web/packages/lsa/lsa.pdf",
+          "repository" : "https://github.com/cran/lsa"
+        },
         "min" : 0,
         "max" : 1,
         "maximize" : true
@@ -3345,6 +3357,13 @@ meta = [
       "name" : "openproblems_v2",
       "repo" : "openproblems-bio/openproblems-v2",
       "tag" : "main_build"
+    },
+    {
+      "type" : "github",
+      "name" : "core",
+      "repo" : "openproblems-bio/core",
+      "tag" : "build/add_common_components",
+      "path" : "viash/core"
     }
   ],
   "license" : "MIT",
@@ -3437,7 +3456,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0-RC7",
-    "git_commit" : "c4c630ca03deb67383c877b92c1bbe3c4ec1f30f",
+    "git_commit" : "e362cd138d9e5b26bcd4db841a26032235da7fd6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3461,6 +3480,13 @@ meta = [
         "name" : "openproblems_v2",
         "repo" : "openproblems-bio/openproblems-v2",
         "tag" : "main_build"
+      },
+      {
+        "type" : "github",
+        "name" : "core",
+        "repo" : "openproblems-bio/core",
+        "tag" : "build/add_common_components",
+        "path" : "viash/core"
       }
     ],
     "viash_version" : "0.9.0-RC7",

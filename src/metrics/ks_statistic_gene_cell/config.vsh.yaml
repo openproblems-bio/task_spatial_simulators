@@ -3,10 +3,11 @@ __merge__: ../../api/comp_metric.yaml
 name: ks_statistic_gene_cell
 
 
-info:
-  documentation_url: https://cran.r-project.org/web/packages/ks/ks.pdf
-  repository_url: https://cran.r-project.org/web/packages/ks
+links:
+  documentation: https://cran.r-project.org/web/packages/ks/ks.pdf
+  repository: https://cran.r-project.org/web/packages/ks
 
+info:
   metrics:
     - name: ks_statistic_frac_zero_genes
       label: Fraction of zeros per gene
