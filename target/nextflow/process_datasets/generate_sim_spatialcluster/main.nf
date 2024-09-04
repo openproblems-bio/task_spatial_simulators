@@ -3123,6 +3123,11 @@ meta = [
       "type" : "nextflow",
       "id" : "nextflow",
       "directives" : {
+        "label" : [
+          "midtime",
+          "midmem",
+          "midcpu"
+        ],
         "tag" : "$id"
       },
       "auto" : {
@@ -3182,7 +3187,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/generate_sim_spatialcluster",
     "viash_version" : "0.9.0",
-    "git_commit" : "e9f55859d4bd97fc56cb48b48141fd75fd11df2d",
+    "git_commit" : "f4d2d74acc7720098e608e8e2746a568b7de65b5",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3733,6 +3738,11 @@ meta["defaults"] = [
     "image" : "openproblems-bio/task_spatial_simulators/process_datasets/generate_sim_spatialcluster",
     "tag" : "build_main"
   },
+  "label" : [
+    "midtime",
+    "midmem",
+    "midcpu"
+  ],
   "tag" : "$id"
 }'''),
 
