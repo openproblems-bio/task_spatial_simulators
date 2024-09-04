@@ -23,7 +23,7 @@ nextflow run . \
   -entry auto \
   -c common/nextflow_helpers/labels_ci.config \
   --input_states "$DATASETS_DIR/spatialsimbench_mobnew/state.yaml" \
-  --rename_keys 'input_sc:output_sc;input_sp:output_sp' \
+  --rename_keys 'input_singlecell_dataset:output_sc;input_spatial_dataset:output_sp' \
   --settings '{"output_scores": "scores.yaml", "output_dataset_info": "dataset_info.yaml", "output_method_configs": "method_configs.yaml", "output_metric_configs": "metric_configs.yaml", "output_task_info": "task_info.yaml"}' \
   --publish_dir "$OUTPUT_DIR" \
   --output_state "state.yaml"

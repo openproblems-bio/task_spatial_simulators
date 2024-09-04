@@ -128,7 +128,7 @@ workflow run_wf {
   output_ch = score_ch
 
     // extract the scores
-    | extract_metadata.run(
+    | extract_uns_metadata.run(
       key: "extract_scores",
       fromState: [input: "metric_output"],
       toState: { id, output, state ->
