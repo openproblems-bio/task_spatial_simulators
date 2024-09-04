@@ -188,6 +188,8 @@ output_state: "\$id/state.yaml"
 publish_dir: resources/task_spatial_simulators/datasets/
 EOF
 
+# the datasets are in the local cache so we can't use seqera tower
+
 # tw launch https://github.com/openproblems-bio/task_spatial_simulators.git \
 #   --revision build/main \
 #   --pull-latest \
@@ -203,3 +205,8 @@ nextflow run . \
   -profile docker \
   -main-script target/nextflow/workflows/process_datasets/main.nf \
   -params-file /tmp/params.yaml
+
+aws s3 sync --profile op \
+  resources/task_spatial_simulators/datasets/ \
+  s3://openproblems-data/resources/task_spatial_simulators/datasets/ \
+  --delete --dryrun

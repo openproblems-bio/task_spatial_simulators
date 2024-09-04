@@ -28,6 +28,15 @@ par <- list(
 )
 ## VIASH END
 
+process_matrix <- function(obj, layer_name) {
+  if (!layer_name %in% assayNames(obj)) {
+    return(NULL)
+  }
+  assay(obj, layer_name) |>
+    as("CsparseMatrix") |>
+    Matrix::t()
+}
+
 cat("Read input files\n")
 input_sc <- readRDS(par$input_sc)
 input_sp <- readRDS(par$input_sp)
@@ -48,8 +57,7 @@ uns <- list(
 cat("Transforming single cell into AnnData\n")
 output_sc <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(assay(input_sc, "counts")),
-    logcounts = Matrix::t(assay(input_sc, "logcounts"))
+    counts = process_matrix(input_sc, "counts")
   ),
   obs = data.frame(
     row.names = colnames(input_sc),
@@ -78,8 +86,8 @@ celltype_proportions <- as.data.frame(metadata(input_sp)[["celltype_prop"]])
 
 output_sp <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(assay(input_sp, "counts")),
-    logcounts = Matrix::t(assay(input_sp, "logcounts"))
+    counts = process_matrix(input_sp, "counts"),
+    logcounts = process_matrix(input_sp, "logcounts")
   ),
   obs = data.frame(
     row.names = colnames(input_sp),
