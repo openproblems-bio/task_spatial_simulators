@@ -3276,7 +3276,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "fcc5d85f0354ad26dccfed3e1d7c7f3cf39fdb13",
+    "git_commit" : "735da9f5ecfee847951754d719365ab50dc1a713",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3538,7 +3538,7 @@ workflow run_wf {
   output_ch = score_ch
 
     // extract the scores
-    | extract_metadata.run(
+    | extract_uns_metadata.run(
       key: "extract_scores",
       fromState: [input: "metric_output"],
       toState: { id, output, state ->

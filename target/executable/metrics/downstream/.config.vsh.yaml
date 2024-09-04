@@ -482,7 +482,7 @@ build_info:
   output: "target/executable/metrics/downstream"
   executable: "target/executable/metrics/downstream/downstream"
   viash_version: "0.9.0"
-  git_commit: "fcc5d85f0354ad26dccfed3e1d7c7f3cf39fdb13"
+  git_commit: "735da9f5ecfee847951754d719365ab50dc1a713"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"
