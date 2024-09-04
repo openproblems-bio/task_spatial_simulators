@@ -80,6 +80,16 @@ workflow run_wf {
       }
     )
 
+    | generate_sim_spatialcluster.run(
+      fromState: [
+        "input_sp": "input_spatial_dataset",
+        "input_sp_sim": "method_output"
+      ],
+      toState: [
+        "output_method_processed": "output_sp"
+      ]
+    )
+
     // run all metrics
     | runEach(
       components: metrics,
@@ -87,13 +97,11 @@ workflow run_wf {
         id + "." + comp.config.name
       },
       // use 'fromState' to fetch the arguments the component requires from the overall state
-      fromState: { id, state, comp ->
-        [
-          input_spatial_dataset: state.input_spatial_dataset,
-          input_singlecell_dataset: state.input_singlecell_dataset,
-          input_simulated_dataset: state.method_output,
-        ]
-      },
+      fromState: [
+        "input_spatial_dataset": "input_spatial_dataset",
+        "input_singlecell_dataset": "input_singlecell_dataset",
+        "input_simulated_dataset": "output_method_processed",
+      ],
       // use 'toState' to publish that component's outputs to the overall state
       toState: { id, output, state, comp ->
         state + [

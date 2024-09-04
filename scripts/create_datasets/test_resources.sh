@@ -20,10 +20,14 @@ nextflow run . \
   --id "$DATASET_ID" \
   --dataset_id "$DATASET_ID" \
   --dataset_name "MOBNEW" \
-  --dataset_description "..." \
-  --dataset_summary "..." \
-  --dataset_reference "..." \
-  --dataset_url "..." \
+  --dataset_description_spatial "..." \
+  --dataset_description_singlecell "..." \
+  --dataset_summary_spatial "..." \
+  --dataset_summary_singlecell "..." \
+  --dataset_reference_spatial "..." \
+  --dataset_reference_singlecell "..." \
+  --dataset_url_spatial "..." \
+  --dataset_url_singlecell "..." \
   --dataset_organism "mus_musculus" \
   --dataset_assay_spatial Visium \
   --dataset_assay_singlecell Chromium \
