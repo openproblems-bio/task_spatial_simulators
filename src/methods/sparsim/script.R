@@ -3,7 +3,7 @@ suppressMessages(library(SPARSim, quietly = TRUE))
 
 ## VIASH START
 par <- list(
-  input = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
+  input = "resources/task_spatial_simulators/datasets/breast/output_sp.h5ad",
   base = "domain"
 )
 meta <- list(
@@ -29,21 +29,21 @@ find_cluster_indices <- function(cluster_column) {
 cat("Reading input files\n")
 input <- anndata::read_h5ad(par$input)
 
-sce <- SingleCellExperiment(
+sce <- SingleCellExperiment::SingleCellExperiment(
   list(counts = Matrix::t(input$layers[["counts"]])),
   colData = input$obs
 )
 
 cat("SPARsim simulation start\n")
 
-ordered_indices <- order(colData(sce)$spatial_cluster)
+ordered_indices <- order(SingleCellExperiment::colData(sce)$spatial_cluster)
 sce_ordered <- sce[, ordered_indices]
 
 if (par$base != "domain") {
   stop("ONLY domain base")
 }
 
-count_matrix <- data.frame(assay(sce_ordered))
+count_matrix <- data.frame(as.matrix(assay(sce_ordered)))
 sce_scran <- SingleCellExperiment::SingleCellExperiment(assays = list(counts = as.matrix(count_matrix)))
 sce_scran <- scran::computeSumFactors(sce_scran, sizes = seq(20, 100, 5), positive = F) 
 
@@ -84,3 +84,4 @@ output <- anndata::AnnData(
 
 cat("Write output files\n")
 output$write_h5ad(par$output, compression = "gzip")
+
