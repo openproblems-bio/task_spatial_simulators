@@ -2,8 +2,10 @@ name: Test
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 jobs:
-  test:
-    uses: openproblems-bio/actions/.github/workflows/test.yml@main
+  build:
+    uses: viash-io/viash-actions/.github/workflows/test.yaml@v6
