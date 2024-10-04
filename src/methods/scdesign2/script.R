@@ -38,8 +38,11 @@ sim_out <- scDesign2::simulate_count_scDesign2(
   cell_type_prop = prop.table(spatial_cluster_prop)
 )
 
-colnames(sim_out) <- colnames(t(input$layers[["counts"]]))
-rownames(sim_out) <- rownames(t(input$layers[["counts"]]))
+# colnames(sim_out) <- colnames(t(as.matrix(input$layers[["counts"]])))
+#rownames(sim_out) <- rownames(t(as.matrix(input$layers[["counts"]])))
+
+rownames(sim_out) <- input$obs_names
+colnames(sim_out) <- input$var_names
 
 cat("Generating output\n")
 
