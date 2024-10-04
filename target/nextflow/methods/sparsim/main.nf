@@ -3103,15 +3103,9 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "openproblems_v2",
-      "repo" : "openproblems-bio/openproblems-v2",
-      "tag" : "main_build"
-    },
-    {
-      "type" : "github",
       "name" : "core",
       "repo" : "openproblems-bio/core",
-      "tag" : "build/add_common_components",
+      "tag" : "build/main",
       "path" : "viash/core"
     }
   ],
@@ -3201,7 +3195,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/sparsim",
     "viash_version" : "0.9.0",
-    "git_commit" : "f4d2d74acc7720098e608e8e2746a568b7de65b5",
+    "git_commit" : "d607631ff398fbd205a91fd28d17d33fd775952c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3222,15 +3216,9 @@ meta = [
     "repositories" : [
       {
         "type" : "github",
-        "name" : "openproblems_v2",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
-      },
-      {
-        "type" : "github",
         "name" : "core",
         "repo" : "openproblems-bio/core",
-        "tag" : "build/add_common_components",
+        "tag" : "build/main",
         "path" : "viash/core"
       }
     ],
@@ -3386,21 +3374,21 @@ find_cluster_indices <- function(cluster_column) {
 cat("Reading input files\\\\n")
 input <- anndata::read_h5ad(par\\$input)
 
-sce <- SingleCellExperiment(
+sce <- SingleCellExperiment::SingleCellExperiment(
   list(counts = Matrix::t(input\\$layers[["counts"]])),
   colData = input\\$obs
 )
 
 cat("SPARsim simulation start\\\\n")
 
-ordered_indices <- order(colData(sce)\\$spatial_cluster)
+ordered_indices <- order(SingleCellExperiment::colData(sce)\\$spatial_cluster)
 sce_ordered <- sce[, ordered_indices]
 
 if (par\\$base != "domain") {
   stop("ONLY domain base")
 }
 
-count_matrix <- data.frame(assay(sce_ordered))
+count_matrix <- data.frame(as.matrix(assay(sce_ordered)))
 sce_scran <- SingleCellExperiment::SingleCellExperiment(assays = list(counts = as.matrix(count_matrix)))
 sce_scran <- scran::computeSumFactors(sce_scran, sizes = seq(20, 100, 5), positive = F) 
 

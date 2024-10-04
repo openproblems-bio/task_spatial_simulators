@@ -477,9 +477,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("aricode", "anndata", "reshape2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets generate_sim_spatialcluster"
-LABEL org.opencontainers.image.created="2024-09-04T15:26:50Z"
+LABEL org.opencontainers.image.created="2024-10-04T11:00:09Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="f4d2d74acc7720098e608e8e2746a568b7de65b5"
+LABEL org.opencontainers.image.revision="d607631ff398fbd205a91fd28d17d33fd775952c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -3135,15 +3135,9 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "openproblems_v2",
-      "repo" : "openproblems-bio/openproblems-v2",
-      "tag" : "main_build"
-    },
-    {
-      "type" : "github",
       "name" : "core",
       "repo" : "openproblems-bio/core",
-      "tag" : "build/add_common_components",
+      "tag" : "build/main",
       "path" : "viash/core"
     }
   ],
@@ -3169,7 +3163,7 @@ meta = [
       "id" : "nextflow",
       "directives" : {
         "label" : [
-          "midtime",
+          "hightime",
           "midmem",
           "midcpu"
         ],
@@ -3233,7 +3227,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3",
     "viash_version" : "0.9.0",
-    "git_commit" : "f4d2d74acc7720098e608e8e2746a568b7de65b5",
+    "git_commit" : "d607631ff398fbd205a91fd28d17d33fd775952c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3254,15 +3248,9 @@ meta = [
     "repositories" : [
       {
         "type" : "github",
-        "name" : "openproblems_v2",
-        "repo" : "openproblems-bio/openproblems-v2",
-        "tag" : "main_build"
-      },
-      {
-        "type" : "github",
         "name" : "core",
         "repo" : "openproblems-bio/core",
-        "tag" : "build/add_common_components",
+        "tag" : "build/main",
         "path" : "viash/core"
       }
     ],
@@ -3824,7 +3812,7 @@ meta["defaults"] = [
     "tag" : "build_main"
   },
   "label" : [
-    "midtime",
+    "hightime",
     "midmem",
     "midcpu"
   ],

@@ -2,7 +2,7 @@
 
 ## VIASH START
 par <- list(
-  input = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
+  input = "resources/task_spatial_simulators/datasets/breast/output_sp.h5ad",
   output = "simulated_dataset.h5ad",
   base = "domain"
 )
