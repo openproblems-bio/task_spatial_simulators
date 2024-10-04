@@ -3,11 +3,11 @@ requireNamespace("edgeR", quietly = TRUE)
 requireNamespace("ks", quietly = TRUE)
 requireNamespace("resample", quietly = TRUE)
 requireNamespace("reshape2", quietly = TRUE)
-
+library(Matrix)
 ## VIASH START
 par <- list(
-  input_spatial_dataset = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
-  input_singlecell_dataset = "resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds",
+  input_spatial_dataset = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
+  input_singlecell_dataset = "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad",
   input_simulated_dataset = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad",
   output = "output.h5ad"
 )
@@ -25,6 +25,9 @@ real_counts <- input_spatial_dataset$layers[["counts"]]
 sim_counts <- input_simulated_dataset$layers[["counts"]]
 
 cat("Computing ks statistic of fraction of zeros per gene\n")
+print(str(real_counts == 0))
+print(real_counts)
+print(real_counts == 0)
 frac_zero_real_genes <- colMeans(real_counts == 0)
 frac_zero_sim_genes <- colMeans(sim_counts == 0)
 ks_statistic_frac_zero_genes <- ks::kde.test(x1 = frac_zero_real_genes, x2 = frac_zero_sim_genes)
@@ -141,3 +144,10 @@ output <- anndata::AnnData(
   shape = c(0L, 0L)
 )
 output$write_h5ad(par[["output"]], compression = "gzip")
+
+
+
+
+
+input_spatial_dataset <- anndata::read_h5ad("resources/task_spatial_simulators/datasets/gastrulation/output_sp.h5ad")
+print(input_simulated_dataset$obs[['spatial_cluster']].isna().sum())
