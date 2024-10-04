@@ -2,7 +2,7 @@
 
 ## VIASH START
 par <- list(
-  input = "resources/task_spatial_simulators/datasets/breast/output_sp.h5ad",
+  input = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
   output = "simulated_dataset.h5ad",
   base = "domain"
 )
@@ -41,8 +41,8 @@ sim_out <- scDesign2::simulate_count_scDesign2(
 # colnames(sim_out) <- colnames(t(as.matrix(input$layers[["counts"]])))
 #rownames(sim_out) <- rownames(t(as.matrix(input$layers[["counts"]])))
 
-rownames(sim_out) <- input$obs_names
-colnames(sim_out) <- input$var_names
+rownames(sim_out) <- input$var_names
+colnames(sim_out) <- input$obs_names
 
 cat("Generating output\n")
 

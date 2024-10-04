@@ -3195,7 +3195,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign2",
     "viash_version" : "0.9.0",
-    "git_commit" : "a0456c085375f5588133b28215242ee7442ec730",
+    "git_commit" : "df301b65d56cf678be2ee66cc11d991dc46074a0",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3384,8 +3384,8 @@ sim_out <- scDesign2::simulate_count_scDesign2(
 # colnames(sim_out) <- colnames(t(as.matrix(input\\$layers[["counts"]])))
 #rownames(sim_out) <- rownames(t(as.matrix(input\\$layers[["counts"]])))
 
-rownames(sim_out) <- input\\$obs_names
-colnames(sim_out) <- input\\$var_names
+rownames(sim_out) <- input\\$var_names
+colnames(sim_out) <- input\\$obs_names
 
 cat("Generating output\\\\n")
 
