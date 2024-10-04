@@ -484,9 +484,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2024-10-04T11:34:05Z"
+LABEL org.opencontainers.image.created="2024-10-04T11:42:39Z"
 LABEL org.opencontainers.image.source="https://github.com/Oshlack/splatter"
-LABEL org.opencontainers.image.revision="b5aaf7159d8143f41bcb34d39e16ff212664d605"
+LABEL org.opencontainers.image.revision="1021fceb6dd9a9fc442e8a543b8e68b4d8ae3416"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
