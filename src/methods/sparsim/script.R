@@ -1,9 +1,10 @@
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 suppressMessages(library(SPARSim, quietly = TRUE))
+suppressMessages(library(SummarizedExperiment, quietly = TRUE))
 
 ## VIASH START
 par <- list(
-  input = "resources/task_spatial_simulators/datasets/breast/output_sp.h5ad",
+  input = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
   base = "domain"
 )
 meta <- list(
@@ -43,7 +44,7 @@ if (par$base != "domain") {
   stop("ONLY domain base")
 }
 
-count_matrix <- data.frame(as.matrix(assay(sce_ordered)))
+count_matrix <- data.frame(as.matrix(SummarizedExperiment::assay(sce_ordered)))
 sce_scran <- SingleCellExperiment::SingleCellExperiment(assays = list(counts = as.matrix(count_matrix)))
 sce_scran <- scran::computeSumFactors(sce_scran, sizes = seq(20, 100, 5), positive = F) 
 
@@ -53,16 +54,16 @@ if (any(sce_scran$sizeFactor <= 0)) {
 }
 count_matrix_norm <- scater::normalizeCounts(sce_scran, log = FALSE)
 count_matrix_conditions <- find_cluster_indices(sce_ordered@colData$spatial_cluster)
-SPARSim_sim_param <- SPARSim_estimate_parameter_from_data(
+SPARSim_sim_param <- SPARSim::SPARSim_estimate_parameter_from_data(
   raw_data = count_matrix,
   norm_data = count_matrix_norm,
   conditions = count_matrix_conditions
 )
 
-sim_result <- SPARSim_simulation(dataset_parameter = SPARSim_sim_param)
+sim_result <- SPARSim::SPARSim_simulation(dataset_parameter = SPARSim_sim_param)
 colnames(sim_result$count_matrix) <- gsub("\\.", "-", colnames(sim_result$count_matrix))
 simulated_result_order <- sce_ordered
-assays(simulated_result_order, withDimnames = FALSE) <- list(counts = sim_result$count_matrix)
+SummarizedExperiment::assays(simulated_result_order, withDimnames = FALSE) <- list(counts = sim_result$count_matrix)
 simulated_result_order <- simulated_result_order[,match(colnames(sce), colnames(simulated_result_order))]
 simulated_result_order <- simulated_result_order[match(rownames(sce), rownames(simulated_result_order)),]
 new_obs <- as.data.frame(simulated_result_order@colData[c("row", "col")])
@@ -70,7 +71,7 @@ new_obs <- as.data.frame(simulated_result_order@colData[c("row", "col")])
 cat("Generating output\n")
 output <- anndata::AnnData(
   layers = list(
-    counts = Matrix::t(counts(simulated_result_order))
+    counts = Matrix::t(SingleCellExperiment::counts(simulated_result_order))
   ),
   obs = new_obs,
   var = input$var,
