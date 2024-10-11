@@ -159,8 +159,8 @@ engines:
     image: openproblems/base_r:1.0.0
     setup:
       - type: r
-        bioc: edger
-        cran: [ks, resample, reshape2]
+        bioc: [edger, sparseMatrixStats]
+        cran: [ks, resample, reshape2, proxyC]
 
 runners:
   - type: executable
