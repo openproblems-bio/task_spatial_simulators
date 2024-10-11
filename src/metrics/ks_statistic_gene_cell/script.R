@@ -4,6 +4,8 @@ requireNamespace("ks", quietly = TRUE)
 requireNamespace("resample", quietly = TRUE)
 requireNamespace("reshape2", quietly = TRUE)
 library(Matrix)
+library(matrixStats)
+
 ## VIASH START
 par <- list(
   input_spatial_dataset = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
@@ -25,9 +27,6 @@ real_counts <- input_spatial_dataset$layers[["counts"]]
 sim_counts <- input_simulated_dataset$layers[["counts"]]
 
 cat("Computing ks statistic of fraction of zeros per gene\n")
-print(str(real_counts == 0))
-print(real_counts)
-print(real_counts == 0)
 frac_zero_real_genes <- colMeans(real_counts == 0)
 frac_zero_sim_genes <- colMeans(sim_counts == 0)
 ks_statistic_frac_zero_genes <- ks::kde.test(x1 = frac_zero_real_genes, x2 = frac_zero_sim_genes)
@@ -55,8 +54,8 @@ tmm_sim_cells <- edgeR::calcNormFactors(sim_dge, method = "TMM")$samples$norm.fa
 ks_statistic_tmm_cells <- ks::kde.test(x1 = tmm_real_cells, x2 = tmm_sim_cells)
 
 cat("Computing ks statistic of the cell-level scaled variance\n")
-scaled_var_real_cells <- scale(resample::colVars(Matrix::t(real_counts)))
-scaled_var_sim_cells <- scale(resample::colVars(Matrix::t(sim_counts)))
+scaled_var_real_cells <- scale(sparseMatrixStats::colVars(Matrix::t(real_counts)))
+scaled_var_sim_cells <- scale(sparseMatrixStats::colVars(Matrix::t(sim_counts)))
 ks_statistic_scaled_var_cells <- ks::kde.test(x1 = as.numeric(scaled_var_sim_cells), x2 = as.numeric(scaled_var_sim_cells))
 
 cat("Computing ks statistic of the cell-level scaled mean\n")
@@ -70,13 +69,16 @@ lib_fraczero_sim_cells <- data.frame(lib = lib_size_sim_cells, fraczero = frac_z
 ks_statistic_lib_fraczero_cells <- ks::kde.test(x1 = lib_fraczero_real_cells, x2 = lib_fraczero_sim_cells)
 
 cat("Computing ks statistic of the sample Pearson correlation\n")
-pearson_real_cells <- reshape2::melt(cor(as.matrix(Matrix::t(real_counts)), method = "pearson"))
-pearson_sim_cells <- reshape2::melt(cor(as.matrix(Matrix::t(sim_counts)), method = "pearson"))
-ks_statistic_pearson_cells <- ks::kde.test(x1 = as.numeric(pearson_real_cells$value), x2 = as.numeric(pearson_sim_cells$value))
+# pearson_real_cells <- reshape2::melt(cor(as.matrix(Matrix::t(real_counts)), method = "pearson"))
+pearson_real_cells <- proxyC::simil(real_counts, method = "correlation")
+# pearson_sim_cells <- reshape2::melt(cor(as.matrix(Matrix::t(sim_counts)), method = "pearson"))
+pearson_sim_cells <- proxyC::simil(sim_counts, method = "correlation")
+
+ks_statistic_pearson_cells <- ks::kde.test(x1 = sample(as.numeric(pearson_real_cells), 10000), x2 = sample(as.numeric(pearson_sim_cells), 10000))
 
 cat("Computing ks statistic of the gene-level scaled variance\n")
-scaled_var_real_genes <- scale(resample::colVars(real_counts))
-scaled_var_sim_genes <- scale(resample::colVars(sim_counts))
+scaled_var_real_genes <- scale(sparseMatrixStats::colVars(real_counts))
+scaled_var_sim_genes <- scale(sparseMatrixStats::colVars(sim_counts))
 ks_statistic_scaled_var_genes <- ks::kde.test(x1 = as.numeric(scaled_var_sim_genes), x2 = as.numeric(scaled_var_sim_genes))
 
 cat("Computing ks statistic of the gene-level scaled mean\n")
@@ -85,13 +87,15 @@ scaled_mean_sim_genes <- scale(colMeans(sim_counts))
 ks_statistic_scaled_mean_genes <- ks::kde.test(x1 = as.numeric(scaled_mean_real_genes), x2 = as.numeric(scaled_mean_sim_genes))
 
 cat("Computing ks statistic of the gene Pearson correlation\n")
-pearson_real_genes <- reshape2::melt(cor(as.matrix(real_counts), method = "pearson"))
-pearson_sim_genes <- reshape2::melt(cor(as.matrix(sim_counts), method = "pearson"))
-ks_statistic_pearson_genes <- ks::kde.test(x1 = as.numeric(pearson_real_genes$value), x2 = as.numeric(pearson_sim_genes$value))
+# pearson_real_genes <- reshape2::melt(cor(as.matrix(real_counts), method = "pearson"))
+pearson_real_genes <- proxyC::simil(real_counts, method = "correlation")
+# pearson_sim_genes <- reshape2::melt(cor(as.matrix(sim_counts), method = "pearson"))
+pearson_sim_genes <- proxyC::simil(sim_counts, method = "correlation")
+ks_statistic_pearson_genes <- ks::kde.test(x1 = sample(as.numeric(pearson_real_genes), 10000), x2 = sample(as.numeric(pearson_sim_genes), 10000))
 
 cat("Computing ks statistic of the mean expression vs variance expression\n")
-mean_var_real_genes <- data.frame(mean = colMeans(real_counts), var = resample::colVars(real_counts))
-mean_var_sim_genes <- data.frame(mean = colMeans(sim_counts), var = resample::colVars(sim_counts))
+mean_var_real_genes <- data.frame(mean = colMeans(real_counts), var = sparseMatrixStats::colVars(real_counts))
+mean_var_sim_genes <- data.frame(mean = colMeans(sim_counts), var = sparseMatrixStats::colVars(sim_counts))
 ks_statistic_mean_var_genes <- ks::kde.test(x1 = mean_var_real_genes, x2 = mean_var_sim_genes)
 
 cat("Computing ks statistic of the mean expression vs fraction of zeros per gene\n")
@@ -144,10 +148,3 @@ output <- anndata::AnnData(
   shape = c(0L, 0L)
 )
 output$write_h5ad(par[["output"]], compression = "gzip")
-
-
-
-
-
-input_spatial_dataset <- anndata::read_h5ad("resources/task_spatial_simulators/datasets/gastrulation/output_sp.h5ad")
-print(input_simulated_dataset$obs[['spatial_cluster']].isna().sum())
