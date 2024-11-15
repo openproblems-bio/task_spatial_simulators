@@ -470,9 +470,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("SRTsim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component control_methods negative"
-LABEL org.opencontainers.image.created="2024-10-22T14:39:47Z"
+LABEL org.opencontainers.image.created="2024-11-15T11:27:48Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="af55b35763cd127dfc791b24076528d8c8f83140"
+LABEL org.opencontainers.image.revision="342d3b531a6ac6a943ecda749ffa9eb94b311238"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1042,11 +1042,34 @@ input <- anndata::read_h5ad(par\$input)
 
 count_matrix <- as.matrix(input\$layers[['counts']])
 
+# Calculate the total number of elements
+total_elements <- length(count_matrix)
+
+# Count the number of zeros
+num_zeros <- sum(count_matrix == 0)
+
+# Calculate the proportion of zeros
+proportion_zeros <- num_zeros / total_elements
+
+# Print the result
+proportion_zeros
+
 n_rows <- nrow(count_matrix)
 n_cols <- ncol(count_matrix)
 
 random_matrix_uniform <- matrix(runif(n_rows * n_cols), nrow = n_rows, ncol = n_cols)
 rownames(random_matrix_uniform) <- rownames(count_matrix)
+
+# Calculate the number of elements to set to zero
+num_elements <- length(random_matrix_uniform)
+num_zeros <- ceiling(proportion_zeros * num_elements)
+
+# Randomly select indices to set to zero
+indices <- sample(seq_len(num_elements), num_zeros)
+
+# Set the selected indices to zero
+random_matrix_uniform[indices] <- 0
+
 
 cat("Generate outoput file\\n")
 output <- anndata::AnnData(

@@ -3165,7 +3165,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/negative",
     "viash_version" : "0.9.0",
-    "git_commit" : "af55b35763cd127dfc791b24076528d8c8f83140",
+    "git_commit" : "342d3b531a6ac6a943ecda749ffa9eb94b311238",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3327,11 +3327,34 @@ input <- anndata::read_h5ad(par\\$input)
 
 count_matrix <- as.matrix(input\\$layers[['counts']])
 
+# Calculate the total number of elements
+total_elements <- length(count_matrix)
+
+# Count the number of zeros
+num_zeros <- sum(count_matrix == 0)
+
+# Calculate the proportion of zeros
+proportion_zeros <- num_zeros / total_elements
+
+# Print the result
+proportion_zeros
+
 n_rows <- nrow(count_matrix)
 n_cols <- ncol(count_matrix)
 
 random_matrix_uniform <- matrix(runif(n_rows * n_cols), nrow = n_rows, ncol = n_cols)
 rownames(random_matrix_uniform) <- rownames(count_matrix)
+
+# Calculate the number of elements to set to zero
+num_elements <- length(random_matrix_uniform)
+num_zeros <- ceiling(proportion_zeros * num_elements)
+
+# Randomly select indices to set to zero
+indices <- sample(seq_len(num_elements), num_zeros)
+
+# Set the selected indices to zero
+random_matrix_uniform[indices] <- 0
+
 
 cat("Generate outoput file\\\\n")
 output <- anndata::AnnData(
