@@ -324,7 +324,7 @@ build_info:
   output: "target/nextflow/workflows/run_benchmark"
   executable: "target/nextflow/workflows/run_benchmark/main.nf"
   viash_version: "0.9.0"
-  git_commit: "97d8c872ff10cdebf9b247cdb2caa8d405275931"
+  git_commit: "c0cbd557406f4066762a1bd587d7cf3112993133"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
   dependencies:
   - "target/dependencies/github/openproblems-bio/core/build/main/nextflow/h5ad/extract_uns_metadata"
