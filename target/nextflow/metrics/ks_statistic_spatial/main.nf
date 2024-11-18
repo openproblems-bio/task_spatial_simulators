@@ -3355,7 +3355,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_spatial",
     "viash_version" : "0.9.0",
-    "git_commit" : "342d3b531a6ac6a943ecda749ffa9eb94b311238",
+    "git_commit" : "97d8c872ff10cdebf9b247cdb2caa8d405275931",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3515,7 +3515,7 @@ dep = {
 
 print('Reading input files', flush=True)
 input_spatial_dataset = ad.read_h5ad(par['input_spatial_dataset'])
-input_singlecell_dataset = ad.read_h5ad(par['input_singlecell_dataset'])
+# input_singlecell_dataset = ad.read_h5ad(par['input_singlecell_dataset'])
 input_simulated_dataset = ad.read_h5ad(par['input_simulated_dataset'])
 
 def get_spatial_network(num_sample=None, spatial=None, radius=None, coord_type="grid", n_rings=2, set_diag=False):
@@ -3568,19 +3568,26 @@ input_simulated_dataset.obsm["spatial"] = np.array(input_simulated_dataset.obs[[
 input_simulated_dataset.obs["celltype"] = input_simulated_dataset.obs["spatial_cluster"]
 input_simulated_dataset.obs["celltype"] = input_simulated_dataset.obs["celltype"].astype('category')
 
+# remove NaN before compute the matrix
+valid_indices = input_simulated_dataset.obs["celltype"].notnull()
+input_simulated_dataset = input_simulated_dataset[valid_indices]
+input_spatial_dataset = input_spatial_dataset[valid_indices]
+
 sq.gr.spatial_neighbors(input_simulated_dataset, coord_type="generic", set_diag=False, delaunay=True)
-# neighborhood enrichment matrix
-sq.gr.nhood_enrichment(input_simulated_dataset, cluster_key="celltype")
 # centrality scores matrix
 sq.gr.centrality_scores(input_simulated_dataset, cluster_key="celltype")
+# neighborhood enrichment matrix
+input_simulated_dataset = input_simulated_dataset[input_simulated_dataset.obs["celltype"].notnull()]
+sq.gr.nhood_enrichment(input_simulated_dataset, cluster_key="celltype")
+
 
 target_enrich_real = input_spatial_dataset.uns["celltype_nhood_enrichment"]["zscore"]
 target_enrich_scale_real = target_enrich_real/np.max(target_enrich_real)
 target_enrich_sim = input_simulated_dataset.uns["celltype_nhood_enrichment"]["zscore"]
 target_enrich_scale_sim = target_enrich_sim/np.max(target_enrich_sim)
 
-error_enrich = np.linalg.norm(target_enrich_sim - target_enrich_real)
-error_enrich_scale = np.linalg.norm(target_enrich_scale_sim - target_enrich_scale_real)
+#error_enrich = np.linalg.norm(target_enrich_sim - target_enrich_real)
+#error_enrich_scale = np.linalg.norm(target_enrich_scale_sim - target_enrich_scale_real)
     
 target_enrich_real_ds = target_enrich_real.flatten()
 target_enrich_sim_ds = target_enrich_sim.flatten()
@@ -3603,7 +3610,7 @@ sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
 transition_matrix_real = get_trans(adata=input_spatial_dataset, ct=real)
 transition_matrix_sim = get_trans(adata=input_simulated_dataset, ct=sim)
 
-error = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
+# error = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
 transition_matrix_real_ds = transition_matrix_real.flatten()
 transition_matrix_sim_ds = transition_matrix_sim.flatten()
 ks_stat_error, p_value = ks_2samp(transition_matrix_real_ds, transition_matrix_sim_ds)
