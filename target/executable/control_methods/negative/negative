@@ -470,9 +470,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("SRTsim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component control_methods negative"
-LABEL org.opencontainers.image.created="2024-11-18T05:52:29Z"
+LABEL org.opencontainers.image.created="2024-11-18T06:00:22Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="c0cbd557406f4066762a1bd587d7cf3112993133"
+LABEL org.opencontainers.image.revision="1ee2de4a1284a68fc295552f6fa1410cd60ae9c9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1042,17 +1042,15 @@ input <- anndata::read_h5ad(par\$input)
 
 count_matrix <- as.matrix(input\$layers[['counts']])
 
+shuffled_values <- sample(as.vector(count_matrix))
 
-n_rows <- nrow(count_matrix)
-n_cols <- ncol(count_matrix)
+shuffled_matrix <- matrix(shuffled_values, nrow = nrow(count_matrix), ncol = ncol(count_matrix))
 
-random_matrix_uniform <- matrix(runif(n_rows * n_cols), nrow = n_rows, ncol = n_cols)
-rownames(random_matrix_uniform) <- rownames(count_matrix)
 
 cat("Generate outoput file\\n")
 output <- anndata::AnnData(
   layers = list(
-    counts = random_matrix_uniform
+    counts = shuffled_matrix
   ),
   obs = input\$obs[c("row", "col")],
   var = input\$var,

@@ -3165,7 +3165,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/negative",
     "viash_version" : "0.9.0",
-    "git_commit" : "c0cbd557406f4066762a1bd587d7cf3112993133",
+    "git_commit" : "1ee2de4a1284a68fc295552f6fa1410cd60ae9c9",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3327,17 +3327,15 @@ input <- anndata::read_h5ad(par\\$input)
 
 count_matrix <- as.matrix(input\\$layers[['counts']])
 
+shuffled_values <- sample(as.vector(count_matrix))
 
-n_rows <- nrow(count_matrix)
-n_cols <- ncol(count_matrix)
+shuffled_matrix <- matrix(shuffled_values, nrow = nrow(count_matrix), ncol = ncol(count_matrix))
 
-random_matrix_uniform <- matrix(runif(n_rows * n_cols), nrow = n_rows, ncol = n_cols)
-rownames(random_matrix_uniform) <- rownames(count_matrix)
 
 cat("Generate outoput file\\\\n")
 output <- anndata::AnnData(
   layers = list(
-    counts = random_matrix_uniform
+    counts = shuffled_matrix
   ),
   obs = input\\$obs[c("row", "col")],
   var = input\\$var,
