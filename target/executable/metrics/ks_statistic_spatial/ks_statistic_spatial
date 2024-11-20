@@ -481,9 +481,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2024-11-20T10:45:11Z"
+LABEL org.opencontainers.image.created="2024-11-20T13:27:01Z"
 LABEL org.opencontainers.image.source="https://github.com/scipy/scipy/"
-LABEL org.opencontainers.image.revision="1d1ffcc8b8f6825002ee479e273882afd580db43"
+LABEL org.opencontainers.image.revision="208a246070dfec7a86e2fc4d6d38b61a6a4061e8"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1101,17 +1101,13 @@ dep = {
 
 print('Reading input files', flush=True)
 input_spatial_dataset = ad.read_h5ad(par['input_spatial_dataset'])
-# input_singlecell_dataset = ad.read_h5ad(par['input_singlecell_dataset'])
 input_simulated_dataset = ad.read_h5ad(par['input_simulated_dataset'])
 
 def get_spatial_network(num_sample=None, spatial=None, radius=None, coord_type="grid", n_rings=2, set_diag=False):
     spatial_adata = ad.AnnData(np.empty((num_sample, 1), dtype="float32"))
     spatial_adata.obsm["spatial"] = spatial
-    # sq.gr.spatial_neighbors(spatial_adata, n_rings=n_rings, coord_type=coord_type, n_neighs=n_neighs, radius=radius,set_diag =set_diag)
-    sq.gr.spatial_neighbors(spatial_adata, n_rings=n_rings, coord_type=coord_type, radius=radius, set_diag=set_diag,
-                            delaunay=True)
+    sq.gr.spatial_neighbors(spatial_adata, n_rings=n_rings, coord_type=coord_type, radius=radius, set_diag=set_diag, delaunay=True)
     sn = spatial_adata.obsp["spatial_connectivities"]
-
     return sn
 
 

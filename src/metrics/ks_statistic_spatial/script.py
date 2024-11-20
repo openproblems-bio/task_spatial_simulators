@@ -19,17 +19,13 @@ meta = {
 
 print('Reading input files', flush=True)
 input_spatial_dataset = ad.read_h5ad(par['input_spatial_dataset'])
-# input_singlecell_dataset = ad.read_h5ad(par['input_singlecell_dataset'])
 input_simulated_dataset = ad.read_h5ad(par['input_simulated_dataset'])
 
 def get_spatial_network(num_sample=None, spatial=None, radius=None, coord_type="grid", n_rings=2, set_diag=False):
     spatial_adata = ad.AnnData(np.empty((num_sample, 1), dtype="float32"))
     spatial_adata.obsm["spatial"] = spatial
-    # sq.gr.spatial_neighbors(spatial_adata, n_rings=n_rings, coord_type=coord_type, n_neighs=n_neighs, radius=radius,set_diag =set_diag)
-    sq.gr.spatial_neighbors(spatial_adata, n_rings=n_rings, coord_type=coord_type, radius=radius, set_diag=set_diag,
-                            delaunay=True)
+    sq.gr.spatial_neighbors(spatial_adata, n_rings=n_rings, coord_type=coord_type, radius=radius, set_diag=set_diag, delaunay=True)
     sn = spatial_adata.obsp["spatial_connectivities"]
-
     return sn
 
 

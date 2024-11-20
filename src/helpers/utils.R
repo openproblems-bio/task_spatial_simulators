@@ -185,15 +185,15 @@ generate_sim_spatialCluster <- function(real_adata, sim_adata){
     metadata = sim_adata$obsm
     ))
   
-  sim_sce <- BayesSpace::spatialPreprocess(sim_sce, platform="ST", n.HVGs=2000, log.normalize=FALSE)
+  sim_sce <- BayesSpace::spatialPreprocess(sim_sce, n.PCs=7, platform="ST", n.HVGs=2000, log.normalize=FALSE)
                               
   sim_sce <- BayesSpace::spatialCluster(sim_sce,
     q=max(unique(real_adata$obs[,c("spatial_cluster")])), 
-    platform="ST", 
-    d=7,
-    init.method="mclust", model="t", gamma=2,
-    nrep=1000, burn.in=100,
-    save.chain=TRUE
+    platform = "ST", 
+    d = 7,
+    init.method = "mclust", model = "t", gamma = 2,
+    nrep = 1000, burn.in = 100,
+    save.chain = TRUE
   )
   sim_cluster <- sim_sce$spatial.cluster
   return(sim_cluster)
