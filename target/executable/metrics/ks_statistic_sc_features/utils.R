@@ -18,6 +18,7 @@ generate_moransI <- function(adata) {
   return(res)
 }
 
+
 generate_cosine <- function(real, sim) {
   requireNamespace("lsa", quietly = TRUE)
 
@@ -71,10 +72,9 @@ calculate_recall <- function(real_svg, sim_svg) {
   return(recall)
 }
 
+
 # cell type deconvolution
 CARD_processing <- function(sp_adata, sc_adata){
-  # sp_adata <- input_real_sp
-  # sc_adata <- input_sc
   requireNamespace("MuSiC", quietly = TRUE)
   requireNamespace("CARD", quietly = TRUE)
   spatial_count <- Matrix::t(sp_adata$layers[["counts"]])
@@ -110,6 +110,7 @@ CARD_processing <- function(sp_adata, sc_adata){
 
 }
 
+
 generate_jds <- function(real, sim) {
   common_row_names <- intersect(rownames(real), rownames(sim))
   real_common <- real[common_row_names, , drop = FALSE]
@@ -121,6 +122,7 @@ generate_jds <- function(real, sim) {
   average_jsd <- mean(jsd_values)
   return(average_jsd)
 }
+
 
 generate_rmse <- function(real, sim) {
   common_row_names <- intersect(rownames(real), rownames(sim))
@@ -172,27 +174,27 @@ reclassify_simsce <- function(location, real_cluster, sim_cluster){
   
 }
 
+
 # generate sparial clustering in simulated data
 generate_sim_spatialCluster <- function(real_adata, sim_adata){
+  colnames(sim_adata$obs)[colnames(sim_adata$obs) == "col"] <- "array_col"
+  colnames(sim_adata$obs)[colnames(sim_adata$obs) == "row"] <- "array_row"
   sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
     list(counts = Matrix::t(sim_adata$layers[["counts"]])),
     colData = sim_adata$obs,
     metadata = sim_adata$obsm
     ))
   
-  sim_sce <- BayesSpace::spatialPreprocess(sim_sce, platform=par$plat, 
-                              n.PCs=7, n.HVGs=2000, log.normalize=FALSE)
+  sim_sce <- BayesSpace::spatialPreprocess(sim_sce, platform="ST", n.HVGs=2000, log.normalize=FALSE)
                               
   sim_sce <- BayesSpace::spatialCluster(sim_sce,
-  q=max(unique(real_adata$obs[,c("spatial_cluster")])), 
-  platform=par$plat, 
-  d=7,
-  init.method="mclust", model="t", gamma=2,
-  nrep=1000, burn.in=100,
-  save.chain=TRUE)
+    q=max(unique(real_adata$obs[,c("spatial_cluster")])), 
+    platform="ST", 
+    d=7,
+    init.method="mclust", model="t", gamma=2,
+    nrep=1000, burn.in=100,
+    save.chain=TRUE
+  )
   sim_cluster <- sim_sce$spatial.cluster
   return(sim_cluster)
 }
-
-
-

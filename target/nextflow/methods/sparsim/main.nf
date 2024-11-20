@@ -3073,7 +3073,7 @@ meta = [
   ],
   "label" : "SPARsim",
   "summary" : "SPARSim single cell is a count data simulator for scRNA-seq data.",
-  "description" : "SPARSim is a scRNA-seq count data simulator based on a Gamma-Multivariate Hypergeometric model. \nIt allows to generate count data that resemble real data in terms of count intensity, variability and sparsity.\n",
+  "description" : "SPARSim is a scRNA-seq count data simulator based on a Gamma-Multivariate Hypergeometric model. \nIt allows to generate count data that resembles real data in terms of count intensity, variability and sparsity.\n",
   "test_resources" : [
     {
       "type" : "python_script",
@@ -3195,7 +3195,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/sparsim",
     "viash_version" : "0.9.0",
-    "git_commit" : "1ee2de4a1284a68fc295552f6fa1410cd60ae9c9",
+    "git_commit" : "1d1ffcc8b8f6825002ee479e273882afd580db43",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3359,67 +3359,64 @@ rm(.viash_orig_warn)
 
 find_cluster_indices <- function(cluster_column) {
   unique_clusters <- sort(unique(cluster_column))
-  conditions <- list()
-
-  for (i in seq_along(unique_clusters)) {
-    cluster <- unique_clusters[i]
+  conditions <- lapply(unique_clusters, function(cluster) {
     indices <- which(cluster_column == cluster)
-    range_name <- sprintf("cluster_%s_column_index", LETTERS[i])
-    assign(range_name, c(min(indices):max(indices)), envir = .GlobalEnv)
-    conditions[[range_name]] <- get(range_name)
-  }
-
+    seq(min(indices), max(indices))
+  })
+  names(conditions) <- sprintf("cluster_%s_column_index", LETTERS[seq_along(unique_clusters)])
   return(conditions)
 }
 
 cat("Reading input files\\\\n")
 input <- anndata::read_h5ad(par\\$input)
 
-sce <- SingleCellExperiment::SingleCellExperiment(
-  list(counts = Matrix::t(input\\$layers[["counts"]])),
-  colData = input\\$obs
-)
-
-cat("SPARsim simulation start\\\\n")
-
-ordered_indices <- order(SingleCellExperiment::colData(sce)\\$spatial_cluster)
-sce_ordered <- sce[, ordered_indices]
+cat("SPARSim simulation start\\\\n")
 
 if (par\\$base != "domain") {
-  stop("ONLY domain base")
+  stop("Error: Only 'domain' base is supported.")
 }
 
-count_matrix <- data.frame(as.matrix(SummarizedExperiment::assay(sce_ordered)))
-sce_scran <- SingleCellExperiment::SingleCellExperiment(assays = list(counts = as.matrix(count_matrix)))
+# Order by spatial cluster
+ordered_indices <- order(input\\$obs\\$spatial_cluster)
+input_ordered <- input[ordered_indices]
+
+count_matrix <- as.matrix(Matrix::t(input_ordered\\$layers[["counts"]]))
+sce_scran <- SingleCellExperiment::SingleCellExperiment(
+  assays = list(counts = count_matrix),
+  colData = input_ordered\\$obs
+)
 sce_scran <- scran::computeSumFactors(sce_scran, sizes = seq(20, 100, 5), positive = F) 
 
-if (any(sce_scran\\$sizeFactor <= 0)) {
-  threshold <- 1e-10
-  sce_scran\\$sizeFactor[sce_scran\\$sizeFactor <= 0] <- threshold
-}
+# Replace zero or negative size factors with threshold 1e-10
+sce_scran\\$sizeFactor[sce_scran\\$sizeFactor <= 0] <- 1e-10
+
+# Perform normalization
 count_matrix_norm <- scater::normalizeCounts(sce_scran, log = FALSE)
-count_matrix_conditions <- find_cluster_indices(sce_ordered@colData\\$spatial_cluster)
+
+# Find cluster indices for conditions
+count_matrix_conditions <- find_cluster_indices(input_ordered\\$obs[["spatial_cluster"]])
+
+# Estimate SPARSim parameters
 SPARSim_sim_param <- SPARSim::SPARSim_estimate_parameter_from_data(
   raw_data = count_matrix,
   norm_data = count_matrix_norm,
   conditions = count_matrix_conditions
 )
 
+# Simulate new dataset
 sim_result <- SPARSim::SPARSim_simulation(dataset_parameter = SPARSim_sim_param)
-colnames(sim_result\\$count_matrix) <- gsub("\\\\\\\\.", "-", colnames(sim_result\\$count_matrix))
-simulated_result_order <- sce_ordered
-SummarizedExperiment::assays(simulated_result_order, withDimnames = FALSE) <- list(counts = sim_result\\$count_matrix)
-simulated_result_order <- simulated_result_order[,match(colnames(sce), colnames(simulated_result_order))]
-simulated_result_order <- simulated_result_order[match(rownames(sce), rownames(simulated_result_order)),]
-new_obs <- as.data.frame(simulated_result_order@colData[c("row", "col")])
+
+# Reorder simulated results
+simulated_result_ordered <- sim_result\\$count_matrix[
+  match(rownames(sim_result\\$count_matrix), rownames(input_ordered\\$var)),
+  match(colnames(sim_result\\$count_matrix), rownames(input_ordered\\$obs))
+]
 
 cat("Generating output\\\\n")
 output <- anndata::AnnData(
-  layers = list(
-    counts = Matrix::t(SingleCellExperiment::counts(simulated_result_order))
-  ),
-  obs = new_obs,
-  var = input\\$var,
+  layers = list(counts = t(simulated_result_ordered)),
+  obs = input_ordered\\$obs[c("row", "col")],
+  var = input_ordered\\$var,
   uns = c(
     input\\$uns,
     list(
@@ -3428,7 +3425,7 @@ output <- anndata::AnnData(
   )
 )
 
-cat("Write output files\\\\n")
+cat("Writing output files\\\\n")
 output\\$write_h5ad(par\\$output, compression = "gzip")
 VIASHMAIN
 Rscript "$tempscript"

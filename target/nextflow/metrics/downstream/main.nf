@@ -3456,7 +3456,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0",
-    "git_commit" : "1ee2de4a1284a68fc295552f6fa1410cd60ae9c9",
+    "git_commit" : "1d1ffcc8b8f6825002ee479e273882afd580db43",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3642,24 +3642,11 @@ crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
 cat("spatial clustering evaluation\\\\n")
-# TODO
-sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
-  list(counts = Matrix::t(input_simulated_sp\\$layers[["counts"]])),
-  colData = input_simulated_sp\\$obs,
-  metadata = input_simulated_sp\\$obsm
-))
-
-# generate the simulated clustering result first by BayersSpace
-# sim_sce <- BayesSpace::spatialPreprocess(sim_sce, platform=par\\$plat, 
-#                               n.PCs=7, n.HVGs=2000, log.normalize=FALSE)
-# sim_sce <- BayesSpace::spatialCluster(sim_sce, q=max(unique(input_real_sp\\$obs[,c("spatial_cluster")])), platform=par\\$plat, d=7,
-#                            init.method="mclust", model="t", gamma=2,
-#                            nrep=1000, burn.in=100,
-#                            save.chain=TRUE)
 # reclassify the clustering result
-real_cluster <- input_real_sp\\$obs[,c("spatial_cluster")]
+real_cluster <- input_real_sp\\$obs[, c("spatial_cluster")]
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
-location <- colnames(counts(sim_sce))
+location <- rownames(input_simulated_sp)
+location
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
 
 # ART and NMI

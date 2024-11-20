@@ -1,5 +1,3 @@
-# requireNamespace("scDesign2", quietly = TRUE)
-
 ## VIASH START
 par <- list(
   input = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
@@ -20,7 +18,7 @@ if (par$base != "domain") {
 }
 
 cat("scDesign2 simulation start\n")
-counts <- as.matrix(Matrix::t(input$layers[["counts"]]))
+counts <- Matrix::t(input$layers[["counts"]])
 colnames(counts) <- as.character(input$obs$spatial_cluster)
 spatial_cluster_prop <- table(input$obs$spatial_cluster)
 
@@ -37,9 +35,6 @@ sim_out <- scDesign2::simulate_count_scDesign2(
   sim_method = "copula",
   cell_type_prop = prop.table(spatial_cluster_prop)
 )
-
-# colnames(sim_out) <- colnames(t(as.matrix(input$layers[["counts"]])))
-#rownames(sim_out) <- rownames(t(as.matrix(input$layers[["counts"]])))
 
 rownames(sim_out) <- input$var_names
 colnames(sim_out) <- input$obs_names
