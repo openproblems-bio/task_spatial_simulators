@@ -8,7 +8,7 @@ par <- list(
   # inputs
   input_sp = "resources_test/spatialsimbench_mobnew/temp_dataset_sp_part2.h5ad",
   # outputs
-  output_sp = "resources_test/spatialsimbench_mobnew/MOBNEW.rds"
+  output_sp = "dataset_sp.h5ad"
 )
 meta <- list(
   resources_dir = "src/helpers"

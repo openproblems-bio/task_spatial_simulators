@@ -18,6 +18,7 @@ generate_moransI <- function(adata) {
   return(res)
 }
 
+
 generate_cosine <- function(real, sim) {
   requireNamespace("lsa", quietly = TRUE)
 
@@ -71,10 +72,9 @@ calculate_recall <- function(real_svg, sim_svg) {
   return(recall)
 }
 
+
 # cell type deconvolution
 CARD_processing <- function(sp_adata, sc_adata){
-  # sp_adata <- input_real_sp
-  # sc_adata <- input_sc
   requireNamespace("MuSiC", quietly = TRUE)
   requireNamespace("CARD", quietly = TRUE)
   spatial_count <- Matrix::t(sp_adata$layers[["counts"]])
@@ -110,6 +110,7 @@ CARD_processing <- function(sp_adata, sc_adata){
 
 }
 
+
 generate_jds <- function(real, sim) {
   common_row_names <- intersect(rownames(real), rownames(sim))
   real_common <- real[common_row_names, , drop = FALSE]
@@ -121,6 +122,7 @@ generate_jds <- function(real, sim) {
   average_jsd <- mean(jsd_values)
   return(average_jsd)
 }
+
 
 generate_rmse <- function(real, sim) {
   common_row_names <- intersect(rownames(real), rownames(sim))
@@ -172,6 +174,7 @@ reclassify_simsce <- function(location, real_cluster, sim_cluster){
   
 }
 
+
 # generate sparial clustering in simulated data
 generate_sim_spatialCluster <- function(real_adata, sim_adata){
   colnames(sim_adata$obs)[colnames(sim_adata$obs) == "col"] <- "array_col"
@@ -195,6 +198,3 @@ generate_sim_spatialCluster <- function(real_adata, sim_adata){
   sim_cluster <- sim_sce$spatial.cluster
   return(sim_cluster)
 }
-
-
-
