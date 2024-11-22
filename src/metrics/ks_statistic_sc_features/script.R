@@ -8,7 +8,7 @@ requireNamespace("CARD", quietly = TRUE)
 requireNamespace("SingleCellExperiment", quietly = TRUE)
 requireNamespace("SummarizedExperiment", quietly = TRUE)
 
-<<<<<<< Updated upstream
+# <<<<<<< Updated upstream
 ## VIASH START
 par <- list(
   input_spatial_dataset = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
@@ -48,7 +48,7 @@ real_log_count <- t(input_real_sp$layers[["logcounts"]])
 real_prob_matrix <- input_real_sp$obsm[["celltype_proportions"]]
 colnames(real_prob_matrix) <- paste0("ct", seq_len(ncol(real_prob_matrix)))
 
-<<<<<<< Updated upstream
+# <<<<<<< Updated upstream
 sim_log_count <- scuttle::normalizeCounts(t(input_simulated_sp$layers[["counts"]]))
 =======
 real_log_count <- real_log_count[  , colnames(real_log_count)  %in% rownames(real_prob_matrix) ]
