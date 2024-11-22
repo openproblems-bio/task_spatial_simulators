@@ -20,10 +20,9 @@ lapply(packages, library, character.only = TRUE)
 
 ## VIASH START
 par <- list(
-  input_spatial_dataset = "temp_pdac.positive.ks_statistic_sc_features/_viash_par/input_spatial_dataset_1/output_sp.h5ad",
-  input_singlecell_dataset = "temp_pdac.positive.ks_statistic_sc_features/_viash_par/input_singlecell_dataset_1/output_sc.h5ad",
-  input_simulated_dataset = "temp_pdac.positive.ks_statistic_sc_features/_viash_par/input_simulated_dataset_1/pdac.positive.generate_sim_spatialcluster.output_sp.h5ad",
-  output = "output.h5ad"
+  input_spatial_dataset = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
+  input_singlecell_dataset = "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad",
+  input_simulated_dataset = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad",  output = "output.h5ad"
 )
 meta <- list(
   name = "ks_statistic",
