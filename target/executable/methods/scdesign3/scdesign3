@@ -507,9 +507,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3"
-LABEL org.opencontainers.image.created="2024-11-22T05:26:27Z"
+LABEL org.opencontainers.image.created="2024-11-22T05:35:02Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="9cd86785c1fa0e3050fff34f5b847a8c65d7b355"
+LABEL org.opencontainers.image.revision="60def09949f450023be9322af08803e20bdffcf1"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

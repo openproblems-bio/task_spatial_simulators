@@ -70,6 +70,7 @@ engines:
           - ks
           - resample
           - reshape2
+          - spatstat
         github: 
           - xuranw/MuSiC
           - YingMa0107/CARD

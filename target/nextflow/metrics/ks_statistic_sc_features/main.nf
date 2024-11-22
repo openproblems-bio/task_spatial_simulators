@@ -3356,7 +3356,8 @@ meta = [
           "cran" : [
             "ks",
             "resample",
-            "reshape2"
+            "reshape2",
+            "spatstat"
           ],
           "bioc" : [
             "edger",
@@ -3381,7 +3382,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0",
-    "git_commit" : "9cd86785c1fa0e3050fff34f5b847a8c65d7b355",
+    "git_commit" : "60def09949f450023be9322af08803e20bdffcf1",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
