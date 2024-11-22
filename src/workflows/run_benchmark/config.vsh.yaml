@@ -46,8 +46,8 @@ resources:
   - type: file
     path: /_viash.yaml
 dependencies:
-  - name: h5ad/extract_uns_metadata
-    repository: core
+  - name: utils/extract_uns_metadata
+    repository: openproblems
   - name: methods/scdesign2
   - name: methods/scdesign3
   - name: methods/sparsim
@@ -57,6 +57,7 @@ dependencies:
   - name: methods/zinbwave
   - name: control_methods/positive
   - name: control_methods/negative
+  - name: metrics/downstream
   - name: metrics/ks_statistic_gene_cell
   - name: metrics/ks_statistic_sc_features
   - name: metrics/ks_statistic_spatial

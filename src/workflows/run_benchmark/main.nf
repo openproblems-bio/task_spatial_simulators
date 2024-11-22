@@ -20,6 +20,7 @@ methods = [
 
 // construct list of metrics
 metrics = [
+  downstream, 
   ks_statistic_gene_cell,
   ks_statistic_sc_features,
   ks_statistic_spatial
