@@ -3129,12 +3129,11 @@ meta = [
   "status" : "enabled",
   "dependencies" : [
     {
-      "name" : "h5ad/extract_uns_metadata",
+      "name" : "utils/extract_uns_metadata",
       "repository" : {
         "type" : "github",
-        "repo" : "openproblems-bio/core",
-        "tag" : "build/main",
-        "path" : "viash/core"
+        "repo" : "openproblems-bio/openproblems",
+        "tag" : "build/main"
       }
     },
     {
@@ -3192,6 +3191,12 @@ meta = [
       }
     },
     {
+      "name" : "metrics/downstream",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
       "name" : "metrics/ks_statistic_gene_cell",
       "repository" : {
         "type" : "local"
@@ -3219,10 +3224,9 @@ meta = [
   "repositories" : [
     {
       "type" : "github",
-      "name" : "core",
-      "repo" : "openproblems-bio/core",
-      "tag" : "build/main",
-      "path" : "viash/core"
+      "name" : "openproblems",
+      "repo" : "openproblems-bio/openproblems",
+      "tag" : "build/main"
     }
   ],
   "license" : "MIT",
@@ -3276,7 +3280,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "a3b43fa8de56cf89012c152325a57460f92e2bd2",
+    "git_commit" : "df6409b000a8951078f2d233bb961eb8a706315a",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3297,10 +3301,9 @@ meta = [
     "repositories" : [
       {
         "type" : "github",
-        "name" : "core",
-        "repo" : "openproblems-bio/core",
-        "tag" : "build/main",
-        "path" : "viash/core"
+        "name" : "openproblems",
+        "repo" : "openproblems-bio/openproblems",
+        "tag" : "build/main"
       }
     ],
     "viash_version" : "0.9.0",
@@ -3386,7 +3389,7 @@ meta = [
 
 // resolve dependencies dependencies (if any)
 meta["root_dir"] = getRootDir()
-include { extract_uns_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/core/build/main/nextflow/h5ad/extract_uns_metadata/main.nf"
+include { extract_uns_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems/build/main/nextflow/utils/extract_uns_metadata/main.nf"
 include { scdesign2 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign2/main.nf"
 include { scdesign3 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign3/main.nf"
 include { sparsim } from "${meta.resources_dir}/../../../nextflow/methods/sparsim/main.nf"
@@ -3396,6 +3399,7 @@ include { symsim } from "${meta.resources_dir}/../../../nextflow/methods/symsim/
 include { zinbwave } from "${meta.resources_dir}/../../../nextflow/methods/zinbwave/main.nf"
 include { positive } from "${meta.resources_dir}/../../../nextflow/control_methods/positive/main.nf"
 include { negative } from "${meta.resources_dir}/../../../nextflow/control_methods/negative/main.nf"
+include { downstream } from "${meta.resources_dir}/../../../nextflow/metrics/downstream/main.nf"
 include { ks_statistic_gene_cell } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_gene_cell/main.nf"
 include { ks_statistic_sc_features } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_sc_features/main.nf"
 include { ks_statistic_spatial } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_spatial/main.nf"
@@ -3425,6 +3429,7 @@ methods = [
 
 // construct list of metrics
 metrics = [
+  downstream, 
   ks_statistic_gene_cell,
   ks_statistic_sc_features,
   ks_statistic_spatial
@@ -3544,6 +3549,7 @@ workflow run_wf {
     | extract_uns_metadata.run(
       key: "extract_scores",
       fromState: [input: "metric_output"],
+      args: [uns_length_cutoff: 15],
       toState: { id, output, state ->
         state + [
           score_uns: readYaml(output.output).uns

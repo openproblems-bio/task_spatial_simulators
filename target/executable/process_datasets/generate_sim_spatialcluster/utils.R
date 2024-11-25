@@ -37,10 +37,9 @@ generate_mantel <- function(real, sim) {
 # Spatial varianble gene
 generate_svg_sparkx <- function(adata) {
   requireNamespace("SPARK", quietly = TRUE)
-  
+
   # get count matrix
   sp_count <- Matrix::t(adata$layers[["counts"]])
-  
   # format location as a matrix
   location <- as.matrix(adata$obs[, c("col", "row")])
   rownames(location) <- colnames(sp_count)
@@ -50,7 +49,7 @@ generate_svg_sparkx <- function(adata) {
 
   # run sparkx
   sparkX <- SPARK::sparkx(sp_count, location, numCores = 1, option = "mixture")
-  
+
   return(sparkX)
 }
 
@@ -139,57 +138,45 @@ generate_rmse <- function(real, sim) {
 # spatial clustering
 reclassify_simsce <- function(location, real_cluster, sim_cluster){
   test <- data.frame(loc = location, real = real_cluster, sim = sim_cluster)
-  
-  matrix_counts <- matrix(0, nrow = 4, ncol = 4, 
+  matrix_counts <- matrix(0, nrow = 4, ncol = 4,
                           dimnames = list(paste0("real", 1:4), paste0("sim", 1:4)))
-  
-  for(r in 1:4) {
-    for(s in 1:4) {
+  for (r in 1:4) {
+    for (s in 1:4) {
       subset_data <- subset(test, real == r & sim == s)
       matrix_counts[r, s] <- length(unique(subset_data$loc))
     }
   }
-  
   reclassification <- numeric(4)
-  
-  for(i in 1:4) {
+  for (i in 1:4) {
     max_value <- max(matrix_counts)
-    if (max_value == 0) break 
-    
+    if (max_value == 0) break
     indices <- which(matrix_counts == max_value, arr.ind = TRUE)
     real_index <- indices[1, 1]
     sim_index <- indices[1, 2]
-    
     reclassification[sim_index] <- real_index
-    
     matrix_counts[real_index, ] <- -Inf
     matrix_counts[, sim_index] <- -Inf
   }
-  
-  
   cluster_map <- setNames(reclassification, seq_along(reclassification))
   sim_reclassify_cluster <- cluster_map[sim_cluster]
-  
   return(sim_reclassify_cluster)
-  
 }
 
 
 # generate sparial clustering in simulated data
 generate_sim_spatialCluster <- function(real_adata, sim_adata){
-  colnames(sim_adata$obs)[colnames(sim_adata$obs) == "col"] <- "array_col"
-  colnames(sim_adata$obs)[colnames(sim_adata$obs) == "row"] <- "array_row"
+  # colnames(sim_adata$obs)[colnames(sim_adata$obs) == "col"] <- "array_col"
+  # colnames(sim_adata$obs)[colnames(sim_adata$obs) == "row"] <- "array_row"
+  sim_adata$obs["array_col"] <- sim_adata$obs["col"]
+  sim_adata$obs["array_row"] <- sim_adata$obs["row"]
   sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
     list(counts = Matrix::t(sim_adata$layers[["counts"]])),
     colData = sim_adata$obs,
-    metadata = sim_adata$obsm
-    ))
-  
+    metadata = sim_adata$obsm))
   sim_sce <- BayesSpace::spatialPreprocess(sim_sce, n.PCs=7, platform="ST", n.HVGs=2000, log.normalize=FALSE)
-                              
   sim_sce <- BayesSpace::spatialCluster(sim_sce,
-    q=max(unique(real_adata$obs[,c("spatial_cluster")])), 
-    platform = "ST", 
+    q = max(unique(real_adata$obs[, c("spatial_cluster")])),
+    platform = "ST",
     d = 7,
     init.method = "mclust", model = "t", gamma = 2,
     nrep = 1000, burn.in = 100,

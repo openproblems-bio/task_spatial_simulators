@@ -236,12 +236,11 @@ resources:
 info: null
 status: "enabled"
 dependencies:
-- name: "h5ad/extract_uns_metadata"
+- name: "utils/extract_uns_metadata"
   repository:
     type: "github"
-    repo: "openproblems-bio/core"
+    repo: "openproblems-bio/openproblems"
     tag: "build/main"
-    path: "viash/core"
 - name: "methods/scdesign2"
   repository:
     type: "local"
@@ -269,6 +268,9 @@ dependencies:
 - name: "control_methods/negative"
   repository:
     type: "local"
+- name: "metrics/downstream"
+  repository:
+    type: "local"
 - name: "metrics/ks_statistic_gene_cell"
   repository:
     type: "local"
@@ -283,10 +285,9 @@ dependencies:
     type: "local"
 repositories:
 - type: "github"
-  name: "core"
-  repo: "openproblems-bio/core"
+  name: "openproblems"
+  repo: "openproblems-bio/openproblems"
   tag: "build/main"
-  path: "viash/core"
 license: "MIT"
 links:
   repository: "https://github.com/openproblems-bio/task_spatial_simulators"
@@ -324,10 +325,10 @@ build_info:
   output: "target/nextflow/workflows/run_benchmark"
   executable: "target/nextflow/workflows/run_benchmark/main.nf"
   viash_version: "0.9.0"
-  git_commit: "a3b43fa8de56cf89012c152325a57460f92e2bd2"
+  git_commit: "df6409b000a8951078f2d233bb961eb8a706315a"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
   dependencies:
-  - "target/dependencies/github/openproblems-bio/core/build/main/nextflow/h5ad/extract_uns_metadata"
+  - "target/dependencies/github/openproblems-bio/openproblems/build/main/nextflow/utils/extract_uns_metadata"
   - "target/nextflow/methods/scdesign2"
   - "target/nextflow/methods/scdesign3"
   - "target/nextflow/methods/sparsim"
@@ -337,6 +338,7 @@ build_info:
   - "target/nextflow/methods/zinbwave"
   - "target/nextflow/control_methods/positive"
   - "target/nextflow/control_methods/negative"
+  - "target/nextflow/metrics/downstream"
   - "target/nextflow/metrics/ks_statistic_gene_cell"
   - "target/nextflow/metrics/ks_statistic_sc_features"
   - "target/nextflow/metrics/ks_statistic_spatial"
@@ -367,10 +369,9 @@ package_config:
       dest: "resources_test"
   repositories:
   - type: "github"
-    name: "core"
-    repo: "openproblems-bio/core"
+    name: "openproblems"
+    repo: "openproblems-bio/openproblems"
     tag: "build/main"
-    path: "viash/core"
   viash_version: "0.9.0"
   source: "src"
   target: "target"

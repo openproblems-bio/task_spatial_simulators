@@ -1,3 +1,5 @@
+# TODO: Update precompute_downstream to store SVG, autocorrelation, and cell type proportions in the real spatial dataset in the proper format and use them directly
+
 ## VIASH START
 par <- list(
   input_spatial_dataset = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
@@ -19,12 +21,14 @@ input_simulated_sp <- anndata::read_h5ad(par$input_simulated_dataset)
 
 cat("spatial variable gene evaluation\n")
 real_svg <- generate_svg_sparkx(input_real_sp)
+# real_svg <- input_real_sp$varm["spatial_variable_genes"]
 sim_svg <- generate_svg_sparkx(input_simulated_sp)
 svg_precision <- calculate_precision(real_svg, sim_svg)
 svg_recall <- calculate_recall(real_svg, sim_svg)
 
 cat("cell type deconvolution evaluation\n")
 real_ct_prop <- CARD_processing(input_real_sp, input_sc)
+# real_ct_prop <- input_real_sp$obsm$celltype_proportions
 sim_ct_prop <- CARD_processing(input_simulated_sp, input_sc)
 ctdeconvolute_rmse <- generate_jds(real_ct_prop, sim_ct_prop)
 ctdeconcolute_jsd <- generate_rmse(real_ct_prop, sim_ct_prop)
@@ -34,6 +38,7 @@ counts <- input_simulated_sp$layers[["counts"]]
 logcounts <- log1p(counts)
 input_simulated_sp$layers[["logcounts"]] <- logcounts
 real_moransI <- generate_moransI(input_real_sp)
+# real_moransI <- input_real_sp$varm$spatial_autocorrelation
 sim_moransI <- generate_moransI(input_simulated_sp)
 crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)

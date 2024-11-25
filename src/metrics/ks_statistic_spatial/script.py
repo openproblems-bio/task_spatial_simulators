@@ -7,9 +7,9 @@ from scipy.stats import ks_2samp
 
 ## VIASH START
 par = {
-  'input_spatial_dataset': 'temp_prostate.srtsim.ks_statistic_spatial/_viash_par/input_spatial_dataset_1/output_sp.h5ad',
-  'input_simulated_dataset': 'temp_prostate.srtsim.ks_statistic_spatial/_viash_par/input_simulated_dataset_1/gastrulation.srtsim.generate_sim_spatialcluster.output_sp.h5ad',
-  'output': 'output.h5ad'
+  "input_spatial_dataset": "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
+  "input_simulated_dataset": "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad",  
+  "output": "output.h5ad"
 }
 meta = {
   'name': 'ks_statistic_spatial'
