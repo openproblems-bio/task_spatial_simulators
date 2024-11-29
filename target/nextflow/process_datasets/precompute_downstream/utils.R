@@ -71,8 +71,6 @@ calculate_recall <- function(real_svg, sim_svg) {
 
 # cell type deconvolution
 CARD_processing <- function(sp_adata, sc_adata){
-  requireNamespace("MuSiC", quietly = TRUE)
-  requireNamespace("CARD", quietly = TRUE)
   spatial_count <- Matrix::t(sp_adata$layers[["counts"]])
   spatial_location <- cbind.data.frame(
     x = sp_adata$obs$col,
@@ -88,7 +86,7 @@ CARD_processing <- function(sp_adata, sc_adata){
   )
   rownames(sc_meta) <- sc_meta$cellID
   rownames(spatial_location) <- colnames(spatial_count)
-  
+  print(89)
   CARD_obj <- CARD::createCARDObject(
 	  sc_count = sc_count,
 	  sc_meta = sc_meta,
@@ -99,15 +97,14 @@ CARD_processing <- function(sp_adata, sc_adata){
 	  sample.varname = "sampleInfo",
 	  minCountGene = 100,
 	  minCountSpot = 5) 
-  
+  print(100)
   CARD_obj <- CARD::CARD_deconvolution(CARD_object = CARD_obj)
-
+  print(102)
   Proportion_CARD <- as.matrix(CARD_obj@Proportion_CARD)
 
   return(Proportion_CARD)
 
 }
-
 
 generate_jds <- function(real, sim) {
   common_row_names <- intersect(rownames(real), rownames(sim))
