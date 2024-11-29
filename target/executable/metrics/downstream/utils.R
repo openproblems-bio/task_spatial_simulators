@@ -20,8 +20,6 @@ generate_moransI <- function(adata) {
 
 
 generate_cosine <- function(real, sim) {
-  requireNamespace("lsa", quietly = TRUE)
-
   real_new <- real[!is.na(real) & !is.na(sim)]
   sim_new <- sim[!is.na(real) & !is.na(sim)]
   similarity <- lsa::cosine(lsa::as.textmatrix(cbind(as.vector(real_new$Morans.I), as.vector(sim_new$Morans.I))))

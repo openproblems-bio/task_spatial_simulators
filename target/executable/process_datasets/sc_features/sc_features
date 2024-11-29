@@ -467,9 +467,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_github(c("SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets sc_features"
-LABEL org.opencontainers.image.created="2024-11-29T04:45:40Z"
+LABEL org.opencontainers.image.created="2024-11-29T05:01:17Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="daad0c5e601f7a079b9514de136d73f69bd3fbd8"
+LABEL org.opencontainers.image.revision="f0d111ed967f844c87ad59063a74d320b94130f9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

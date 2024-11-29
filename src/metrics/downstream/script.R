@@ -48,7 +48,6 @@ cat("spatial clustering evaluation\n")
 real_cluster <- input_real_sp$obs[, c("spatial_cluster")]
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 location <- rownames(input_simulated_sp)
-location
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
 
 # ART and NMI

@@ -3455,7 +3455,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0",
-    "git_commit" : "daad0c5e601f7a079b9514de136d73f69bd3fbd8",
+    "git_commit" : "f0d111ed967f844c87ad59063a74d320b94130f9",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3649,7 +3649,6 @@ cat("spatial clustering evaluation\\\\n")
 real_cluster <- input_real_sp\\$obs[, c("spatial_cluster")]
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 location <- rownames(input_simulated_sp)
-location
 sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
 
 # ART and NMI
