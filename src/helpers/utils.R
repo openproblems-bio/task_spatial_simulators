@@ -71,16 +71,17 @@ calculate_recall <- function(real_svg, sim_svg) {
   return(recall)
 }
 
-
 # cell type deconvolution
 CARD_processing <- function(sp_adata, sc_adata){
   requireNamespace("MuSiC", quietly = TRUE)
   requireNamespace("CARD", quietly = TRUE)
   spatial_count <- Matrix::t(sp_adata$layers[["counts"]])
   spatial_location <- cbind.data.frame(
-    x = as.numeric(sapply(strsplit(colnames(spatial_count),split="x"),"[",1)),
-    y = as.numeric(sapply(strsplit(colnames(spatial_count),split="x"),"[",2)))
-  # names(spatial_location) <- c("x", "y")
+    x = sp_adata$obs$col,
+    y = sp_adata$obs$row
+  )
+  spatial_location$col <- as.numeric(spatial_location$col)
+  spatial_location$row <- as.numeric(spatial_location$row)
   sc_count <- Matrix::t(sc_adata$layers[["counts"]])
   sc_meta <- cbind.data.frame(
     cellID = rownames(sc_adata),
