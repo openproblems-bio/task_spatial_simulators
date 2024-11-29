@@ -20,6 +20,7 @@ generate_moransI <- function(adata) {
 
 
 generate_cosine <- function(real, sim) {
+  requireNamespace("lsa", quietly = TRUE)
   real_new <- real[!is.na(real) & !is.na(sim)]
   sim_new <- sim[!is.na(real) & !is.na(sim)]
   similarity <- lsa::cosine(lsa::as.textmatrix(cbind(as.vector(real_new$Morans.I), as.vector(sim_new$Morans.I))))
@@ -70,23 +71,24 @@ calculate_recall <- function(real_svg, sim_svg) {
 }
 
 # cell type deconvolution
-CARD_processing <- function(sp_adata, sc_adata){
+CARD_processing <- function(sp_adata, sc_adata) {
+  requireNamespace("MuSiC", quietly = TRUE)
+  requireNamespace("CARD", quietly = TRUE)
+
   spatial_count <- Matrix::t(sp_adata$layers[["counts"]])
-  spatial_location <- cbind.data.frame(
-    x = sp_adata$obs$col,
-    y = sp_adata$obs$row
+  spatial_location <- data.frame(
+    x = as.numeric(sp_adata$obs$col),
+    y = as.numeric(sp_adata$obs$row)
   )
-  spatial_location$col <- as.numeric(spatial_location$col)
-  spatial_location$row <- as.numeric(spatial_location$row)
   sc_count <- Matrix::t(sc_adata$layers[["counts"]])
-  sc_meta <- cbind.data.frame(
+  sc_meta <- data.frame(
     cellID = rownames(sc_adata),
-    cellType = input_sc$obs$cell_type,
-    sampleInfo = input_sc$obs$donor_id
+    cellType = sc_adata$obs$cell_type,
+    sampleInfo = sc_adata$obs$donor_id
   )
   rownames(sc_meta) <- sc_meta$cellID
   rownames(spatial_location) <- colnames(spatial_count)
-  print(89)
+
   CARD_obj <- CARD::createCARDObject(
 	  sc_count = sc_count,
 	  sc_meta = sc_meta,
@@ -96,10 +98,9 @@ CARD_processing <- function(sp_adata, sc_adata){
 	  ct.select = unique(sc_meta$cellType),
 	  sample.varname = "sampleInfo",
 	  minCountGene = 100,
-	  minCountSpot = 5) 
-  print(100)
+	  minCountSpot = 5)
   CARD_obj <- CARD::CARD_deconvolution(CARD_object = CARD_obj)
-  print(102)
+
   Proportion_CARD <- as.matrix(CARD_obj@Proportion_CARD)
 
   return(Proportion_CARD)
