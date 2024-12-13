@@ -8,7 +8,8 @@ workflow auto {
 // construct list of methods
 methods = [
   scdesign2,
-  scdesign3,
+  scdesign3_nb,
+  scdesign3_poisson,
   sparsim,
   splatter,
   srtsim,
