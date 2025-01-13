@@ -3230,8 +3230,8 @@ meta = [
     "metrics" : [
       {
         "name" : "clustering_ari",
-        "label" : "clustering_ari",
-        "summary" : "ARI",
+        "label" : "ARI",
+        "summary" : "Adjusted rand index (ARI) measures the similarity between two clusters in real and simulated datasets.",
         "description" : "Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.\n",
         "references" : {
           "doi" : "10.1145/1553374.1553511"
@@ -3246,8 +3246,8 @@ meta = [
       },
       {
         "name" : "clustering_nmi",
-        "label" : "clustering_nmi",
-        "summary" : "NMI",
+        "label" : "NMI",
+        "summary" : "Normalized mutual information (NMI) measures of the mutual dependence between the real and simulated spatial clusters.",
         "description" : "Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].\n",
         "references" : {
           "doi" : "10.1145/1553374.1553511"
@@ -3262,8 +3262,8 @@ meta = [
       },
       {
         "name" : "svg_recall",
-        "label" : "svg_recall",
-        "summary" : "Recall",
+        "label" : "recall",
+        "summary" : "Recall measures the proportion of real SVG correctly identified in the simulated dataset.",
         "description" : "Recall used in identifying spatial variable genes, measuring the true positive rate.\n",
         "references" : {
           "doi" : "10.9735/2229-3981"
@@ -3274,8 +3274,8 @@ meta = [
       },
       {
         "name" : "svg_precision",
-        "label" : "svg_precision",
-        "summary" : "Precision (Spatial Variable Gene)",
+        "label" : "precision",
+        "summary" : "Precision measures the proportion of correctly identified items in simulated datasets.",
         "description" : "Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.\n",
         "references" : {
           "doi" : "10.9735/2229-3981"
@@ -3286,8 +3286,8 @@ meta = [
       },
       {
         "name" : "ctdeconvolute_rmse",
-        "label" : "ctdeconvolute_rmse",
-        "summary" : "RMSE",
+        "label" : "RMSE",
+        "summary" : "Root Mean Square deviation is calculated between the true and predicted proportion of per cell type.",
         "description" : "Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.\n",
         "references" : {
           "doi" : "10.5194/gmd-15-5481-2022"
@@ -3302,8 +3302,8 @@ meta = [
       },
       {
         "name" : "ctdeconcolute_jsd",
-        "label" : "ctdeconcolute_jsd",
-        "summary" : "JSD",
+        "label" : "JSD",
+        "summary" : "Jensen-Shannon divergence (JSD) is calculated between the true and predicted proportion per cell type in all spots.",
         "description" : "Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.\n",
         "references" : {
           "doi" : "10.21105/joss.00765"
@@ -3318,8 +3318,8 @@ meta = [
       },
       {
         "name" : "crosscor_mantel",
-        "label" : "crosscor_mantel",
-        "summary" : "Mantel Statistic",
+        "label" : "mantel_stat",
+        "summary" : "Mantel statistic is the test statistic for the Mantel test, which is a correlation coefficient calculated between bivariate Moran’s I of real dataset and that of in simulation dataset.",
         "description" : "Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.\n",
         "references" : {
           "doi" : "10.1111/2041-210X.12425"
@@ -3334,8 +3334,8 @@ meta = [
       },
       {
         "name" : "crosscor_cosine",
-        "label" : "crosscor_cosine",
-        "summary" : "Cosine Similarity",
+        "label" : "cosine",
+        "summary" : "Cosine similarity measures similarity between bivariate Moran’s I of real dataset and that of in simulation dataset.",
         "description" : "Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.\n",
         "references" : {
           "doi" : "10.1002/asi.20130"
@@ -3455,7 +3455,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.0",
-    "git_commit" : "bf1f6d13221baeab459bdadf6993650f03ddb1f2",
+    "git_commit" : "64393c22ce090f0820202d337bdd75283617a4c4",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

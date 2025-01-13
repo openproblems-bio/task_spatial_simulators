@@ -3186,7 +3186,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/splatter",
     "viash_version" : "0.9.0",
-    "git_commit" : "bf1f6d13221baeab459bdadf6993650f03ddb1f2",
+    "git_commit" : "64393c22ce090f0820202d337bdd75283617a4c4",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
