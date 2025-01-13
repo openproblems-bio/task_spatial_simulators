@@ -5,7 +5,7 @@ name: downstream
 info:
   metrics:
     - name: clustering_ari
-      label: ARI
+      label: clustering_ari
       summary: Adjusted rand index (ARI) measures the similarity between two clusters in real and simulated datasets.
       description: |
         Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.
@@ -18,7 +18,7 @@ info:
       max: +Inf
       maximize: true
     - name: clustering_nmi
-      label: NMI
+      label: clustering_nmi
       summary: Normalized mutual information (NMI) measures of the mutual dependence between the real and simulated spatial clusters.
       description: |
         Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].
@@ -31,7 +31,7 @@ info:
       max: 1
       maximize: true
     - name: svg_recall
-      label: recall
+      label: svg_recall
       summary: Recall measures the proportion of real SVG correctly identified in the simulated dataset.
       description: |
         Recall used in identifying spatial variable genes, measuring the true positive rate.
@@ -41,7 +41,7 @@ info:
       max: 1
       maximize: true
     - name: svg_precision
-      label: precision
+      label: svg_precision
       summary: Precision measures the proportion of correctly identified items in simulated datasets.
       description: |
         Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.
@@ -51,7 +51,7 @@ info:
       max: 1
       maximize: true
     - name: ctdeconvolute_rmse
-      label: RMSE
+      label: ctdeconvolute_rmse
       summary: Root Mean Square deviation is calculated between the true and predicted proportion of per cell type. 
       description: |
         Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.
@@ -64,7 +64,7 @@ info:
       max: +Inf
       maximize: false
     - name: ctdeconcolute_jsd
-      label: JSD
+      label: ctdeconcolute_jsd
       summary: Jensen-Shannon divergence (JSD) is calculated between the true and predicted proportion per cell type in all spots.
       description: |
         Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.
@@ -77,7 +77,7 @@ info:
       max: 1
       maximize: false
     - name: crosscor_mantel
-      label: mantel_stat
+      label: crosscor_mantel
       summary: Mantel statistic is the test statistic for the Mantel test, which is a correlation coefficient calculated between bivariate Moran’s I of real dataset and that of in simulation dataset.
       description: |
         Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.
@@ -90,7 +90,7 @@ info:
       max: 1
       maximize: true
     - name: crosscor_cosine
-      label: cosine
+      label: crosscor_cosine
       summary: Cosine similarity measures similarity between bivariate Moran’s I of real dataset and that of in simulation dataset.
       description: |
         Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.
