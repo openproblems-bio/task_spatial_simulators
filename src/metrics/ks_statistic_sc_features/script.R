@@ -22,9 +22,9 @@ lapply(packages, library, character.only = TRUE)
 
 ## VIASH START
 par <- list(
-  input_spatial_dataset = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
-  input_singlecell_dataset = "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad",
-  input_simulated_dataset = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad",
+  input_spatial_dataset = "temp_brain.zinbwave.ks_statistic_sc_features/_viash_par/input_spatial_dataset_1/output_sp.h5ad",
+  input_singlecell_dataset = "temp_brain.zinbwave.ks_statistic_sc_features/_viash_par/input_singlecell_dataset_1/output_sc.h5ad",
+  input_simulated_dataset = "temp_brain.zinbwave.ks_statistic_sc_features/_viash_par/input_simulated_dataset_1/brain.zinbwave.generate_sim_spatialcluster.output_sp.h5ad",
   output = "output.h5ad"
 )
 meta <- list(
@@ -75,10 +75,7 @@ real_scfeatures_result <- scFeatures::scFeatures(
 sim_scfeatures_result <- scFeatures::scFeatures(
   sim_log_count,
   sample = rep("sample1", ncol(sim_log_count)),
-  spatialCoords = list(
-    as.numeric(unlist(lapply(strsplit(colnames(sim_log_count) , "x"), `[`, 1))),
-    as.numeric(unlist(lapply(strsplit(colnames(sim_log_count) , "x"), `[`, 2)))
-  ),
+  spatialCoords = input_simulated_sp$obs[c("row", "col")],
   feature_types = feat_types,
   type = "spatial_t",
   species = sc_species,
