@@ -3381,7 +3381,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0",
-    "git_commit" : "8ad079fe6d08aac49ec280030d5b7f63cb10ca3c",
+    "git_commit" : "a58b18c52a3b0a0cbafd6cb1e4e6c333f17719ef",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3603,10 +3603,7 @@ real_scfeatures_result <- scFeatures::scFeatures(
 sim_scfeatures_result <- scFeatures::scFeatures(
   sim_log_count,
   sample = rep("sample1", ncol(sim_log_count)),
-  spatialCoords = list(
-    as.numeric(unlist(lapply(strsplit(colnames(sim_log_count) , "x"), \\`[\\`, 1))),
-    as.numeric(unlist(lapply(strsplit(colnames(sim_log_count) , "x"), \\`[\\`, 2)))
-  ),
+  spatialCoords = input_simulated_sp\\$obs[c("row", "col")],
   feature_types = feat_types,
   type = "spatial_t",
   species = sc_species,
