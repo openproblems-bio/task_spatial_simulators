@@ -3143,7 +3143,13 @@ meta = [
       }
     },
     {
-      "name" : "methods/scdesign3",
+      "name" : "methods/scdesign3_nb",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "methods/scdesign3_poisson",
       "repository" : {
         "type" : "local"
       }
@@ -3280,7 +3286,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "a58b18c52a3b0a0cbafd6cb1e4e6c333f17719ef",
+    "git_commit" : "7880691f5628685c063de5f40933e8d52c500de2",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3391,7 +3397,8 @@ meta = [
 meta["root_dir"] = getRootDir()
 include { extract_uns_metadata } from "${meta.root_dir}/dependencies/github/openproblems-bio/openproblems/build/main/nextflow/utils/extract_uns_metadata/main.nf"
 include { scdesign2 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign2/main.nf"
-include { scdesign3 } from "${meta.resources_dir}/../../../nextflow/methods/scdesign3/main.nf"
+include { scdesign3_nb } from "${meta.resources_dir}/../../../nextflow/methods/scdesign3_nb/main.nf"
+include { scdesign3_poisson } from "${meta.resources_dir}/../../../nextflow/methods/scdesign3_poisson/main.nf"
 include { sparsim } from "${meta.resources_dir}/../../../nextflow/methods/sparsim/main.nf"
 include { splatter } from "${meta.resources_dir}/../../../nextflow/methods/splatter/main.nf"
 include { srtsim } from "${meta.resources_dir}/../../../nextflow/methods/srtsim/main.nf"
@@ -3417,7 +3424,8 @@ workflow auto {
 // construct list of methods
 methods = [
   scdesign2,
-  scdesign3,
+  scdesign3_nb,
+  scdesign3_poisson,
   sparsim,
   splatter,
   srtsim,

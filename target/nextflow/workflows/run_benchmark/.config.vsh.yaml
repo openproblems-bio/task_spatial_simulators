@@ -244,7 +244,10 @@ dependencies:
 - name: "methods/scdesign2"
   repository:
     type: "local"
-- name: "methods/scdesign3"
+- name: "methods/scdesign3_nb"
+  repository:
+    type: "local"
+- name: "methods/scdesign3_poisson"
   repository:
     type: "local"
 - name: "methods/sparsim"
@@ -325,12 +328,13 @@ build_info:
   output: "target/nextflow/workflows/run_benchmark"
   executable: "target/nextflow/workflows/run_benchmark/main.nf"
   viash_version: "0.9.0"
-  git_commit: "a58b18c52a3b0a0cbafd6cb1e4e6c333f17719ef"
+  git_commit: "7880691f5628685c063de5f40933e8d52c500de2"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
   dependencies:
   - "target/dependencies/github/openproblems-bio/openproblems/build/main/nextflow/utils/extract_uns_metadata"
   - "target/nextflow/methods/scdesign2"
-  - "target/nextflow/methods/scdesign3"
+  - "target/nextflow/methods/scdesign3_nb"
+  - "target/nextflow/methods/scdesign3_poisson"
   - "target/nextflow/methods/sparsim"
   - "target/nextflow/methods/splatter"
   - "target/nextflow/methods/srtsim"
