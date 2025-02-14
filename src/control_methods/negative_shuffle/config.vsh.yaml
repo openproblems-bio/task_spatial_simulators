@@ -1,0 +1,21 @@
+__merge__: ../../api/comp_control_method.yaml
+
+name: negative_shuffle
+label: negative_shuffle
+summary: A negative control method which shuffles the input data.
+description: |
+  This control method shuffles the input data as a negative control.
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1.0.0
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

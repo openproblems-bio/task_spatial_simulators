@@ -16,7 +16,8 @@ methods = [
   symsim,
   zinbwave,
   positive,
-  negative
+  negative_shuffle,
+  negative_normal
 ]
 
 // construct list of metrics
