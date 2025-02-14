@@ -14,7 +14,9 @@ input <- anndata::read_h5ad(par$input)
 n_rows <- nrow(input)
 n_cols <- ncol(input)
 
-shuffled_values <- rnorm(n = n_rows * n_cols, mean = 10, sd = 5)
+shuffled_values <- rnorm(n = n_rows * n_cols, mean = 3, sd = 1)
+
+shuffled_values[shuffled_values < 0] <- abs(shuffled_values[shuffled_values < 0])
 
 shuffled_matrix <- matrix(shuffled_values, nrow = n_rows, ncol = n_cols)
 
