@@ -478,12 +478,12 @@ function ViashDockerfile {
 FROM openproblems/base_python:1.0.0
 ENTRYPOINT []
 RUN pip install --upgrade pip && \
-  pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy"
+  pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy" "dask==2024.12.1"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2025-02-14T11:10:36Z"
+LABEL org.opencontainers.image.created="2025-02-14T12:22:46Z"
 LABEL org.opencontainers.image.source="https://github.com/scipy/scipy/"
-LABEL org.opencontainers.image.revision="7880691f5628685c063de5f40933e8d52c500de2"
+LABEL org.opencontainers.image.revision="961f31612f0df514476071ade308b1c889a66efd"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
