@@ -1,10 +1,11 @@
 __merge__: ../../api/comp_control_method.yaml
 
-name: negative_shuffle
-label: negative_shuffle
-summary: A negative control method which shuffles the input data.
+name: negative_normal
+label: negative_normal
+summary: A negative control which generates normal distributed data.
 description: |
-  This control method shuffles the input data as a negative control.
+  This control method generates normal distributed data as a negative control.
+  The mean and the sd are defined by the mean and sd of the input data.
 
 resources:
   - type: r_script
