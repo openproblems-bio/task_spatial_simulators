@@ -44,21 +44,21 @@ should consist of similar cell types from similar tissues.
 ## API
 
 ``` mermaid
-flowchart LR
-  comp_process_datasets[/"Process Dataset"/]
-  file_dataset_sc("Single-Cell Dataset")
-  file_dataset_sp("Spatial Dataset")
-  comp_metric[/"Metric"/]
-  comp_control_method[/"Control Method"/]
-  comp_method[/"Method"/]
-  file_score("Score")
-  file_simulated_dataset("Solution")
+flowchart TB
+  comp_process_datasets[/"<a href='https://github.com/openproblems-bio/task_spatial_simulators#component-type-process-dataset'>Process Dataset</a>"/]
+  file_dataset_sc("<a href='https://github.com/openproblems-bio/task_spatial_simulators#file-format-single-cell-dataset'>Single-Cell Dataset</a>")
+  file_dataset_sp("<a href='https://github.com/openproblems-bio/task_spatial_simulators#file-format-spatial-dataset'>Spatial Dataset</a>")
+  comp_metric[/"<a href='https://github.com/openproblems-bio/task_spatial_simulators#component-type-metric'>Metric</a>"/]
+  comp_control_method[/"<a href='https://github.com/openproblems-bio/task_spatial_simulators#component-type-control-method'>Control Method</a>"/]
+  comp_method[/"<a href='https://github.com/openproblems-bio/task_spatial_simulators#component-type-method'>Method</a>"/]
+  file_score("<a href='https://github.com/openproblems-bio/task_spatial_simulators#file-format-score'>Score</a>")
+  file_simulated_dataset("<a href='https://github.com/openproblems-bio/task_spatial_simulators#file-format-solution'>Solution</a>")
   comp_process_datasets-->file_dataset_sc
   comp_process_datasets-->file_dataset_sp
   file_dataset_sc---comp_metric
   file_dataset_sp---comp_metric
-  file_dataset_sp---comp_control_method
-  file_dataset_sp---comp_method
+  file_dataset_sp-.-comp_control_method
+  file_dataset_sp-.-comp_method
   comp_metric-->file_score
   comp_control_method-->file_simulated_dataset
   comp_method-->file_simulated_dataset
@@ -82,10 +82,15 @@ Arguments:
 | `--output_sp` | `file` | (*Output*) An unprocessed spatial dataset as output by a dataset loader. Default: `$id/output_sp.h5ad`. |
 | `--dataset_id` | `string` | NA. |
 | `--dataset_name` | `string` | NA. |
-| `--dataset_url` | `string` | (*Optional*) NA. |
+| `--dataset_url_spatial` | `string` | (*Optional*) NA. |
+| `--dataset_url_singlecell` | `string` | (*Optional*) NA. |
 | `--dataset_reference` | `string` | (*Optional*) NA. |
-| `--dataset_summary` | `string` | NA. |
-| `--dataset_description` | `string` | NA. |
+| `--dataset_reference_spatial` | `string` | (*Optional*) NA. |
+| `--dataset_reference_singlecell` | `string` | (*Optional*) NA. |
+| `--dataset_summary_spatial` | `string` | NA. |
+| `--dataset_summary_singlecell` | `string` | NA. |
+| `--dataset_description_spatial` | `string` | NA. |
+| `--dataset_description_singlecell` | `string` | NA. |
 | `--dataset_organism` | `string` | NA. |
 | `--dataset_assay_spatial` | `string` | NA. |
 | `--dataset_assay_singlecell` | `string` | NA. |
