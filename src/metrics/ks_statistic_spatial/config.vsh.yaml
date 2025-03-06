@@ -81,8 +81,9 @@ engines:
         packages:
           - numpy
           - scikit-learn
-          - squidpy 
+          - squidpy
           - scipy
+          - dask==2024.12.1
 
 runners:
   - type: executable

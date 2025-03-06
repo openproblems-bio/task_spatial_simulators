@@ -1,7 +1,7 @@
 __merge__: ../../api/comp_method.yaml
 
-name: scdesign3
-label: scDesign3
+name: scdesign3_poisson
+label: scDesign3 (Poisson)
 summary: A probabilistic model that unifies the generation and inference for single-cell and spatial omics data
 description: |
   scDesign3 offers a probabilistic model that unifies the generation and inference
@@ -18,7 +18,7 @@ links:
 arguments:
   - name: "--family"
     type: "string"
-    default: nb
+    default: poisson
     description: |
       A string or a vector of strings of the marginal distribution. Must be one of 'binomial',
       'poisson', 'nb', 'zip', 'zinb' or 'gaussian', which represent 'poisson distribution',
@@ -33,7 +33,7 @@ arguments:
 
 resources:
   - type: r_script
-    path: script.R
+    path: ../scdesign3_nb/script.R
 
 engines:
   - type: docker
