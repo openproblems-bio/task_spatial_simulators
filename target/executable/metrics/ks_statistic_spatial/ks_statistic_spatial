@@ -481,9 +481,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy" "dask==2024.12.1"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2025-02-14T12:25:25Z"
+LABEL org.opencontainers.image.created="2025-03-06T10:30:17Z"
 LABEL org.opencontainers.image.source="https://github.com/scipy/scipy/"
-LABEL org.opencontainers.image.revision="6898c4ff9d29456247e3d1d93eaacd9f3adf0a12"
+LABEL org.opencontainers.image.revision="97872be127f696675dc90c2189ac7b11bf2ed8ee"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1168,8 +1168,8 @@ target_enrich_scale_real = target_enrich_real/np.max(target_enrich_real)
 target_enrich_sim = input_simulated_dataset.uns["celltype_nhood_enrichment"]["zscore"]
 target_enrich_scale_sim = target_enrich_sim/np.max(target_enrich_sim)
 
-#error_enrich = np.linalg.norm(target_enrich_sim - target_enrich_real)
-#error_enrich_scale = np.linalg.norm(target_enrich_scale_sim - target_enrich_scale_real)
+error_enrich = np.linalg.norm(target_enrich_sim - target_enrich_real)
+# error_enrich_scale = np.linalg.norm(target_enrich_scale_sim - target_enrich_scale_real)
     
 target_enrich_real_ds = target_enrich_real.flatten()
 target_enrich_sim_ds = target_enrich_sim.flatten()
@@ -1179,7 +1179,8 @@ ks_enrich, p_value = ks_2samp(target_enrich_real_ds, target_enrich_sim_ds)
 
 real_central_real = np.array(input_spatial_dataset.uns["celltype_centrality_scores"])
 real_central_sim = np.array(input_simulated_dataset.uns["celltype_centrality_scores"])
-    
+
+error_central = np.linalg.norm(real_central_sim - real_central_real)
 real_central_real_ds = real_central_real.flatten()
 real_central_sim_ds = real_central_sim.flatten()
 ks_central, p_value = ks_2samp(real_central_real_ds, real_central_sim_ds)
@@ -1192,7 +1193,7 @@ sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
 transition_matrix_real = get_trans(adata=input_spatial_dataset, ct=real)
 transition_matrix_sim = get_trans(adata=input_simulated_dataset, ct=sim)
 
-# error = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
+error_tran = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
 transition_matrix_real_ds = transition_matrix_real.flatten()
 transition_matrix_sim_ds = transition_matrix_sim.flatten()
 ks_stat_error, p_value = ks_2samp(transition_matrix_real_ds, transition_matrix_sim_ds)
@@ -1201,13 +1202,21 @@ ks_stat_error, p_value = ks_2samp(transition_matrix_real_ds, transition_matrix_s
 uns_metric_ids = [
   "ks_statistic_transition_matrix",
   "ks_statistic_central_score",
-  "ks_statistic_enrichment"
+  "ks_statistic_enrichment",
+
+  "ks_statistic_enrichment_scalef",
+  "ks_statistic_central_score_scalef",
+  "ks_statistic_transition_scalef"
 ]
 
 uns_metric_values = [
   ks_stat_error,
   ks_central,
-  ks_enrich
+  ks_enrich,
+
+  error_enrich,
+  error_central,
+  error_tran
 ]
 
 print("Write output AnnData to file", flush=True)

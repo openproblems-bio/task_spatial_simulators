@@ -3259,6 +3259,42 @@ meta = [
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_transition_scalef",
+        "label" : "Frobenius norm of transition matrix",
+        "summary" : "Frobenius norm of the transition matrix.",
+        "description" : "The Frobenius norm of the difference between two matrices is calculated to assess the closeness of the spatial pattern of cell types between the simulated and real data.\n",
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        },
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_central_score_scalef",
+        "label" : "Frobenius norm of centralized score",
+        "summary" : "Frobenius norm of the centralized score matrix.",
+        "description" : "The Frobenius norm of the difference between two matrices is calculated to assess the closeness of the spatial pattern of cell types between the simulated and real data.\n",
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        },
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
+      },
+      {
+        "name" : "ks_statistic_enrichment_scalef",
+        "label" : "Frobenius norm of neighborhood enrichment",
+        "summary" : "Frobenius norm of the neighborhood enrichment.",
+        "description" : "The Frobenius norm of the difference between two matrices is calculated to assess the closeness of the spatial pattern of cell types between the simulated and real data.\n",
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        },
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false
       }
     ],
     "type" : "metric",
@@ -3355,7 +3391,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_spatial",
     "viash_version" : "0.9.0",
-    "git_commit" : "6898c4ff9d29456247e3d1d93eaacd9f3adf0a12",
+    "git_commit" : "97872be127f696675dc90c2189ac7b11bf2ed8ee",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3581,8 +3617,8 @@ target_enrich_scale_real = target_enrich_real/np.max(target_enrich_real)
 target_enrich_sim = input_simulated_dataset.uns["celltype_nhood_enrichment"]["zscore"]
 target_enrich_scale_sim = target_enrich_sim/np.max(target_enrich_sim)
 
-#error_enrich = np.linalg.norm(target_enrich_sim - target_enrich_real)
-#error_enrich_scale = np.linalg.norm(target_enrich_scale_sim - target_enrich_scale_real)
+error_enrich = np.linalg.norm(target_enrich_sim - target_enrich_real)
+# error_enrich_scale = np.linalg.norm(target_enrich_scale_sim - target_enrich_scale_real)
     
 target_enrich_real_ds = target_enrich_real.flatten()
 target_enrich_sim_ds = target_enrich_sim.flatten()
@@ -3592,7 +3628,8 @@ ks_enrich, p_value = ks_2samp(target_enrich_real_ds, target_enrich_sim_ds)
 
 real_central_real = np.array(input_spatial_dataset.uns["celltype_centrality_scores"])
 real_central_sim = np.array(input_simulated_dataset.uns["celltype_centrality_scores"])
-    
+
+error_central = np.linalg.norm(real_central_sim - real_central_real)
 real_central_real_ds = real_central_real.flatten()
 real_central_sim_ds = real_central_sim.flatten()
 ks_central, p_value = ks_2samp(real_central_real_ds, real_central_sim_ds)
@@ -3605,7 +3642,7 @@ sim = np.array(input_simulated_dataset.obs['spatial_cluster'].values.tolist())
 transition_matrix_real = get_trans(adata=input_spatial_dataset, ct=real)
 transition_matrix_sim = get_trans(adata=input_simulated_dataset, ct=sim)
 
-# error = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
+error_tran = np.linalg.norm(transition_matrix_sim - transition_matrix_real)
 transition_matrix_real_ds = transition_matrix_real.flatten()
 transition_matrix_sim_ds = transition_matrix_sim.flatten()
 ks_stat_error, p_value = ks_2samp(transition_matrix_real_ds, transition_matrix_sim_ds)
@@ -3614,13 +3651,21 @@ ks_stat_error, p_value = ks_2samp(transition_matrix_real_ds, transition_matrix_s
 uns_metric_ids = [
   "ks_statistic_transition_matrix",
   "ks_statistic_central_score",
-  "ks_statistic_enrichment"
+  "ks_statistic_enrichment",
+
+  "ks_statistic_enrichment_scalef",
+  "ks_statistic_central_score_scalef",
+  "ks_statistic_transition_scalef"
 ]
 
 uns_metric_values = [
   ks_stat_error,
   ks_central,
-  ks_enrich
+  ks_enrich,
+
+  error_enrich,
+  error_central,
+  error_tran
 ]
 
 print("Write output AnnData to file", flush=True)

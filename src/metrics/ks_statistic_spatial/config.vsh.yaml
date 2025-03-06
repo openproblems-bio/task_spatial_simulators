@@ -38,6 +38,36 @@ info:
       min: -Inf
       max: +Inf
       maximize: false
+    - name: ks_statistic_transition_scalef
+      label: Frobenius norm of transition matrix
+      summary: Frobenius norm of the transition matrix.
+      description: |
+        The Frobenius norm of the difference between two matrices is calculated to assess the closeness of the spatial pattern of cell types between the simulated and real data.
+      references:
+        doi: 10.1201/9780429485572
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_central_score_scalef
+      label: Frobenius norm of centralized score
+      summary: Frobenius norm of the centralized score matrix.
+      description: |
+        The Frobenius norm of the difference between two matrices is calculated to assess the closeness of the spatial pattern of cell types between the simulated and real data.
+      references:
+        doi: 10.1201/9780429485572
+      min: -Inf
+      max: +Inf
+      maximize: false
+    - name: ks_statistic_enrichment_scalef
+      label: Frobenius norm of neighborhood enrichment
+      summary: Frobenius norm of the neighborhood enrichment.
+      description: |
+        The Frobenius norm of the difference between two matrices is calculated to assess the closeness of the spatial pattern of cell types between the simulated and real data.
+      references:
+        doi: 10.1201/9780429485572
+      min: -Inf
+      max: +Inf
+      maximize: false
 
 resources:
   - type: python_script
