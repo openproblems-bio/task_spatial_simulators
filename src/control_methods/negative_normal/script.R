@@ -4,24 +4,26 @@ par <- list(
   output = "simulated_dataset.h5ad"
 )
 meta <- list(
-  name = "negative"
+  name = "negative_normal"
 )
 ## VIASH END
 
 cat("Reading input files\n")
 input <- anndata::read_h5ad(par$input)
 
-count_matrix <- as.matrix(input$layers[['counts']])
+# generate random values
+n_rows <- nrow(input)
+n_cols <- ncol(input)
 
-shuffled_values <- sample(as.vector(count_matrix))
+values <- rnorm(n = n_rows * n_cols, mean = 3, sd = 1)
 
-shuffled_matrix <- matrix(shuffled_values, nrow = nrow(count_matrix), ncol = ncol(count_matrix))
-
+# make sure all values are positive
+values[values < 0] <- abs(values[values < 0])
 
 cat("Generate outoput file\n")
 output <- anndata::AnnData(
   layers = list(
-    counts = shuffled_matrix
+    counts = matrix(values, nrow = n_rows, ncol = n_cols)
   ),
   obs = input$obs[c("row", "col")],
   var = input$var,
