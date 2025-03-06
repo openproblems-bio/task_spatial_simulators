@@ -105,20 +105,36 @@ ks_statistic_mean_fraczero_genes <- ks::kde.test(x1 = mean_fraczero_real_genes, 
 
 cat("Combining metric values\n")
 uns_metric_ids <- c(
-  "ks_statistic_frac_zero_genes",
-  "ks_statistic_frac_zero_cells",
-  "ks_statistic_lib_size_cells",
-  "ks_statistic_efflib_size_cells",
-  "ks_statistic_tmm_cells",
-  "ks_statistic_scaled_var_cells",
-  "ks_statistic_scaled_mean_cells",
-  "ks_statistic_lib_fraczero_cells",
-  "ks_statistic_pearson_cells",
-  "ks_statistic_scaled_var_genes",
-  "ks_statistic_scaled_mean_genes",
-  "ks_statistic_pearson_genes",
-  "ks_statistic_mean_var_genes",
-  "ks_statistic_mean_fraczero_genes"
+  "ks_statistic_frac_zero_genes_zstat",
+  "ks_statistic_frac_zero_cells_zstat",
+  "ks_statistic_lib_size_cells_zstat",
+  "ks_statistic_efflib_size_cells_zstat",
+  "ks_statistic_tmm_cells_zstat",
+  "ks_statistic_scaled_var_cells_zstat",
+  "ks_statistic_scaled_mean_cells_zstat",
+  "ks_statistic_lib_fraczero_cells_zstat",
+  "ks_statistic_pearson_cells_zstat",
+  "ks_statistic_scaled_var_genes_zstat",
+  "ks_statistic_scaled_mean_genes_zstat",
+  "ks_statistic_pearson_genes_zstat",
+  "ks_statistic_mean_var_genes_zstat",
+  "ks_statistic_mean_fraczero_genes_zstat",
+
+  "ks_statistic_frac_zero_genes_tstat",
+  "ks_statistic_frac_zero_cells_tstat",
+  "ks_statistic_lib_size_cells_tstat",
+  "ks_statistic_efflib_size_cells_tstat",
+  "ks_statistic_tmm_cells_tstat",
+  "ks_statistic_scaled_var_cells_tstat",
+  "ks_statistic_scaled_mean_cells_tstat",
+  "ks_statistic_lib_fraczero_cells_tstat",
+  "ks_statistic_pearson_cells_tstat",
+  "ks_statistic_scaled_var_genes_tstat",
+  "ks_statistic_scaled_mean_genes_tstat",
+  "ks_statistic_pearson_genes_tstat",
+  "ks_statistic_mean_var_genes_tstat",
+  "ks_statistic_mean_fraczero_genes_tstat"
+
 )
 uns_metric_values <- c(
   ks_statistic_frac_zero_genes$zstat,
@@ -134,7 +150,22 @@ uns_metric_values <- c(
   ks_statistic_scaled_mean_genes$zstat,
   ks_statistic_pearson_genes$zstat,
   ks_statistic_mean_var_genes$zstat,
-  ks_statistic_mean_fraczero_genes$zstat
+  ks_statistic_mean_fraczero_genes$zstat,
+  
+  ks_statistic_frac_zero_genes$tstat,
+  ks_statistic_frac_zero_cells$tstat,
+  ks_statistic_lib_size_cells$tstat,
+  ks_statistic_efflib_size_cells$tstat,
+  ks_statistic_tmm_cells$tstat,
+  ks_statistic_scaled_var_cells$tstat,
+  ks_statistic_scaled_mean_cells$tstat,
+  ks_statistic_lib_fraczero_cells$tstat,
+  ks_statistic_pearson_cells$tstat,
+  ks_statistic_scaled_var_genes$tstat,
+  ks_statistic_scaled_mean_genes$tstat,
+  ks_statistic_pearson_genes$tstat,
+  ks_statistic_mean_var_genes$tstat,
+  ks_statistic_mean_fraczero_genes$tstat
 )
 
 cat("Writing output AnnData to file\n")

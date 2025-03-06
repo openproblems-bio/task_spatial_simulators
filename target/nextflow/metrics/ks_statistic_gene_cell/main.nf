@@ -3225,7 +3225,7 @@ meta = [
   "info" : {
     "metrics" : [
       {
-        "name" : "ks_statistic_frac_zero_genes",
+        "name" : "ks_statistic_frac_zero_genes_zstat",
         "label" : "Fraction of zeros per gene",
         "summary" : "KS statistic of the fraction of zeros per gene.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.\n",
@@ -3237,7 +3237,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_frac_zero_cells",
+        "name" : "ks_statistic_frac_zero_cells_zstat",
         "label" : "Fraction of zeros per cell",
         "summary" : "KS statistic of the fraction of zeros per spot (cell).",
         "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.\n",
@@ -3249,7 +3249,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_lib_size_cells",
+        "name" : "ks_statistic_lib_size_cells_zstat",
         "label" : "Library size",
         "summary" : "KS statistic of the library size.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.\n",
@@ -3261,7 +3261,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_efflib_size_cells",
+        "name" : "ks_statistic_efflib_size_cells_zstat",
         "label" : "Effective library size",
         "summary" : "KS statistic of the effective library size.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.\n",
@@ -3273,7 +3273,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_tmm_cells",
+        "name" : "ks_statistic_tmm_cells_zstat",
         "label" : "TMM",
         "summary" : "KS statistic of the weight trimmed mean of M-values normalization factor (TMM).",
         "description" : "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.\n",
@@ -3285,7 +3285,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_scaled_var_cells",
+        "name" : "ks_statistic_scaled_var_cells_zstat",
         "label" : "Scaled variance cell",
         "summary" : "KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
@@ -3297,7 +3297,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_scaled_mean_cells",
+        "name" : "ks_statistic_scaled_mean_cells_zstat",
         "label" : "Scaled mean cells",
         "summary" : "KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
@@ -3309,7 +3309,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_lib_fraczero_cells",
+        "name" : "ks_statistic_lib_fraczero_cells_zstat",
         "label" : "Library size vs fraction zero",
         "summary" : "KS statistic of the relationship between library size and the proportion of zeros per spot (cell).",
         "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.\n",
@@ -3321,7 +3321,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_pearson_cells",
+        "name" : "ks_statistic_pearson_cells_zstat",
         "label" : "Sample Pearson correlation",
         "summary" : "KS statistic of the sample Pearson correlation.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.\n",
@@ -3333,7 +3333,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_scaled_var_genes",
+        "name" : "ks_statistic_scaled_var_genes_zstat",
         "label" : "Scaled variance genes",
         "summary" : "KS statistic of the gene-level scaled variance of the expression matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
@@ -3345,7 +3345,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_scaled_mean_genes",
+        "name" : "ks_statistic_scaled_mean_genes_zstat",
         "label" : "Scaled mean genes",
         "summary" : "KS statistic of the gene-level scaled mean of the expression matrix.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
@@ -3357,7 +3357,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_pearson_genes",
+        "name" : "ks_statistic_pearson_genes_zstat",
         "label" : "Gene Pearson correlation",
         "summary" : "KS statistic of the gene Pearson correlation.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.\n",
@@ -3369,7 +3369,7 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_mean_var_genes",
+        "name" : "ks_statistic_mean_var_genes_zstat",
         "label" : "Mean vs variance",
         "summary" : "KS statistic of the relationship between mean expression and variance expression.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.\n",
@@ -3381,7 +3381,175 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_mean_fraczero_genes",
+        "name" : "ks_statistic_mean_fraczero_genes_zstat",
+        "label" : "Mean vs fraction zero",
+        "summary" : "KS statistic of the relationship between mean expression and the proportion of zero per gene.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_frac_zero_genes_tstat",
+        "label" : "Fraction of zeros per gene",
+        "summary" : "KS statistic of the fraction of zeros per gene.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_frac_zero_cells_tstat",
+        "label" : "Fraction of zeros per cell",
+        "summary" : "KS statistic of the fraction of zeros per spot (cell).",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_lib_size_cells_tstat",
+        "label" : "Library size",
+        "summary" : "KS statistic of the library size.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_efflib_size_cells_tstat",
+        "label" : "Effective library size",
+        "summary" : "KS statistic of the effective library size.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_tmm_cells_tstat",
+        "label" : "TMM",
+        "summary" : "KS statistic of the weight trimmed mean of M-values normalization factor (TMM).",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_scaled_var_cells_tstat",
+        "label" : "Scaled variance cell",
+        "summary" : "KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_scaled_mean_cells_tstat",
+        "label" : "Scaled mean cells",
+        "summary" : "KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_lib_fraczero_cells_tstat",
+        "label" : "Library size vs fraction zero",
+        "summary" : "KS statistic of the relationship between library size and the proportion of zeros per spot (cell).",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_pearson_cells_tstat",
+        "label" : "Sample Pearson correlation",
+        "summary" : "KS statistic of the sample Pearson correlation.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_scaled_var_genes_tstat",
+        "label" : "Scaled variance genes",
+        "summary" : "KS statistic of the gene-level scaled variance of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_scaled_mean_genes_tstat",
+        "label" : "Scaled mean genes",
+        "summary" : "KS statistic of the gene-level scaled mean of the expression matrix.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_pearson_genes_tstat",
+        "label" : "Gene Pearson correlation",
+        "summary" : "KS statistic of the gene Pearson correlation.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_mean_var_genes_tstat",
+        "label" : "Mean vs variance",
+        "summary" : "KS statistic of the relationship between mean expression and variance expression.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.\n",
+        "min" : "-Inf",
+        "max" : "+Inf",
+        "maximize" : false,
+        "references" : {
+          "doi" : "10.1201/9780429485572"
+        }
+      },
+      {
+        "name" : "ks_statistic_mean_fraczero_genes_tstat",
         "label" : "Mean vs fraction zero",
         "summary" : "KS statistic of the relationship between mean expression and the proportion of zero per gene.",
         "description" : "The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.\n",
@@ -3489,7 +3657,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.0",
-    "git_commit" : "97872be127f696675dc90c2189ac7b11bf2ed8ee",
+    "git_commit" : "a741028b7b5d7ceb1a442690bf081e2197915d8e",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3742,20 +3910,36 @@ ks_statistic_mean_fraczero_genes <- ks::kde.test(x1 = mean_fraczero_real_genes, 
 
 cat("Combining metric values\\\\n")
 uns_metric_ids <- c(
-  "ks_statistic_frac_zero_genes",
-  "ks_statistic_frac_zero_cells",
-  "ks_statistic_lib_size_cells",
-  "ks_statistic_efflib_size_cells",
-  "ks_statistic_tmm_cells",
-  "ks_statistic_scaled_var_cells",
-  "ks_statistic_scaled_mean_cells",
-  "ks_statistic_lib_fraczero_cells",
-  "ks_statistic_pearson_cells",
-  "ks_statistic_scaled_var_genes",
-  "ks_statistic_scaled_mean_genes",
-  "ks_statistic_pearson_genes",
-  "ks_statistic_mean_var_genes",
-  "ks_statistic_mean_fraczero_genes"
+  "ks_statistic_frac_zero_genes_zstat",
+  "ks_statistic_frac_zero_cells_zstat",
+  "ks_statistic_lib_size_cells_zstat",
+  "ks_statistic_efflib_size_cells_zstat",
+  "ks_statistic_tmm_cells_zstat",
+  "ks_statistic_scaled_var_cells_zstat",
+  "ks_statistic_scaled_mean_cells_zstat",
+  "ks_statistic_lib_fraczero_cells_zstat",
+  "ks_statistic_pearson_cells_zstat",
+  "ks_statistic_scaled_var_genes_zstat",
+  "ks_statistic_scaled_mean_genes_zstat",
+  "ks_statistic_pearson_genes_zstat",
+  "ks_statistic_mean_var_genes_zstat",
+  "ks_statistic_mean_fraczero_genes_zstat",
+
+  "ks_statistic_frac_zero_genes_tstat",
+  "ks_statistic_frac_zero_cells_tstat",
+  "ks_statistic_lib_size_cells_tstat",
+  "ks_statistic_efflib_size_cells_tstat",
+  "ks_statistic_tmm_cells_tstat",
+  "ks_statistic_scaled_var_cells_tstat",
+  "ks_statistic_scaled_mean_cells_tstat",
+  "ks_statistic_lib_fraczero_cells_tstat",
+  "ks_statistic_pearson_cells_tstat",
+  "ks_statistic_scaled_var_genes_tstat",
+  "ks_statistic_scaled_mean_genes_tstat",
+  "ks_statistic_pearson_genes_tstat",
+  "ks_statistic_mean_var_genes_tstat",
+  "ks_statistic_mean_fraczero_genes_tstat"
+
 )
 uns_metric_values <- c(
   ks_statistic_frac_zero_genes\\$zstat,
@@ -3771,7 +3955,22 @@ uns_metric_values <- c(
   ks_statistic_scaled_mean_genes\\$zstat,
   ks_statistic_pearson_genes\\$zstat,
   ks_statistic_mean_var_genes\\$zstat,
-  ks_statistic_mean_fraczero_genes\\$zstat
+  ks_statistic_mean_fraczero_genes\\$zstat,
+  
+  ks_statistic_frac_zero_genes\\$tstat,
+  ks_statistic_frac_zero_cells\\$tstat,
+  ks_statistic_lib_size_cells\\$tstat,
+  ks_statistic_efflib_size_cells\\$tstat,
+  ks_statistic_tmm_cells\\$tstat,
+  ks_statistic_scaled_var_cells\\$tstat,
+  ks_statistic_scaled_mean_cells\\$tstat,
+  ks_statistic_lib_fraczero_cells\\$tstat,
+  ks_statistic_pearson_cells\\$tstat,
+  ks_statistic_scaled_var_genes\\$tstat,
+  ks_statistic_scaled_mean_genes\\$tstat,
+  ks_statistic_pearson_genes\\$tstat,
+  ks_statistic_mean_var_genes\\$tstat,
+  ks_statistic_mean_fraczero_genes\\$tstat
 )
 
 cat("Writing output AnnData to file\\\\n")
