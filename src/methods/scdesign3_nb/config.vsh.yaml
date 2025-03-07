@@ -39,10 +39,10 @@ engines:
   - type: docker
     image: openproblems/base_r:1.0.0
     setup:
-      - type: apt
-        packages: [r-bioc-singlecellexperiment, git]
       - type: r
-        github: SONGDONGYUAN1994/scDesign3
+        github:
+        - SONGDONGYUAN1994/scDesign3
+        - rstudio/reticulate@v1.40.0
 
 runners:
   - type: executable
