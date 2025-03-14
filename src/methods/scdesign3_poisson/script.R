@@ -6,7 +6,7 @@ par <- list(
   input = "resources_test/spatialsimbench_mobnew/MOBNEW.rds",
   base = "domain",
   output = "simulated_dataset.h5ad",
-  family = "nb",
+  family = "poi",
   usebam = FALSE
 )
 meta <- list(
