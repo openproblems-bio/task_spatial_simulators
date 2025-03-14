@@ -1,4 +1,4 @@
-name: "negative"
+name: "negative_shuffle"
 namespace: "control_methods"
 version: "build_main"
 argument_groups:
@@ -173,9 +173,9 @@ resources:
 - type: "r_script"
   path: "script.R"
   is_executable: true
-label: "negative"
-summary: "A negative control method."
-description: "A negative control method.\n"
+label: "negative_shuffle"
+summary: "A negative control method which shuffles the input data."
+description: "This control method shuffles the input data as a negative control.\n"
 test_resources:
 - type: "python_script"
   path: "run_and_check_output.py"
@@ -240,21 +240,16 @@ engines:
   id: "docker"
   image: "openproblems/base_r:1.0.0"
   namespace_separator: "/"
-  setup:
-  - type: "r"
-    cran:
-    - "SRTsim"
-    bioc_force_install: false
   entrypoint: []
   cmd: null
 build_info:
-  config: "src/control_methods/negative/config.vsh.yaml"
+  config: "src/control_methods/negative_shuffle/config.vsh.yaml"
   runner: "nextflow"
   engine: "docker"
-  output: "target/nextflow/control_methods/negative"
-  executable: "target/nextflow/control_methods/negative/main.nf"
+  output: "target/nextflow/control_methods/negative_shuffle"
+  executable: "target/nextflow/control_methods/negative_shuffle/main.nf"
   viash_version: "0.9.0"
-  git_commit: "0159cd5ba34ad8f6dbde5cac14ceb646f1366d73"
+  git_commit: "ded84776d349413438209b2fa0aedf5b8e1a1e67"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"

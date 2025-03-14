@@ -3191,7 +3191,13 @@ meta = [
       }
     },
     {
-      "name" : "control_methods/negative",
+      "name" : "control_methods/negative_shuffle",
+      "repository" : {
+        "type" : "local"
+      }
+    },
+    {
+      "name" : "control_methods/negative_normal",
       "repository" : {
         "type" : "local"
       }
@@ -3286,7 +3292,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "0159cd5ba34ad8f6dbde5cac14ceb646f1366d73",
+    "git_commit" : "ded84776d349413438209b2fa0aedf5b8e1a1e67",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3405,7 +3411,8 @@ include { srtsim } from "${meta.resources_dir}/../../../nextflow/methods/srtsim/
 include { symsim } from "${meta.resources_dir}/../../../nextflow/methods/symsim/main.nf"
 include { zinbwave } from "${meta.resources_dir}/../../../nextflow/methods/zinbwave/main.nf"
 include { positive } from "${meta.resources_dir}/../../../nextflow/control_methods/positive/main.nf"
-include { negative } from "${meta.resources_dir}/../../../nextflow/control_methods/negative/main.nf"
+include { negative_shuffle } from "${meta.resources_dir}/../../../nextflow/control_methods/negative_shuffle/main.nf"
+include { negative_normal } from "${meta.resources_dir}/../../../nextflow/control_methods/negative_normal/main.nf"
 include { downstream } from "${meta.resources_dir}/../../../nextflow/metrics/downstream/main.nf"
 include { ks_statistic_gene_cell } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_gene_cell/main.nf"
 include { ks_statistic_sc_features } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_sc_features/main.nf"
@@ -3432,7 +3439,8 @@ methods = [
   symsim,
   zinbwave,
   positive,
-  negative
+  negative_shuffle,
+  negative_normal
 ]
 
 // construct list of metrics

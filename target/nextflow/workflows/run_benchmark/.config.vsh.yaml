@@ -268,7 +268,10 @@ dependencies:
 - name: "control_methods/positive"
   repository:
     type: "local"
-- name: "control_methods/negative"
+- name: "control_methods/negative_shuffle"
+  repository:
+    type: "local"
+- name: "control_methods/negative_normal"
   repository:
     type: "local"
 - name: "metrics/downstream"
@@ -328,7 +331,7 @@ build_info:
   output: "target/nextflow/workflows/run_benchmark"
   executable: "target/nextflow/workflows/run_benchmark/main.nf"
   viash_version: "0.9.0"
-  git_commit: "0159cd5ba34ad8f6dbde5cac14ceb646f1366d73"
+  git_commit: "ded84776d349413438209b2fa0aedf5b8e1a1e67"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
   dependencies:
   - "target/dependencies/github/openproblems-bio/openproblems/build/main/nextflow/utils/extract_uns_metadata"
@@ -341,7 +344,8 @@ build_info:
   - "target/nextflow/methods/symsim"
   - "target/nextflow/methods/zinbwave"
   - "target/nextflow/control_methods/positive"
-  - "target/nextflow/control_methods/negative"
+  - "target/nextflow/control_methods/negative_shuffle"
+  - "target/nextflow/control_methods/negative_normal"
   - "target/nextflow/metrics/downstream"
   - "target/nextflow/metrics/ks_statistic_gene_cell"
   - "target/nextflow/metrics/ks_statistic_sc_features"
