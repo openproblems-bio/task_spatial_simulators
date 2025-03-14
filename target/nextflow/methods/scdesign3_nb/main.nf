@@ -3203,32 +3203,12 @@ meta = [
       "namespace_separator" : "/",
       "setup" : [
         {
-          "type" : "apt",
-          "packages" : [
-            "r-bioc-singlecellexperiment",
-            "git"
-          ],
-          "interactive" : false
-        },
-        {
           "type" : "r",
-          "cran" : [
-            "anndata",
-            "reticulate==1.4.0"
-          ],
           "github" : [
             "SONGDONGYUAN1994/scDesign3",
             "rstudio/reticulate@v1.40.0"
           ],
           "bioc_force_install" : false
-        },
-        {
-          "type" : "python",
-          "user" : false,
-          "packages" : [
-            "anndata"
-          ],
-          "upgrade" : true
         }
       ]
     }
@@ -3239,7 +3219,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3_nb",
     "viash_version" : "0.9.0",
-    "git_commit" : "e5754d2f5735ff920e18c99f73c86947a06f520c",
+    "git_commit" : "0159cd5ba34ad8f6dbde5cac14ceb646f1366d73",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
