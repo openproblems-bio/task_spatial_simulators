@@ -485,12 +485,13 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'if (!requireNamespace("SummarizedExperiment", quietly = TRUE)) BiocManager::install("SummarizedExperiment")' && \
   Rscript -e 'if (!requireNamespace("TOAST", quietly = TRUE)) BiocManager::install("TOAST")' && \
   Rscript -e 'remotes::install_cran(c("ks", "resample", "reshape2", "spatstat", "anndata"), repos = "https://cran.rstudio.com")' && \
-  Rscript -e 'remotes::install_github(c("xuranw/MuSiC", "YingMa0107/CARD", "SydneyBioX/scFeatures", "rstudio/reticulate@v1.40.0"), repos = "https://cran.rstudio.com")'
+  Rscript -e 'remotes::install_github(c("xuranw/MuSiC", "YingMa0107/CARD", "SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")' && \
+  Rscript -e 'remotes::install_url(c("https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2025-03-14T12:10:17Z"
+LABEL org.opencontainers.image.created="2025-03-14T12:18:32Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks/"
-LABEL org.opencontainers.image.revision="ded84776d349413438209b2fa0aedf5b8e1a1e67"
+LABEL org.opencontainers.image.revision="e681cf16a64689f1a93fd7dd1d5c97428c55c4d9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

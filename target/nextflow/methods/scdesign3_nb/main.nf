@@ -3205,8 +3205,10 @@ meta = [
         {
           "type" : "r",
           "github" : [
-            "SONGDONGYUAN1994/scDesign3",
-            "rstudio/reticulate@v1.40.0"
+            "SONGDONGYUAN1994/scDesign3"
+          ],
+          "url" : [
+            "https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz"
           ],
           "bioc_force_install" : false
         }
@@ -3219,7 +3221,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3_nb",
     "viash_version" : "0.9.0",
-    "git_commit" : "ded84776d349413438209b2fa0aedf5b8e1a1e67",
+    "git_commit" : "e681cf16a64689f1a93fd7dd1d5c97428c55c4d9",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

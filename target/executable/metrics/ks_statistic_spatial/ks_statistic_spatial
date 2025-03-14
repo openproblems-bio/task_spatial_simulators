@@ -481,9 +481,9 @@ RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy" "dask==2024.12.1"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2025-03-14T12:10:18Z"
+LABEL org.opencontainers.image.created="2025-03-14T12:18:33Z"
 LABEL org.opencontainers.image.source="https://github.com/scipy/scipy/"
-LABEL org.opencontainers.image.revision="ded84776d349413438209b2fa0aedf5b8e1a1e67"
+LABEL org.opencontainers.image.revision="e681cf16a64689f1a93fd7dd1d5c97428c55c4d9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

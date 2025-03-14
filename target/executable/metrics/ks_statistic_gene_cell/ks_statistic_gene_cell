@@ -484,9 +484,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("ks", "resample", "reshape2", "proxyC"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_gene_cell"
-LABEL org.opencontainers.image.created="2025-03-14T12:10:19Z"
+LABEL org.opencontainers.image.created="2025-03-14T12:18:34Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks"
-LABEL org.opencontainers.image.revision="ded84776d349413438209b2fa0aedf5b8e1a1e67"
+LABEL org.opencontainers.image.revision="e681cf16a64689f1a93fd7dd1d5c97428c55c4d9"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
