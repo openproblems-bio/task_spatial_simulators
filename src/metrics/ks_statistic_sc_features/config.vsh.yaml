@@ -71,10 +71,12 @@ engines:
           - resample
           - reshape2
           - spatstat
+          - anndata
         github: 
           - xuranw/MuSiC
           - YingMa0107/CARD
           - SydneyBioX/scFeatures
+          - rstudio/reticulate@v1.40.0
 
 runners:
   - type: executable
