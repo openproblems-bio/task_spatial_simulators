@@ -42,7 +42,15 @@ engines:
       - type: apt
         packages: [r-bioc-singlecellexperiment, git]
       - type: r
-        github: SONGDONGYUAN1994/scDesign3
+        github: 
+        - SONGDONGYUAN1994/scDesign3
+        - rstudio/reticulate@v1.40.0
+        cran:
+        - anndata
+        - reticulate==1.4.0
+      - type: python
+        packages:
+          - anndata
 
 runners:
   - type: executable

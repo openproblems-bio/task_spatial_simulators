@@ -3213,7 +3213,8 @@ meta = [
         {
           "type" : "r",
           "github" : [
-            "SONGDONGYUAN1994/scDesign3"
+            "SONGDONGYUAN1994/scDesign3",
+            "rstudio/reticulate@v1.40.0"
           ],
           "bioc_force_install" : false
         }
@@ -3226,7 +3227,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3_poisson",
     "viash_version" : "0.9.0",
-    "git_commit" : "bfda83641861c0eed126f4a238dc288b038d45c7",
+    "git_commit" : "7008d17da3372ced4703d283e97449d698cbc216",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3387,7 +3388,7 @@ options(.viash_orig_warn)
 rm(.viash_orig_warn)
 
 ## VIASH END
-
+reticulate::py_config()
 cat("Read input files\\\\n")
 input <- anndata::read_h5ad(par\\$input)
 

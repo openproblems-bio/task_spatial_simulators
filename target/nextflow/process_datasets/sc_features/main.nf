@@ -3048,7 +3048,8 @@ meta = [
         {
           "type" : "r",
           "github" : [
-            "SydneyBioX/scFeatures"
+            "SydneyBioX/scFeatures",
+            "rstudio/reticulate@v1.40.0"
           ],
           "bioc_force_install" : false
         }
@@ -3061,7 +3062,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/sc_features",
     "viash_version" : "0.9.0",
-    "git_commit" : "bfda83641861c0eed126f4a238dc288b038d45c7",
+    "git_commit" : "7008d17da3372ced4703d283e97449d698cbc216",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

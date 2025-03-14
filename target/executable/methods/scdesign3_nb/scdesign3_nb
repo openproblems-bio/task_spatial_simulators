@@ -504,12 +504,16 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
-  Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")'
+  Rscript -e 'remotes::install_cran(c("anndata", "reticulate==1.4.0"), repos = "https://cran.rstudio.com")' && \
+  Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3", "rstudio/reticulate@v1.40.0"), repos = "https://cran.rstudio.com")'
+
+RUN pip install --upgrade pip && \
+  pip install --upgrade --no-cache-dir "anndata"
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3_nb"
-LABEL org.opencontainers.image.created="2025-03-06T13:45:44Z"
+LABEL org.opencontainers.image.created="2025-03-14T00:58:58Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="bfda83641861c0eed126f4a238dc288b038d45c7"
+LABEL org.opencontainers.image.revision="7008d17da3372ced4703d283e97449d698cbc216"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1154,7 +1158,7 @@ options(.viash_orig_warn)
 rm(.viash_orig_warn)
 
 ## VIASH END
-
+reticulate::py_config()
 cat("Read input files\\n")
 input <- anndata::read_h5ad(par\$input)
 

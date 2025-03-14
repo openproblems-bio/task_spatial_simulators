@@ -13,7 +13,7 @@ meta <- list(
   name = "scdesign3"
 )
 ## VIASH END
-
+reticulate::py_config()
 cat("Read input files\n")
 input <- anndata::read_h5ad(par$input)
 
