@@ -3385,7 +3385,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0",
-    "git_commit" : "e681cf16a64689f1a93fd7dd1d5c97428c55c4d9",
+    "git_commit" : "0ac6b16e5e1ca015caff41382afd57f8292192ab",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3512,13 +3512,33 @@ requireNamespace("SingleCellExperiment", quietly = TRUE)
 requireNamespace("SummarizedExperiment", quietly = TRUE)
 
 
-packages <- c("SingleCellExperiment", "SummarizedExperiment",
-              "concaveman", "sp", "Matrix", "methods",
-              "ggplot2", "ggcorrplot", "MuSiC", "fields",
-              "MCMCpack", "dplyr", "sf", "RANN", "stats",
-              "reshape2", "RColorBrewer", "scatterpie",
-              "grDevices", "nnls", "pbmcapply", "spatstat",
-              "gtools", "RcppML", "NMF")
+packages <- c(
+  "SingleCellExperiment",
+  "SummarizedExperiment",
+  "concaveman",
+  "sp",
+  "Matrix",
+  "methods",
+  "ggplot2",
+  "ggcorrplot",
+  "MuSiC",
+  "fields",
+  "MCMCpack",
+  "dplyr",
+  "sf",
+  "RANN",
+  "stats",
+  "reshape2",
+  "RColorBrewer",
+  "scatterpie",
+  "grDevices",
+  "nnls",
+  "pbmcapply",
+  "spatstat",
+  "gtools",
+  "RcppML",
+  "NMF"
+)
 
 # Load each package
 lapply(packages, library, character.only = TRUE)
@@ -3575,8 +3595,12 @@ real_log_count <- t(input_real_sp\\$layers[["logcounts"]])
 real_prob_matrix <- input_real_sp\\$obsm[["celltype_proportions"]]
 colnames(real_prob_matrix) <- paste0("ct", seq_len(ncol(real_prob_matrix)))
 
-sim_log_count <- scuttle::normalizeCounts(t(input_simulated_sp\\$layers[["counts"]]))
-real_log_count <- real_log_count[ , colnames(real_log_count)  %in% rownames(real_prob_matrix)]
+sim_log_count <- scuttle::normalizeCounts(t(input_simulated_sp\\$layers[[
+  "counts"
+]]))
+real_log_count <- real_log_count[,
+  colnames(real_log_count) %in% rownames(real_prob_matrix)
+]
 
 
 sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
@@ -3587,10 +3611,31 @@ sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
 
 sim_log_count <- SummarizedExperiment::assay(sim_sce, "logcounts")
 
+# helper function
+try_kde_test <- function(x1, x2) {
+  tryCatch(
+    {
+      ks::kde.test(x1 = x1, x2 = x2)
+    },
+    error = function(e) {
+      warning(
+        "Caught error in ks::kde.test: ",
+        e\\$message,
+        "\\\\n\\\\nTrying again with some random noise added to the vectors."
+      )
+      x1_noise <- stats::runif(length(x1), -1e-8, 1e-8)
+      x2_noise <- stats::runif(length(x2), -1e-8, 1e-8)
+      ks::kde.test(x1 = x1 + x1_noise, x2 = x2 + x2_noise)
+    }
+  )
+}
+
 # build cell type deconvolution in simulated data ## error
 sim_prob_matrix <- CARD_processing(input_real_sp, input_sc)
 
-sim_log_count <- sim_log_count[ , colnames(sim_log_count) %in% rownames(sim_prob_matrix)]
+sim_log_count <- sim_log_count[,
+  colnames(sim_log_count) %in% rownames(sim_prob_matrix)
+]
 
 feat_types <- c("L_stats", "celltype_interaction", "nn_correlation", "morans_I")
 
@@ -3601,7 +3646,7 @@ real_scfeatures_result <- scFeatures::scFeatures(
   feature_types = feat_types,
   type = "spatial_t",
   species = sc_species,
-  spotProbability =  t(real_prob_matrix)
+  spotProbability = t(real_prob_matrix)
 )
 
 sim_scfeatures_result <- scFeatures::scFeatures(
@@ -3611,13 +3656,25 @@ sim_scfeatures_result <- scFeatures::scFeatures(
   feature_types = feat_types,
   type = "spatial_t",
   species = sc_species,
-  spotProbability =  t(sim_prob_matrix)
+  spotProbability = t(sim_prob_matrix)
 )
 
-ks_statistic_L_stats <- ks::kde.test(x1 = as.numeric(real_scfeatures_result\\$L_stats), x2 = as.numeric(sim_scfeatures_result\\$L_stats))
-ks_statistic_celltype_interaction <- ks::kde.test(x1 = as.numeric(real_scfeatures_result\\$celltype_interaction), x2 = as.numeric(sim_scfeatures_result\\$celltype_interaction))
-ks_statistic_nn_correlation <- ks::kde.test(x1 = as.numeric(real_scfeatures_result\\$nn_correlation), x2 = as.numeric(sim_scfeatures_result\\$nn_correlation))
-ks_statistic_morans_I <- ks::kde.test(x1 = as.numeric(real_scfeatures_result\\$morans_I), x2 = as.numeric(sim_scfeatures_result\\$morans_I))
+ks_statistic_L_stats <- try_kde_test(
+  x1 = as.numeric(real_scfeatures_result\\$L_stats),
+  x2 = as.numeric(sim_scfeatures_result\\$L_stats)
+)
+ks_statistic_celltype_interaction <- try_kde_test(
+  x1 = as.numeric(real_scfeatures_result\\$celltype_interaction),
+  x2 = as.numeric(sim_scfeatures_result\\$celltype_interaction)
+)
+ks_statistic_nn_correlation <- try_kde_test(
+  x1 = as.numeric(real_scfeatures_result\\$nn_correlation),
+  x2 = as.numeric(sim_scfeatures_result\\$nn_correlation)
+)
+ks_statistic_morans_I <- try_kde_test(
+  x1 = as.numeric(real_scfeatures_result\\$morans_I),
+  x2 = as.numeric(sim_scfeatures_result\\$morans_I)
+)
 
 cat("Combining metric values\\\\n")
 uns_metric_ids <- c(
