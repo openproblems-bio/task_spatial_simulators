@@ -497,16 +497,16 @@ function ViashDockerfile {
 
   if [[ "$engine_id" == "docker" ]]; then
     cat << 'VIASHDOCKER'
-FROM openproblems/base_r:1.0.0
+FROM openproblems/base_r:1
 ENTRYPOINT []
 RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
   Rscript -e 'remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")' && \
   Rscript -e 'remotes::install_url(c("https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3_nb"
-LABEL org.opencontainers.image.created="2025-03-14T13:04:53Z"
+LABEL org.opencontainers.image.created="2025-06-11T11:42:43Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="0ac6b16e5e1ca015caff41382afd57f8292192ab"
+LABEL org.opencontainers.image.revision="36a15650c3d9f29c8050242725ee27296a2da132"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

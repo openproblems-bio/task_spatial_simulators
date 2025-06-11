@@ -475,15 +475,15 @@ function ViashDockerfile {
 
   if [[ "$engine_id" == "docker" ]]; then
     cat << 'VIASHDOCKER'
-FROM openproblems/base_python:1.0.0
+FROM openproblems/base_python:1
 ENTRYPOINT []
 RUN pip install --upgrade pip && \
   pip install --upgrade --no-cache-dir "numpy" "scikit-learn" "squidpy" "scipy" "dask==2024.12.1"
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_spatial"
-LABEL org.opencontainers.image.created="2025-03-14T13:04:53Z"
+LABEL org.opencontainers.image.created="2025-06-11T11:42:42Z"
 LABEL org.opencontainers.image.source="https://github.com/scipy/scipy/"
-LABEL org.opencontainers.image.revision="0ac6b16e5e1ca015caff41382afd57f8292192ab"
+LABEL org.opencontainers.image.revision="36a15650c3d9f29c8050242725ee27296a2da132"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -475,7 +475,7 @@ function ViashDockerfile {
 
   if [[ "$engine_id" == "docker" ]]; then
     cat << 'VIASHDOCKER'
-FROM openproblems/base_r:1.0.0
+FROM openproblems/base_r:1
 ENTRYPOINT []
 RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
   Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
@@ -484,9 +484,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("ks", "resample", "reshape2", "proxyC"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_gene_cell"
-LABEL org.opencontainers.image.created="2025-03-14T13:04:54Z"
+LABEL org.opencontainers.image.created="2025-06-11T11:42:41Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks"
-LABEL org.opencontainers.image.revision="0ac6b16e5e1ca015caff41382afd57f8292192ab"
+LABEL org.opencontainers.image.revision="36a15650c3d9f29c8050242725ee27296a2da132"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

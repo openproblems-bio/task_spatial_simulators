@@ -477,16 +477,16 @@ function ViashDockerfile {
 
   if [[ "$engine_id" == "docker" ]]; then
     cat << 'VIASHDOCKER'
-FROM openproblems/base_r:1.0.0
+FROM openproblems/base_r:1
 ENTRYPOINT []
 RUN apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y r-bioc-splatter && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2025-03-14T13:04:54Z"
+LABEL org.opencontainers.image.created="2025-06-11T11:42:42Z"
 LABEL org.opencontainers.image.source="https://github.com/Oshlack/splatter"
-LABEL org.opencontainers.image.revision="0ac6b16e5e1ca015caff41382afd57f8292192ab"
+LABEL org.opencontainers.image.revision="36a15650c3d9f29c8050242725ee27296a2da132"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

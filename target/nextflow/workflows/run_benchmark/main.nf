@@ -3292,7 +3292,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "0ac6b16e5e1ca015caff41382afd57f8292192ab",
+    "git_commit" : "36a15650c3d9f29c8050242725ee27296a2da132",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
