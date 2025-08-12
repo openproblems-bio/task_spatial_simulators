@@ -24,8 +24,7 @@ methods = [
 metrics = [
   downstream, 
   ks_statistic_gene_cell,
-  ks_statistic_sc_features,
-  ks_statistic_spatial
+  ks_statistic_sc_features
 ]
 
 workflow run_wf {
