@@ -62,7 +62,6 @@ dependencies:
   - name: metrics/downstream
   - name: metrics/ks_statistic_gene_cell
   - name: metrics/ks_statistic_sc_features
-  - name: metrics/ks_statistic_spatial
   - name: process_datasets/generate_sim_spatialcluster
 runners:
   - type: nextflow
