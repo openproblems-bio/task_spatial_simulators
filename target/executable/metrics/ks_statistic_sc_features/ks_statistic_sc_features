@@ -489,9 +489,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_url(c("https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2025-06-11T11:42:41Z"
+LABEL org.opencontainers.image.created="2025-08-12T12:53:34Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks/"
-LABEL org.opencontainers.image.revision="36a15650c3d9f29c8050242725ee27296a2da132"
+LABEL org.opencontainers.image.revision="534cde12b4205872d16020a96738dde54bce3647"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1228,10 +1228,7 @@ ks_statistic_L_stats <- try_kde_test(
   x1 = as.numeric(real_scfeatures_result\$L_stats),
   x2 = as.numeric(sim_scfeatures_result\$L_stats)
 )
-ks_statistic_celltype_interaction <- try_kde_test(
-  x1 = as.numeric(real_scfeatures_result\$celltype_interaction),
-  x2 = as.numeric(sim_scfeatures_result\$celltype_interaction)
-)
+
 ks_statistic_nn_correlation <- try_kde_test(
   x1 = as.numeric(real_scfeatures_result\$nn_correlation),
   x2 = as.numeric(sim_scfeatures_result\$nn_correlation)
@@ -1244,14 +1241,14 @@ ks_statistic_morans_I <- try_kde_test(
 cat("Combining metric values\\n")
 uns_metric_ids <- c(
   "ks_statistic_L_stats",
-  "ks_statistic_celltype_interaction",
+  
   "ks_statistic_nn_correlation",
   "ks_statistic_morans_I"
 )
 
 uns_metric_values <- c(
   ks_statistic_L_stats\$zstat,
-  ks_statistic_celltype_interaction\$zstat,
+  
   ks_statistic_nn_correlation\$zstat,
   ks_statistic_morans_I\$zstat
 )

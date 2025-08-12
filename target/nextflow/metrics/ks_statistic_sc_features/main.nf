@@ -3241,18 +3241,6 @@ meta = [
         }
       },
       {
-        "name" : "ks_statistic_celltype_interaction",
-        "label" : "Celltype interaction",
-        "summary" : "KS statistic of the celltype interaction",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the Celltype interaction in the real datasets versus the Celltype interaction in the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
         "name" : "ks_statistic_nn_correlation",
         "label" : "Library size",
         "summary" : "KS statistic of the library size.",
@@ -3385,7 +3373,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.0",
-    "git_commit" : "36a15650c3d9f29c8050242725ee27296a2da132",
+    "git_commit" : "534cde12b4205872d16020a96738dde54bce3647",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3663,10 +3651,7 @@ ks_statistic_L_stats <- try_kde_test(
   x1 = as.numeric(real_scfeatures_result\\$L_stats),
   x2 = as.numeric(sim_scfeatures_result\\$L_stats)
 )
-ks_statistic_celltype_interaction <- try_kde_test(
-  x1 = as.numeric(real_scfeatures_result\\$celltype_interaction),
-  x2 = as.numeric(sim_scfeatures_result\\$celltype_interaction)
-)
+
 ks_statistic_nn_correlation <- try_kde_test(
   x1 = as.numeric(real_scfeatures_result\\$nn_correlation),
   x2 = as.numeric(sim_scfeatures_result\\$nn_correlation)
@@ -3679,14 +3664,14 @@ ks_statistic_morans_I <- try_kde_test(
 cat("Combining metric values\\\\n")
 uns_metric_ids <- c(
   "ks_statistic_L_stats",
-  "ks_statistic_celltype_interaction",
+  
   "ks_statistic_nn_correlation",
   "ks_statistic_morans_I"
 )
 
 uns_metric_values <- c(
   ks_statistic_L_stats\\$zstat,
-  ks_statistic_celltype_interaction\\$zstat,
+  
   ks_statistic_nn_correlation\\$zstat,
   ks_statistic_morans_I\\$zstat
 )

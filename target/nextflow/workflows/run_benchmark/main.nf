@@ -3221,12 +3221,6 @@ meta = [
       }
     },
     {
-      "name" : "metrics/ks_statistic_spatial",
-      "repository" : {
-        "type" : "local"
-      }
-    },
-    {
       "name" : "process_datasets/generate_sim_spatialcluster",
       "repository" : {
         "type" : "local"
@@ -3292,7 +3286,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.0",
-    "git_commit" : "36a15650c3d9f29c8050242725ee27296a2da132",
+    "git_commit" : "534cde12b4205872d16020a96738dde54bce3647",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3416,7 +3410,6 @@ include { negative_normal } from "${meta.resources_dir}/../../../nextflow/contro
 include { downstream } from "${meta.resources_dir}/../../../nextflow/metrics/downstream/main.nf"
 include { ks_statistic_gene_cell } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_gene_cell/main.nf"
 include { ks_statistic_sc_features } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_sc_features/main.nf"
-include { ks_statistic_spatial } from "${meta.resources_dir}/../../../nextflow/metrics/ks_statistic_spatial/main.nf"
 include { generate_sim_spatialcluster } from "${meta.resources_dir}/../../../nextflow/process_datasets/generate_sim_spatialcluster/main.nf"
 
 // inner workflow

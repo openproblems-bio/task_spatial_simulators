@@ -48,7 +48,7 @@ viash run src/process_datasets/generate_sim_spatialcluster/config.vsh.yaml -- \
   --output_sp "$OUTPUT_DIR/simulated_dataset_processed.h5ad"
 
 # run a metric
-viash run src/metrics/ks_statistic_spatial/config.vsh.yaml -- \
+viash run src/metrics/ks_statistic_gene_cell/config.vsh.yaml -- \
   --input_spatial_dataset "$OUTPUT_DIR/dataset_sp.h5ad" \
   --input_singlecell_dataset "$OUTPUT_DIR/dataset_sc.h5ad" \
   --input_simulated_dataset "$OUTPUT_DIR/simulated_dataset_processed.h5ad" \

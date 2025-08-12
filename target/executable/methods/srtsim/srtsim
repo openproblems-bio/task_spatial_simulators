@@ -482,9 +482,9 @@ RUN Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packag
   Rscript -e 'remotes::install_cran(c("SRTsim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods srtsim"
-LABEL org.opencontainers.image.created="2025-06-11T11:42:42Z"
+LABEL org.opencontainers.image.created="2025-08-12T12:53:33Z"
 LABEL org.opencontainers.image.source="https://github.com/xzhoulab/srtsim"
-LABEL org.opencontainers.image.revision="36a15650c3d9f29c8050242725ee27296a2da132"
+LABEL org.opencontainers.image.revision="534cde12b4205872d16020a96738dde54bce3647"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
