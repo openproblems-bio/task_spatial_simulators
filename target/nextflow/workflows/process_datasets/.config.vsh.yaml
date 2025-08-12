@@ -401,8 +401,9 @@ build_info:
   output: "target/nextflow/workflows/process_datasets"
   executable: "target/nextflow/workflows/process_datasets/main.nf"
   viash_version: "0.9.0"
-  git_commit: "534cde12b4205872d16020a96738dde54bce3647"
+  git_commit: "a2c579edf72a19765c5fb81c968965662c609341"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
+  git_tag: "test-1-ga2c579e"
   dependencies:
   - "target/nextflow/process_datasets/convert"
   - "target/nextflow/process_datasets/sc_features"
