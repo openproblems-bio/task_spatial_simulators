@@ -18,16 +18,6 @@ info:
       maximize: false
       references:
         doi: 10.1201/9780429485572
-    - name: ks_statistic_celltype_interaction
-      label: Celltype interaction
-      summary: KS statistic of the celltype interaction
-      description: |
-        The Kolmogorov-Smirnov statistic comparing the Celltype interaction in the real datasets versus the Celltype interaction in the simulated datasets.
-      min: -Inf
-      max: +Inf
-      maximize: false
-      references:
-        doi: 10.1201/9780429485572
     - name: ks_statistic_nn_correlation
       label: Library size
       summary: KS statistic of the library size.
