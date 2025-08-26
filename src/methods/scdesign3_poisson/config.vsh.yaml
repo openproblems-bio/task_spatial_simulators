@@ -39,13 +39,8 @@ engines:
   - type: docker
     image: openproblems/base_r:1
     setup:
-      - type: apt
-        packages: [r-bioc-singlecellexperiment, git]
       - type: r
-        url:
-          - https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz
-        github: 
-          - SONGDONGYUAN1994/scDesign3
+        bioc: [scDesign3, SingleCellExperiment]
 
 runners:
   - type: executable

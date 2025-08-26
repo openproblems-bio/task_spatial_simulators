@@ -40,10 +40,7 @@ engines:
     image: openproblems/base_r:1
     setup:
       - type: r
-        github:
-          - SONGDONGYUAN1994/scDesign3
-        url:
-          - https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz
+        bioc: scDesign3
 
 runners:
   - type: executable
