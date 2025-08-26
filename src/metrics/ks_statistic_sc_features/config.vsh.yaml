@@ -66,8 +66,6 @@ engines:
           - xuranw/MuSiC
           - YingMa0107/CARD
           - SydneyBioX/scFeatures
-        url:
-          - https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz
 
 runners:
   - type: executable
