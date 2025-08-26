@@ -1,0 +1,30 @@
+__merge__: ../../api/comp_control_method.yaml
+
+name: positive
+label: positive
+summary: A positive control method.
+description: |
+  A positive control method. 
+# references:
+#   doi: 
+
+# info:
+#   documentation_url: https://xzhoulab.github.io/SRTsim
+#   repository_url: https://github.com/xzhoulab/srtsim
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: r
+        cran: SRTsim
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

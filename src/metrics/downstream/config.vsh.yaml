@@ -1,0 +1,139 @@
+__merge__: ../../api/comp_metric.yaml
+
+name: downstream
+
+info:
+  metrics:
+    - name: clustering_ari
+      label: clustering_ari
+      summary: Adjusted rand index (ARI) measures the similarity between two clusters in real and simulated datasets.
+      description: |
+        Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.
+      references: 
+        doi: 10.1145/1553374.1553511
+      links:
+        documentation: https://cran.r-project.org/web/packages/aricode/index.html
+        repository: https://github.com/jchiquet/aricode
+      min: -Inf
+      max: +Inf
+      maximize: true
+    - name: clustering_nmi
+      label: clustering_nmi
+      summary: Normalized mutual information (NMI) measures of the mutual dependence between the real and simulated spatial clusters.
+      description: |
+        Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].
+      references:
+        doi: 10.1145/1553374.1553511
+      links:
+        documentation: https://cran.r-project.org/web/packages/aricode/index.html
+        repository: https://github.com/jchiquet/aricode
+      min: 0
+      max: 1
+      maximize: true
+    - name: svg_recall
+      label: svg_recall
+      summary: Recall measures the proportion of real SVG correctly identified in the simulated dataset.
+      description: |
+        Recall used in identifying spatial variable genes, measuring the true positive rate.
+      references:
+        doi: 10.9735/2229-3981
+      min: 0
+      max: 1
+      maximize: true
+    - name: svg_precision
+      label: svg_precision
+      summary: Precision measures the proportion of correctly identified items in simulated datasets.
+      description: |
+        Precision used in identifying spatial variable genes, measuring the accuracy of positive predictions.
+      references:
+        doi: 10.9735/2229-3981
+      min: 0
+      max: 1
+      maximize: true
+    - name: ctdeconvolute_rmse
+      label: ctdeconvolute_rmse
+      summary: Root Mean Square deviation is calculated between the true and predicted proportion of per cell type. 
+      description: |
+        Root Mean Squared Error used in cell type deconvolution to measure the difference between observed and predicted values.
+      references: 
+        doi: 10.5194/gmd-15-5481-2022
+      links:
+        documentation: https://cran.r-project.org/web/packages/Metrics/Metrics.pdf
+        repository: https://github.com/mfrasco/Metrics
+      min: 0
+      max: +Inf
+      maximize: false
+    - name: ctdeconcolute_jsd
+      label: ctdeconcolute_jsd
+      summary: Jensen-Shannon divergence (JSD) is calculated between the true and predicted proportion per cell type in all spots.
+      description: |
+        Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.
+      references: 
+        doi: 10.21105/joss.00765
+      links:
+        documentation: https://cran.r-project.org/web/packages/philentropy/index.html
+        repository: https://github.com/drostlab/philentropy
+      min: 0
+      max: 1
+      maximize: false
+    - name: crosscor_mantel
+      label: crosscor_mantel
+      summary: Mantel statistic is the test statistic for the Mantel test, which is a correlation coefficient calculated between bivariate Moran’s I of real dataset and that of in simulation dataset.
+      description: |
+        Mantel statistic used in spatial cross-correlation to test the correlation between two distance matrices.
+      references: 
+        doi: 10.1111/2041-210X.12425
+      links:
+        documentation: https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html
+        repository: https://github.com/vegandevs/vegan
+      min: -1
+      max: 1
+      maximize: true
+    - name: crosscor_cosine
+      label: crosscor_cosine
+      summary: Cosine similarity measures similarity between bivariate Moran’s I of real dataset and that of in simulation dataset.
+      description: |
+        Cosine similarity used in spatial cross-correlation to measure the cosine of the angle between two non-zero vectors.
+      references: 
+        doi: 10.1002/asi.20130
+      links:
+        documentation: https://cran.r-project.org/web/packages/lsa/lsa.pdf
+        repository: https://github.com/cran/lsa
+      min: 0
+      max: 1
+      maximize: true
+
+resources:
+  - type: r_script
+    path: script.R
+  - path: /src/helpers/utils.R
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: r
+        bioc: 
+          - scater
+          - BayesSpace
+          - TOAST
+        cran:
+          - aricode
+          - anndata
+          - reshape2
+          - dplyr
+          - philentropy
+          - lsa
+          - vegan
+          - Metrics
+        github:
+          - xzhoulab/SPARK
+          - YingMa0107/CARD
+          - xuranw/MuSiC
+          - stevexniu/spots
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

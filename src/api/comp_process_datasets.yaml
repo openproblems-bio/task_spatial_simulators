@@ -1,0 +1,124 @@
+info:
+  type: process_dataset
+  type_info:
+    label: Process Dataset
+    summary: Preprocessing of spatial transcriptomics and single-cell transcriptomics datasets.
+    description: |
+      A component for preprocessing spatial transcriptomics and single-cell transcriptomics for
+      use in the spatial simulator benchmark.
+
+argument_groups:
+  - name: Inputs
+    arguments:
+      - type: file
+        name: --input_sc
+        description: Raw single-cell dataset
+        example: resources_test/spatialsimbench_mobnew/MOBNEW_sc.rds
+        required: true
+      - type: file
+        name: --input_sp
+        description: Raw spatial dataset
+        example: resources_test/spatialsimbench_mobnew/MOBNEW.rds
+        required: true
+
+  - name: Outputs
+    arguments:
+      - name: --output_sc
+        __merge__: file_dataset_sc.yaml
+        description: Processed single-cell dataset
+        direction: output
+        required: true
+        default: '$id/output_sc.h5ad'
+      - name: --output_sp
+        __merge__: file_dataset_sp.yaml
+        description: Processed spatial dataset
+        direction: output
+        required: true
+        default: '$id/output_sp.h5ad'
+
+  - name: Dataset metadata
+    description: Metadata about the dataset, used for documentation and provenance.
+    arguments:
+      - type: string
+        name: --dataset_id
+        description: A unique identifier for the dataset.
+        required: true
+        info: 
+          test_default: mobnew
+      - type: string
+        name: --dataset_name
+        description: A human-readable name for the dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_url_spatial
+        description: Link to the original source of the spatial dataset.
+        required: false
+      - type: string
+        name: --dataset_url_singlecell
+        description: Link to the original source of the single-cell dataset.
+        required: false
+      - type: string
+        name: --dataset_reference
+        description: A doi for the dataset.
+        example: 10.1234/s1234-5678-9012-3
+        required: false
+      - type: string
+        name: --dataset_reference_spatial
+        description: A doi for the spatial dataset.
+        example: 10.1234/s1234-5678-9012-3
+        required: false
+      - type: string
+        name: --dataset_reference_singlecell
+        description: A doi for the single-cell dataset.
+        example: 10.1234/s1234-5678-9012-3
+        required: false
+      - type: string
+        name: --dataset_summary_spatial
+        description: Short description of the spatial dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_summary_singlecell
+        description: Short description of the single-cell dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_description_spatial
+        description: Long description of the spatial dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_description_singlecell
+        description: Long description of the single-cell dataset.
+        required: true
+        info: 
+          test_default: MOBNEW
+      - type: string
+        name: --dataset_organism
+        description: Organism from which the dataset was derived.
+        required: true
+        info:
+          test_default: mus_musculus
+      - type: string
+        name: --dataset_assay_spatial
+        description: "Assay used for spatial data."
+        required: true
+        info:
+          test_default: Visium
+      - type: string
+        name: --dataset_assay_singlecell
+        description: "Assay used for single-cell data."
+        required: true
+        info:
+          test_default: Chromium
+
+test_resources:
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+  - path: /resources_test/spatialsimbench_mobnew
+    dest: resources_test/spatialsimbench_mobnew

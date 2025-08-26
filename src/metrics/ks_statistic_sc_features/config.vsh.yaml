@@ -1,0 +1,76 @@
+__merge__: ../../api/comp_metric.yaml
+
+name: ks_statistic_sc_features
+
+links:
+  documentation: https://cran.r-project.org/web/packages/ks/ks.pdf
+  repository: https://cran.r-project.org/web/packages/ks/
+
+info:
+  metrics:
+    - name: ks_statistic_L_stats
+      label: L statistics
+      summary: KS statistic of the L statistics
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the L statistics in the real datasets versus the L statistics in the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_nn_correlation
+      label: Library size
+      summary: KS statistic of the library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simmulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_morans_I
+      label: Effective library size
+      summary: KS statistic of the effective library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the morans I of the real datasets versus the morans I of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+
+resources:
+  - type: r_script
+    path: script.R
+  - path: /src/helpers/utils.R
+
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: r
+        bioc:
+          - edger
+          - scater
+          - SingleCellExperiment
+          - SummarizedExperiment
+          - TOAST
+        cran:
+          - ks
+          - resample
+          - reshape2
+          - spatstat
+          - anndata
+        github: 
+          - xuranw/MuSiC
+          - YingMa0107/CARD
+          - SydneyBioX/scFeatures
+        url:
+          - https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

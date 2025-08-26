@@ -1,0 +1,30 @@
+__merge__: ../../api/comp_method.yaml
+
+name: zinbwave
+label: zinbwave
+summary: A general and flexible method for signal extraction from single-cell RNA-seq data
+description: |
+  ZINB-WaVE is a general and flexible zero-inflated negative binomial model, which leads to low-dimensional representations 
+  of the data that account for zero inflation (dropouts), over-dispersion, and the count nature of the data.
+references:
+  doi: 10.1038/s41467-017-02554-5
+links:
+  documentation: https://bioconductor.org/packages/release/bioc/html/zinbwave.html
+  repository: https://github.com/drisso/zinbwave
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: apt
+        packages: [r-bioc-splatter, r-bioc-zinbwave, r-bioc-singlecellexperiment]
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]
+

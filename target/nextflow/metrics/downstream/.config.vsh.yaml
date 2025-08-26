@@ -1,0 +1,581 @@
+name: "downstream"
+namespace: "metrics"
+version: "0.1.0"
+argument_groups:
+- name: "Arguments"
+  arguments:
+  - type: "file"
+    name: "--input_spatial_dataset"
+    label: "Spatial Dataset"
+    summary: "An unprocessed spatial dataset as output by a dataset loader."
+    description: "This dataset contains raw counts and metadata as output by a dataset\
+      \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        - type: "integer"
+          name: "logcounts"
+          description: "Log-transformed counts"
+          required: true
+        obs:
+        - type: "double"
+          name: "col"
+          description: "Column index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "row"
+          description: "Row index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "sizeFactor"
+          description: "Size factor for the cell."
+          required: true
+        - type: "integer"
+          name: "spatial_cluster"
+          description: "Spatial cluster assignment for the cell."
+          required: true
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        obsm:
+        - type: "float"
+          name: "celltype_proportions"
+          description: "Spot-by-celltype matrix of celltype proportions generated\
+            \ by CARD."
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--input_singlecell_dataset"
+    label: "Single-Cell Dataset"
+    summary: "An unprocessed single-cell dataset as output by a dataset loader."
+    description: "This dataset contains raw counts and metadata as output by a dataset\
+      \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        obs:
+        - type: "string"
+          name: "cell_type"
+          description: "Classification of the cell type based on its characteristics\
+            \ and function within the tissue or organism."
+          required: false
+        - type: "string"
+          name: "donor_id"
+          description: "Identifier for the donor from whom the cell sample is obtained."
+          required: false
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--input_simulated_dataset"
+    label: "Solution"
+    summary: "The solution for the test data"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        obs:
+        - type: "double"
+          name: "col"
+          description: "Column index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "row"
+          description: "Row index of the cell in the spatial grid."
+          required: true
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+        - name: "method_id"
+          type: "string"
+          description: "A unique identifier for the method used to generate the dataset."
+          required: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--output"
+    label: "Score"
+    summary: "File indicating the score of a metric."
+    info:
+      file_type: "h5ad"
+      slots:
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset"
+          required: true
+        - type: "string"
+          name: "method_id"
+          description: "A unique identifier for the method"
+          required: true
+        - type: "string"
+          name: "metric_ids"
+          description: "One or more unique metric identifiers"
+          multiple: true
+          required: true
+        - type: "double"
+          name: "metric_values"
+          description: "The metric values obtained for the given prediction. Must\
+            \ be of same length as 'metric_ids'."
+          multiple: true
+          required: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/score.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ";"
+resources:
+- type: "r_script"
+  path: "script.R"
+  is_executable: true
+- type: "file"
+  path: "utils.R"
+test_resources:
+- type: "python_script"
+  path: "run_and_check_output.py"
+  is_executable: true
+- type: "python_script"
+  path: "check_config.py"
+  is_executable: true
+- type: "file"
+  path: "resources_test/spatialsimbench_mobnew"
+  dest: "resources_test/spatialsimbench_mobnew"
+info:
+  metrics:
+  - name: "clustering_ari"
+    label: "clustering_ari"
+    summary: "Adjusted rand index (ARI) measures the similarity between two clusters\
+      \ in real and simulated datasets."
+    description: "Adjusted Rand Index used in spatial clustering to measure the similarity\
+      \ between two data clusterings, adjusted for chance.\n"
+    references:
+      doi: "10.1145/1553374.1553511"
+    links:
+      documentation: "https://cran.r-project.org/web/packages/aricode/index.html"
+      repository: "https://github.com/jchiquet/aricode"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: true
+  - name: "clustering_nmi"
+    label: "clustering_nmi"
+    summary: "Normalized mutual information (NMI) measures of the mutual dependence\
+      \ between the real and simulated spatial clusters."
+    description: "Normalized Mutual Information used in spatial clustering to measure\
+      \ the agreement between two different clusterings, scaled to [0, 1].\n"
+    references:
+      doi: "10.1145/1553374.1553511"
+    links:
+      documentation: "https://cran.r-project.org/web/packages/aricode/index.html"
+      repository: "https://github.com/jchiquet/aricode"
+    min: 0
+    max: 1
+    maximize: true
+  - name: "svg_recall"
+    label: "svg_recall"
+    summary: "Recall measures the proportion of real SVG correctly identified in the\
+      \ simulated dataset."
+    description: "Recall used in identifying spatial variable genes, measuring the\
+      \ true positive rate.\n"
+    references:
+      doi: "10.9735/2229-3981"
+    min: 0
+    max: 1
+    maximize: true
+  - name: "svg_precision"
+    label: "svg_precision"
+    summary: "Precision measures the proportion of correctly identified items in simulated\
+      \ datasets."
+    description: "Precision used in identifying spatial variable genes, measuring\
+      \ the accuracy of positive predictions.\n"
+    references:
+      doi: "10.9735/2229-3981"
+    min: 0
+    max: 1
+    maximize: true
+  - name: "ctdeconvolute_rmse"
+    label: "ctdeconvolute_rmse"
+    summary: "Root Mean Square deviation is calculated between the true and predicted\
+      \ proportion of per cell type."
+    description: "Root Mean Squared Error used in cell type deconvolution to measure\
+      \ the difference between observed and predicted values.\n"
+    references:
+      doi: "10.5194/gmd-15-5481-2022"
+    links:
+      documentation: "https://cran.r-project.org/web/packages/Metrics/Metrics.pdf"
+      repository: "https://github.com/mfrasco/Metrics"
+    min: 0
+    max: "+Inf"
+    maximize: false
+  - name: "ctdeconcolute_jsd"
+    label: "ctdeconcolute_jsd"
+    summary: "Jensen-Shannon divergence (JSD) is calculated between the true and predicted\
+      \ proportion per cell type in all spots."
+    description: "Jensen-Shannon Divergence used in cell type deconvolution to measure\
+      \ the similarity between two probability distributions.\n"
+    references:
+      doi: "10.21105/joss.00765"
+    links:
+      documentation: "https://cran.r-project.org/web/packages/philentropy/index.html"
+      repository: "https://github.com/drostlab/philentropy"
+    min: 0
+    max: 1
+    maximize: false
+  - name: "crosscor_mantel"
+    label: "crosscor_mantel"
+    summary: "Mantel statistic is the test statistic for the Mantel test, which is\
+      \ a correlation coefficient calculated between bivariate Moran’s I of real dataset\
+      \ and that of in simulation dataset."
+    description: "Mantel statistic used in spatial cross-correlation to test the correlation\
+      \ between two distance matrices.\n"
+    references:
+      doi: "10.1111/2041-210X.12425"
+    links:
+      documentation: "https://search.r-project.org/CRAN/refmans/vegan/html/mantel.html"
+      repository: "https://github.com/vegandevs/vegan"
+    min: -1
+    max: 1
+    maximize: true
+  - name: "crosscor_cosine"
+    label: "crosscor_cosine"
+    summary: "Cosine similarity measures similarity between bivariate Moran’s I of\
+      \ real dataset and that of in simulation dataset."
+    description: "Cosine similarity used in spatial cross-correlation to measure the\
+      \ cosine of the angle between two non-zero vectors.\n"
+    references:
+      doi: "10.1002/asi.20130"
+    links:
+      documentation: "https://cran.r-project.org/web/packages/lsa/lsa.pdf"
+      repository: "https://github.com/cran/lsa"
+    min: 0
+    max: 1
+    maximize: true
+  type: "metric"
+  type_info:
+    label: "Metric"
+    summary: "A metric."
+    description: "A metric for evaluating spatial transcriptomics simulation methods.\n"
+status: "enabled"
+scope:
+  image: "public"
+  target: "public"
+repositories:
+- type: "github"
+  name: "openproblems"
+  repo: "openproblems-bio/openproblems"
+  tag: "build/main"
+license: "MIT"
+links:
+  repository: "https://github.com/openproblems-bio/task_spatial_simulators"
+  docker_registry: "ghcr.io"
+runners:
+- type: "executable"
+  id: "executable"
+  docker_setup_strategy: "ifneedbepullelsecachedbuild"
+- type: "nextflow"
+  id: "nextflow"
+  directives:
+    label:
+    - "midtime"
+    - "midmem"
+    - "midcpu"
+    tag: "$id"
+  auto:
+    simplifyInput: true
+    simplifyOutput: false
+    transcript: false
+    publish: false
+  config:
+    labels:
+      lowmem: "memory = 20.Gb"
+      midmem: "memory = 50.Gb"
+      highmem: "memory = 100.Gb"
+      lowcpu: "cpus = 5"
+      midcpu: "cpus = 15"
+      highcpu: "cpus = 30"
+      lowtime: "time = 1.h"
+      midtime: "time = 4.h"
+      hightime: "time = 8.h"
+      veryhightime: "time = 24.h"
+    script:
+    - "process.errorStrategy = 'ignore'"
+  debug: false
+  container: "docker"
+engines:
+- type: "docker"
+  id: "docker"
+  image: "openproblems/base_r:1"
+  namespace_separator: "/"
+  setup:
+  - type: "r"
+    cran:
+    - "aricode"
+    - "anndata"
+    - "reshape2"
+    - "dplyr"
+    - "philentropy"
+    - "lsa"
+    - "vegan"
+    - "Metrics"
+    bioc:
+    - "scater"
+    - "BayesSpace"
+    - "TOAST"
+    github:
+    - "xzhoulab/SPARK"
+    - "YingMa0107/CARD"
+    - "xuranw/MuSiC"
+    - "stevexniu/spots"
+    bioc_force_install: false
+    warnings_as_errors: true
+  entrypoint: []
+  cmd: null
+build_info:
+  config: "src/metrics/downstream/config.vsh.yaml"
+  runner: "nextflow"
+  engine: "docker"
+  output: "target/nextflow/metrics/downstream"
+  executable: "target/nextflow/metrics/downstream/main.nf"
+  viash_version: "0.9.4"
+  git_commit: "cd39dd407c524f68130646beb26f7724f680de07"
+  git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
+  git_tag: "test-2-gcd39dd4"
+package_config:
+  name: "task_spatial_simulators"
+  version: "0.1.0"
+  label: "Spatial Simulators"
+  summary: "Assessing the quality of spatial transcriptomics simulators"
+  description: "Computational methods for spatially resolved transcriptomics (SRT)\
+    \ are frequently developed \nand assessed through data simulation. The effectiveness\
+    \ of these evaluations relies on the \nsimulation methods' ability to accurately\
+    \ reflect experimental data. However, a systematic \nevaluation framework for\
+    \ spatial simulators is lacking. Here, we present SpatialSimBench, \na comprehensive\
+    \ evaluation framework that assesses 13 simulation methods using 10 distinct \n\
+    STR datasets.\n\nThe research goal of this benchmark is to systematically evaluate\
+    \ and compare the\nperformance of various simulation methods for spatial transcriptomics\
+    \ (ST) data.\nIt aims to address the lack of a comprehensive evaluation framework\
+    \ for spatial simulators\nand explore the feasibility of leveraging existing single-cell\
+    \ simulators for ST data.\nThe experimental setup involves collecting public spatial\
+    \ transcriptomics datasets and\ncorresponding scRNA-seq datasets.\nThe spatial\
+    \ and scRNA-seq datasets can originate from different study but should consist\n\
+    of similar cell types from similar tissues.\n"
+  info:
+    image: "thumbnail.svg"
+    test_resources:
+    - type: "s3"
+      path: "s3://openproblems-data/resources_test/task_spatial_simulators"
+      dest: "resources_test"
+  repositories:
+  - type: "github"
+    name: "openproblems"
+    repo: "openproblems-bio/openproblems"
+    tag: "build/main"
+  viash_version: "0.9.4"
+  source: "src"
+  target: "target"
+  config_mods:
+  - ".runners[.type == \"nextflow\"].config.labels := { lowmem : \"memory = 20.Gb\"\
+    , midmem : \"memory = 50.Gb\", highmem : \"memory = 100.Gb\", lowcpu : \"cpus\
+    \ = 5\", midcpu : \"cpus = 15\", highcpu : \"cpus = 30\", lowtime : \"time = 1.h\"\
+    , midtime : \"time = 4.h\", hightime : \"time = 8.h\", veryhightime : \"time =\
+    \ 24.h\" }\n.runners[.type == \"nextflow\"].config.script := \"process.errorStrategy\
+    \ = 'ignore'\""
+  authors:
+  - name: "Xiaoqi Liang"
+    roles:
+    - "author"
+    - "maintainer"
+    info:
+      orcid: "0009-0004-9625-1441"
+      github: "littlecabiria"
+  - name: "Yue Cao"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-2356-4031"
+      github: "ycao6928"
+  - name: "Jean Yang"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-5271-2603"
+      github: "jeany21"
+  - name: "Robrecht Cannoodt"
+    roles:
+    - "contributor"
+    info:
+      github: "rcannood"
+      orcid: "0000-0003-3641-729X"
+  - name: "Sai Nirmayi Yasa"
+    roles:
+    - "contributor"
+    info:
+      github: "sainirmayi"
+      orcid: "0009-0003-6319-9803"
+  keywords:
+  - "single-cell"
+  - "spatial transcriptomics"
+  - "in-silico"
+  - "spatial simulation"
+  license: "MIT"
+  organization: "openproblems-bio"
+  references:
+    doi:
+    - "10.1101/2024.05.29.596418"
+  links:
+    repository: "https://github.com/openproblems-bio/task_spatial_simulators"
+    docker_registry: "ghcr.io"
+    issue_tracker: "https://github.com/openproblems-bio/task_spatial_simulators/issues"

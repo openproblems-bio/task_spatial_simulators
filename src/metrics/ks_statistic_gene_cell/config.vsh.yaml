@@ -1,0 +1,309 @@
+__merge__: ../../api/comp_metric.yaml
+
+name: ks_statistic_gene_cell
+
+links:
+  documentation: https://cran.r-project.org/web/packages/ks/ks.pdf
+  repository: https://cran.r-project.org/web/packages/ks
+
+info:
+  metrics:
+    - name: ks_statistic_frac_zero_genes_zstat
+      label: Fraction of zeros per gene
+      summary: KS statistic of the fraction of zeros per gene.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_frac_zero_cells_zstat
+      label: Fraction of zeros per cell
+      summary: KS statistic of the fraction of zeros per spot (cell).
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_lib_size_cells_zstat
+      label: Library size
+      summary: KS statistic of the library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_efflib_size_cells_zstat
+      label: Effective library size
+      summary: KS statistic of the effective library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_tmm_cells_zstat
+      label: TMM
+      summary: KS statistic of the weight trimmed mean of M-values normalization factor (TMM).
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_var_cells_zstat
+      label: Scaled variance cell
+      summary: KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_mean_cells_zstat
+      label: Scaled mean cells
+      summary: KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_lib_fraczero_cells_zstat
+      label: Library size vs fraction zero
+      summary: KS statistic of the relationship between library size and the proportion of zeros per spot (cell).
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_pearson_cells_zstat
+      label: Sample Pearson correlation
+      summary: KS statistic of the sample Pearson correlation.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_var_genes_zstat
+      label: Scaled variance genes
+      summary: KS statistic of the gene-level scaled variance of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_mean_genes_zstat
+      label: Scaled mean genes
+      summary: KS statistic of the gene-level scaled mean of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_pearson_genes_zstat
+      label: Gene Pearson correlation
+      summary: KS statistic of the gene Pearson correlation.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_mean_var_genes_zstat
+      label: Mean vs variance
+      summary: KS statistic of the relationship between mean expression and variance expression.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_mean_fraczero_genes_zstat
+      label: Mean vs fraction zero
+      summary: KS statistic of the relationship between mean expression and the proportion of zero per gene.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_frac_zero_genes_tstat
+      label: Fraction of zeros per gene
+      summary: KS statistic of the fraction of zeros per gene.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_frac_zero_cells_tstat
+      label: Fraction of zeros per cell
+      summary: KS statistic of the fraction of zeros per spot (cell).
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_lib_size_cells_tstat
+      label: Library size
+      summary: KS statistic of the library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_efflib_size_cells_tstat
+      label: Effective library size
+      summary: KS statistic of the effective library size.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_tmm_cells_tstat
+      label: TMM
+      summary: KS statistic of the weight trimmed mean of M-values normalization factor (TMM).
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_var_cells_tstat
+      label: Scaled variance cell
+      summary: KS statistic of the spot- (or cell-) level scaled variance of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_mean_cells_tstat
+      label: Scaled mean cells
+      summary: KS statistic of the spot- (or cell-) level scaled mean of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_lib_fraczero_cells_tstat
+      label: Library size vs fraction zero
+      summary: KS statistic of the relationship between library size and the proportion of zeros per spot (cell).
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_pearson_cells_tstat
+      label: Sample Pearson correlation
+      summary: KS statistic of the sample Pearson correlation.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_var_genes_tstat
+      label: Scaled variance genes
+      summary: KS statistic of the gene-level scaled variance of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_scaled_mean_genes_tstat
+      label: Scaled mean genes
+      summary: KS statistic of the gene-level scaled mean of the expression matrix.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_pearson_genes_tstat
+      label: Gene Pearson correlation
+      summary: KS statistic of the gene Pearson correlation.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_mean_var_genes_tstat
+      label: Mean vs variance
+      summary: KS statistic of the relationship between mean expression and variance expression.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+    - name: ks_statistic_mean_fraczero_genes_tstat
+      label: Mean vs fraction zero
+      summary: KS statistic of the relationship between mean expression and the proportion of zero per gene.
+      description: |
+        The Kolmogorov-Smirnov statistic comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.
+      min: -Inf
+      max: +Inf
+      maximize: false
+      references:
+        doi: 10.1201/9780429485572
+
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: r
+        bioc: [edger, sparseMatrixStats]
+        cran: [ks, resample, reshape2, proxyC]
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime, midmem, midcpu]

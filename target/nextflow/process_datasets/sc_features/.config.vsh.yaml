@@ -1,0 +1,279 @@
+name: "sc_features"
+namespace: "process_datasets"
+version: "0.1.0"
+argument_groups:
+- name: "Inputs"
+  arguments:
+  - type: "file"
+    name: "--input_sp"
+    label: "Spatial Dataset"
+    summary: "An unprocessed spatial dataset as output by a dataset loader."
+    description: "Raw spatial dataset"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        - type: "integer"
+          name: "logcounts"
+          description: "Log-transformed counts"
+          required: true
+        obs:
+        - type: "double"
+          name: "col"
+          description: "Column index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "row"
+          description: "Row index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "sizeFactor"
+          description: "Size factor for the cell."
+          required: true
+        - type: "integer"
+          name: "spatial_cluster"
+          description: "Spatial cluster assignment for the cell."
+          required: true
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        obsm:
+        - type: "float"
+          name: "celltype_proportions"
+          description: "Spot-by-celltype matrix of celltype proportions generated\
+            \ by CARD."
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+- name: "Outputs"
+  arguments:
+  - type: "file"
+    name: "--output_sp"
+    description: "Processed spatial dataset"
+    info: null
+    example:
+    - "dataset_sp.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ";"
+resources:
+- type: "r_script"
+  path: "script.R"
+  is_executable: true
+description: "Add scFeatures in adata"
+test_resources:
+- type: "file"
+  path: "resources_test/spatialsimbench_mobnew"
+  dest: "resources_test/spatialsimbench_mobnew"
+- type: "python_script"
+  path: "run_and_check_output.py"
+  is_executable: true
+info: null
+status: "enabled"
+scope:
+  image: "public"
+  target: "public"
+repositories:
+- type: "github"
+  name: "openproblems"
+  repo: "openproblems-bio/openproblems"
+  tag: "build/main"
+license: "MIT"
+links:
+  repository: "https://github.com/openproblems-bio/task_spatial_simulators"
+  docker_registry: "ghcr.io"
+runners:
+- type: "executable"
+  id: "executable"
+  docker_setup_strategy: "ifneedbepullelsecachedbuild"
+- type: "nextflow"
+  id: "nextflow"
+  directives:
+    label:
+    - "midtime"
+    - "midmem"
+    - "midcpu"
+    tag: "$id"
+  auto:
+    simplifyInput: true
+    simplifyOutput: false
+    transcript: false
+    publish: false
+  config:
+    labels:
+      lowmem: "memory = 20.Gb"
+      midmem: "memory = 50.Gb"
+      highmem: "memory = 100.Gb"
+      lowcpu: "cpus = 5"
+      midcpu: "cpus = 15"
+      highcpu: "cpus = 30"
+      lowtime: "time = 1.h"
+      midtime: "time = 4.h"
+      hightime: "time = 8.h"
+      veryhightime: "time = 24.h"
+    script:
+    - "process.errorStrategy = 'ignore'"
+  debug: false
+  container: "docker"
+engines:
+- type: "docker"
+  id: "docker"
+  image: "openproblems/base_r:1"
+  namespace_separator: "/"
+  setup:
+  - type: "r"
+    github:
+    - "SydneyBioX/scFeatures"
+    url:
+    - "https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz"
+    bioc_force_install: false
+    warnings_as_errors: true
+  entrypoint: []
+  cmd: null
+build_info:
+  config: "src/process_datasets/sc_features/config.vsh.yaml"
+  runner: "nextflow"
+  engine: "docker"
+  output: "target/nextflow/process_datasets/sc_features"
+  executable: "target/nextflow/process_datasets/sc_features/main.nf"
+  viash_version: "0.9.4"
+  git_commit: "cd39dd407c524f68130646beb26f7724f680de07"
+  git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
+  git_tag: "test-2-gcd39dd4"
+package_config:
+  name: "task_spatial_simulators"
+  version: "0.1.0"
+  label: "Spatial Simulators"
+  summary: "Assessing the quality of spatial transcriptomics simulators"
+  description: "Computational methods for spatially resolved transcriptomics (SRT)\
+    \ are frequently developed \nand assessed through data simulation. The effectiveness\
+    \ of these evaluations relies on the \nsimulation methods' ability to accurately\
+    \ reflect experimental data. However, a systematic \nevaluation framework for\
+    \ spatial simulators is lacking. Here, we present SpatialSimBench, \na comprehensive\
+    \ evaluation framework that assesses 13 simulation methods using 10 distinct \n\
+    STR datasets.\n\nThe research goal of this benchmark is to systematically evaluate\
+    \ and compare the\nperformance of various simulation methods for spatial transcriptomics\
+    \ (ST) data.\nIt aims to address the lack of a comprehensive evaluation framework\
+    \ for spatial simulators\nand explore the feasibility of leveraging existing single-cell\
+    \ simulators for ST data.\nThe experimental setup involves collecting public spatial\
+    \ transcriptomics datasets and\ncorresponding scRNA-seq datasets.\nThe spatial\
+    \ and scRNA-seq datasets can originate from different study but should consist\n\
+    of similar cell types from similar tissues.\n"
+  info:
+    image: "thumbnail.svg"
+    test_resources:
+    - type: "s3"
+      path: "s3://openproblems-data/resources_test/task_spatial_simulators"
+      dest: "resources_test"
+  repositories:
+  - type: "github"
+    name: "openproblems"
+    repo: "openproblems-bio/openproblems"
+    tag: "build/main"
+  viash_version: "0.9.4"
+  source: "src"
+  target: "target"
+  config_mods:
+  - ".runners[.type == \"nextflow\"].config.labels := { lowmem : \"memory = 20.Gb\"\
+    , midmem : \"memory = 50.Gb\", highmem : \"memory = 100.Gb\", lowcpu : \"cpus\
+    \ = 5\", midcpu : \"cpus = 15\", highcpu : \"cpus = 30\", lowtime : \"time = 1.h\"\
+    , midtime : \"time = 4.h\", hightime : \"time = 8.h\", veryhightime : \"time =\
+    \ 24.h\" }\n.runners[.type == \"nextflow\"].config.script := \"process.errorStrategy\
+    \ = 'ignore'\""
+  authors:
+  - name: "Xiaoqi Liang"
+    roles:
+    - "author"
+    - "maintainer"
+    info:
+      orcid: "0009-0004-9625-1441"
+      github: "littlecabiria"
+  - name: "Yue Cao"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-2356-4031"
+      github: "ycao6928"
+  - name: "Jean Yang"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-5271-2603"
+      github: "jeany21"
+  - name: "Robrecht Cannoodt"
+    roles:
+    - "contributor"
+    info:
+      github: "rcannood"
+      orcid: "0000-0003-3641-729X"
+  - name: "Sai Nirmayi Yasa"
+    roles:
+    - "contributor"
+    info:
+      github: "sainirmayi"
+      orcid: "0009-0003-6319-9803"
+  keywords:
+  - "single-cell"
+  - "spatial transcriptomics"
+  - "in-silico"
+  - "spatial simulation"
+  license: "MIT"
+  organization: "openproblems-bio"
+  references:
+    doi:
+    - "10.1101/2024.05.29.596418"
+  links:
+    repository: "https://github.com/openproblems-bio/task_spatial_simulators"
+    docker_registry: "ghcr.io"
+    issue_tracker: "https://github.com/openproblems-bio/task_spatial_simulators/issues"

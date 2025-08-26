@@ -1,0 +1,783 @@
+name: "ks_statistic_gene_cell"
+namespace: "metrics"
+version: "0.1.0"
+argument_groups:
+- name: "Arguments"
+  arguments:
+  - type: "file"
+    name: "--input_spatial_dataset"
+    label: "Spatial Dataset"
+    summary: "An unprocessed spatial dataset as output by a dataset loader."
+    description: "This dataset contains raw counts and metadata as output by a dataset\
+      \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        - type: "integer"
+          name: "logcounts"
+          description: "Log-transformed counts"
+          required: true
+        obs:
+        - type: "double"
+          name: "col"
+          description: "Column index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "row"
+          description: "Row index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "sizeFactor"
+          description: "Size factor for the cell."
+          required: true
+        - type: "integer"
+          name: "spatial_cluster"
+          description: "Spatial cluster assignment for the cell."
+          required: true
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        obsm:
+        - type: "float"
+          name: "celltype_proportions"
+          description: "Spot-by-celltype matrix of celltype proportions generated\
+            \ by CARD."
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--input_singlecell_dataset"
+    label: "Single-Cell Dataset"
+    summary: "An unprocessed single-cell dataset as output by a dataset loader."
+    description: "This dataset contains raw counts and metadata as output by a dataset\
+      \ loader.\n\nThe format of this file is derived from the [CELLxGENE schema v4.0.0](https://github.com/chanzuckerberg/single-cell-curation/blob/main/schema/4.0.0/schema.md).\n"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        obs:
+        - type: "string"
+          name: "cell_type"
+          description: "Classification of the cell type based on its characteristics\
+            \ and function within the tissue or organism."
+          required: false
+        - type: "string"
+          name: "donor_id"
+          description: "Identifier for the donor from whom the cell sample is obtained."
+          required: false
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/dataset_sc.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--input_simulated_dataset"
+    label: "Solution"
+    summary: "The solution for the test data"
+    info:
+      slots:
+        layers:
+        - type: "integer"
+          name: "counts"
+          description: "Raw counts"
+          required: true
+        obs:
+        - type: "double"
+          name: "col"
+          description: "Column index of the cell in the spatial grid."
+          required: true
+        - type: "double"
+          name: "row"
+          description: "Row index of the cell in the spatial grid."
+          required: true
+        var:
+        - type: "string"
+          name: "feature_id"
+          description: "Unique identifier for the feature, usually a ENSEMBL gene\
+            \ id."
+          required: false
+        - type: "string"
+          name: "feature_name"
+          description: "A human-readable name for the feature, usually a gene symbol."
+          required: true
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset. This is different from\
+            \ the `obs.dataset_id` field, which is the identifier for the dataset\
+            \ from which the cell data is derived."
+          required: true
+        - name: "dataset_name"
+          type: "string"
+          description: "A human-readable name for the dataset."
+          required: true
+        - type: "string"
+          name: "dataset_url"
+          description: "Link to the original source of the dataset."
+          required: false
+        - name: "dataset_reference"
+          type: "string"
+          description: "Bibtex reference of the paper in which the dataset was published."
+          required: false
+          multiple: true
+        - name: "dataset_summary"
+          type: "string"
+          description: "Short description of the dataset."
+          required: true
+        - name: "dataset_description"
+          type: "string"
+          description: "Long description of the dataset."
+          required: true
+        - name: "dataset_organism"
+          type: "string"
+          description: "The organism of the sample in the dataset."
+          required: false
+          multiple: true
+        - name: "method_id"
+          type: "string"
+          description: "A unique identifier for the method used to generate the dataset."
+          required: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "input"
+    multiple: false
+    multiple_sep: ";"
+  - type: "file"
+    name: "--output"
+    label: "Score"
+    summary: "File indicating the score of a metric."
+    info:
+      file_type: "h5ad"
+      slots:
+        uns:
+        - type: "string"
+          name: "dataset_id"
+          description: "A unique identifier for the dataset"
+          required: true
+        - type: "string"
+          name: "method_id"
+          description: "A unique identifier for the method"
+          required: true
+        - type: "string"
+          name: "metric_ids"
+          description: "One or more unique metric identifiers"
+          multiple: true
+          required: true
+        - type: "double"
+          name: "metric_values"
+          description: "The metric values obtained for the given prediction. Must\
+            \ be of same length as 'metric_ids'."
+          multiple: true
+          required: true
+    example:
+    - "resources_test/spatialsimbench_mobnew/score.h5ad"
+    must_exist: true
+    create_parent: true
+    required: true
+    direction: "output"
+    multiple: false
+    multiple_sep: ";"
+resources:
+- type: "r_script"
+  path: "script.R"
+  is_executable: true
+test_resources:
+- type: "python_script"
+  path: "run_and_check_output.py"
+  is_executable: true
+- type: "python_script"
+  path: "check_config.py"
+  is_executable: true
+- type: "file"
+  path: "resources_test/spatialsimbench_mobnew"
+  dest: "resources_test/spatialsimbench_mobnew"
+info:
+  metrics:
+  - name: "ks_statistic_frac_zero_genes_zstat"
+    label: "Fraction of zeros per gene"
+    summary: "KS statistic of the fraction of zeros per gene."
+    description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
+      \ per gene in the real datasets versus the fraction of zeros per gene in the\
+      \ simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_frac_zero_cells_zstat"
+    label: "Fraction of zeros per cell"
+    summary: "KS statistic of the fraction of zeros per spot (cell)."
+    description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
+      \ per spot (cell) in the real datasets versus the fraction of zeros per spot\
+      \ (cell) in the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_lib_size_cells_zstat"
+    label: "Library size"
+    summary: "KS statistic of the library size."
+    description: "The Kolmogorov-Smirnov statistic comparing the total sum of UMI\
+      \ counts across all genes in the real datasets versus the total sum of UMI counts\
+      \ across all genes in the simmulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_efflib_size_cells_zstat"
+    label: "Effective library size"
+    summary: "KS statistic of the effective library size."
+    description: "The Kolmogorov-Smirnov statistic comparing the effective library\
+      \ size of the real datasets versus the effective library size of the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_tmm_cells_zstat"
+    label: "TMM"
+    summary: "KS statistic of the weight trimmed mean of M-values normalization factor\
+      \ (TMM)."
+    description: "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean\
+      \ of M-values normalization factor for the real datasets versus the weight trimmed\
+      \ mean of M-values normalization factor for the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_var_cells_zstat"
+    label: "Scaled variance cell"
+    summary: "KS statistic of the spot- (or cell-) level scaled variance of the expression\
+      \ matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the spot-level z-score\
+      \ standardization of the variance of expression matrix in terms of log2(CPM)\
+      \ in the real datasets versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_mean_cells_zstat"
+    label: "Scaled mean cells"
+    summary: "KS statistic of the spot- (or cell-) level scaled mean of the expression\
+      \ matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the z-score standardization\
+      \ of the mean of expression matrix in terms of log2(CPM) in the real datasets\
+      \ versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_lib_fraczero_cells_zstat"
+    label: "Library size vs fraction zero"
+    summary: "KS statistic of the relationship between library size and the proportion\
+      \ of zeros per spot (cell)."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ library size and the proportion of zeros per spot (cell) in the real datasets\
+      \ versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_pearson_cells_zstat"
+    label: "Sample Pearson correlation"
+    summary: "KS statistic of the sample Pearson correlation."
+    description: "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation\
+      \ of the real datasets versus the sample Pearson correlation of the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_var_genes_zstat"
+    label: "Scaled variance genes"
+    summary: "KS statistic of the gene-level scaled variance of the expression matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene-level z-score\
+      \ standardization of the variance of expression matrix in terms of log2(CPM)\
+      \ in the real datasets versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_mean_genes_zstat"
+    label: "Scaled mean genes"
+    summary: "KS statistic of the gene-level scaled mean of the expression matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene-level z-score\
+      \ standardization of the mean of expression matrix in terms of log2(CPM) in\
+      \ the real datasets versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_pearson_genes_zstat"
+    label: "Gene Pearson correlation"
+    summary: "KS statistic of the gene Pearson correlation."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation\
+      \ of the real datasets versus the gene Pearson correlation of the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_mean_var_genes_zstat"
+    label: "Mean vs variance"
+    summary: "KS statistic of the relationship between mean expression and variance\
+      \ expression."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ mean expression and variance expression in the real datasets versus the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_mean_fraczero_genes_zstat"
+    label: "Mean vs fraction zero"
+    summary: "KS statistic of the relationship between mean expression and the proportion\
+      \ of zero per gene."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ mean expression and the proportion of zero per gene in the real datasets versus\
+      \ the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_frac_zero_genes_tstat"
+    label: "Fraction of zeros per gene"
+    summary: "KS statistic of the fraction of zeros per gene."
+    description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
+      \ per gene in the real datasets versus the fraction of zeros per gene in the\
+      \ simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_frac_zero_cells_tstat"
+    label: "Fraction of zeros per cell"
+    summary: "KS statistic of the fraction of zeros per spot (cell)."
+    description: "The Kolmogorov-Smirnov statistic comparing the fraction of zeros\
+      \ per spot (cell) in the real datasets versus the fraction of zeros per spot\
+      \ (cell) in the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_lib_size_cells_tstat"
+    label: "Library size"
+    summary: "KS statistic of the library size."
+    description: "The Kolmogorov-Smirnov statistic comparing the total sum of UMI\
+      \ counts across all genes in the real datasets versus the total sum of UMI counts\
+      \ across all genes in the simmulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_efflib_size_cells_tstat"
+    label: "Effective library size"
+    summary: "KS statistic of the effective library size."
+    description: "The Kolmogorov-Smirnov statistic comparing the effective library\
+      \ size of the real datasets versus the effective library size of the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_tmm_cells_tstat"
+    label: "TMM"
+    summary: "KS statistic of the weight trimmed mean of M-values normalization factor\
+      \ (TMM)."
+    description: "The Kolmogorov-Smirnov statistic comparing the weight trimmed mean\
+      \ of M-values normalization factor for the real datasets versus the weight trimmed\
+      \ mean of M-values normalization factor for the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_var_cells_tstat"
+    label: "Scaled variance cell"
+    summary: "KS statistic of the spot- (or cell-) level scaled variance of the expression\
+      \ matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the spot-level z-score\
+      \ standardization of the variance of expression matrix in terms of log2(CPM)\
+      \ in the real datasets versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_mean_cells_tstat"
+    label: "Scaled mean cells"
+    summary: "KS statistic of the spot- (or cell-) level scaled mean of the expression\
+      \ matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the z-score standardization\
+      \ of the mean of expression matrix in terms of log2(CPM) in the real datasets\
+      \ versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_lib_fraczero_cells_tstat"
+    label: "Library size vs fraction zero"
+    summary: "KS statistic of the relationship between library size and the proportion\
+      \ of zeros per spot (cell)."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ library size and the proportion of zeros per spot (cell) in the real datasets\
+      \ versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_pearson_cells_tstat"
+    label: "Sample Pearson correlation"
+    summary: "KS statistic of the sample Pearson correlation."
+    description: "The Kolmogorov-Smirnov statistic comparing the sample Pearson correlation\
+      \ of the real datasets versus the sample Pearson correlation of the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_var_genes_tstat"
+    label: "Scaled variance genes"
+    summary: "KS statistic of the gene-level scaled variance of the expression matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene-level z-score\
+      \ standardization of the variance of expression matrix in terms of log2(CPM)\
+      \ in the real datasets versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_scaled_mean_genes_tstat"
+    label: "Scaled mean genes"
+    summary: "KS statistic of the gene-level scaled mean of the expression matrix."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene-level z-score\
+      \ standardization of the mean of expression matrix in terms of log2(CPM) in\
+      \ the real datasets versus the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_pearson_genes_tstat"
+    label: "Gene Pearson correlation"
+    summary: "KS statistic of the gene Pearson correlation."
+    description: "The Kolmogorov-Smirnov statistic comparing the gene Pearson correlation\
+      \ of the real datasets versus the gene Pearson correlation of the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_mean_var_genes_tstat"
+    label: "Mean vs variance"
+    summary: "KS statistic of the relationship between mean expression and variance\
+      \ expression."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ mean expression and variance expression in the real datasets versus the simulated\
+      \ datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  - name: "ks_statistic_mean_fraczero_genes_tstat"
+    label: "Mean vs fraction zero"
+    summary: "KS statistic of the relationship between mean expression and the proportion\
+      \ of zero per gene."
+    description: "The Kolmogorov-Smirnov statistic comparing the relationship between\
+      \ mean expression and the proportion of zero per gene in the real datasets versus\
+      \ the simulated datasets.\n"
+    min: "-Inf"
+    max: "+Inf"
+    maximize: false
+    references:
+      doi: "10.1201/9780429485572"
+  type: "metric"
+  type_info:
+    label: "Metric"
+    summary: "A metric."
+    description: "A metric for evaluating spatial transcriptomics simulation methods.\n"
+status: "enabled"
+scope:
+  image: "public"
+  target: "public"
+repositories:
+- type: "github"
+  name: "openproblems"
+  repo: "openproblems-bio/openproblems"
+  tag: "build/main"
+license: "MIT"
+links:
+  repository: "https://cran.r-project.org/web/packages/ks"
+  docker_registry: "ghcr.io"
+  documentation: "https://cran.r-project.org/web/packages/ks/ks.pdf"
+runners:
+- type: "executable"
+  id: "executable"
+  docker_setup_strategy: "ifneedbepullelsecachedbuild"
+- type: "nextflow"
+  id: "nextflow"
+  directives:
+    label:
+    - "midtime"
+    - "midmem"
+    - "midcpu"
+    tag: "$id"
+  auto:
+    simplifyInput: true
+    simplifyOutput: false
+    transcript: false
+    publish: false
+  config:
+    labels:
+      lowmem: "memory = 20.Gb"
+      midmem: "memory = 50.Gb"
+      highmem: "memory = 100.Gb"
+      lowcpu: "cpus = 5"
+      midcpu: "cpus = 15"
+      highcpu: "cpus = 30"
+      lowtime: "time = 1.h"
+      midtime: "time = 4.h"
+      hightime: "time = 8.h"
+      veryhightime: "time = 24.h"
+    script:
+    - "process.errorStrategy = 'ignore'"
+  debug: false
+  container: "docker"
+engines:
+- type: "docker"
+  id: "docker"
+  image: "openproblems/base_r:1"
+  namespace_separator: "/"
+  setup:
+  - type: "r"
+    cran:
+    - "ks"
+    - "resample"
+    - "reshape2"
+    - "proxyC"
+    bioc:
+    - "edger"
+    - "sparseMatrixStats"
+    bioc_force_install: false
+    warnings_as_errors: true
+  entrypoint: []
+  cmd: null
+build_info:
+  config: "src/metrics/ks_statistic_gene_cell/config.vsh.yaml"
+  runner: "nextflow"
+  engine: "docker"
+  output: "target/nextflow/metrics/ks_statistic_gene_cell"
+  executable: "target/nextflow/metrics/ks_statistic_gene_cell/main.nf"
+  viash_version: "0.9.4"
+  git_commit: "cd39dd407c524f68130646beb26f7724f680de07"
+  git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
+  git_tag: "test-2-gcd39dd4"
+package_config:
+  name: "task_spatial_simulators"
+  version: "0.1.0"
+  label: "Spatial Simulators"
+  summary: "Assessing the quality of spatial transcriptomics simulators"
+  description: "Computational methods for spatially resolved transcriptomics (SRT)\
+    \ are frequently developed \nand assessed through data simulation. The effectiveness\
+    \ of these evaluations relies on the \nsimulation methods' ability to accurately\
+    \ reflect experimental data. However, a systematic \nevaluation framework for\
+    \ spatial simulators is lacking. Here, we present SpatialSimBench, \na comprehensive\
+    \ evaluation framework that assesses 13 simulation methods using 10 distinct \n\
+    STR datasets.\n\nThe research goal of this benchmark is to systematically evaluate\
+    \ and compare the\nperformance of various simulation methods for spatial transcriptomics\
+    \ (ST) data.\nIt aims to address the lack of a comprehensive evaluation framework\
+    \ for spatial simulators\nand explore the feasibility of leveraging existing single-cell\
+    \ simulators for ST data.\nThe experimental setup involves collecting public spatial\
+    \ transcriptomics datasets and\ncorresponding scRNA-seq datasets.\nThe spatial\
+    \ and scRNA-seq datasets can originate from different study but should consist\n\
+    of similar cell types from similar tissues.\n"
+  info:
+    image: "thumbnail.svg"
+    test_resources:
+    - type: "s3"
+      path: "s3://openproblems-data/resources_test/task_spatial_simulators"
+      dest: "resources_test"
+  repositories:
+  - type: "github"
+    name: "openproblems"
+    repo: "openproblems-bio/openproblems"
+    tag: "build/main"
+  viash_version: "0.9.4"
+  source: "src"
+  target: "target"
+  config_mods:
+  - ".runners[.type == \"nextflow\"].config.labels := { lowmem : \"memory = 20.Gb\"\
+    , midmem : \"memory = 50.Gb\", highmem : \"memory = 100.Gb\", lowcpu : \"cpus\
+    \ = 5\", midcpu : \"cpus = 15\", highcpu : \"cpus = 30\", lowtime : \"time = 1.h\"\
+    , midtime : \"time = 4.h\", hightime : \"time = 8.h\", veryhightime : \"time =\
+    \ 24.h\" }\n.runners[.type == \"nextflow\"].config.script := \"process.errorStrategy\
+    \ = 'ignore'\""
+  authors:
+  - name: "Xiaoqi Liang"
+    roles:
+    - "author"
+    - "maintainer"
+    info:
+      orcid: "0009-0004-9625-1441"
+      github: "littlecabiria"
+  - name: "Yue Cao"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-2356-4031"
+      github: "ycao6928"
+  - name: "Jean Yang"
+    roles:
+    - "author"
+    info:
+      orcid: "0000-0002-5271-2603"
+      github: "jeany21"
+  - name: "Robrecht Cannoodt"
+    roles:
+    - "contributor"
+    info:
+      github: "rcannood"
+      orcid: "0000-0003-3641-729X"
+  - name: "Sai Nirmayi Yasa"
+    roles:
+    - "contributor"
+    info:
+      github: "sainirmayi"
+      orcid: "0009-0003-6319-9803"
+  keywords:
+  - "single-cell"
+  - "spatial transcriptomics"
+  - "in-silico"
+  - "spatial simulation"
+  license: "MIT"
+  organization: "openproblems-bio"
+  references:
+    doi:
+    - "10.1101/2024.05.29.596418"
+  links:
+    repository: "https://github.com/openproblems-bio/task_spatial_simulators"
+    docker_registry: "ghcr.io"
+    issue_tracker: "https://github.com/openproblems-bio/task_spatial_simulators/issues"
