@@ -211,6 +211,9 @@ info:
     summary: "A method."
     description: "A spatial transcriptomics simulation method.\n"
 status: "enabled"
+scope:
+  image: "public"
+  target: "public"
 repositories:
 - type: "github"
   name: "openproblems"
@@ -267,6 +270,7 @@ engines:
     cran:
     - "SRTsim"
     bioc_force_install: false
+    warnings_as_errors: true
   entrypoint: []
   cmd: null
 build_info:
@@ -275,10 +279,10 @@ build_info:
   engine: "docker"
   output: "target/executable/methods/srtsim"
   executable: "target/executable/methods/srtsim/srtsim"
-  viash_version: "0.9.0"
-  git_commit: "a2c579edf72a19765c5fb81c968965662c609341"
+  viash_version: "0.9.4"
+  git_commit: "cd39dd407c524f68130646beb26f7724f680de07"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
-  git_tag: "test-1-ga2c579e"
+  git_tag: "test-2-gcd39dd4"
 package_config:
   name: "task_spatial_simulators"
   version: "build_main"
@@ -299,6 +303,7 @@ package_config:
     \ and scRNA-seq datasets can originate from different study but should consist\n\
     of similar cell types from similar tissues.\n"
   info:
+    image: "thumbnail.svg"
     test_resources:
     - type: "s3"
       path: "s3://openproblems-data/resources_test/task_spatial_simulators"
@@ -308,7 +313,7 @@ package_config:
     name: "openproblems"
     repo: "openproblems-bio/openproblems"
     tag: "build/main"
-  viash_version: "0.9.0"
+  viash_version: "0.9.4"
   source: "src"
   target: "target"
   config_mods:

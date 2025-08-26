@@ -53,11 +53,11 @@ argument_groups:
           test_default: MOBNEW
       - type: string
         name: --dataset_url_spatial
-        description: Link to the original source of the dataset.
+        description: Link to the original source of the spatial dataset.
         required: false
       - type: string
         name: --dataset_url_singlecell
-        description: Link to the original source of the dataset.
+        description: Link to the original source of the single-cell dataset.
         required: false
       - type: string
         name: --dataset_reference
@@ -66,35 +66,35 @@ argument_groups:
         required: false
       - type: string
         name: --dataset_reference_spatial
-        description: A doi for the dataset.
+        description: A doi for the spatial dataset.
         example: 10.1234/s1234-5678-9012-3
         required: false
       - type: string
         name: --dataset_reference_singlecell
-        description: A doi for the dataset.
+        description: A doi for the single-cell dataset.
         example: 10.1234/s1234-5678-9012-3
         required: false
       - type: string
         name: --dataset_summary_spatial
-        description: Short description of the dataset.
+        description: Short description of the spatial dataset.
         required: true
         info: 
           test_default: MOBNEW
       - type: string
         name: --dataset_summary_singlecell
-        description: Short description of the dataset.
+        description: Short description of the single-cell dataset.
         required: true
         info: 
           test_default: MOBNEW
       - type: string
         name: --dataset_description_spatial
-        description: Long description of the dataset.
+        description: Long description of the spatial dataset.
         required: true
         info: 
           test_default: MOBNEW
       - type: string
         name: --dataset_description_singlecell
-        description: Long description of the dataset.
+        description: Long description of the single-cell dataset.
         required: true
         info: 
           test_default: MOBNEW
