@@ -445,18 +445,14 @@ function ViashDockerfile {
     cat << 'VIASHDOCKER'
 FROM openproblems/base_r:1
 ENTRYPOINT []
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y r-bioc-singlecellexperiment git && \
-  rm -rf /var/lib/apt/lists/*
-
-RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
-  Rscript -e 'options(warn = 2); remotes::install_github(c("SONGDONGYUAN1994/scDesign3"), repos = "https://cran.rstudio.com")' && \
-  Rscript -e 'options(warn = 2); remotes::install_url(c("https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.40.0.tar.gz"), repos = "https://cran.rstudio.com")'
+RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("scDesign3", quietly = TRUE)) BiocManager::install("scDesign3")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3_poisson"
-LABEL org.opencontainers.image.created="2025-08-26T08:14:59Z"
+LABEL org.opencontainers.image.created="2025-08-26T08:56:44Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="cd39dd407c524f68130646beb26f7724f680de07"
+LABEL org.opencontainers.image.revision="3721b1792e49f2624a1e40b4671defd980971996"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
