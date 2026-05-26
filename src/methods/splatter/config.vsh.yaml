@@ -8,7 +8,7 @@ description: |
 references:
   doi: 10.1186/s13059-017-1305-0
 links:
-  documentation: https://bioconductor.org/packages/devel/bioc/vignettes/splatter/inst/doc/splatter.html
+  documentation: https://bioconductor.org/packages/release/bioc/vignettes/splatter/inst/doc/splatter.html
   repository: https://github.com/Oshlack/splatter
 
 resources:

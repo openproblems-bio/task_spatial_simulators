@@ -21,11 +21,10 @@ publish_dir: "$publish_dir"
 HERE
 
 tw launch https://github.com/openproblems-bio/task_spatial_simulators.git \
-  --revision build/main \
+  --revision v0.1.0 \
   --pull-latest \
   --main-script target/nextflow/workflows/run_benchmark/main.nf \
   --workspace 53907369739130 \
-  --compute-env 5DwwhQoBi0knMSGcwThnlF \
   --params-file /tmp/params.yaml \
   --entry-name auto \
   --config common/nextflow_helpers/labels_tw.config \
