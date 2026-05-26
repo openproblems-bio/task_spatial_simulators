@@ -71,7 +71,7 @@ runners:
 
 ## Arguments
 
-- Do **not** set `default` on any argument — defaults belong to the library, not the config. Use `example` to document a typical value.
+- Do **not** set `default` on tuning/hyperparameter arguments — defaults belong to the library, not the config. Use `example` to document a typical value. Exception: if an argument is a variant-defining parameter that must always have a value, use `default` to ensure it is always set.
 - Use `info.test_default` to override a parameter value **only during `viash test`** (not in benchmarks). This is useful to reduce epoch counts, disable slow quality checks, etc., so tests run quickly without affecting real benchmark results.
 - Argument names use `--snake_case`. Viash exposes them in the script as `par['snake_case']` (Python) or `par$snake_case` (R).
 - After adding, removing, or renaming any argument, regenerate the `## VIASH START` block in the script so the `par` dict stays in sync:
