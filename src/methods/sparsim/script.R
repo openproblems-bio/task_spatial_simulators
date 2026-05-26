@@ -23,7 +23,7 @@ find_cluster_indices <- function(cluster_column) {
 }
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 cat("SPARSim simulation start\n")
 
@@ -68,7 +68,7 @@ simulated_result_ordered <- sim_result$count_matrix[
 ]
 
 cat("Generating output\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(counts = t(simulated_result_ordered)),
   obs = input_ordered$obs[c("row", "col")],
   var = input_ordered$var,

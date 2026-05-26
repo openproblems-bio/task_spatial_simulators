@@ -3395,7 +3395,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/negative_shuffle",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3553,7 +3553,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\\\n")
-input <- anndata::read_h5ad(par\\$input)
+input <- anndataR::read_h5ad(par\\$input)
 
 count_matrix <- as.matrix(input\\$layers[['counts']])
 
@@ -3563,7 +3563,7 @@ shuffled_matrix <- matrix(shuffled_values, nrow = nrow(count_matrix), ncol = nco
 
 
 cat("Generate outoput file\\\\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = shuffled_matrix
   ),

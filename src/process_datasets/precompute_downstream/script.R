@@ -18,7 +18,7 @@ meta <- list(
 source(file.path(meta$resources_dir, "utils.R"))
 
 cat("Read input files\n")
-input_sp <- anndata::read_h5ad(par$input_sp)
+input_sp <- anndataR::read_h5ad(par$input_sp)
 
 cat("Spatial dataset:\n")
 print(input_sp)

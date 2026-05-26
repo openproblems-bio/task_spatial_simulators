@@ -446,9 +446,9 @@ function ViashDockerfile {
 FROM openproblems/base_r:1
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component control_methods negative_normal"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:37Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:24Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -568,8 +568,8 @@ VIASH_DOCKER_RUN_ARGS=(-i --rm)
 function ViashHelp {
   echo "negative_normal build_main"
   echo ""
-  echo "This control method generates normal distributed data as a negative control."
-  echo "The mean and the sd are defined by the mean and sd of the input data."
+  echo "This control method generates normally distributed data as a negative control,"
+  echo "using a fixed mean of 3 and standard deviation of 1."
   echo ""
   echo "Arguments:"
   echo "    --input"
@@ -1062,7 +1062,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\n")
-input <- anndata::read_h5ad(par\$input)
+input <- anndataR::read_h5ad(par\$input)
 
 # generate random values
 n_rows <- nrow(input)
@@ -1074,7 +1074,7 @@ values <- rnorm(n = n_rows * n_cols, mean = 3, sd = 1)
 values[values < 0] <- abs(values[values < 0])
 
 cat("Generate outoput file\\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = matrix(values, nrow = n_rows, ncol = n_cols)
   ),

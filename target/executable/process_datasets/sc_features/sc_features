@@ -449,9 +449,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets sc_features"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:37Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:24Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1024,7 +1024,7 @@ function interrupt {
 trap clean_up EXIT
 trap interrupt INT SIGINT
 cat > "\$tempscript" << 'VIASHMAIN'
-requireNamespace("anndata", quietly = TRUE)
+requireNamespace("anndataR", quietly = TRUE)
 requireNamespace("scFeatures", quietly = TRUE)
 
 ## VIASH START
@@ -1068,7 +1068,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Read input files\\n")
-input_sp <- anndata::read_h5ad(par\$input_sp)
+input_sp <- anndataR::read_h5ad(par\$input_sp)
 
 cat("Spatial dataset:\\n")
 print(input_sp)
@@ -1084,7 +1084,7 @@ species <- organism_mapping[[input_sp\$uns[["dataset_organism"]]]]
 cat("Run scFeatures\\n")
 scfeatures_result <- scFeatures::scFeatures(
   data = Matrix::t(input_sp\$layers[["logcounts"]]),
-  sample = rep("sample1", input_sp\$n_obs),
+  sample = rep("sample1", input_sp\$n_obs()),
   spatialCoords = input_sp\$obs[, c("row", "col")],
   feature_types = c("L_stats", "celltype_interaction", "nn_correlation", "morans_I"),
   type = "spatial_t",

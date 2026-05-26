@@ -12,7 +12,7 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 cat("SymSim simulation start\n")
 
@@ -89,7 +89,7 @@ simulated_result_ordered <- counts(simulated_result)[
 ]
 
 cat("Generating output\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(simulated_result_ordered)
   ),

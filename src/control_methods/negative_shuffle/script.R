@@ -9,7 +9,7 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 count_matrix <- as.matrix(input$layers[['counts']])
 
@@ -19,7 +19,7 @@ shuffled_matrix <- matrix(shuffled_values, nrow = nrow(count_matrix), ncol = nco
 
 
 cat("Generate outoput file\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = shuffled_matrix
   ),

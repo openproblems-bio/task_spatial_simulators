@@ -11,7 +11,7 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 if (par$base != "domain") {
   stop("ONLY domain base")
@@ -41,7 +41,7 @@ colnames(sim_out) <- input$obs_names
 
 cat("Generating output\n")
 
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(sim_out)
   ),

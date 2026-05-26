@@ -3478,9 +3478,9 @@ meta = [
       },
       {
         "name" : "ks_statistic_nn_correlation",
-        "label" : "Library size",
-        "summary" : "KS statistic of the library size.",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simmulated datasets.\n",
+        "label" : "Nearest-neighbour correlation",
+        "summary" : "KS statistic of the nearest-neighbour correlation.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false,
@@ -3490,9 +3490,9 @@ meta = [
       },
       {
         "name" : "ks_statistic_morans_I",
-        "label" : "Effective library size",
-        "summary" : "KS statistic of the effective library size.",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the morans I of the real datasets versus the morans I of the simulated datasets.\n",
+        "label" : "Moran's I",
+        "summary" : "KS statistic of Moran's I.",
+        "description" : "The Kolmogorov-Smirnov statistic comparing the Moran's I of the real datasets versus the Moran's I of the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false,
@@ -3611,7 +3611,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3814,9 +3814,9 @@ rm(.viash_orig_warn)
 
 source(paste0(meta[["resources_dir"]], "/utils.R"))
 
-input_real_sp <- anndata::read_h5ad(par\\$input_spatial_dataset)
-input_sc <- anndata::read_h5ad(par\\$input_singlecell_dataset)
-input_simulated_sp <- anndata::read_h5ad(par\\$input_simulated_dataset)
+input_real_sp <- anndataR::read_h5ad(par\\$input_spatial_dataset)
+input_sc <- anndataR::read_h5ad(par\\$input_singlecell_dataset)
+input_simulated_sp <- anndataR::read_h5ad(par\\$input_simulated_dataset)
 
 real_log_count <- t(input_real_sp\\$layers[["logcounts"]])
 real_prob_matrix <- input_real_sp\\$obsm[["celltype_proportions"]]
@@ -3916,7 +3916,7 @@ uns_metric_values <- c(
 )
 
 cat("Writing output AnnData to file\\\\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   uns = list(
     dataset_id = input_simulated_sp\\$uns[["dataset_id"]],
     method_id = input_simulated_sp\\$uns[["method_id"]],

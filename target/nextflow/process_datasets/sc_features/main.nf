@@ -3302,7 +3302,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/sc_features",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3419,7 +3419,7 @@ def innerWorkflowFactory(args) {
   def rawScript = '''set -e
 tempscript=".viash_script.R"
 cat > "$tempscript" << VIASHMAIN
-requireNamespace("anndata", quietly = TRUE)
+requireNamespace("anndataR", quietly = TRUE)
 requireNamespace("scFeatures", quietly = TRUE)
 
 ## VIASH START
@@ -3463,7 +3463,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Read input files\\\\n")
-input_sp <- anndata::read_h5ad(par\\$input_sp)
+input_sp <- anndataR::read_h5ad(par\\$input_sp)
 
 cat("Spatial dataset:\\\\n")
 print(input_sp)
@@ -3479,7 +3479,7 @@ species <- organism_mapping[[input_sp\\$uns[["dataset_organism"]]]]
 cat("Run scFeatures\\\\n")
 scfeatures_result <- scFeatures::scFeatures(
   data = Matrix::t(input_sp\\$layers[["logcounts"]]),
-  sample = rep("sample1", input_sp\\$n_obs),
+  sample = rep("sample1", input_sp\\$n_obs()),
   spatialCoords = input_sp\\$obs[, c("row", "col")],
   feature_types = c("L_stats", "celltype_interaction", "nn_correlation", "morans_I"),
   type = "spatial_t",

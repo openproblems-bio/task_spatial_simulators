@@ -450,9 +450,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:37Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:24Z"
 LABEL org.opencontainers.image.source="https://github.com/Oshlack/splatter"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1111,7 +1111,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\n")
-input <- anndata::read_h5ad(par\$input)
+input <- anndataR::read_h5ad(par\$input)
 
 cat("Splatter simulation start\\n")
 
@@ -1150,7 +1150,7 @@ simulated_result_ordered <- counts(simulated_result)[
 ]
 
 cat("Generating output\\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(counts = t(simulated_result_ordered)),
   obs = input_ordered\$obs[c("row", "col")],
   var = input_ordered\$var,

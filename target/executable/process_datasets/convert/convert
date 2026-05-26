@@ -449,9 +449,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component process_datasets convert"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:37Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:25Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1419,7 +1419,7 @@ uns <- list(
 )
 
 cat("Transforming single cell into AnnData\\n")
-output_sc <- anndata::AnnData(
+output_sc <- anndataR::AnnData(
   layers = list(
     counts = process_matrix(input_sc, "counts")
   ),
@@ -1448,7 +1448,7 @@ output_sc <- anndata::AnnData(
 cat("Transforming spatial into AnnData\\n")
 celltype_proportions <- as.data.frame(metadata(input_sp)[["celltype_prop"]])
 
-output_sp <- anndata::AnnData(
+output_sp <- anndataR::AnnData(
   layers = list(
     counts = process_matrix(input_sp, "counts"),
     logcounts = process_matrix(input_sp, "logcounts")

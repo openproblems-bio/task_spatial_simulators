@@ -3600,7 +3600,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/convert",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3802,7 +3802,7 @@ uns <- list(
 )
 
 cat("Transforming single cell into AnnData\\\\n")
-output_sc <- anndata::AnnData(
+output_sc <- anndataR::AnnData(
   layers = list(
     counts = process_matrix(input_sc, "counts")
   ),
@@ -3831,7 +3831,7 @@ output_sc <- anndata::AnnData(
 cat("Transforming spatial into AnnData\\\\n")
 celltype_proportions <- as.data.frame(metadata(input_sp)[["celltype_prop"]])
 
-output_sp <- anndata::AnnData(
+output_sp <- anndataR::AnnData(
   layers = list(
     counts = process_matrix(input_sp, "counts"),
     logcounts = process_matrix(input_sp, "logcounts")

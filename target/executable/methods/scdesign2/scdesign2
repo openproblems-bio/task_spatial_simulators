@@ -453,9 +453,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("JSB-UCLA/scDesign2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign2"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:38Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:25Z"
 LABEL org.opencontainers.image.source="https://github.com/JSB-UCLA/scDesign2"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1111,7 +1111,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\n")
-input <- anndata::read_h5ad(par\$input)
+input <- anndataR::read_h5ad(par\$input)
 
 if (par\$base != "domain") {
   stop("ONLY domain base")
@@ -1141,7 +1141,7 @@ colnames(sim_out) <- input\$obs_names
 
 cat("Generating output\\n")
 
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(sim_out)
   ),

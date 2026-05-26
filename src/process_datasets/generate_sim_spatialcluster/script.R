@@ -16,8 +16,8 @@ meta <- list(
 source(file.path(meta$resources_dir, "utils.R"))
 
 cat("Read input files\n")
-input_real_sp <- anndata::read_h5ad(par$input_sp)
-input_simulated_sp <- anndata::read_h5ad(par$input_sp_sim)
+input_real_sp <- anndataR::read_h5ad(par$input_sp)
+input_simulated_sp <- anndataR::read_h5ad(par$input_sp_sim)
 
 cat("add spatial cluster in simulated dataset:\n")
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)

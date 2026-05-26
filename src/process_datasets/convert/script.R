@@ -55,7 +55,7 @@ uns <- list(
 )
 
 cat("Transforming single cell into AnnData\n")
-output_sc <- anndata::AnnData(
+output_sc <- anndataR::AnnData(
   layers = list(
     counts = process_matrix(input_sc, "counts")
   ),
@@ -84,7 +84,7 @@ output_sc <- anndata::AnnData(
 cat("Transforming spatial into AnnData\n")
 celltype_proportions <- as.data.frame(metadata(input_sp)[["celltype_prop"]])
 
-output_sp <- anndata::AnnData(
+output_sp <- anndataR::AnnData(
   layers = list(
     counts = process_matrix(input_sp, "counts"),
     logcounts = process_matrix(input_sp, "logcounts")

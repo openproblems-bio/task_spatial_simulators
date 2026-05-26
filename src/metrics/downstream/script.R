@@ -15,9 +15,9 @@ meta <- list(
 ## VIASH END
 
 source(paste0(meta[["resources_dir"]], "/utils.R"))
-input_real_sp <- anndata::read_h5ad(par$input_spatial_dataset)
-input_sc <- anndata::read_h5ad(par$input_singlecell_dataset)
-input_simulated_sp <- anndata::read_h5ad(par$input_simulated_dataset)
+input_real_sp <- anndataR::read_h5ad(par$input_spatial_dataset)
+input_sc <- anndataR::read_h5ad(par$input_singlecell_dataset)
+input_simulated_sp <- anndataR::read_h5ad(par$input_simulated_dataset)
 
 cat("spatial variable gene evaluation\n")
 real_svg <- generate_svg_sparkx(input_real_sp)
@@ -78,7 +78,7 @@ uns_metric_values <- c(
 )
 
 cat("Writing output AnnData to file\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   uns = list(
     dataset_id = input_simulated_sp$uns[["dataset_id"]],
     method_id = input_simulated_sp$uns[["method_id"]],

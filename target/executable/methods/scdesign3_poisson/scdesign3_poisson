@@ -450,9 +450,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3_poisson"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:37Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:25Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1179,7 +1179,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 reticulate::py_config()
 cat("Read input files\\n")
-input <- anndata::read_h5ad(par\$input)
+input <- anndataR::read_h5ad(par\$input)
 
 sce <- SingleCellExperiment(
   list(counts = Matrix::t(input\$layers[["counts"]])),
@@ -1220,7 +1220,7 @@ sce_simu <- scdesign3(
 cat("Generating output file\\n")
 new_obs <- sce_simu\$new_covariate[c("row", "col")]
 
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(sce_simu\$new_count)
   ),

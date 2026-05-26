@@ -3427,7 +3427,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/srtsim",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3588,12 +3588,12 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\\\n")
-input <- anndata::read_h5ad(par\\$input)
+input <- anndataR::read_h5ad(par\\$input)
 
 cat("SRTsim simulation start\\\\n")
 
-real_count <- Matrix::t(input\\$layers["counts"])
-real_loc <- data.frame(x = input\\$obs["row"], y = input\\$obs["col"], region = input\\$obs["spatial_cluster"])
+real_count <- Matrix::t(input\\$layers[["counts"]])
+real_loc <- data.frame(x = input\\$obs[["row"]], y = input\\$obs[["col"]], region = input\\$obs[["spatial_cluster"]])
 rownames(real_loc) <- rownames(input\\$obs)
 
 simSRT <- createSRT(count_in = real_count, loc_in = real_loc)
@@ -3617,7 +3617,7 @@ col_data <- data.frame(
 
 cat("Generating output\\\\n")
 
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(counts_single)
   ),

@@ -3307,7 +3307,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/precompute_downstream",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3472,7 +3472,7 @@ rm(.viash_orig_warn)
 source(file.path(meta\\$resources_dir, "utils.R"))
 
 cat("Read input files\\\\n")
-input_sp <- anndata::read_h5ad(par\\$input_sp)
+input_sp <- anndataR::read_h5ad(par\\$input_sp)
 
 cat("Spatial dataset:\\\\n")
 print(input_sp)

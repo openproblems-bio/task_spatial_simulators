@@ -446,9 +446,9 @@ function ViashDockerfile {
 FROM openproblems/base_r:1
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component control_methods negative_shuffle"
-LABEL org.opencontainers.image.created="2026-05-26T09:27:37Z"
+LABEL org.opencontainers.image.created="2026-05-26T14:13:24Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="c52b15361182510c19bfdf2729a84395a779ae48"
+LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1061,7 +1061,7 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\n")
-input <- anndata::read_h5ad(par\$input)
+input <- anndataR::read_h5ad(par\$input)
 
 count_matrix <- as.matrix(input\$layers[['counts']])
 
@@ -1071,7 +1071,7 @@ shuffled_matrix <- matrix(shuffled_values, nrow = nrow(count_matrix), ncol = nco
 
 
 cat("Generate outoput file\\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = shuffled_matrix
   ),

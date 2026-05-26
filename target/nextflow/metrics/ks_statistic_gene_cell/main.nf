@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "c52b15361182510c19bfdf2729a84395a779ae48",
+    "git_commit" : "2a9c57d1caa79500f8905a319c7788e5260f6a4c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4066,11 +4066,11 @@ rm(.viash_orig_warn)
 ## VIASH END
 
 cat("Reading input files\\\\n")
-input_spatial_dataset <- anndata::read_h5ad(par[["input_spatial_dataset"]])
-input_singlecell_dataset <- anndata::read_h5ad(par[[
+input_spatial_dataset <- anndataR::read_h5ad(par[["input_spatial_dataset"]])
+input_singlecell_dataset <- anndataR::read_h5ad(par[[
   "input_singlecell_dataset"
 ]])
-input_simulated_dataset <- anndata::read_h5ad(par[["input_simulated_dataset"]])
+input_simulated_dataset <- anndataR::read_h5ad(par[["input_simulated_dataset"]])
 
 real_counts <- input_spatial_dataset\\$layers[["counts"]]
 sim_counts <- input_simulated_dataset\\$layers[["counts"]]
@@ -4304,7 +4304,7 @@ uns_metric_values <- c(
 )
 
 cat("Writing output AnnData to file\\\\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   uns = list(
     dataset_id = input_simulated_dataset\\$uns[["dataset_id"]],
     method_id = input_simulated_dataset\\$uns[["method_id"]],
