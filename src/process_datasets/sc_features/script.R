@@ -1,4 +1,4 @@
-requireNamespace("anndata", quietly = TRUE)
+requireNamespace("anndataR", quietly = TRUE)
 requireNamespace("scFeatures", quietly = TRUE)
 
 ## VIASH START
@@ -11,7 +11,7 @@ par <- list(
 ## VIASH END
 
 cat("Read input files\n")
-input_sp <- anndata::read_h5ad(par$input_sp)
+input_sp <- anndataR::read_h5ad(par$input_sp)
 
 cat("Spatial dataset:\n")
 print(input_sp)
@@ -27,7 +27,7 @@ species <- organism_mapping[[input_sp$uns[["dataset_organism"]]]]
 cat("Run scFeatures\n")
 scfeatures_result <- scFeatures::scFeatures(
   data = Matrix::t(input_sp$layers[["logcounts"]]),
-  sample = rep("sample1", input_sp$n_obs),
+  sample = rep("sample1", input_sp$n_obs()),
   spatialCoords = input_sp$obs[, c("row", "col")],
   feature_types = c("L_stats", "celltype_interaction", "nn_correlation", "morans_I"),
   type = "spatial_t",

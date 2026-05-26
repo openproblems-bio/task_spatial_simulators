@@ -29,11 +29,11 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input_spatial_dataset <- anndata::read_h5ad(par[["input_spatial_dataset"]])
-input_singlecell_dataset <- anndata::read_h5ad(par[[
+input_spatial_dataset <- anndataR::read_h5ad(par[["input_spatial_dataset"]])
+input_singlecell_dataset <- anndataR::read_h5ad(par[[
   "input_singlecell_dataset"
 ]])
-input_simulated_dataset <- anndata::read_h5ad(par[["input_simulated_dataset"]])
+input_simulated_dataset <- anndataR::read_h5ad(par[["input_simulated_dataset"]])
 
 real_counts <- input_spatial_dataset$layers[["counts"]]
 sim_counts <- input_simulated_dataset$layers[["counts"]]
@@ -267,7 +267,7 @@ uns_metric_values <- c(
 )
 
 cat("Writing output AnnData to file\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   uns = list(
     dataset_id = input_simulated_dataset$uns[["dataset_id"]],
     method_id = input_simulated_dataset$uns[["method_id"]],

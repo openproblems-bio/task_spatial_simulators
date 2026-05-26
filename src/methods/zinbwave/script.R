@@ -13,7 +13,7 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 ordered_indices <- order(input$obs$spatial_cluster)
 input_ordered <- input[ordered_indices]
@@ -42,7 +42,7 @@ simulated_result_ordered <- counts(simulated_result)[
 ]
 
 cat("Generating output\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(simulated_result_ordered)
   ),
