@@ -33,13 +33,13 @@ should consist of similar cell types from similar tissues.
 
 ## Authors & contributors
 
-| name              | roles              |
-|:------------------|:-------------------|
-| Xiaoqi Liang      | author, maintainer |
-| Yue Cao           | author             |
-| Jean Yang         | author             |
-| Robrecht Cannoodt | contributor        |
-| Sai Nirmayi Yasa  | contributor        |
+| Name              | Roles              | Orcid               | Github        |
+|:------------------|:-------------------|:--------------------|:--------------|
+| Xiaoqi Liang      | author, maintainer | 0009-0004-9625-1441 | littlecabiria |
+| Yue Cao           | author             | 0000-0002-2356-4031 | ycao6928      |
+| Jean Yang         | author             | 0000-0002-5271-2603 | jeany21       |
+| Robrecht Cannoodt | contributor        | 0000-0003-3641-729X | rcannood      |
+| Sai Nirmayi Yasa  | contributor        | 0009-0003-6319-9803 | sainirmayi    |
 
 ## API
 
@@ -76,24 +76,10 @@ Arguments:
 
 | Name | Type | Description |
 |:---|:---|:---|
-| `--input_sc` | `file` | NA. |
-| `--input_sp` | `file` | NA. |
+| `--input_sc` | `file` | . |
+| `--input_sp` | `file` | . |
 | `--output_sc` | `file` | (*Output*) An unprocessed single-cell dataset as output by a dataset loader. Default: `$id/output_sc.h5ad`. |
 | `--output_sp` | `file` | (*Output*) An unprocessed spatial dataset as output by a dataset loader. Default: `$id/output_sp.h5ad`. |
-| `--dataset_id` | `string` | NA. |
-| `--dataset_name` | `string` | NA. |
-| `--dataset_url_spatial` | `string` | (*Optional*) NA. |
-| `--dataset_url_singlecell` | `string` | (*Optional*) NA. |
-| `--dataset_reference` | `string` | (*Optional*) NA. |
-| `--dataset_reference_spatial` | `string` | (*Optional*) NA. |
-| `--dataset_reference_singlecell` | `string` | (*Optional*) NA. |
-| `--dataset_summary_spatial` | `string` | NA. |
-| `--dataset_summary_singlecell` | `string` | NA. |
-| `--dataset_description_spatial` | `string` | NA. |
-| `--dataset_description_singlecell` | `string` | NA. |
-| `--dataset_organism` | `string` | NA. |
-| `--dataset_assay_spatial` | `string` | NA. |
-| `--dataset_assay_singlecell` | `string` | NA. |
 
 </div>
 
@@ -168,8 +154,6 @@ Arguments:
 | Name | Type | Description |
 |:---|:---|:---|
 | `--input` | `file` | (*Optional*) An unprocessed spatial dataset as output by a dataset loader. |
-| `--base` | `string` | (*Optional*) NA. Default: `domain`. |
-| `--base` | `string` | (*Optional*) NA. Default: `domain`. |
 | `--output` | `file` | (*Output*) The solution for the test data. |
 
 </div>
@@ -186,4 +170,3 @@ The solution for the test data
 
 Example file:
 `resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad`
-
