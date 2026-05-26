@@ -3385,9 +3385,8 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/control_methods/negative_shuffle",
     "viash_version" : "0.9.4",
-    "git_commit" : "3721b1792e49f2624a1e40b4671defd980971996",
-    "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators",
-    "git_tag" : "test-3-g3721b17"
+    "git_commit" : "2ba90656ce4d3493158130425a853398eb5014c7",
+    "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
     "name" : "task_spatial_simulators",
@@ -3423,8 +3422,7 @@ meta = [
       {
         "name" : "Xiaoqi Liang",
         "roles" : [
-          "author",
-          "maintainer"
+          "author"
         ],
         "info" : {
           "orcid" : "0009-0004-9625-1441",
@@ -3434,7 +3432,8 @@ meta = [
       {
         "name" : "Yue Cao",
         "roles" : [
-          "author"
+          "author",
+          "maintainer"
         ],
         "info" : {
           "orcid" : "0000-0002-2356-4031",
