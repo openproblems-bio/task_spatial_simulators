@@ -4,8 +4,8 @@ name: negative_normal
 label: negative_normal
 summary: A negative control which generates normal distributed data.
 description: |
-  This control method generates normal distributed data as a negative control.
-  The mean and the sd are defined by the mean and sd of the input data.
+  This control method generates normally distributed data as a negative control,
+  using a fixed mean of 3 and standard deviation of 1.
 
 resources:
   - type: r_script
