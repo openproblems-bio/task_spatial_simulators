@@ -33,13 +33,13 @@ should consist of similar cell types from similar tissues.
 
 ## Authors & contributors
 
-| Name              | Roles              | Orcid               | Github        |
-|:------------------|:-------------------|:--------------------|:--------------|
-| Xiaoqi Liang      | author, maintainer | 0009-0004-9625-1441 | littlecabiria |
-| Yue Cao           | author             | 0000-0002-2356-4031 | ycao6928      |
-| Jean Yang         | author             | 0000-0002-5271-2603 | jeany21       |
-| Robrecht Cannoodt | contributor        | 0000-0003-3641-729X | rcannood      |
-| Sai Nirmayi Yasa  | contributor        | 0009-0003-6319-9803 | sainirmayi    |
+| Name              | Roles              | Github        | Orcid               |
+|:------------------|:-------------------|:--------------|:--------------------|
+| Xiaoqi Liang      | author             | littlecabiria | 0009-0004-9625-1441 |
+| Yue Cao           | author, maintainer | ycao6928      | 0000-0002-2356-4031 |
+| Jean Yang         | author             | jeany21       | 0000-0002-5271-2603 |
+| Robrecht Cannoodt | contributor        | rcannood      | 0000-0003-3641-729X |
+| Sai Nirmayi Yasa  | contributor        | sainirmayi    | 0009-0003-6319-9803 |
 
 ## API
 
