@@ -9,7 +9,7 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 # generate random values
 n_rows <- nrow(input)
@@ -21,7 +21,7 @@ values <- rnorm(n = n_rows * n_cols, mean = 3, sd = 1)
 values[values < 0] <- abs(values[values < 0])
 
 cat("Generate outoput file\n")
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = matrix(values, nrow = n_rows, ncol = n_cols)
   ),

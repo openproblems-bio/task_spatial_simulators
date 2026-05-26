@@ -19,20 +19,20 @@ info:
       references:
         doi: 10.1201/9780429485572
     - name: ks_statistic_nn_correlation
-      label: Library size
-      summary: KS statistic of the library size.
+      label: Nearest-neighbour correlation
+      summary: KS statistic of the nearest-neighbour correlation.
       description: |
-        The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simmulated datasets.
+        The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simulated datasets.
       min: -Inf
       max: +Inf
       maximize: false
       references:
         doi: 10.1201/9780429485572
     - name: ks_statistic_morans_I
-      label: Effective library size
-      summary: KS statistic of the effective library size.
+      label: Moran's I
+      summary: KS statistic of Moran's I.
       description: |
-        The Kolmogorov-Smirnov statistic comparing the morans I of the real datasets versus the morans I of the simulated datasets.
+        The Kolmogorov-Smirnov statistic comparing the Moran's I of the real datasets versus the Moran's I of the simulated datasets.
       min: -Inf
       max: +Inf
       maximize: false

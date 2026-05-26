@@ -12,12 +12,12 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 cat("SRTsim simulation start\n")
 
-real_count <- Matrix::t(input$layers["counts"])
-real_loc <- data.frame(x = input$obs["row"], y = input$obs["col"], region = input$obs["spatial_cluster"])
+real_count <- Matrix::t(input$layers[["counts"]])
+real_loc <- data.frame(x = input$obs[["row"]], y = input$obs[["col"]], region = input$obs[["spatial_cluster"]])
 rownames(real_loc) <- rownames(input$obs)
 
 simSRT <- createSRT(count_in = real_count, loc_in = real_loc)
@@ -41,7 +41,7 @@ col_data <- data.frame(
 
 cat("Generating output\n")
 
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = Matrix::t(counts_single)
   ),

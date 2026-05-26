@@ -19,9 +19,6 @@ resources:
 engines:
   - type: docker
     image: openproblems/base_r:1
-    setup:
-      - type: r
-        cran: SRTsim
 
 runners:
   - type: executable

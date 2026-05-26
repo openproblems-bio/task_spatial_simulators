@@ -9,7 +9,7 @@ meta <- list(
 ## VIASH END
 
 cat("Reading input files\n")
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 
 input$uns$method_id <- meta$name
 

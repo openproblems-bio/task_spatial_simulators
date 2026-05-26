@@ -40,12 +40,12 @@ This block is **auto-generated** by viash from the component's `config.vsh.yaml`
 
 **Method: reading input:**
 ```r
-input <- anndata::read_h5ad(par$input)
+input <- anndataR::read_h5ad(par$input)
 ```
 
 **Method: writing simulated dataset output:**
 ```r
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   layers = list(
     counts = simulated_counts  # integer matrix, cells x genes
   ),
@@ -63,14 +63,14 @@ output$write_h5ad(par$output, compression = "gzip")
 
 **Metric: reading inputs:**
 ```r
-input_spatial_dataset <- anndata::read_h5ad(par[["input_spatial_dataset"]])
-input_singlecell_dataset <- anndata::read_h5ad(par[["input_singlecell_dataset"]])
-input_simulated_dataset <- anndata::read_h5ad(par[["input_simulated_dataset"]])
+input_spatial_dataset <- anndataR::read_h5ad(par[["input_spatial_dataset"]])
+input_singlecell_dataset <- anndataR::read_h5ad(par[["input_singlecell_dataset"]])
+input_simulated_dataset <- anndataR::read_h5ad(par[["input_simulated_dataset"]])
 ```
 
 **Metric: writing score output:**
 ```r
-output <- anndata::AnnData(
+output <- anndataR::AnnData(
   uns = list(
     dataset_id = input_simulated_dataset$uns[["dataset_id"]],
     method_id = input_simulated_dataset$uns[["method_id"]],
