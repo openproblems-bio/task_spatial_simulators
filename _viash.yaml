@@ -33,12 +33,12 @@ references:
 
 authors:
   - name: Xiaoqi Liang
-    roles: [author, maintainer]
+    roles: [author]
     info:
       orcid: 0009-0004-9625-1441
       github: littlecabiria
   - name: Yue Cao
-    roles: [author]
+    roles: [author, maintainer]
     info:
       orcid: 0000-0002-2356-4031
       github: ycao6928
