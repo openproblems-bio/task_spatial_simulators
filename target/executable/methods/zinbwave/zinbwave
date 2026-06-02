@@ -450,9 +450,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2026-05-26T14:13:25Z"
+LABEL org.opencontainers.image.created="2026-06-02T12:20:23Z"
 LABEL org.opencontainers.image.source="https://github.com/drisso/zinbwave"
-LABEL org.opencontainers.image.revision="2a9c57d1caa79500f8905a319c7788e5260f6a4c"
+LABEL org.opencontainers.image.revision="2f62a3daf72c79a0fdb7b6534ab6be5acd076a2f"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
