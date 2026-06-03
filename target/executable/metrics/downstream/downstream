@@ -454,9 +454,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("xzhoulab/SPARK", "YingMa0107/CARD", "xuranw/MuSiC", "stevexniu/spots"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics downstream"
-LABEL org.opencontainers.image.created="2026-06-02T12:20:24Z"
+LABEL org.opencontainers.image.created="2026-06-03T06:25:06Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="2f62a3daf72c79a0fdb7b6534ab6be5acd076a2f"
+LABEL org.opencontainers.image.revision="4f779b4770b90a1f1e73c438b8897d5719def947"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

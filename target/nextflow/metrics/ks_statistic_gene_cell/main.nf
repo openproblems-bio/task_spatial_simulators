@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "2f62a3daf72c79a0fdb7b6534ab6be5acd076a2f",
+    "git_commit" : "4f779b4770b90a1f1e73c438b8897d5719def947",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4075,22 +4075,84 @@ input_simulated_dataset <- anndataR::read_h5ad(par[["input_simulated_dataset"]])
 real_counts <- input_spatial_dataset\\$layers[["counts"]]
 sim_counts <- input_simulated_dataset\\$layers[["counts"]]
 
+as_finite_kde_input <- function(x) {
+  if (is.data.frame(x)) {
+    x <- as.matrix(x)
+  }
+
+  if (is.matrix(x)) {
+    x <- matrix(as.numeric(x), nrow = nrow(x), ncol = ncol(x))
+    return(x[apply(is.finite(x), 1, all), , drop = FALSE])
+  }
+
+  x <- as.numeric(x)
+  x[is.finite(x)]
+}
+
+add_kde_jitter <- function(x, amount) {
+  x_range <- max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
+  x_scale <- max(x_range, stats::sd(as.numeric(x), na.rm = TRUE), 1)
+  noise <- seq(-amount, amount, length.out = length(x)) * x_scale
+
+  if (is.matrix(x)) {
+    matrix(as.numeric(x) + noise, nrow = nrow(x), ncol = ncol(x))
+  } else {
+    as.numeric(x) + noise
+  }
+}
+
 try_kde_test <- function(x1, x2) {
-  tryCatch(
-    {
-      ks::kde.test(x1 = x1, x2 = x2)
-    },
-    error = function(e) {
-      warning(
-        "Caught error in ks::kde.test: ",
-        e\\$message,
-        "\\\\n\\\\nTrying again with some random noise added to the vectors."
-      )
-      x1_noise <- stats::runif(length(x1), -1e-8, 1e-8)
-      x2_noise <- stats::runif(length(x2), -1e-8, 1e-8)
-      ks::kde.test(x1 = x1 + x1_noise, x2 = x2 + x2_noise)
+  x1 <- as_finite_kde_input(x1)
+  x2 <- as_finite_kde_input(x2)
+
+  if (length(x1) == 0 || length(x2) == 0) {
+    warning("No finite values available for ks::kde.test; returning NA.")
+    return(list(zstat = NA_real_, tstat = NA_real_))
+  }
+
+  if (is.matrix(x1) && (nrow(x1) < 2 || nrow(x2) < 2)) {
+    warning("Not enough finite rows available for ks::kde.test; returning NA.")
+    return(list(zstat = NA_real_, tstat = NA_real_))
+  }
+
+  if (!is.matrix(x1) && (length(x1) < 2 || length(x2) < 2)) {
+    warning("Not enough finite values available for ks::kde.test; returning NA.")
+    return(list(zstat = NA_real_, tstat = NA_real_))
+  }
+
+  last_error <- NULL
+  for (jitter in c(0, 1e-8, 1e-7, 1e-6, 1e-5, 1e-4)) {
+    x1_try <- if (jitter == 0) x1 else add_kde_jitter(x1, jitter)
+    x2_try <- if (jitter == 0) x2 else add_kde_jitter(x2, jitter)
+
+    result <- tryCatch(
+      ks::kde.test(x1 = x1_try, x2 = x2_try),
+      error = function(e) {
+        last_error <<- e
+        NULL
+      }
+    )
+
+    if (!is.null(result)) {
+      if (jitter > 0) {
+        warning(
+          "Caught error in ks::kde.test: ",
+          last_error\\$message,
+          "\\\\n\\\\nSucceeded after adding deterministic jitter of size ",
+          jitter,
+          "."
+        )
+      }
+      return(result)
     }
+  }
+
+  warning(
+    "ks::kde.test failed after deterministic jitter retries: ",
+    last_error\\$message,
+    "\\\\n\\\\nReturning NA for this metric."
   )
+  list(zstat = NA_real_, tstat = NA_real_)
 }
 
 cat("Computing ks statistic of fraction of zeros per gene\\\\n")
@@ -4144,7 +4206,7 @@ scaled_var_real_cells <- scale(sparseMatrixStats::colVars(Matrix::t(
 )))
 scaled_var_sim_cells <- scale(sparseMatrixStats::colVars(Matrix::t(sim_counts)))
 ks_statistic_scaled_var_cells <- try_kde_test(
-  x1 = as.numeric(scaled_var_sim_cells),
+  x1 = as.numeric(scaled_var_real_cells),
   x2 = as.numeric(scaled_var_sim_cells)
 )
 
@@ -4152,7 +4214,7 @@ cat("Computing ks statistic of the cell-level scaled mean\\\\n")
 scaled_mean_real_cells <- scale(colMeans(Matrix::t(real_counts)))
 scaled_mean_sim_cells <- scale(colMeans(Matrix::t(sim_counts)))
 ks_statistic_scaled_mean_cells <- try_kde_test(
-  x1 = as.numeric(scaled_mean_sim_cells),
+  x1 = as.numeric(scaled_mean_real_cells),
   x2 = as.numeric(scaled_mean_sim_cells)
 )
 
@@ -4187,7 +4249,7 @@ cat("Computing ks statistic of the gene-level scaled variance\\\\n")
 scaled_var_real_genes <- scale(sparseMatrixStats::colVars(real_counts))
 scaled_var_sim_genes <- scale(sparseMatrixStats::colVars(sim_counts))
 ks_statistic_scaled_var_genes <- try_kde_test(
-  x1 = as.numeric(scaled_var_sim_genes),
+  x1 = as.numeric(scaled_var_real_genes),
   x2 = as.numeric(scaled_var_sim_genes)
 )
 
