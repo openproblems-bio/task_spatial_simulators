@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "4d8ffd3a1b5f6092a138bcfac31ec5c82f9f25f7",
+    "git_commit" : "107736d923cd869c7d9e6cd798f83839cea47a68",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4236,9 +4236,17 @@ ks_statistic_lib_fraczero_cells <- try_kde_test(
 
 cat("Computing ks statistic of the sample Pearson correlation\\\\n")
 # pearson_real_cells <- reshape2::melt(cor(as.matrix(Matrix::t(real_counts)), method = "pearson"))
-pearson_real_cells <- proxyC::simil(real_counts, method = "correlation")
+pearson_real_cells <- proxyC::simil(
+  real_counts,
+  margin = 1,
+  method = "correlation"
+)
 # pearson_sim_cells <- reshape2::melt(cor(as.matrix(Matrix::t(sim_counts)), method = "pearson"))
-pearson_sim_cells <- proxyC::simil(sim_counts, method = "correlation")
+pearson_sim_cells <- proxyC::simil(
+  sim_counts,
+  margin = 1,
+  method = "correlation"
+)
 
 ks_statistic_pearson_cells <- try_kde_test(
   x1 = sample(as.numeric(pearson_real_cells), 10000),
@@ -4263,9 +4271,17 @@ ks_statistic_scaled_mean_genes <- try_kde_test(
 
 cat("Computing ks statistic of the gene Pearson correlation\\\\n")
 # pearson_real_genes <- reshape2::melt(cor(as.matrix(real_counts), method = "pearson"))
-pearson_real_genes <- proxyC::simil(real_counts, method = "correlation")
+pearson_real_genes <- proxyC::simil(
+  real_counts,
+  margin = 2,
+  method = "correlation"
+)
 # pearson_sim_genes <- reshape2::melt(cor(as.matrix(sim_counts), method = "pearson"))
-pearson_sim_genes <- proxyC::simil(sim_counts, method = "correlation")
+pearson_sim_genes <- proxyC::simil(
+  sim_counts,
+  margin = 2,
+  method = "correlation"
+)
 ks_statistic_pearson_genes <- try_kde_test(
   x1 = sample(as.numeric(pearson_real_genes), 10000),
   x2 = sample(as.numeric(pearson_sim_genes), 10000)

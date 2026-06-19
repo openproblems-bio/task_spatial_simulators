@@ -199,9 +199,17 @@ ks_statistic_lib_fraczero_cells <- try_kde_test(
 
 cat("Computing ks statistic of the sample Pearson correlation\n")
 # pearson_real_cells <- reshape2::melt(cor(as.matrix(Matrix::t(real_counts)), method = "pearson"))
-pearson_real_cells <- proxyC::simil(real_counts, method = "correlation")
+pearson_real_cells <- proxyC::simil(
+  real_counts,
+  margin = 1,
+  method = "correlation"
+)
 # pearson_sim_cells <- reshape2::melt(cor(as.matrix(Matrix::t(sim_counts)), method = "pearson"))
-pearson_sim_cells <- proxyC::simil(sim_counts, method = "correlation")
+pearson_sim_cells <- proxyC::simil(
+  sim_counts,
+  margin = 1,
+  method = "correlation"
+)
 
 ks_statistic_pearson_cells <- try_kde_test(
   x1 = sample(as.numeric(pearson_real_cells), 10000),
@@ -226,9 +234,17 @@ ks_statistic_scaled_mean_genes <- try_kde_test(
 
 cat("Computing ks statistic of the gene Pearson correlation\n")
 # pearson_real_genes <- reshape2::melt(cor(as.matrix(real_counts), method = "pearson"))
-pearson_real_genes <- proxyC::simil(real_counts, method = "correlation")
+pearson_real_genes <- proxyC::simil(
+  real_counts,
+  margin = 2,
+  method = "correlation"
+)
 # pearson_sim_genes <- reshape2::melt(cor(as.matrix(sim_counts), method = "pearson"))
-pearson_sim_genes <- proxyC::simil(sim_counts, method = "correlation")
+pearson_sim_genes <- proxyC::simil(
+  sim_counts,
+  margin = 2,
+  method = "correlation"
+)
 ks_statistic_pearson_genes <- try_kde_test(
   x1 = sample(as.numeric(pearson_real_genes), 10000),
   x2 = sample(as.numeric(pearson_sim_genes), 10000)
