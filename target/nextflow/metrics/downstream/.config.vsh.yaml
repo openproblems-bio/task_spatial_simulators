@@ -360,8 +360,8 @@ info:
     min: 0
     max: "+Inf"
     maximize: false
-  - name: "ctdeconcolute_jsd"
-    label: "ctdeconcolute_jsd"
+  - name: "ctdeconvolute_jsd"
+    label: "ctdeconvolute_jsd"
     summary: "Jensen-Shannon divergence (JSD) is calculated between the true and predicted\
       \ proportion per cell type in all spots."
     description: "Jensen-Shannon Divergence used in cell type deconvolution to measure\
@@ -490,7 +490,7 @@ build_info:
   output: "target/nextflow/metrics/downstream"
   executable: "target/nextflow/metrics/downstream/main.nf"
   viash_version: "0.9.7"
-  git_commit: "4db9aba11f4e9bc31d7136ea098ece027266bd7e"
+  git_commit: "4d8ffd3a1b5f6092a138bcfac31ec5c82f9f25f7"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"

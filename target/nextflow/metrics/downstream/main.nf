@@ -3537,8 +3537,8 @@ meta = [
         "maximize" : false
       },
       {
-        "name" : "ctdeconcolute_jsd",
-        "label" : "ctdeconcolute_jsd",
+        "name" : "ctdeconvolute_jsd",
+        "label" : "ctdeconvolute_jsd",
         "summary" : "Jensen-Shannon divergence (JSD) is calculated between the true and predicted proportion per cell type in all spots.",
         "description" : "Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.\n",
         "references" : {
@@ -3696,7 +3696,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.7",
-    "git_commit" : "4db9aba11f4e9bc31d7136ea098ece027266bd7e",
+    "git_commit" : "4d8ffd3a1b5f6092a138bcfac31ec5c82f9f25f7",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3873,8 +3873,8 @@ cat("cell type deconvolution evaluation\\\\n")
 real_ct_prop <- CARD_processing(input_real_sp, input_sc)
 # real_ct_prop <- input_real_sp\\$obsm\\$celltype_proportions
 sim_ct_prop <- CARD_processing(input_simulated_sp, input_sc)
-ctdeconvolute_rmse <- generate_jds(real_ct_prop, sim_ct_prop)
-ctdeconcolute_jsd <- generate_rmse(real_ct_prop, sim_ct_prop)
+ctdeconvolute_rmse <- generate_rmse(real_ct_prop, sim_ct_prop)
+ctdeconvolute_jsd <- generate_jds(real_ct_prop, sim_ct_prop)
 
 cat("spatial autocorrelation evaluation\\\\n")
 counts <- input_simulated_sp\\$layers[["counts"]]
@@ -3902,7 +3902,7 @@ uns_metric_ids <- c(
   "svg_precision",
   "svg_recall",
   "ctdeconvolute_rmse",
-  "ctdeconcolute_jsd",
+  "ctdeconvolute_jsd",
   "crosscor_cosine",
   "crosscor_mantel",
   "clustering_ari",
@@ -3913,7 +3913,7 @@ uns_metric_values <- c(
   svg_precision,
   svg_recall,
   ctdeconvolute_rmse,
-  ctdeconcolute_jsd,
+  ctdeconvolute_jsd,
   crosscor_cosine,
   crosscor_mantel,
   clustering_ari,
