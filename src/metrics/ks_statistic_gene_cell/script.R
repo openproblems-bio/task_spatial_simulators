@@ -118,6 +118,18 @@ try_kde_test <- function(x1, x2) {
   list(zstat = NA_real_, tstat = NA_real_)
 }
 
+subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
+  x <- as.numeric(x)
+  x <- x[is.finite(x)]
+
+  if (length(x) <= max_size) {
+    return(x)
+  }
+
+  set.seed(seed)
+  sample(x, size = max_size, replace = FALSE)
+}
+
 cat("Computing ks statistic of fraction of zeros per gene\n")
 frac_zero_real_genes <- colMeans(real_counts == 0)
 frac_zero_sim_genes <- colMeans(sim_counts == 0)
@@ -217,8 +229,8 @@ pearson_sim_cells <- proxyC::simil(
 )
 
 ks_statistic_pearson_cells <- try_kde_test(
-  x1 = sample(as.numeric(pearson_real_cells), 10000),
-  x2 = sample(as.numeric(pearson_sim_cells), 10000)
+  x1 = subsample_correlations(pearson_real_cells),
+  x2 = subsample_correlations(pearson_sim_cells)
 )
 
 cat("Computing ks statistic of the gene-level scaled variance\n")
@@ -251,8 +263,8 @@ pearson_sim_genes <- proxyC::simil(
   method = "correlation"
 )
 ks_statistic_pearson_genes <- try_kde_test(
-  x1 = sample(as.numeric(pearson_real_genes), 10000),
-  x2 = sample(as.numeric(pearson_sim_genes), 10000)
+  x1 = subsample_correlations(pearson_real_genes),
+  x2 = subsample_correlations(pearson_sim_genes)
 )
 
 cat("Computing ks statistic of the mean expression vs variance expression\n")
