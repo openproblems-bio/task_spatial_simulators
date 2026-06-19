@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "15e94b74529a062c79aaa8a10d3515a5c1f6cae6",
+    "git_commit" : "db3e9fbf8e09cc21d76503c2cc9a8013d9b2009c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4155,6 +4155,18 @@ try_kde_test <- function(x1, x2) {
   list(zstat = NA_real_, tstat = NA_real_)
 }
 
+subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
+  x <- as.numeric(x)
+  x <- x[is.finite(x)]
+
+  if (length(x) <= max_size) {
+    return(x)
+  }
+
+  set.seed(seed)
+  sample(x, size = max_size, replace = FALSE)
+}
+
 cat("Computing ks statistic of fraction of zeros per gene\\\\n")
 frac_zero_real_genes <- colMeans(real_counts == 0)
 frac_zero_sim_genes <- colMeans(sim_counts == 0)
@@ -4254,8 +4266,8 @@ pearson_sim_cells <- proxyC::simil(
 )
 
 ks_statistic_pearson_cells <- try_kde_test(
-  x1 = sample(as.numeric(pearson_real_cells), 10000),
-  x2 = sample(as.numeric(pearson_sim_cells), 10000)
+  x1 = subsample_correlations(pearson_real_cells),
+  x2 = subsample_correlations(pearson_sim_cells)
 )
 
 cat("Computing ks statistic of the gene-level scaled variance\\\\n")
@@ -4288,8 +4300,8 @@ pearson_sim_genes <- proxyC::simil(
   method = "correlation"
 )
 ks_statistic_pearson_genes <- try_kde_test(
-  x1 = sample(as.numeric(pearson_real_genes), 10000),
-  x2 = sample(as.numeric(pearson_sim_genes), 10000)
+  x1 = subsample_correlations(pearson_real_genes),
+  x2 = subsample_correlations(pearson_sim_genes)
 )
 
 cat("Computing ks statistic of the mean expression vs variance expression\\\\n")
