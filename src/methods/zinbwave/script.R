@@ -1,3 +1,6 @@
+if (!requireNamespace("zinbwave", quietly = TRUE)) {
+  stop("The 'zinbwave' package is required but is not installed.")
+}
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 suppressMessages(library(splatter, quietly = TRUE))
 suppressMessages(library(BiocParallel, quietly = TRUE))

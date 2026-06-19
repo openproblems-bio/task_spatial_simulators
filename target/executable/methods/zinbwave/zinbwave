@@ -445,14 +445,16 @@ function ViashDockerfile {
     cat << 'VIASHDOCKER'
 FROM openproblems/base_r:1
 ENTRYPOINT []
-RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y r-bioc-splatter r-bioc-zinbwave r-bioc-singlecellexperiment && \
-  rm -rf /var/lib/apt/lists/*
+RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("splatter", quietly = TRUE)) BiocManager::install("splatter")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("zinbwave", quietly = TRUE)) BiocManager::install("zinbwave")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("BiocParallel", quietly = TRUE)) BiocManager::install("BiocParallel")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2026-06-19T07:33:42Z"
+LABEL org.opencontainers.image.created="2026-06-19T07:51:06Z"
 LABEL org.opencontainers.image.source="https://github.com/drisso/zinbwave"
-LABEL org.opencontainers.image.revision="da1b153fd7a48ca2fbe95bcfccf986169394575f"
+LABEL org.opencontainers.image.revision="0628dc0fef0da3e2b0cb09b07b49eb3a9509023c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1065,6 +1067,9 @@ function interrupt {
 trap clean_up EXIT
 trap interrupt INT SIGINT
 cat > "\$tempscript" << 'VIASHMAIN'
+if (!requireNamespace("zinbwave", quietly = TRUE)) {
+  stop("The 'zinbwave' package is required but is not installed.")
+}
 suppressMessages(library(SingleCellExperiment, quietly = TRUE))
 suppressMessages(library(splatter, quietly = TRUE))
 suppressMessages(library(BiocParallel, quietly = TRUE))
