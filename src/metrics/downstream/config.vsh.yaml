@@ -63,8 +63,8 @@ info:
       min: 0
       max: +Inf
       maximize: false
-    - name: ctdeconcolute_jsd
-      label: ctdeconcolute_jsd
+    - name: ctdeconvolute_jsd
+      label: ctdeconvolute_jsd
       summary: Jensen-Shannon divergence (JSD) is calculated between the true and predicted proportion per cell type in all spots.
       description: |
         Jensen-Shannon Divergence used in cell type deconvolution to measure the similarity between two probability distributions.
