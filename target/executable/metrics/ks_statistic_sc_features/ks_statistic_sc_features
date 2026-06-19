@@ -456,9 +456,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("xuranw/MuSiC", "YingMa0107/CARD", "SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2026-06-19T04:59:40Z"
+LABEL org.opencontainers.image.created="2026-06-19T06:26:50Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks/"
-LABEL org.opencontainers.image.revision="107736d923cd869c7d9e6cd798f83839cea47a68"
+LABEL org.opencontainers.image.revision="15e94b74529a062c79aaa8a10d3515a5c1f6cae6"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

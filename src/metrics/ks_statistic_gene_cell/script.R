@@ -142,25 +142,30 @@ ks_statistic_lib_size_cells <- try_kde_test(
   x2 = lib_size_sim_cells
 )
 
+real_dge <- edgeR::calcNormFactors(
+  edgeR::DGEList(counts = Matrix::t(real_counts)),
+  method = "TMM"
+)
+sim_dge <- edgeR::calcNormFactors(
+  edgeR::DGEList(counts = Matrix::t(sim_counts)),
+  method = "TMM"
+)
+
 cat("Computing ks statistic of the effective library size\n")
-efflib_size_real_cells <- log1p(rowSums(real_counts))
-efflib_size_sim_cells <- log1p(rowSums(sim_counts))
+efflib_size_real_cells <- log1p(
+  real_dge$samples$lib.size * real_dge$samples$norm.factors
+)
+efflib_size_sim_cells <- log1p(
+  sim_dge$samples$lib.size * sim_dge$samples$norm.factors
+)
 ks_statistic_efflib_size_cells <- try_kde_test(
   x1 = efflib_size_real_cells,
   x2 = efflib_size_sim_cells
 )
 
 cat("Computing ks statistic of TMM\n")
-real_dge <- edgeR::DGEList(counts = Matrix::t(real_counts))
-sim_dge <- edgeR::DGEList(counts = Matrix::t(sim_counts))
-tmm_real_cells <- edgeR::calcNormFactors(
-  real_dge,
-  method = "TMM"
-)$samples$norm.factors
-tmm_sim_cells <- edgeR::calcNormFactors(
-  sim_dge,
-  method = "TMM"
-)$samples$norm.factors
+tmm_real_cells <- real_dge$samples$norm.factors
+tmm_sim_cells <- sim_dge$samples$norm.factors
 ks_statistic_tmm_cells <- try_kde_test(x1 = tmm_real_cells, x2 = tmm_sim_cells)
 
 cat("Computing ks statistic of the cell-level scaled variance\n")
