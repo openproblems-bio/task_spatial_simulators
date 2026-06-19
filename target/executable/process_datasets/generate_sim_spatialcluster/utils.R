@@ -133,30 +133,59 @@ generate_rmse <- function(real, sim) {
 
 
 # spatial clustering
-reclassify_simsce <- function(location, real_cluster, sim_cluster){
-  test <- data.frame(loc = location, real = real_cluster, sim = sim_cluster)
-  matrix_counts <- matrix(0, nrow = 4, ncol = 4,
-                          dimnames = list(paste0("real", 1:4), paste0("sim", 1:4)))
-  for (r in 1:4) {
-    for (s in 1:4) {
-      subset_data <- subset(test, real == r & sim == s)
-      matrix_counts[r, s] <- length(unique(subset_data$loc))
+reclassify_simsce <- function(location, real_cluster, sim_cluster) {
+  flatten_cluster <- function(x, label) {
+    if (is.data.frame(x) || is.matrix(x)) {
+      if (ncol(x) != 1) {
+        stop(label, " must contain exactly one column.")
+      }
+      x <- x[, 1]
     }
+    unname(as.vector(x))
   }
-  reclassification <- numeric(4)
-  for (i in 1:4) {
-    max_value <- max(matrix_counts)
-    if (max_value == 0) break
-    indices <- which(matrix_counts == max_value, arr.ind = TRUE)
-    real_index <- indices[1, 1]
-    sim_index <- indices[1, 2]
-    reclassification[sim_index] <- real_index
-    matrix_counts[real_index, ] <- -Inf
-    matrix_counts[, sim_index] <- -Inf
+
+  real_cluster <- flatten_cluster(real_cluster, "Real cluster")
+  sim_cluster <- flatten_cluster(sim_cluster, "Simulated cluster")
+  location <- as.vector(location)
+
+  if (
+    length(location) != length(real_cluster) ||
+      length(location) != length(sim_cluster)
+  ) {
+    stop("Location, real cluster, and simulated cluster vectors must have equal lengths.")
   }
-  cluster_map <- setNames(reclassification, seq_along(reclassification))
-  sim_reclassify_cluster <- cluster_map[sim_cluster]
-  return(sim_reclassify_cluster)
+
+  keep <- !is.na(location) & !is.na(real_cluster) & !is.na(sim_cluster)
+  overlap <- table(
+    real = as.character(real_cluster[keep]),
+    sim = as.character(sim_cluster[keep])
+  )
+
+  cluster_map <- stats::setNames(
+    rep(NA_character_, ncol(overlap)),
+    colnames(overlap)
+  )
+
+  for (i in seq_len(min(nrow(overlap), ncol(overlap)))) {
+    max_value <- max(overlap)
+    if (!is.finite(max_value) || max_value == 0) {
+      break
+    }
+
+    indices <- which(overlap == max_value, arr.ind = TRUE)[1, ]
+    real_index <- indices[1]
+    sim_index <- indices[2]
+    cluster_map[colnames(overlap)[sim_index]] <- rownames(overlap)[real_index]
+    overlap[real_index, ] <- -Inf
+    overlap[, sim_index] <- -Inf
+  }
+
+  reclassified <- unname(cluster_map[as.character(sim_cluster)])
+  if (is.numeric(real_cluster)) {
+    reclassified <- as.numeric(reclassified)
+  }
+
+  reclassified
 }
 
 
@@ -171,8 +200,14 @@ generate_sim_spatialCluster <- function(real_adata, sim_adata){
     colData = sim_adata$obs,
     metadata = sim_adata$obsm))
   sim_sce <- BayesSpace::spatialPreprocess(sim_sce, n.PCs=7, platform="ST", n.HVGs=2000, log.normalize=FALSE)
+  real_clusters <- unique(real_adata$obs[["spatial_cluster"]])
+  real_clusters <- real_clusters[!is.na(real_clusters)]
+  if (length(real_clusters) < 2) {
+    stop("At least two real spatial clusters are required.")
+  }
+
   sim_sce <- BayesSpace::spatialCluster(sim_sce,
-    q = max(unique(real_adata$obs[, c("spatial_cluster")])),
+    q = length(real_clusters),
     platform = "ST",
     d = 7,
     init.method = "mclust", model = "t", gamma = 2,
