@@ -22,6 +22,7 @@ engines:
     setup:
       - type: r
         bioc:
+          - blob
           - splatter
           - zinbwave
           - SingleCellExperiment
