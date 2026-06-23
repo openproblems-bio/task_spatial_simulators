@@ -19,8 +19,9 @@ engines:
   - type: docker
     image: openproblems/base_r:1
     setup:
-      - type: apt
-        packages: r-bioc-splatter
+      - type: r
+        bioc:
+          - splatter
 
 runners:
   - type: executable

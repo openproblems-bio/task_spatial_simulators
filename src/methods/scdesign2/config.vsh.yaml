@@ -22,7 +22,9 @@ engines:
     image: openproblems/base_r:1
     setup:
       - type: apt
-        packages: [r-bioc-singlecellexperiment, git]
+        packages: git
+      - type: r
+        bioc: SingleCellExperiment
       - type: r
         github: JSB-UCLA/scDesign2
 

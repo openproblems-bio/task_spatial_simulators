@@ -446,16 +446,19 @@ function ViashDockerfile {
 FROM openproblems/base_r:1
 ENTRYPOINT []
 RUN apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y git r-bioc-singlecellexperiment && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y git && \
   rm -rf /var/lib/apt/lists/*
+
+RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")' && \
   Rscript -e 'options(warn = 2); remotes::install_gitlab(c("sysbiobig/SPARSim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods sparsim"
-LABEL org.opencontainers.image.created="2026-06-19T07:58:06Z"
+LABEL org.opencontainers.image.created="2026-06-23T12:04:24Z"
 LABEL org.opencontainers.image.source="https://gitlab.com/sysbiobig/sparsim"
-LABEL org.opencontainers.image.revision="c0ca0170b86a047ba4e64ef0b667eee6e1b83772"
+LABEL org.opencontainers.image.revision="9c4b2be367fcbdaee48ec074ea9577108298531d"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
