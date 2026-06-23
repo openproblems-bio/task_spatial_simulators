@@ -446,15 +446,16 @@ function ViashDockerfile {
 FROM openproblems/base_r:1
 ENTRYPOINT []
 RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")' && \
+  Rscript -e 'options(warn = 2); if (!requireNamespace("blob", quietly = TRUE)) BiocManager::install("blob")' && \
   Rscript -e 'options(warn = 2); if (!requireNamespace("splatter", quietly = TRUE)) BiocManager::install("splatter")' && \
   Rscript -e 'options(warn = 2); if (!requireNamespace("zinbwave", quietly = TRUE)) BiocManager::install("zinbwave")' && \
   Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")' && \
   Rscript -e 'options(warn = 2); if (!requireNamespace("BiocParallel", quietly = TRUE)) BiocManager::install("BiocParallel")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2026-06-23T12:04:24Z"
+LABEL org.opencontainers.image.created="2026-06-23T12:11:58Z"
 LABEL org.opencontainers.image.source="https://github.com/drisso/zinbwave"
-LABEL org.opencontainers.image.revision="9c4b2be367fcbdaee48ec074ea9577108298531d"
+LABEL org.opencontainers.image.revision="3d78c563c640709eee81833b9cf0e19ad31549c6"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

@@ -3413,6 +3413,7 @@ meta = [
         {
           "type" : "r",
           "bioc" : [
+            "blob",
             "splatter",
             "zinbwave",
             "SingleCellExperiment",
@@ -3430,7 +3431,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/zinbwave",
     "viash_version" : "0.9.7",
-    "git_commit" : "9c4b2be367fcbdaee48ec074ea9577108298531d",
+    "git_commit" : "3d78c563c640709eee81833b9cf0e19ad31549c6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
