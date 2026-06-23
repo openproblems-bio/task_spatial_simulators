@@ -21,7 +21,7 @@ publish_dir: "$publish_dir"
 HERE
 
 tw launch https://github.com/openproblems-bio/task_spatial_simulators.git \
-  --revision v0.1.0 \
+  --revision build/main \
   --pull-latest \
   --main-script target/nextflow/workflows/run_benchmark/main.nf \
   --workspace 53907369739130 \

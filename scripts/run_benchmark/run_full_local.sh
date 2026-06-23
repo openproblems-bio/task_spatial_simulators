@@ -13,24 +13,24 @@ cd "$REPO_ROOT"
 
 set -e
 
+export NXF_VER=25.10.6
+
 # generate a unique id
 RUN_ID="run_$(date +%Y-%m-%d_%H-%M-%S)"
 publish_dir="resources/results/${RUN_ID}"
 
 # write the parameters to file
 cat > /tmp/params.yaml << HERE
-input_states: resources/datasets/**/state.yaml
+input_states: s3://openproblems-data/resources/task_spatial_simulators/datasets/**/state.yaml
 rename_keys: 'input_singlecell_dataset:output_sc;input_spatial_dataset:output_sp'
 output_state: "state.yaml"
 publish_dir: "$publish_dir"
 HERE
 
 # run the benchmark
-nextflow run openproblems-bio/task_spatial_simulators \
-  --revision build/main \
+nextflow run . \
   -main-script target/nextflow/workflows/run_benchmark/main.nf \
   -profile docker \
   -resume \
   -entry auto \
-  -c common/nextflow_helpers/labels.config \
   -params-file /tmp/params.yaml
