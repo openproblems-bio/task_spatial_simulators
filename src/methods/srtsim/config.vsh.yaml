@@ -21,7 +21,9 @@ engines:
     image: openproblems/base_r:1
     setup:
       - type: r
-        cran: SRTsim
+        # shiny and shinyBS do not come along with SRTsim, which then fails to
+        # load with "there is no package called 'httpuv'"
+        cran: [SRTsim, shiny, shinyBS]
 
 runners:
   - type: executable
