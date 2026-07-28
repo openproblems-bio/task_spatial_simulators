@@ -1,3 +1,22 @@
+# task_spatial_simulators dev
+
+Bug fixes:
+  - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
+    `extract_uns_metadata` no longer drops the `metric_ids` of components that
+    emit more than 15 metrics. All 28 `ks_statistic_gene_cell` metrics were
+    reported as 100% missing in `run_2026-07-11_18-00-02` because of this.
+  - `ks_statistic_gene_cell`: read `$Tstat` rather than `$tstat`, which
+    `ks::kde.test()` does not define. Half of the metric values were being
+    dropped on the way out.
+  - `ks_statistic_gene_cell`: report NA when `ks::kde.test()` cannot be
+    computed, instead of an empirical KS statistic or a penalty of 1. Both
+    ranked as very good scores on the unbounded `zstat`/`Tstat` scale, so
+    failing was rewarded.
+  - `ks_statistic_gene_cell`: retry `ks::kde.test()` with deterministic jitter,
+    as `ks_statistic_sc_features` already did, so that ties no longer turn into
+    NAs. Inputs without variance report NA rather than surviving the jitter as
+    a top score.
+
 # task_spatial_simulators 0.1.0
 
 First release of the spatial simulator benchmark.
