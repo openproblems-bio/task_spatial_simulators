@@ -50,16 +50,21 @@ sim_out <- scDesign2::simulate_count_scDesign2(
 rownames(sim_out) <- input_ordered$var_names
 colnames(sim_out) <- input_ordered$obs_names
 
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
+
 cat("Generating output\n")
 
 output <- anndataR::AnnData(
   layers = list(
-    counts = Matrix::t(sim_out)
+    counts = Matrix::t(sim_out)[restore_order, , drop = FALSE]
   ),
-  obs = input_ordered$obs[c("row", "col")],
-  var = input_ordered$var,
+  obs = input$obs[c("row", "col")],
+  var = input$var,
   uns = c(
-    input_ordered$uns,
+    input$uns,
     list(
       method_id = meta$name
     )
