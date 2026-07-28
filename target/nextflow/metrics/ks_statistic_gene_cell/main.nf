@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "3d78c563c640709eee81833b9cf0e19ad31549c6",
+    "git_commit" : "518bc67e96283b792031b733da528fc7b7ce71ac",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4017,9 +4017,6 @@ tempscript=".viash_script.R"
 cat > "$tempscript" << VIASHMAIN
 requireNamespace("anndata", quietly = TRUE)
 requireNamespace("edgeR", quietly = TRUE)
-requireNamespace("ks", quietly = TRUE)
-requireNamespace("resample", quietly = TRUE)
-requireNamespace("reshape2", quietly = TRUE)
 library(Matrix)
 library(matrixStats)
 
@@ -4089,70 +4086,95 @@ as_finite_kde_input <- function(x) {
   x[is.finite(x)]
 }
 
-add_kde_jitter <- function(x, amount) {
-  x_range <- max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
-  x_scale <- max(x_range, stats::sd(as.numeric(x), na.rm = TRUE), 1)
-  noise <- seq(-amount, amount, length.out = length(x)) * x_scale
+ks_penalty_result <- function(reason) {
+  warning(reason, " Returning worst-case KS statistic of 1.")
+  list(zstat = 1, tstat = 1)
+}
 
-  if (is.matrix(x)) {
-    matrix(as.numeric(x) + noise, nrow = nrow(x), ncol = ncol(x))
-  } else {
-    as.numeric(x) + noise
+empirical_ks_statistic <- function(x1, x2) {
+  x1 <- as.numeric(x1)
+  x2 <- as.numeric(x2)
+
+  if (length(x1) < 2 || length(x2) < 2) {
+    return(NA_real_)
   }
+
+  result <- tryCatch(
+    suppressWarnings(stats::ks.test(x1 = x1, x2 = x2, exact = FALSE)),
+    error = function(e) NULL
+  )
+
+  if (is.null(result) || !is.finite(as.numeric(result\\$statistic))) {
+    return(NA_real_)
+  }
+
+  as.numeric(result\\$statistic)
+}
+
+sliced_ks_statistic <- function(x1, x2) {
+  n_dim <- ncol(x1)
+  directions <- diag(n_dim)
+
+  if (n_dim > 1) {
+    directions <- rbind(
+      directions,
+      rep(1, n_dim),
+      c(rep(1, n_dim - 1), -1)
+    )
+  }
+
+  stats <- apply(directions, 1, function(direction) {
+    direction <- direction / sqrt(sum(direction^2))
+    empirical_ks_statistic(
+      as.numeric(x1 %*% direction),
+      as.numeric(x2 %*% direction)
+    )
+  })
+
+  if (all(!is.finite(stats))) {
+    return(NA_real_)
+  }
+
+  max(stats, na.rm = TRUE)
+}
+
+bounded_ks_result <- function(statistic) {
+  statistic <- min(max(as.numeric(statistic), 0), 1)
+  list(zstat = statistic, tstat = statistic)
 }
 
 try_kde_test <- function(x1, x2) {
   x1 <- as_finite_kde_input(x1)
   x2 <- as_finite_kde_input(x2)
+  is_2d <- is.matrix(x1) || is.matrix(x2)
 
   if (length(x1) == 0 || length(x2) == 0) {
-    warning("No finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(ks_penalty_result("No finite values available for KS statistic."))
   }
 
-  if (is.matrix(x1) && (nrow(x1) < 2 || nrow(x2) < 2)) {
-    warning("Not enough finite rows available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
-  }
-
-  if (!is.matrix(x1) && (length(x1) < 2 || length(x2) < 2)) {
-    warning("Not enough finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
-  }
-
-  last_error <- NULL
-  for (jitter in c(0, 1e-8, 1e-7, 1e-6, 1e-5, 1e-4)) {
-    x1_try <- if (jitter == 0) x1 else add_kde_jitter(x1, jitter)
-    x2_try <- if (jitter == 0) x2 else add_kde_jitter(x2, jitter)
-
-    result <- tryCatch(
-      ks::kde.test(x1 = x1_try, x2 = x2_try),
-      error = function(e) {
-        last_error <<- e
-        NULL
-      }
-    )
-
-    if (!is.null(result)) {
-      if (jitter > 0) {
-        warning(
-          "Caught error in ks::kde.test: ",
-          last_error\\$message,
-          "\\\\n\\\\nSucceeded after adding deterministic jitter of size ",
-          jitter,
-          "."
-        )
-      }
-      return(result)
+  if (is_2d) {
+    if (!is.matrix(x1) || !is.matrix(x2) || ncol(x1) != ncol(x2)) {
+      return(ks_penalty_result("KS statistic inputs have incompatible dimensions."))
     }
+
+    if (nrow(x1) < 2 || nrow(x2) < 2) {
+      return(ks_penalty_result("Not enough finite rows available for KS statistic."))
+    }
+
+    statistic <- sliced_ks_statistic(x1, x2)
+  } else {
+    if (length(x1) < 2 || length(x2) < 2) {
+      return(ks_penalty_result("Not enough finite values available for KS statistic."))
+    }
+
+    statistic <- empirical_ks_statistic(x1, x2)
   }
 
-  warning(
-    "ks::kde.test failed after deterministic jitter retries: ",
-    last_error\\$message,
-    "\\\\n\\\\nReturning NA for this metric."
-  )
-  list(zstat = NA_real_, tstat = NA_real_)
+  if (!is.finite(statistic)) {
+    return(ks_penalty_result("Unable to compute finite KS statistic."))
+  }
+
+  bounded_ks_result(statistic)
 }
 
 subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
