@@ -449,9 +449,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("scDesign3", quietly = TRUE)) BiocManager::install("scDesign3")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3_nb"
-LABEL org.opencontainers.image.created="2026-07-28T12:35:06Z"
+LABEL org.opencontainers.image.created="2026-07-28T13:03:12Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="aeac18671b7d71fa2214431b58cefb62994cdee8"
+LABEL org.opencontainers.image.revision="e93e12c6362cd1f4b8c84d7d5554f94d05263867"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
