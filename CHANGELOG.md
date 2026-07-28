@@ -5,6 +5,11 @@ Bug fixes:
   - `downstream`: `clustering_ari` was declared -Inf..+Inf and
     `ctdeconvolute_rmse` 0..+Inf, though both are bounded. Metric labels were
     the ids repeated back.
+  - `splatter` and `symsim`: drop the `try()` around the per-cluster loop, which
+    let a failed cluster pass silently and only surfaced later as a length
+    mismatch.
+  - `symsim`: sample gene lengths with replacement, which errored outright on
+    datasets holding more genes than `gene_len_pool`.
   - `negative_normal`: round the generated values, so that `counts` holds
     integers as `file_simulated_dataset.yaml` declares.
   - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
