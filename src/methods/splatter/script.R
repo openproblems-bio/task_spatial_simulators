@@ -25,21 +25,19 @@ input_ordered <- input[ordered_indices]
 
 simulated_result <- NULL
 for (spatial_cluster in unique(input_ordered$obs[["spatial_cluster"]])) {
-  res <- try({
-    input_spatial_cluster <- input_ordered[input_ordered$obs[["spatial_cluster"]] == spatial_cluster]
-    params <- splatter::splatEstimate(as.matrix(t(input_spatial_cluster$layers[["counts"]])))
-    sim_spatial_cluster <- splatter::splatSimulate(params)
-    sim_spatial_cluster$spatial_cluster <- spatial_cluster
-    colnames(sim_spatial_cluster) <- paste0(spatial_cluster, colnames(sim_spatial_cluster))
-    names(rowData(sim_spatial_cluster)) <- paste(spatial_cluster, names(rowData(sim_spatial_cluster)))
+  input_spatial_cluster <- input_ordered[input_ordered$obs[["spatial_cluster"]] == spatial_cluster]
+  params <- splatter::splatEstimate(as.matrix(t(input_spatial_cluster$layers[["counts"]])))
+  sim_spatial_cluster <- splatter::splatSimulate(params)
+  sim_spatial_cluster$spatial_cluster <- spatial_cluster
+  colnames(sim_spatial_cluster) <- paste0(spatial_cluster, colnames(sim_spatial_cluster))
+  names(rowData(sim_spatial_cluster)) <- paste(spatial_cluster, names(rowData(sim_spatial_cluster)))
 
-    # combine the cell types
-    if (is.null(simulated_result)) {
-      simulated_result <- sim_spatial_cluster
-    } else {
-      simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_spatial_cluster)
-    }
-  })
+  # combine the cell types
+  if (is.null(simulated_result)) {
+    simulated_result <- sim_spatial_cluster
+  } else {
+    simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_spatial_cluster)
+  }
 }
 
 colnames(simulated_result) <- rownames(input_ordered$obs)
