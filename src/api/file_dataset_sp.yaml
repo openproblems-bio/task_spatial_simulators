@@ -13,7 +13,7 @@ info:
         name: counts
         description: Raw counts
         required: true
-      - type: integer
+      - type: double
         name: logcounts
         description: Log-transformed counts
         required: true
