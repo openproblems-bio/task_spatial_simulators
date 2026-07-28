@@ -1,6 +1,12 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `scdesign2`: order the input by `spatial_cluster` before simulating.
+    `simulate_count_scDesign2()` returns cells grouped per cell type, so the
+    coordinates taken from the unsorted input belonged to different spots than
+    the counts they were attached to. Also make `cell_type_sel` and
+    `cell_type_prop` agree in order, which they did not for 10 or more clusters.
+    The simulated spots are returned in the order they came in.
   - `generate_cosine()`: filter the Moran's I values rather than the objects
     holding them, so that a single NaN no longer takes the whole metric with
     it. `crosscor_cosine` was NA for 32 of 99 runs.
