@@ -3431,7 +3431,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/zinbwave",
     "viash_version" : "0.9.7",
-    "git_commit" : "518bc67e96283b792031b733da528fc7b7ce71ac",
+    "git_commit" : "3301ded46e41633a4d50b3385b05ddcb2bab1543",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {

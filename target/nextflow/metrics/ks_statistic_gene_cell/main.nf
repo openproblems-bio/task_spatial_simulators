@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "518bc67e96283b792031b733da528fc7b7ce71ac",
+    "git_commit" : "3301ded46e41633a4d50b3385b05ddcb2bab1543",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4017,6 +4017,7 @@ tempscript=".viash_script.R"
 cat > "$tempscript" << VIASHMAIN
 requireNamespace("anndata", quietly = TRUE)
 requireNamespace("edgeR", quietly = TRUE)
+requireNamespace("ks", quietly = TRUE)
 library(Matrix)
 library(matrixStats)
 
@@ -4138,8 +4139,9 @@ sliced_ks_statistic <- function(x1, x2) {
   max(stats, na.rm = TRUE)
 }
 
-bounded_ks_result <- function(statistic) {
-  statistic <- min(max(as.numeric(statistic), 0), 1)
+fallback_ks_result <- function(statistic, reason) {
+  statistic <- as.numeric(statistic)
+  warning(reason, " Falling back to empirical KS statistic.")
   list(zstat = statistic, tstat = statistic)
 }
 
@@ -4161,20 +4163,30 @@ try_kde_test <- function(x1, x2) {
       return(ks_penalty_result("Not enough finite rows available for KS statistic."))
     }
 
-    statistic <- sliced_ks_statistic(x1, x2)
+    fallback_statistic <- sliced_ks_statistic(x1, x2)
   } else {
     if (length(x1) < 2 || length(x2) < 2) {
       return(ks_penalty_result("Not enough finite values available for KS statistic."))
     }
 
-    statistic <- empirical_ks_statistic(x1, x2)
+    fallback_statistic <- empirical_ks_statistic(x1, x2)
   }
 
-  if (!is.finite(statistic)) {
-    return(ks_penalty_result("Unable to compute finite KS statistic."))
+  result <- tryCatch(
+    ks::kde.test(x1 = x1, x2 = x2),
+    error = function(e) e
+  )
+
+  if (!inherits(result, "error")) {
+    return(result)
   }
 
-  bounded_ks_result(statistic)
+  reason <- paste0("ks::kde.test failed: ", result\\$message, ".")
+  if (!is.finite(fallback_statistic)) {
+    return(ks_penalty_result(reason))
+  }
+
+  fallback_ks_result(fallback_statistic, reason)
 }
 
 subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
