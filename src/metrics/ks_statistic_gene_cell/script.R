@@ -50,6 +50,29 @@ as_finite_kde_input <- function(x) {
   x[is.finite(x)]
 }
 
+# A constant input has no distribution to compare. It also survives the jitter
+# below -- both sides get the same deterministic noise, so they stay identical
+# and kde.test reports them as far more alike than chance, i.e. a top score.
+has_no_variance <- function(x) {
+  if (is.matrix(x)) {
+    any(apply(x, 2, stats::sd, na.rm = TRUE) == 0)
+  } else {
+    stats::sd(x, na.rm = TRUE) == 0
+  }
+}
+
+add_kde_jitter <- function(x, amount) {
+  x_range <- max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
+  x_scale <- max(x_range, stats::sd(as.numeric(x), na.rm = TRUE), 1)
+  noise <- seq(-amount, amount, length.out = length(x)) * x_scale
+
+  if (is.matrix(x)) {
+    matrix(as.numeric(x) + noise, nrow = nrow(x), ncol = ncol(x))
+  } else {
+    as.numeric(x) + noise
+  }
+}
+
 # Both statistics are unbounded, so there is no value we could return that
 # reliably reads as "worst". Anything finite we invent would rank above a real
 # result, since lower is better -- so report NA and let the run be marked as
@@ -82,16 +105,44 @@ try_kde_test <- function(x1, x2) {
     }
   }
 
-  result <- tryCatch(
-    ks::kde.test(x1 = x1, x2 = x2),
-    error = function(e) e
-  )
-
-  if (!inherits(result, "error")) {
-    return(result)
+  if (has_no_variance(x1) || has_no_variance(x2)) {
+    return(ks_missing_result("ks::kde.test inputs have no variance."))
   }
 
-  ks_missing_result(paste0("ks::kde.test failed: ", result$message, "."))
+  # kde.test trips over ties and degenerate bandwidths; nudging the inputs by a
+  # deterministic, vanishingly small amount usually gets it through
+  last_error <- NULL
+  for (jitter in c(0, 1e-8, 1e-7, 1e-6, 1e-5, 1e-4)) {
+    x1_try <- if (jitter == 0) x1 else add_kde_jitter(x1, jitter)
+    x2_try <- if (jitter == 0) x2 else add_kde_jitter(x2, jitter)
+
+    result <- tryCatch(
+      ks::kde.test(x1 = x1_try, x2 = x2_try),
+      error = function(e) {
+        last_error <<- e
+        NULL
+      }
+    )
+
+    if (!is.null(result)) {
+      if (jitter > 0) {
+        warning(
+          "Caught error in ks::kde.test: ",
+          last_error$message,
+          "\n\nSucceeded after adding deterministic jitter of size ",
+          jitter,
+          "."
+        )
+      }
+      return(result)
+    }
+  }
+
+  ks_missing_result(paste0(
+    "ks::kde.test failed after deterministic jitter retries: ",
+    last_error$message,
+    "."
+  ))
 }
 
 subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
