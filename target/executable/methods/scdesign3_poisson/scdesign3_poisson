@@ -450,9 +450,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("SingleCellExperiment", quietly = TRUE)) BiocManager::install("SingleCellExperiment")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign3_poisson"
-LABEL org.opencontainers.image.created="2026-07-28T13:46:29Z"
+LABEL org.opencontainers.image.created="2026-07-28T13:52:45Z"
 LABEL org.opencontainers.image.source="https://github.com/SONGDONGYUAN1994/scDesign3"
-LABEL org.opencontainers.image.revision="e95f41ab6fe79db02fff3a527f37f5067b160f65"
+LABEL org.opencontainers.image.revision="69843d6cc84dcee36e401ffcaee928e7be6dc37c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

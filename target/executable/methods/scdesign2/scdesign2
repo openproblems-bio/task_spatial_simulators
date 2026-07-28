@@ -456,9 +456,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("JSB-UCLA/scDesign2"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods scdesign2"
-LABEL org.opencontainers.image.created="2026-07-28T13:46:29Z"
+LABEL org.opencontainers.image.created="2026-07-28T13:52:45Z"
 LABEL org.opencontainers.image.source="https://github.com/JSB-UCLA/scDesign2"
-LABEL org.opencontainers.image.revision="e95f41ab6fe79db02fff3a527f37f5067b160f65"
+LABEL org.opencontainers.image.revision="69843d6cc84dcee36e401ffcaee928e7be6dc37c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1121,13 +1121,24 @@ if (par\$base != "domain") {
 }
 
 cat("scDesign2 simulation start\\n")
-counts <- Matrix::t(input\$layers[["counts"]])
-colnames(counts) <- as.character(input\$obs\$spatial_cluster)
-spatial_cluster_prop <- table(input\$obs\$spatial_cluster)
+# simulate_count_scDesign2() returns the cells grouped per cell type, so order
+# the spots by spatial cluster first -- otherwise the coordinates we attach
+# below belong to different spots than the counts we attach them to
+ordered_indices <- order(input\$obs\$spatial_cluster)
+input_ordered <- input[ordered_indices]
+
+counts <- Matrix::t(input_ordered\$layers[["counts"]])
+colnames(counts) <- as.character(input_ordered\$obs\$spatial_cluster)
+
+# cell_type_prop is matched to the fitted models by position, so both have to be
+# in the same order -- and that order has to be the one the spots are sorted in,
+# which unique() gives us since the columns are already grouped per cluster
+cell_types <- unique(colnames(counts))
+spatial_cluster_prop <- prop.table(table(colnames(counts))[cell_types])
 
 copula_result <- scDesign2::fit_model_scDesign2(
   data_mat = counts,
-  cell_type_sel = unique(colnames(counts)),
+  cell_type_sel = cell_types,
   sim_method = "copula",
   ncores = ifelse(!is.null(meta\$cpus), meta\$cpus, 8L)
 )
@@ -1136,17 +1147,22 @@ sim_out <- scDesign2::simulate_count_scDesign2(
   copula_result,
   ncol(counts),
   sim_method = "copula",
-  cell_type_prop = prop.table(spatial_cluster_prop)
+  cell_type_prop = spatial_cluster_prop
 )
 
-rownames(sim_out) <- input\$var_names
-colnames(sim_out) <- input\$obs_names
+rownames(sim_out) <- input_ordered\$var_names
+colnames(sim_out) <- input_ordered\$obs_names
+
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
 
 cat("Generating output\\n")
 
 output <- anndataR::AnnData(
   layers = list(
-    counts = Matrix::t(sim_out)
+    counts = Matrix::t(sim_out)[restore_order, , drop = FALSE]
   ),
   obs = input\$obs[c("row", "col")],
   var = input\$var,
