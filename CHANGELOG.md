@@ -12,6 +12,13 @@ Bug fixes:
     the counts they were attached to. Also make `cell_type_sel` and
     `cell_type_prop` agree in order, which they did not for 10 or more clusters.
     The simulated spots are returned in the order they came in.
+  - `splatter`, `sparsim`, `symsim` and `zinbwave`: return the simulated spots
+    in the order they were given, rather than sorted by `spatial_cluster`.
+    `clustering_ari` and `clustering_nmi` compare the real and simulated
+    clusterings element-wise, so those four were being scored against
+    mismatched spots.
+  - `generate_sim_spatialcluster`: check that the simulated dataset still lines
+    up with the real one, through a new `check_alignment()` helper.
   - `generate_cosine()`: filter the Moran's I values rather than the objects
     holding them, so that a single NaN no longer takes the whole metric with
     it. `crosscor_cosine` was NA for 32 of 99 runs.
