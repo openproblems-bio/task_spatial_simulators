@@ -62,16 +62,18 @@ SPARSim_sim_param <- SPARSim::SPARSim_estimate_parameter_from_data(
 sim_result <- SPARSim::SPARSim_simulation(dataset_parameter = SPARSim_sim_param)
 
 # Reorder simulated results
-simulated_result_ordered <- sim_result$count_matrix[
-  match(rownames(sim_result$count_matrix), rownames(input_ordered$var)),
-  match(colnames(sim_result$count_matrix), rownames(input_ordered$obs))
-]
+simulated_result_ordered <- sim_result$count_matrix
+
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
 
 cat("Generating output\n")
 output <- anndataR::AnnData(
-  layers = list(counts = t(simulated_result_ordered)),
-  obs = input_ordered$obs[c("row", "col")],
-  var = input_ordered$var,
+  layers = list(counts = t(simulated_result_ordered)[restore_order, , drop = FALSE]),
+  obs = input$obs[c("row", "col")],
+  var = input$var,
   uns = c(
     input$uns,
     list(
