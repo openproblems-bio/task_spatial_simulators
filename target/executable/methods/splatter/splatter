@@ -449,9 +449,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("splatter", quietly = TRUE)) BiocManager::install("splatter")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods splatter"
-LABEL org.opencontainers.image.created="2026-07-28T13:03:12Z"
+LABEL org.opencontainers.image.created="2026-07-28T13:06:38Z"
 LABEL org.opencontainers.image.source="https://github.com/Oshlack/splatter"
-LABEL org.opencontainers.image.revision="e93e12c6362cd1f4b8c84d7d5554f94d05263867"
+LABEL org.opencontainers.image.revision="07f04480699014589a1bd73eed78ed0122895f05"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1123,21 +1123,19 @@ input_ordered <- input[ordered_indices]
 
 simulated_result <- NULL
 for (spatial_cluster in unique(input_ordered\$obs[["spatial_cluster"]])) {
-  res <- try({
-    input_spatial_cluster <- input_ordered[input_ordered\$obs[["spatial_cluster"]] == spatial_cluster]
-    params <- splatter::splatEstimate(as.matrix(t(input_spatial_cluster\$layers[["counts"]])))
-    sim_spatial_cluster <- splatter::splatSimulate(params)
-    sim_spatial_cluster\$spatial_cluster <- spatial_cluster
-    colnames(sim_spatial_cluster) <- paste0(spatial_cluster, colnames(sim_spatial_cluster))
-    names(rowData(sim_spatial_cluster)) <- paste(spatial_cluster, names(rowData(sim_spatial_cluster)))
+  input_spatial_cluster <- input_ordered[input_ordered\$obs[["spatial_cluster"]] == spatial_cluster]
+  params <- splatter::splatEstimate(as.matrix(t(input_spatial_cluster\$layers[["counts"]])))
+  sim_spatial_cluster <- splatter::splatSimulate(params)
+  sim_spatial_cluster\$spatial_cluster <- spatial_cluster
+  colnames(sim_spatial_cluster) <- paste0(spatial_cluster, colnames(sim_spatial_cluster))
+  names(rowData(sim_spatial_cluster)) <- paste(spatial_cluster, names(rowData(sim_spatial_cluster)))
 
-    # combine the cell types
-    if (is.null(simulated_result)) {
-      simulated_result <- sim_spatial_cluster
-    } else {
-      simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_spatial_cluster)
-    }
-  })
+  # combine the cell types
+  if (is.null(simulated_result)) {
+    simulated_result <- sim_spatial_cluster
+  } else {
+    simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_spatial_cluster)
+  }
 }
 
 colnames(simulated_result) <- rownames(input_ordered\$obs)

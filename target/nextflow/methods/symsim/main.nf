@@ -3430,7 +3430,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/symsim",
     "viash_version" : "0.9.7",
-    "git_commit" : "e93e12c6362cd1f4b8c84d7d5554f94d05263867",
+    "git_commit" : "07f04480699014589a1bd73eed78ed0122895f05",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3607,57 +3607,55 @@ ordered_indices <- order(input\\$obs\\$spatial_cluster)
 input_ordered <- input[ordered_indices]
 
 for (thisSpatialCluster in unique(input_ordered\\$obs[["spatial_cluster"]])) {
-  res <- try({
-    input_thiscelltype <- input_ordered[input_ordered\\$obs[["spatial_cluster"]] == thisSpatialCluster]
+  input_thiscelltype <- input_ordered[input_ordered\\$obs[["spatial_cluster"]] == thisSpatialCluster]
 
-    # this is because if some genes are 0 , this will cause error in simulation
-    keep_feature <- colSums(input_thiscelltype\\$layers[["counts"]] > 0) > 0
-    input_thiscelltype_f <- input_thiscelltype[, keep_feature]
+  # this is because if some genes are 0 , this will cause error in simulation
+  keep_feature <- colSums(input_thiscelltype\\$layers[["counts"]] > 0) > 0
+  input_thiscelltype_f <- input_thiscelltype[, keep_feature]
 
-    best_matches_UMI <- BestMatchParams(
-      tech = "UMI",
-      counts = as.matrix(t(input_thiscelltype_f\\$layers[["counts"]])),
-      plotfilename = "best_params.umi.qqplot",
-      n_optimal = 1
-    )
+  best_matches_UMI <- BestMatchParams(
+    tech = "UMI",
+    counts = as.matrix(t(input_thiscelltype_f\\$layers[["counts"]])),
+    plotfilename = "best_params.umi.qqplot",
+    n_optimal = 1
+  )
 
-    sim_thiscelltype <- SimulateTrueCounts(
-      ncells_total =  dim(input_thiscelltype)[1],
-      ngenes =  dim(input_thiscelltype)[2],
-      evf_type = "one.population",
-      randseed = 1,
-      Sigma = best_matches_UMI\\$Sigma[1],
-      gene_effects_sd = best_matches_UMI\\$gene_effects_sd[1],
-      scale_s = best_matches_UMI\\$scale_s[1],
-      gene_effect_prob = best_matches_UMI\\$gene_effect_prob[1],
-      prop_hge = best_matches_UMI\\$prop_hge[1],
-      mean_hge = best_matches_UMI\\$mean_hge[1]
-    )
+  sim_thiscelltype <- SimulateTrueCounts(
+    ncells_total =  dim(input_thiscelltype)[1],
+    ngenes =  dim(input_thiscelltype)[2],
+    evf_type = "one.population",
+    randseed = 1,
+    Sigma = best_matches_UMI\\$Sigma[1],
+    gene_effects_sd = best_matches_UMI\\$gene_effects_sd[1],
+    scale_s = best_matches_UMI\\$scale_s[1],
+    gene_effect_prob = best_matches_UMI\\$gene_effect_prob[1],
+    prop_hge = best_matches_UMI\\$prop_hge[1],
+    mean_hge = best_matches_UMI\\$mean_hge[1]
+  )
 
-    gene_len <- sample(gene_len_pool, dim(input_thiscelltype)[2], replace = FALSE)
-    sim_thiscelltype <- True2ObservedCounts(
-      true_counts = sim_thiscelltype[[1]],
-      meta_cell = sim_thiscelltype[[3]],
-      protocol = tech,
-      alpha_mean = best_matches_UMI\\$alpha_mean[1],
-      alpha_sd = best_matches_UMI\\$alpha_sd[1],
-      gene_len = gene_len,
-      depth_mean = best_matches_UMI\\$depth_mean[1],
-      depth_sd = best_matches_UMI\\$depth_sd[1]
-    )
+  gene_len <- sample(gene_len_pool, dim(input_thiscelltype)[2], replace = TRUE)
+  sim_thiscelltype <- True2ObservedCounts(
+    true_counts = sim_thiscelltype[[1]],
+    meta_cell = sim_thiscelltype[[3]],
+    protocol = tech,
+    alpha_mean = best_matches_UMI\\$alpha_mean[1],
+    alpha_sd = best_matches_UMI\\$alpha_sd[1],
+    gene_len = gene_len,
+    depth_mean = best_matches_UMI\\$depth_mean[1],
+    depth_sd = best_matches_UMI\\$depth_sd[1]
+  )
 
-    # tidy up the names
-    sim_thiscelltype <- SingleCellExperiment(list(counts = as.matrix(sim_thiscelltype\\$counts)))
-    sim_thiscelltype\\$spatial_cluster <- thisSpatialCluster
+  # tidy up the names
+  sim_thiscelltype <- SingleCellExperiment(list(counts = as.matrix(sim_thiscelltype\\$counts)))
+  sim_thiscelltype\\$spatial_cluster <- thisSpatialCluster
 
-    # combine the cell types
-    if (is.null(simulated_result)) {
-      simulated_result <- sim_thiscelltype
-    } else {
-      simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_thiscelltype)
-    }
+  # combine the cell types
+  if (is.null(simulated_result)) {
+    simulated_result <- sim_thiscelltype
+  } else {
+    simulated_result <- SingleCellExperiment::cbind(simulated_result, sim_thiscelltype)
+  }
 
-  })
 }
 
 colnames(simulated_result) <- rownames(input_ordered\\$obs)
