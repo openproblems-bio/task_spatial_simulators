@@ -1,6 +1,15 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `downstream`: normalise the simulated dataset the same way as the real one,
+    through a new `compute_logcounts()` helper. The simulated side used
+    `log1p(counts)` while the real side used the stored, size-factor normalised
+    `logcounts`. On the positive control, `crosscor_cosine` and
+    `crosscor_mantel` now come out at exactly 1.
+
+# task_spatial_simulators dev
+
+Bug fixes:
   - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
     `extract_uns_metadata` no longer drops the `metric_ids` of components that
     emit more than 15 metrics. All 28 `ks_statistic_gene_cell` metrics were
