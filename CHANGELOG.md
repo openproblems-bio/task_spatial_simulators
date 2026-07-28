@@ -6,6 +6,7 @@ Bug fixes:
     coordinates taken from the unsorted input belonged to different spots than
     the counts they were attached to. Also make `cell_type_sel` and
     `cell_type_prop` agree in order, which they did not for 10 or more clusters.
+    The simulated spots are returned in the order they came in.
   - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
     `extract_uns_metadata` no longer drops the `metric_ids` of components that
     emit more than 15 metrics. All 28 `ks_statistic_gene_cell` metrics were
