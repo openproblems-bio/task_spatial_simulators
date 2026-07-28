@@ -1,6 +1,12 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `generate_cosine()`: filter the Moran's I values rather than the objects
+    holding them, so that a single NaN no longer takes the whole metric with
+    it. `crosscor_cosine` was NA for 32 of 99 runs.
+  - `calculate_precision()`: report 0 rather than NA when a simulation has no
+    spatially variable genes at all. Both negative controls were left without a
+    score on any dataset, so nothing anchored the bottom of the scale.
   - `ks_statistic_gene_cell` and `ks_statistic_sc_features`: the metric
     descriptions said Kolmogorov-Smirnov, but both call `ks::kde.test()`, which
     is a kernel density based two-sample test.
