@@ -52,7 +52,7 @@ as_finite_kde_input <- function(x) {
 
 ks_penalty_result <- function(reason) {
   warning(reason, " Returning worst-case KS statistic of 1.")
-  list(zstat = 1, tstat = 1)
+  list(zstat = 1, Tstat = 1)
 }
 
 empirical_ks_statistic <- function(x1, x2) {
@@ -105,7 +105,7 @@ sliced_ks_statistic <- function(x1, x2) {
 fallback_ks_result <- function(statistic, reason) {
   statistic <- as.numeric(statistic)
   warning(reason, " Falling back to empirical KS statistic.")
-  list(zstat = statistic, tstat = statistic)
+  list(zstat = statistic, Tstat = statistic)
 }
 
 try_kde_test <- function(x1, x2) {
@@ -379,20 +379,20 @@ uns_metric_values <- c(
   ks_statistic_mean_var_genes$zstat,
   ks_statistic_mean_fraczero_genes$zstat,
 
-  ks_statistic_frac_zero_genes$tstat,
-  ks_statistic_frac_zero_cells$tstat,
-  ks_statistic_lib_size_cells$tstat,
-  ks_statistic_efflib_size_cells$tstat,
-  ks_statistic_tmm_cells$tstat,
-  ks_statistic_scaled_var_cells$tstat,
-  ks_statistic_scaled_mean_cells$tstat,
-  ks_statistic_lib_fraczero_cells$tstat,
-  ks_statistic_pearson_cells$tstat,
-  ks_statistic_scaled_var_genes$tstat,
-  ks_statistic_scaled_mean_genes$tstat,
-  ks_statistic_pearson_genes$tstat,
-  ks_statistic_mean_var_genes$tstat,
-  ks_statistic_mean_fraczero_genes$tstat
+  ks_statistic_frac_zero_genes$Tstat,
+  ks_statistic_frac_zero_cells$Tstat,
+  ks_statistic_lib_size_cells$Tstat,
+  ks_statistic_efflib_size_cells$Tstat,
+  ks_statistic_tmm_cells$Tstat,
+  ks_statistic_scaled_var_cells$Tstat,
+  ks_statistic_scaled_mean_cells$Tstat,
+  ks_statistic_lib_fraczero_cells$Tstat,
+  ks_statistic_pearson_cells$Tstat,
+  ks_statistic_scaled_var_genes$Tstat,
+  ks_statistic_scaled_mean_genes$Tstat,
+  ks_statistic_pearson_genes$Tstat,
+  ks_statistic_mean_var_genes$Tstat,
+  ks_statistic_mean_fraczero_genes$Tstat
 )
 
 cat("Writing output AnnData to file\n")
