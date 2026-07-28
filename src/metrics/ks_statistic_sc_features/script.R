@@ -68,17 +68,12 @@ if (is.null(sc_species)) {
   sc_species <- input_real_sp$uns[["dataset_organism"]]
 }
 
-real_log_count <- t(input_real_sp$layers[["logcounts"]])
+# normalise both datasets the same way, so the features are comparable
+real_log_count <- Matrix::t(compute_logcounts(input_real_sp))
 real_prob_matrix <- input_real_sp$obsm[["celltype_proportions"]]
 colnames(real_prob_matrix) <- paste0("ct", seq_len(ncol(real_prob_matrix)))
 
-sim_sce <- scater::logNormCounts(SingleCellExperiment::SingleCellExperiment(
-  list(counts = Matrix::t(input_simulated_sp$layers[["counts"]])),
-  colData = input_simulated_sp$obs,
-  metadata = input_simulated_sp$obsm
-))
-
-sim_log_count <- SummarizedExperiment::assay(sim_sce, "logcounts")
+sim_log_count <- Matrix::t(compute_logcounts(input_simulated_sp))
 
 ensure_spot_names <- function(x, spot_names, label) {
   if (is.null(rownames(x))) {
