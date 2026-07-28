@@ -21,9 +21,20 @@ generate_moransI <- function(adata) {
 
 generate_cosine <- function(real, sim) {
   requireNamespace("lsa", quietly = TRUE)
-  real_new <- real[!is.na(real) & !is.na(sim)]
-  sim_new <- sim[!is.na(real) & !is.na(sim)]
-  similarity <- lsa::cosine(lsa::as.textmatrix(cbind(as.vector(real_new$Morans.I), as.vector(sim_new$Morans.I))))
+
+  real_i <- as.vector(real$Morans.I)
+  sim_i <- as.vector(sim$Morans.I)
+
+  # drop the pairs where either side is missing. This used to filter `real` and
+  # `sim` themselves, which are lists, so it never dropped anything and a single
+  # NaN took the whole metric with it -- 32 of 99 runs came out NA, while
+  # generate_mantel() passes na.rm and lost none.
+  keep <- is.finite(real_i) & is.finite(sim_i)
+  if (sum(keep) < 2) {
+    return(NA_real_)
+  }
+
+  similarity <- lsa::cosine(lsa::as.textmatrix(cbind(real_i[keep], sim_i[keep])))
   return(mean(similarity))
 }
 
@@ -57,7 +68,10 @@ calculate_precision <- function(real_svg, sim_svg) {
   filtered_compared_data <- dplyr::filter(sim_svg$res_mtest, adjustedPval < 0.05)
   tp <- length(intersect(row.names(filtered_real_data), row.names(filtered_compared_data)))
   fp <- length(setdiff(row.names(filtered_compared_data), row.names(filtered_real_data)))
-  precision <- ifelse((tp + fp) > 0, tp / (tp + fp), NA)
+  # a simulation that produces no spatially variable genes at all is a bad
+  # simulation, not a missing result. Reporting NA meant both negative controls
+  # had no score on any dataset, so nothing anchored the bottom of the scale.
+  precision <- ifelse((tp + fp) > 0, tp / (tp + fp), 0)
   return(precision)
 }
 
@@ -66,6 +80,9 @@ calculate_recall <- function(real_svg, sim_svg) {
   filtered_compared_data <- dplyr::filter(sim_svg$res_mtest, adjustedPval < 0.05)
   tp <- length(intersect(row.names(filtered_real_data), row.names(filtered_compared_data)))
   fn <- length(setdiff(row.names(filtered_real_data), row.names(filtered_compared_data)))
+  # unlike precision, an empty denominator here says something about the real
+  # dataset rather than about the simulation: there are no spatially variable
+  # genes to recover, so no simulator can be scored on it. NA is right.
   recall <- ifelse((tp + fn) > 0, tp / (tp + fn), NA)
   return(recall)
 }
