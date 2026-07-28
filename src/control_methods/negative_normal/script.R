@@ -20,6 +20,11 @@ values <- rnorm(n = n_rows * n_cols, mean = 3, sd = 1)
 # make sure all values are positive
 values[values < 0] <- abs(values[values < 0])
 
+# counts are declared as integer in file_simulated_dataset.yaml, and edgeR,
+# SPARK and scran all assume that. Handing them continuous values makes them
+# fall over, which loses the run instead of scoring it badly.
+values <- round(values)
+
 cat("Generate outoput file\n")
 output <- anndataR::AnnData(
   layers = list(
