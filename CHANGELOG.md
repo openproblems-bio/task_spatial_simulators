@@ -1,6 +1,11 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `downstream`: normalise the simulated dataset the same way as the real one,
+    through a new `compute_logcounts()` helper. The simulated side used
+    `log1p(counts)` while the real side used the stored, size-factor normalised
+    `logcounts`. On the positive control, `crosscor_cosine` and
+    `crosscor_mantel` now come out at exactly 1.
   - `scdesign2`: order the input by `spatial_cluster` before simulating.
     `simulate_count_scDesign2()` returns cells grouped per cell type, so the
     coordinates taken from the unsorted input belonged to different spots than
