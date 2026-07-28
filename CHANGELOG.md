@@ -1,6 +1,8 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `negative_normal`: round the generated values, so that `counts` holds
+    integers as `file_simulated_dataset.yaml` declares.
   - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
     `extract_uns_metadata` no longer drops the `metric_ids` of components that
     emit more than 15 metrics. All 28 `ks_statistic_gene_cell` metrics were
