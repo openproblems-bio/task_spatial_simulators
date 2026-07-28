@@ -36,7 +36,7 @@ Simulation methods under `src/methods/`:
   - `sparsim`
   - `splatter`
   - `srtsim`
-  - `synsim`
+  - `symsim`
   - `zinbwave`
 
 Control methods under `src/control_methods/`:
@@ -45,8 +45,9 @@ Control methods under `src/control_methods/`:
   - `positive`
 
 Metrics under `src/metrics/`:
+  - `downstream`
   - `ks_statistic_gene_cell`
-  - `ks_statistic_sc_features/`
+  - `ks_statistic_sc_features`
 
 Documentation:
   - Check the `README.md` and `INSTRUCTIONS.md` for how to use and extend the benchmark.
