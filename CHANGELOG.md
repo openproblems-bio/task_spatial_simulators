@@ -1,6 +1,12 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `generate_cosine()`: filter the Moran's I values rather than the objects
+    holding them, so that a single NaN no longer takes the whole metric with
+    it. `crosscor_cosine` was NA for 32 of 99 runs.
+  - `calculate_precision()`: report 0 rather than NA when a simulation has no
+    spatially variable genes at all. Both negative controls were left without a
+    score on any dataset, so nothing anchored the bottom of the scale.
   - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
     `extract_uns_metadata` no longer drops the `metric_ids` of components that
     emit more than 15 metrics. All 28 `ks_statistic_gene_cell` metrics were
