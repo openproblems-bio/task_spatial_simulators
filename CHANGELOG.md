@@ -19,6 +19,12 @@ Bug fixes:
     mismatched spots.
   - `generate_sim_spatialcluster`: check that the simulated dataset still lines
     up with the real one, through a new `check_alignment()` helper.
+  - `downstream`: reuse the `spatial_cluster` that
+    `process_datasets/generate_sim_spatialcluster` already computed, instead of
+    running `BayesSpace::spatialCluster()` a second time. Saves an MCMC run per
+    method per dataset and makes the metric report the clustering the pipeline
+    stored. This does not make `clustering_ari` reproducible: both before and
+    after, a fixed reference is compared against one unseeded run.
   - `generate_cosine()`: filter the Moran's I values rather than the objects
     holding them, so that a single NaN no longer takes the whole metric with
     it. `crosscor_cosine` was NA for 32 of 99 runs.
