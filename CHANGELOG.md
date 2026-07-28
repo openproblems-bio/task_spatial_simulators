@@ -25,6 +25,18 @@ Bug fixes:
     `process_datasets/generate_sim_spatialcluster` instead of running BayesSpace
     a second time. The two runs disagreed, which put the positive control at
     `clustering_ari` 0.55 while the best simulator scored 0.22.
+  - `generate_cosine()`: filter the Moran's I values rather than the objects
+    holding them, so that a single NaN no longer takes the whole metric with
+    it. `crosscor_cosine` was NA for 32 of 99 runs.
+  - `calculate_precision()`: report 0 rather than NA when a simulation has no
+    spatially variable genes at all. Both negative controls were left without a
+    score on any dataset, so nothing anchored the bottom of the scale.
+  - `splatter` and `symsim`: drop the `try()` around the per-cluster loop, which
+    let a failed cluster pass silently and only surfaced later as a length
+    mismatch.
+  - `symsim`: sample gene lengths with replacement, which errored outright on
+    datasets holding more genes than `gene_len_pool`.
+  - `file_dataset_sp.yaml`: `logcounts` is a double, not an integer.
 
 # task_spatial_simulators 0.1.0
 
