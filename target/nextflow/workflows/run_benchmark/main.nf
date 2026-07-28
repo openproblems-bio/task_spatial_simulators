@@ -3526,7 +3526,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.7",
-    "git_commit" : "3301ded46e41633a4d50b3385b05ddcb2bab1543",
+    "git_commit" : "ef6ea5f0d606b722163a80576948f88f73427f4e",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3798,7 +3798,10 @@ workflow run_wf {
     | extract_uns_metadata.run(
       key: "extract_scores",
       fromState: [input: "metric_output"],
-      args: [uns_length_cutoff: 15],
+      // must stay above the largest number of metrics a single metric component
+      // emits, otherwise extract_uns_metadata silently drops metric_ids and/or
+      // metric_values and the whole component disappears from the results
+      args: [uns_length_cutoff: 50],
       toState: { id, output, state ->
         state + [
           score_uns: readYaml(output.output).uns

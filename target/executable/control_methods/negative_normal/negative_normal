@@ -446,9 +446,9 @@ function ViashDockerfile {
 FROM openproblems/base_r:1
 ENTRYPOINT []
 LABEL org.opencontainers.image.description="Companion container for running component control_methods negative_normal"
-LABEL org.opencontainers.image.created="2026-07-28T10:53:31Z"
+LABEL org.opencontainers.image.created="2026-07-28T11:30:53Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="3301ded46e41633a4d50b3385b05ddcb2bab1543"
+LABEL org.opencontainers.image.revision="ef6ea5f0d606b722163a80576948f88f73427f4e"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER

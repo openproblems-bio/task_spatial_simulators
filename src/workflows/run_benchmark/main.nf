@@ -141,7 +141,10 @@ workflow run_wf {
     | extract_uns_metadata.run(
       key: "extract_scores",
       fromState: [input: "metric_output"],
-      args: [uns_length_cutoff: 15],
+      // must stay above the largest number of metrics a single metric component
+      // emits, otherwise extract_uns_metadata silently drops metric_ids and/or
+      // metric_values and the whole component disappears from the results
+      args: [uns_length_cutoff: 50],
       toState: { id, output, state ->
         state + [
           score_uns: readYaml(output.output).uns

@@ -3898,7 +3898,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "3301ded46e41633a4d50b3385b05ddcb2bab1543",
+    "git_commit" : "ef6ea5f0d606b722163a80576948f88f73427f4e",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4087,62 +4087,36 @@ as_finite_kde_input <- function(x) {
   x[is.finite(x)]
 }
 
-ks_penalty_result <- function(reason) {
-  warning(reason, " Returning worst-case KS statistic of 1.")
-  list(zstat = 1, tstat = 1)
+# A constant input has no distribution to compare. It also survives the jitter
+# below -- both sides get the same deterministic noise, so they stay identical
+# and kde.test reports them as far more alike than chance, i.e. a top score.
+has_no_variance <- function(x) {
+  if (is.matrix(x)) {
+    any(apply(x, 2, stats::sd, na.rm = TRUE) == 0)
+  } else {
+    stats::sd(x, na.rm = TRUE) == 0
+  }
 }
 
-empirical_ks_statistic <- function(x1, x2) {
-  x1 <- as.numeric(x1)
-  x2 <- as.numeric(x2)
+add_kde_jitter <- function(x, amount) {
+  x_range <- max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
+  x_scale <- max(x_range, stats::sd(as.numeric(x), na.rm = TRUE), 1)
+  noise <- seq(-amount, amount, length.out = length(x)) * x_scale
 
-  if (length(x1) < 2 || length(x2) < 2) {
-    return(NA_real_)
+  if (is.matrix(x)) {
+    matrix(as.numeric(x) + noise, nrow = nrow(x), ncol = ncol(x))
+  } else {
+    as.numeric(x) + noise
   }
-
-  result <- tryCatch(
-    suppressWarnings(stats::ks.test(x1 = x1, x2 = x2, exact = FALSE)),
-    error = function(e) NULL
-  )
-
-  if (is.null(result) || !is.finite(as.numeric(result\\$statistic))) {
-    return(NA_real_)
-  }
-
-  as.numeric(result\\$statistic)
 }
 
-sliced_ks_statistic <- function(x1, x2) {
-  n_dim <- ncol(x1)
-  directions <- diag(n_dim)
-
-  if (n_dim > 1) {
-    directions <- rbind(
-      directions,
-      rep(1, n_dim),
-      c(rep(1, n_dim - 1), -1)
-    )
-  }
-
-  stats <- apply(directions, 1, function(direction) {
-    direction <- direction / sqrt(sum(direction^2))
-    empirical_ks_statistic(
-      as.numeric(x1 %*% direction),
-      as.numeric(x2 %*% direction)
-    )
-  })
-
-  if (all(!is.finite(stats))) {
-    return(NA_real_)
-  }
-
-  max(stats, na.rm = TRUE)
-}
-
-fallback_ks_result <- function(statistic, reason) {
-  statistic <- as.numeric(statistic)
-  warning(reason, " Falling back to empirical KS statistic.")
-  list(zstat = statistic, tstat = statistic)
+# Both statistics are unbounded, so there is no value we could return that
+# reliably reads as "worst". Anything finite we invent would rank above a real
+# result, since lower is better -- so report NA and let the run be marked as
+# missing instead of quietly handing out a good score.
+ks_missing_result <- function(reason) {
+  warning(reason, " Returning NA for this metric.")
+  list(zstat = NA_real_, Tstat = NA_real_)
 }
 
 try_kde_test <- function(x1, x2) {
@@ -4151,42 +4125,61 @@ try_kde_test <- function(x1, x2) {
   is_2d <- is.matrix(x1) || is.matrix(x2)
 
   if (length(x1) == 0 || length(x2) == 0) {
-    return(ks_penalty_result("No finite values available for KS statistic."))
+    return(ks_missing_result("No finite values available for ks::kde.test."))
   }
 
   if (is_2d) {
     if (!is.matrix(x1) || !is.matrix(x2) || ncol(x1) != ncol(x2)) {
-      return(ks_penalty_result("KS statistic inputs have incompatible dimensions."))
+      return(ks_missing_result("ks::kde.test inputs have incompatible dimensions."))
     }
 
     if (nrow(x1) < 2 || nrow(x2) < 2) {
-      return(ks_penalty_result("Not enough finite rows available for KS statistic."))
+      return(ks_missing_result("Not enough finite rows available for ks::kde.test."))
     }
-
-    fallback_statistic <- sliced_ks_statistic(x1, x2)
   } else {
     if (length(x1) < 2 || length(x2) < 2) {
-      return(ks_penalty_result("Not enough finite values available for KS statistic."))
+      return(ks_missing_result("Not enough finite values available for ks::kde.test."))
     }
-
-    fallback_statistic <- empirical_ks_statistic(x1, x2)
   }
 
-  result <- tryCatch(
-    ks::kde.test(x1 = x1, x2 = x2),
-    error = function(e) e
-  )
-
-  if (!inherits(result, "error")) {
-    return(result)
+  if (has_no_variance(x1) || has_no_variance(x2)) {
+    return(ks_missing_result("ks::kde.test inputs have no variance."))
   }
 
-  reason <- paste0("ks::kde.test failed: ", result\\$message, ".")
-  if (!is.finite(fallback_statistic)) {
-    return(ks_penalty_result(reason))
+  # kde.test trips over ties and degenerate bandwidths; nudging the inputs by a
+  # deterministic, vanishingly small amount usually gets it through
+  last_error <- NULL
+  for (jitter in c(0, 1e-8, 1e-7, 1e-6, 1e-5, 1e-4)) {
+    x1_try <- if (jitter == 0) x1 else add_kde_jitter(x1, jitter)
+    x2_try <- if (jitter == 0) x2 else add_kde_jitter(x2, jitter)
+
+    result <- tryCatch(
+      ks::kde.test(x1 = x1_try, x2 = x2_try),
+      error = function(e) {
+        last_error <<- e
+        NULL
+      }
+    )
+
+    if (!is.null(result)) {
+      if (jitter > 0) {
+        warning(
+          "Caught error in ks::kde.test: ",
+          last_error\\$message,
+          "\\\\n\\\\nSucceeded after adding deterministic jitter of size ",
+          jitter,
+          "."
+        )
+      }
+      return(result)
+    }
   }
 
-  fallback_ks_result(fallback_statistic, reason)
+  ks_missing_result(paste0(
+    "ks::kde.test failed after deterministic jitter retries: ",
+    last_error\\$message,
+    "."
+  ))
 }
 
 subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
@@ -4416,20 +4409,20 @@ uns_metric_values <- c(
   ks_statistic_mean_var_genes\\$zstat,
   ks_statistic_mean_fraczero_genes\\$zstat,
 
-  ks_statistic_frac_zero_genes\\$tstat,
-  ks_statistic_frac_zero_cells\\$tstat,
-  ks_statistic_lib_size_cells\\$tstat,
-  ks_statistic_efflib_size_cells\\$tstat,
-  ks_statistic_tmm_cells\\$tstat,
-  ks_statistic_scaled_var_cells\\$tstat,
-  ks_statistic_scaled_mean_cells\\$tstat,
-  ks_statistic_lib_fraczero_cells\\$tstat,
-  ks_statistic_pearson_cells\\$tstat,
-  ks_statistic_scaled_var_genes\\$tstat,
-  ks_statistic_scaled_mean_genes\\$tstat,
-  ks_statistic_pearson_genes\\$tstat,
-  ks_statistic_mean_var_genes\\$tstat,
-  ks_statistic_mean_fraczero_genes\\$tstat
+  ks_statistic_frac_zero_genes\\$Tstat,
+  ks_statistic_frac_zero_cells\\$Tstat,
+  ks_statistic_lib_size_cells\\$Tstat,
+  ks_statistic_efflib_size_cells\\$Tstat,
+  ks_statistic_tmm_cells\\$Tstat,
+  ks_statistic_scaled_var_cells\\$Tstat,
+  ks_statistic_scaled_mean_cells\\$Tstat,
+  ks_statistic_lib_fraczero_cells\\$Tstat,
+  ks_statistic_pearson_cells\\$Tstat,
+  ks_statistic_scaled_var_genes\\$Tstat,
+  ks_statistic_scaled_mean_genes\\$Tstat,
+  ks_statistic_pearson_genes\\$Tstat,
+  ks_statistic_mean_var_genes\\$Tstat,
+  ks_statistic_mean_fraczero_genes\\$Tstat
 )
 
 cat("Writing output AnnData to file\\\\n")
