@@ -1,6 +1,10 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `file_dataset_sp.yaml`: `logcounts` is a double, not an integer.
+  - `downstream`: `clustering_ari` was declared -Inf..+Inf and
+    `ctdeconvolute_rmse` 0..+Inf, though both are bounded. Metric labels were
+    the ids repeated back.
   - `splatter` and `symsim`: drop the `try()` around the per-cluster loop, which
     let a failed cluster pass silently and only surfaced later as a length
     mismatch.
