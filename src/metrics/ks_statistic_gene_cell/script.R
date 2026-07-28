@@ -50,62 +50,13 @@ as_finite_kde_input <- function(x) {
   x[is.finite(x)]
 }
 
-ks_penalty_result <- function(reason) {
-  warning(reason, " Returning worst-case KS statistic of 1.")
-  list(zstat = 1, Tstat = 1)
-}
-
-empirical_ks_statistic <- function(x1, x2) {
-  x1 <- as.numeric(x1)
-  x2 <- as.numeric(x2)
-
-  if (length(x1) < 2 || length(x2) < 2) {
-    return(NA_real_)
-  }
-
-  result <- tryCatch(
-    suppressWarnings(stats::ks.test(x1 = x1, x2 = x2, exact = FALSE)),
-    error = function(e) NULL
-  )
-
-  if (is.null(result) || !is.finite(as.numeric(result$statistic))) {
-    return(NA_real_)
-  }
-
-  as.numeric(result$statistic)
-}
-
-sliced_ks_statistic <- function(x1, x2) {
-  n_dim <- ncol(x1)
-  directions <- diag(n_dim)
-
-  if (n_dim > 1) {
-    directions <- rbind(
-      directions,
-      rep(1, n_dim),
-      c(rep(1, n_dim - 1), -1)
-    )
-  }
-
-  stats <- apply(directions, 1, function(direction) {
-    direction <- direction / sqrt(sum(direction^2))
-    empirical_ks_statistic(
-      as.numeric(x1 %*% direction),
-      as.numeric(x2 %*% direction)
-    )
-  })
-
-  if (all(!is.finite(stats))) {
-    return(NA_real_)
-  }
-
-  max(stats, na.rm = TRUE)
-}
-
-fallback_ks_result <- function(statistic, reason) {
-  statistic <- as.numeric(statistic)
-  warning(reason, " Falling back to empirical KS statistic.")
-  list(zstat = statistic, Tstat = statistic)
+# Both statistics are unbounded, so there is no value we could return that
+# reliably reads as "worst". Anything finite we invent would rank above a real
+# result, since lower is better -- so report NA and let the run be marked as
+# missing instead of quietly handing out a good score.
+ks_missing_result <- function(reason) {
+  warning(reason, " Returning NA for this metric.")
+  list(zstat = NA_real_, Tstat = NA_real_)
 }
 
 try_kde_test <- function(x1, x2) {
@@ -114,25 +65,21 @@ try_kde_test <- function(x1, x2) {
   is_2d <- is.matrix(x1) || is.matrix(x2)
 
   if (length(x1) == 0 || length(x2) == 0) {
-    return(ks_penalty_result("No finite values available for KS statistic."))
+    return(ks_missing_result("No finite values available for ks::kde.test."))
   }
 
   if (is_2d) {
     if (!is.matrix(x1) || !is.matrix(x2) || ncol(x1) != ncol(x2)) {
-      return(ks_penalty_result("KS statistic inputs have incompatible dimensions."))
+      return(ks_missing_result("ks::kde.test inputs have incompatible dimensions."))
     }
 
     if (nrow(x1) < 2 || nrow(x2) < 2) {
-      return(ks_penalty_result("Not enough finite rows available for KS statistic."))
+      return(ks_missing_result("Not enough finite rows available for ks::kde.test."))
     }
-
-    fallback_statistic <- sliced_ks_statistic(x1, x2)
   } else {
     if (length(x1) < 2 || length(x2) < 2) {
-      return(ks_penalty_result("Not enough finite values available for KS statistic."))
+      return(ks_missing_result("Not enough finite values available for ks::kde.test."))
     }
-
-    fallback_statistic <- empirical_ks_statistic(x1, x2)
   }
 
   result <- tryCatch(
@@ -144,12 +91,7 @@ try_kde_test <- function(x1, x2) {
     return(result)
   }
 
-  reason <- paste0("ks::kde.test failed: ", result$message, ".")
-  if (!is.finite(fallback_statistic)) {
-    return(ks_penalty_result(reason))
-  }
-
-  fallback_ks_result(fallback_statistic, reason)
+  ks_missing_result(paste0("ks::kde.test failed: ", result$message, "."))
 }
 
 subsample_correlations <- function(x, max_size = 10000L, seed = 1L) {
