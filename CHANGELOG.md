@@ -16,6 +16,15 @@ Bug fixes:
     as `ks_statistic_sc_features` already did, so that ties no longer turn into
     NAs. Inputs without variance report NA rather than surviving the jitter as
     a top score.
+  - `downstream` and `ks_statistic_sc_features`: normalise the real and the
+    simulated dataset the same way, through a new `compute_logcounts()` helper.
+    They used three different transforms between them, so the metrics partly
+    measured the difference in normalisation. On the positive control,
+    `crosscor_cosine` and `crosscor_mantel` now come out at exactly 1.
+  - `downstream`: reuse the `spatial_cluster` computed by
+    `process_datasets/generate_sim_spatialcluster` instead of running BayesSpace
+    a second time. The two runs disagreed, which put the positive control at
+    `clustering_ari` 0.55 while the best simulator scored 0.22.
 
 # task_spatial_simulators 0.1.0
 
