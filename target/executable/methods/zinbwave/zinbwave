@@ -453,9 +453,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("BiocParallel", quietly = TRUE)) BiocManager::install("BiocParallel")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2026-07-28T11:30:54Z"
+LABEL org.opencontainers.image.created="2026-07-28T12:34:10Z"
 LABEL org.opencontainers.image.source="https://github.com/drisso/zinbwave"
-LABEL org.opencontainers.image.revision="ef6ea5f0d606b722163a80576948f88f73427f4e"
+LABEL org.opencontainers.image.revision="ee94707c48082697c463d3ff4e203df4e019a1c5"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
