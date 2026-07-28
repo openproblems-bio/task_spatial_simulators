@@ -16,6 +16,17 @@ Bug fixes:
     as `ks_statistic_sc_features` already did, so that ties no longer turn into
     NAs. Inputs without variance report NA rather than surviving the jitter as
     a top score.
+  - `srtsim`: install `shiny` and `shinyBS`, without which `library(SRTsim)`
+    fails on a missing `httpuv`. The method produced no results at all in
+    `run_2026-07-11_18-00-02`.
+  - `scdesign2`: order the input by `spatial_cluster` before simulating.
+    `simulate_count_scDesign2()` returns cells grouped per cell type, so the
+    coordinates taken from the unsorted input belonged to different spots than
+    the counts they were attached to. Also make `cell_type_sel` and
+    `cell_type_prop` agree in order, which they did not for 10 or more
+    clusters.
+  - `negative_normal`: round the generated values, so that `counts` holds
+    integers as `file_simulated_dataset.yaml` declares.
 
 # task_spatial_simulators 0.1.0
 
