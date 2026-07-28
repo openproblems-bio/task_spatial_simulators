@@ -1,6 +1,9 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `ks_statistic_gene_cell` and `ks_statistic_sc_features`: the metric
+    descriptions said Kolmogorov-Smirnov, but both call `ks::kde.test()`, which
+    is a kernel density based two-sample test.
   - `file_dataset_sp.yaml`: `logcounts` is a double, not an integer.
   - `downstream`: `clustering_ari` was declared -Inf..+Inf and
     `ctdeconvolute_rmse` 0..+Inf, though both are bounded. Metric labels were

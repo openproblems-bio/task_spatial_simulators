@@ -3467,8 +3467,8 @@ meta = [
       {
         "name" : "ks_statistic_L_stats",
         "label" : "L statistics",
-        "summary" : "KS statistic of the L statistics",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the L statistics in the real datasets versus the L statistics in the simulated datasets.\n",
+        "summary" : "Kernel density two-sample statistic of the L statistics",
+        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the L statistics in the real datasets versus the L statistics in the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false,
@@ -3479,8 +3479,8 @@ meta = [
       {
         "name" : "ks_statistic_nn_correlation",
         "label" : "Nearest-neighbour correlation",
-        "summary" : "KS statistic of the nearest-neighbour correlation.",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the nn correlation in the real datasets versus the nn correlation in the simulated datasets.\n",
+        "summary" : "Kernel density two-sample statistic of the nearest-neighbour correlation.",
+        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the nn correlation in the real datasets versus the nn correlation in the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false,
@@ -3491,8 +3491,8 @@ meta = [
       {
         "name" : "ks_statistic_morans_I",
         "label" : "Moran's I",
-        "summary" : "KS statistic of Moran's I.",
-        "description" : "The Kolmogorov-Smirnov statistic comparing the Moran's I of the real datasets versus the Moran's I of the simulated datasets.\n",
+        "summary" : "Kernel density two-sample statistic of Moran's I.",
+        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the Moran's I of the real datasets versus the Moran's I of the simulated datasets.\n",
         "min" : "-Inf",
         "max" : "+Inf",
         "maximize" : false,
@@ -3612,7 +3612,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.7",
-    "git_commit" : "8e53b6b765e91b1e6ef5018628fbb625793386ec",
+    "git_commit" : "916a6f882135b80c07bcaffb1b0ffd28c37f87da",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
