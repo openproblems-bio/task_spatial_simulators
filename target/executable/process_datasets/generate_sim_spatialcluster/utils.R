@@ -1,3 +1,28 @@
+# log-normalisation
+#
+# Both the real and the simulated dataset must be normalised the exact same way
+# before they are compared, otherwise the metric picks up the difference in
+# normalisation rather than the difference in the data. Do not read the
+# `logcounts` layer directly: on the real dataset it was produced by the dataset
+# loader, on a simulated dataset it may not exist at all.
+compute_logcounts <- function(adata) {
+  requireNamespace("scater", quietly = TRUE)
+  requireNamespace("SingleCellExperiment", quietly = TRUE)
+  requireNamespace("SummarizedExperiment", quietly = TRUE)
+
+  # genes x spots, as expected by SingleCellExperiment
+  counts <- Matrix::t(adata$layers[["counts"]])
+
+  sce <- SingleCellExperiment::SingleCellExperiment(list(counts = counts))
+  sce <- scater::logNormCounts(sce)
+
+  logcounts <- SummarizedExperiment::assay(sce, "logcounts")
+  dimnames(logcounts) <- dimnames(counts)
+
+  # back to spots x genes, matching the anndata layout
+  Matrix::t(logcounts)
+}
+
 # spatial autocorrelation
 generate_moransI <- function(adata) {
   requireNamespace("spots", quietly = TRUE)

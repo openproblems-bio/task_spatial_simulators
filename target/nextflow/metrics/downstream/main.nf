@@ -3696,7 +3696,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.7",
-    "git_commit" : "69843d6cc84dcee36e401ffcaee928e7be6dc37c",
+    "git_commit" : "5d5c9cb947e5213278ec5e4c2613db40f2b1a8a6",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3877,9 +3877,9 @@ ctdeconvolute_rmse <- generate_rmse(real_ct_prop, sim_ct_prop)
 ctdeconvolute_jsd <- generate_jds(real_ct_prop, sim_ct_prop)
 
 cat("spatial autocorrelation evaluation\\\\n")
-counts <- input_simulated_sp\\$layers[["counts"]]
-logcounts <- log1p(counts)
-input_simulated_sp\\$layers[["logcounts"]] <- logcounts
+# normalise both datasets the same way, so that Moran's I is comparable
+input_real_sp\\$layers[["logcounts"]] <- compute_logcounts(input_real_sp)
+input_simulated_sp\\$layers[["logcounts"]] <- compute_logcounts(input_simulated_sp)
 real_moransI <- generate_moransI(input_real_sp)
 # real_moransI <- input_real_sp\\$varm\\$spatial_autocorrelation
 sim_moransI <- generate_moransI(input_simulated_sp)

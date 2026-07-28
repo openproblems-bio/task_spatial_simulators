@@ -454,9 +454,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("xzhoulab/SPARK", "YingMa0107/CARD", "xuranw/MuSiC", "stevexniu/spots"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics downstream"
-LABEL org.opencontainers.image.created="2026-07-28T13:52:46Z"
+LABEL org.opencontainers.image.created="2026-07-28T13:53:47Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="69843d6cc84dcee36e401ffcaee928e7be6dc37c"
+LABEL org.opencontainers.image.revision="5d5c9cb947e5213278ec5e4c2613db40f2b1a8a6"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1153,9 +1153,9 @@ ctdeconvolute_rmse <- generate_rmse(real_ct_prop, sim_ct_prop)
 ctdeconvolute_jsd <- generate_jds(real_ct_prop, sim_ct_prop)
 
 cat("spatial autocorrelation evaluation\\n")
-counts <- input_simulated_sp\$layers[["counts"]]
-logcounts <- log1p(counts)
-input_simulated_sp\$layers[["logcounts"]] <- logcounts
+# normalise both datasets the same way, so that Moran's I is comparable
+input_real_sp\$layers[["logcounts"]] <- compute_logcounts(input_real_sp)
+input_simulated_sp\$layers[["logcounts"]] <- compute_logcounts(input_simulated_sp)
 real_moransI <- generate_moransI(input_real_sp)
 # real_moransI <- input_real_sp\$varm\$spatial_autocorrelation
 sim_moransI <- generate_moransI(input_simulated_sp)
