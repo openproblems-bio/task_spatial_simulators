@@ -1,6 +1,9 @@
 # task_spatial_simulators dev
 
 Bug fixes:
+  - `srtsim`: install `shiny` and `shinyBS`, without which `library(SRTsim)`
+    fails on a missing `httpuv`. The method produced no results at all in
+    `run_2026-07-11_18-00-02`.
   - `run_benchmark`: raise `uns_length_cutoff` from 15 to 50, so that
     `extract_uns_metadata` no longer drops the `metric_ids` of components that
     emit more than 15 metrics. All 28 `ks_statistic_gene_cell` metrics were
