@@ -3063,7 +3063,7 @@ meta = [
                   "required" : true
                 },
                 {
-                  "type" : "integer",
+                  "type" : "double",
                   "name" : "logcounts",
                   "description" : "Log-transformed counts",
                   "required" : true
@@ -3460,7 +3460,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/scdesign3_poisson",
     "viash_version" : "0.9.7",
-    "git_commit" : "07f04480699014589a1bd73eed78ed0122895f05",
+    "git_commit" : "8e53b6b765e91b1e6ef5018628fbb625793386ec",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
