@@ -43,13 +43,20 @@ crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
 cat("spatial clustering evaluation\n")
-# reclassify the clustering result
-real_cluster <- input_real_sp$obs[, c("spatial_cluster")]
-sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
-location <- rownames(input_simulated_sp)
-sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
+# the simulated clustering was already computed by
+# process_datasets/generate_sim_spatialcluster; recomputing it here would give a
+# different answer every time, since BayesSpace is stochastic and unseeded
+real_cluster <- input_real_sp$obs[["spatial_cluster"]]
+sim_cluster <- input_simulated_sp$obs[["spatial_cluster"]]
 
-# ART and NMI
+if (is.null(sim_cluster)) {
+  stop(
+    "The simulated dataset has no 'spatial_cluster' column. ",
+    "Did it pass through process_datasets/generate_sim_spatialcluster?"
+  )
+}
+
+# ARI and NMI
 clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
 clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)
 
