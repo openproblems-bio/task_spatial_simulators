@@ -454,9 +454,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("xzhoulab/SPARK", "YingMa0107/CARD", "xuranw/MuSiC", "stevexniu/spots"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics downstream"
-LABEL org.opencontainers.image.created="2026-07-29T10:36:32Z"
+LABEL org.opencontainers.image.created="2026-07-29T10:55:09Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="5e9da04915112b09113386be6fe3ff627ab173ce"
+LABEL org.opencontainers.image.revision="3192578013694afb41810aec6aef905c1326b674"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1163,13 +1163,20 @@ crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
 cat("spatial clustering evaluation\\n")
-# reclassify the clustering result
-real_cluster <- input_real_sp\$obs[, c("spatial_cluster")]
-sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
-location <- rownames(input_simulated_sp)
-sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
+# the simulated clustering was already computed by
+# process_datasets/generate_sim_spatialcluster; recomputing it here would give a
+# different answer every time, since BayesSpace is stochastic and unseeded
+real_cluster <- input_real_sp\$obs[["spatial_cluster"]]
+sim_cluster <- input_simulated_sp\$obs[["spatial_cluster"]]
 
-# ART and NMI
+if (is.null(sim_cluster)) {
+  stop(
+    "The simulated dataset has no 'spatial_cluster' column. ",
+    "Did it pass through process_datasets/generate_sim_spatialcluster?"
+  )
+}
+
+# ARI and NMI
 clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
 clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)
 
