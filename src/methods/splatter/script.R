@@ -43,16 +43,18 @@ for (spatial_cluster in unique(input_ordered$obs[["spatial_cluster"]])) {
 colnames(simulated_result) <- rownames(input_ordered$obs)
 rownames(simulated_result) <- rownames(input_ordered$var)
 
-simulated_result_ordered <- counts(simulated_result)[
-  match(rownames(counts(simulated_result)), rownames(input_ordered$var)),
-  match(colnames(counts(simulated_result)), rownames(input_ordered$obs))
-]
+simulated_result_ordered <- counts(simulated_result)
+
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
 
 cat("Generating output\n")
 output <- anndataR::AnnData(
-  layers = list(counts = t(simulated_result_ordered)),
-  obs = input_ordered$obs[c("row", "col")],
-  var = input_ordered$var,
+  layers = list(counts = t(simulated_result_ordered)[restore_order, , drop = FALSE]),
+  obs = input$obs[c("row", "col")],
+  var = input$var,
   uns = c(
     input$uns,
     list(
