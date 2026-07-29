@@ -3421,7 +3421,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/process_datasets/generate_sim_spatialcluster",
     "viash_version" : "0.9.7",
-    "git_commit" : "5d5c9cb947e5213278ec5e4c2613db40f2b1a8a6",
+    "git_commit" : "5e9da04915112b09113386be6fe3ff627ab173ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3586,6 +3586,10 @@ source(file.path(meta\\$resources_dir, "utils.R"))
 cat("Read input files\\\\n")
 input_real_sp <- anndataR::read_h5ad(par\\$input_sp)
 input_simulated_sp <- anndataR::read_h5ad(par\\$input_sp_sim)
+
+# every method's output passes through here on its way to the metrics, so this
+# is the one place worth checking that it still lines up with the real dataset
+check_alignment(input_simulated_sp, input_real_sp)
 
 cat("add spatial cluster in simulated dataset:\\\\n")
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)

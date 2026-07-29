@@ -23,6 +23,43 @@ compute_logcounts <- function(adata) {
   Matrix::t(logcounts)
 }
 
+# A simulated dataset describes the same spots and genes as the dataset it was
+# simulated from, in the same order. The metrics compare the two element-wise --
+# ARI and NMI survive a permutation of the cluster labels, but not one of the
+# spots -- so a method that sorts its input has to sort the result back before
+# writing it out.
+check_alignment <- function(sim_adata, real_adata) {
+  checks <- list(
+    spots = list(sim = rownames(sim_adata$obs), real = rownames(real_adata$obs)),
+    genes = list(sim = rownames(sim_adata$var), real = rownames(real_adata$var))
+  )
+
+  for (what in names(checks)) {
+    sim_names <- checks[[what]]$sim
+    real_names <- checks[[what]]$real
+
+    if (identical(sim_names, real_names)) {
+      next
+    }
+
+    reason <- if (setequal(sim_names, real_names)) {
+      "they are in a different order"
+    } else {
+      paste0(
+        "they differ: ", length(setdiff(real_names, sim_names)), " missing, ",
+        length(setdiff(sim_names, real_names)), " unexpected"
+      )
+    }
+
+    stop(
+      "The simulated dataset's ", what, " do not match the real dataset's: ",
+      reason, "."
+    )
+  }
+
+  invisible(TRUE)
+}
+
 # spatial autocorrelation
 generate_moransI <- function(adata) {
   requireNamespace("spots", quietly = TRUE)

@@ -3427,7 +3427,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/methods/splatter",
     "viash_version" : "0.9.7",
-    "git_commit" : "5d5c9cb947e5213278ec5e4c2613db40f2b1a8a6",
+    "git_commit" : "5e9da04915112b09113386be6fe3ff627ab173ce",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3620,16 +3620,18 @@ for (spatial_cluster in unique(input_ordered\\$obs[["spatial_cluster"]])) {
 colnames(simulated_result) <- rownames(input_ordered\\$obs)
 rownames(simulated_result) <- rownames(input_ordered\\$var)
 
-simulated_result_ordered <- counts(simulated_result)[
-  match(rownames(counts(simulated_result)), rownames(input_ordered\\$var)),
-  match(colnames(counts(simulated_result)), rownames(input_ordered\\$obs))
-]
+simulated_result_ordered <- counts(simulated_result)
+
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
 
 cat("Generating output\\\\n")
 output <- anndataR::AnnData(
-  layers = list(counts = t(simulated_result_ordered)),
-  obs = input_ordered\\$obs[c("row", "col")],
-  var = input_ordered\\$var,
+  layers = list(counts = t(simulated_result_ordered)[restore_order, , drop = FALSE]),
+  obs = input\\$obs[c("row", "col")],
+  var = input\\$var,
   uns = c(
     input\\$uns,
     list(

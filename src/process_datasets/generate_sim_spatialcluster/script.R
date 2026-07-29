@@ -19,6 +19,10 @@ cat("Read input files\n")
 input_real_sp <- anndataR::read_h5ad(par$input_sp)
 input_simulated_sp <- anndataR::read_h5ad(par$input_sp_sim)
 
+# every method's output passes through here on its way to the metrics, so this
+# is the one place worth checking that it still lines up with the real dataset
+check_alignment(input_simulated_sp, input_real_sp)
+
 cat("add spatial cluster in simulated dataset:\n")
 sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
 

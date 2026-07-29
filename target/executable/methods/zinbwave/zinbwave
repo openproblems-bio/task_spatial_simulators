@@ -453,9 +453,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("BiocManager", quietly 
   Rscript -e 'options(warn = 2); if (!requireNamespace("BiocParallel", quietly = TRUE)) BiocManager::install("BiocParallel")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods zinbwave"
-LABEL org.opencontainers.image.created="2026-07-28T13:53:47Z"
+LABEL org.opencontainers.image.created="2026-07-29T10:36:32Z"
 LABEL org.opencontainers.image.source="https://github.com/drisso/zinbwave"
-LABEL org.opencontainers.image.revision="5d5c9cb947e5213278ec5e4c2613db40f2b1a8a6"
+LABEL org.opencontainers.image.revision="5e9da04915112b09113386be6fe3ff627ab173ce"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1140,18 +1140,20 @@ simulated_result <- splatter::zinbSimulate(params)
 colnames(simulated_result) <- rownames(input_ordered\$obs)
 rownames(simulated_result) <- rownames(input_ordered\$var)
 
-simulated_result_ordered <- counts(simulated_result)[
-  match(rownames(counts(simulated_result)), rownames(input_ordered\$var)),
-  match(colnames(counts(simulated_result)), rownames(input_ordered\$obs))
-]
+simulated_result_ordered <- counts(simulated_result)
+
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
 
 cat("Generating output\\n")
 output <- anndataR::AnnData(
   layers = list(
-    counts = Matrix::t(simulated_result_ordered)
+    counts = Matrix::t(simulated_result_ordered)[restore_order, , drop = FALSE]
   ),
-  obs = input_ordered\$obs[c("row", "col")],
-  var = input_ordered\$var,
+  obs = input\$obs[c("row", "col")],
+  var = input\$var,
   uns = c(
     input\$uns,
     list(

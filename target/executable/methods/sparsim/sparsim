@@ -456,9 +456,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_gitlab(c("sysbiobig/SPARSim"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component methods sparsim"
-LABEL org.opencontainers.image.created="2026-07-28T13:53:48Z"
+LABEL org.opencontainers.image.created="2026-07-29T10:36:32Z"
 LABEL org.opencontainers.image.source="https://gitlab.com/sysbiobig/sparsim"
-LABEL org.opencontainers.image.revision="5d5c9cb947e5213278ec5e4c2613db40f2b1a8a6"
+LABEL org.opencontainers.image.revision="5e9da04915112b09113386be6fe3ff627ab173ce"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1166,16 +1166,18 @@ SPARSim_sim_param <- SPARSim::SPARSim_estimate_parameter_from_data(
 sim_result <- SPARSim::SPARSim_simulation(dataset_parameter = SPARSim_sim_param)
 
 # Reorder simulated results
-simulated_result_ordered <- sim_result\$count_matrix[
-  match(rownames(sim_result\$count_matrix), rownames(input_ordered\$var)),
-  match(colnames(sim_result\$count_matrix), rownames(input_ordered\$obs))
-]
+simulated_result_ordered <- sim_result\$count_matrix
+
+# put the spots back in the order they came in. The metrics compare the
+# simulated dataset against the real one spot for spot -- ARI and NMI are
+# invariant to a permutation of the labels, but not of the samples.
+restore_order <- order(ordered_indices)
 
 cat("Generating output\\n")
 output <- anndataR::AnnData(
-  layers = list(counts = t(simulated_result_ordered)),
-  obs = input_ordered\$obs[c("row", "col")],
-  var = input_ordered\$var,
+  layers = list(counts = t(simulated_result_ordered)[restore_order, , drop = FALSE]),
+  obs = input\$obs[c("row", "col")],
+  var = input\$var,
   uns = c(
     input\$uns,
     list(
