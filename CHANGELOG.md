@@ -1,5 +1,11 @@
 # task_spatial_simulators dev
 
+Minor changes:
+  - `run_benchmark`: write the commit the workflow ran from into `task_info.yaml`,
+    so a published result can be traced back to the code that produced it. Until
+    now `task_info.yaml` was a verbatim copy of `_viash.yaml`, whose `version` is
+    the revision (`build_main`) rather than a commit.
+
 Bug fixes:
   - `downstream`: normalise the simulated dataset the same way as the real one,
     through a new `compute_logcounts()` helper. The simulated side used

@@ -165,7 +165,14 @@ workflow run_wf {
       def metric_configs_file = tempFile("metric_configs.yaml")
       metric_configs_file.write(metric_configs_yaml_blob)
 
-      def task_info_file = meta.resources_dir.resolve("_viash.yaml")
+      // store the task info in a file
+      def task_info = readYaml(meta.resources_dir.resolve("_viash.yaml"))
+      // commitId is null when nextflow runs from a local checkout instead of a revision
+      if (workflow.commitId) {
+        task_info.commit = workflow.commitId
+      }
+      def task_info_file = tempFile("task_info.yaml")
+      task_info_file.write(toYamlBlob(task_info))
 
       // store the scores in a file
       def score_uns = states.collect{it.score_uns}
