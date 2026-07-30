@@ -3526,7 +3526,7 @@ meta = [
     "engine" : "native",
     "output" : "target/nextflow/workflows/run_benchmark",
     "viash_version" : "0.9.7",
-    "git_commit" : "4d27c068a516596d55ede14a78773cea9259ddbe",
+    "git_commit" : "f0fab8d44097c92d7c820394274998fbefc5e9cb",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3828,6 +3828,9 @@ workflow run_wf {
       if (workflow.commitId) {
         task_info.commit = workflow.commitId
       }
+      // the launch time -- workflow.complete is only known once the run is over
+      task_info.timestamp = workflow.start.toInstant()
+        .truncatedTo(java.time.temporal.ChronoUnit.SECONDS).toString()
       def task_info_file = tempFile("task_info.yaml")
       task_info_file.write(toYamlBlob(task_info))
 

@@ -171,6 +171,9 @@ workflow run_wf {
       if (workflow.commitId) {
         task_info.commit = workflow.commitId
       }
+      // the launch time -- workflow.complete is only known once the run is over
+      task_info.timestamp = workflow.start.toInstant()
+        .truncatedTo(java.time.temporal.ChronoUnit.SECONDS).toString()
       def task_info_file = tempFile("task_info.yaml")
       task_info_file.write(toYamlBlob(task_info))
 
