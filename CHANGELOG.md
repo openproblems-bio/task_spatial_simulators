@@ -5,6 +5,9 @@ Minor changes:
     so a published result can be traced back to the code that produced it. Until
     now `task_info.yaml` was a verbatim copy of `_viash.yaml`, whose `version` is
     the revision (`build_main`) rather than a commit.
+  - `run_benchmark`: write the workflow launch time into `task_info.yaml` as
+    `timestamp`. The reporting side requires one and was falling back to guessing
+    it from the results path or a file modification time.
 
 Bug fixes:
   - `downstream`: normalise the simulated dataset the same way as the real one,
