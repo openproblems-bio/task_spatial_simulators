@@ -42,24 +42,6 @@ sim_moransI <- generate_moransI(input_simulated_sp)
 crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
-cat("spatial clustering evaluation\n")
-# the simulated clustering was already computed by
-# process_datasets/generate_sim_spatialcluster; recomputing it here would give a
-# different answer every time, since BayesSpace is stochastic and unseeded
-real_cluster <- input_real_sp$obs[["spatial_cluster"]]
-sim_cluster <- input_simulated_sp$obs[["spatial_cluster"]]
-
-if (is.null(sim_cluster)) {
-  stop(
-    "The simulated dataset has no 'spatial_cluster' column. ",
-    "Did it pass through process_datasets/generate_sim_spatialcluster?"
-  )
-}
-
-# ARI and NMI
-clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
-clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)
-
 cat("Combining metric values\n")
 uns_metric_ids <- c(
   "svg_precision",
@@ -67,9 +49,7 @@ uns_metric_ids <- c(
   "ctdeconvolute_rmse",
   "ctdeconvolute_jsd",
   "crosscor_cosine",
-  "crosscor_mantel",
-  "clustering_ari",
-  "clustering_nmi"
+  "crosscor_mantel"
 )
 
 uns_metric_values <- c(
@@ -78,9 +58,7 @@ uns_metric_values <- c(
   ctdeconvolute_rmse,
   ctdeconvolute_jsd,
   crosscor_cosine,
-  crosscor_mantel,
-  clustering_ari,
-  clustering_nmi
+  crosscor_mantel
 )
 
 cat("Writing output AnnData to file\n")
