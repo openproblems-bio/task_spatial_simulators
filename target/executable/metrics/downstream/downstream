@@ -450,13 +450,13 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); if (!requireNamespace("scater", quietly = TRUE)) BiocManager::install("scater")' && \
   Rscript -e 'options(warn = 2); if (!requireNamespace("BayesSpace", quietly = TRUE)) BiocManager::install("BayesSpace")' && \
   Rscript -e 'options(warn = 2); if (!requireNamespace("TOAST", quietly = TRUE)) BiocManager::install("TOAST")' && \
-  Rscript -e 'options(warn = 2); remotes::install_cran(c("aricode", "anndata", "reshape2", "dplyr", "philentropy", "lsa", "vegan", "Metrics"), repos = "https://cran.rstudio.com")' && \
+  Rscript -e 'options(warn = 2); remotes::install_cran(c("anndata", "reshape2", "dplyr", "philentropy", "lsa", "vegan", "Metrics"), repos = "https://cran.rstudio.com")' && \
   Rscript -e 'options(warn = 2); remotes::install_github(c("xzhoulab/SPARK", "YingMa0107/CARD", "xuranw/MuSiC", "stevexniu/spots"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics downstream"
-LABEL org.opencontainers.image.created="2026-07-30T19:21:32Z"
+LABEL org.opencontainers.image.created="2026-08-02T07:58:54Z"
 LABEL org.opencontainers.image.source="https://github.com/openproblems-bio/task_spatial_simulators"
-LABEL org.opencontainers.image.revision="f0fab8d44097c92d7c820394274998fbefc5e9cb"
+LABEL org.opencontainers.image.revision="d4fc24eb78cd9efd179255a304109450e5606053"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1162,24 +1162,6 @@ sim_moransI <- generate_moransI(input_simulated_sp)
 crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
-cat("spatial clustering evaluation\\n")
-# the simulated clustering was already computed by
-# process_datasets/generate_sim_spatialcluster; recomputing it here would give a
-# different answer every time, since BayesSpace is stochastic and unseeded
-real_cluster <- input_real_sp\$obs[["spatial_cluster"]]
-sim_cluster <- input_simulated_sp\$obs[["spatial_cluster"]]
-
-if (is.null(sim_cluster)) {
-  stop(
-    "The simulated dataset has no 'spatial_cluster' column. ",
-    "Did it pass through process_datasets/generate_sim_spatialcluster?"
-  )
-}
-
-# ARI and NMI
-clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
-clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)
-
 cat("Combining metric values\\n")
 uns_metric_ids <- c(
   "svg_precision",
@@ -1187,9 +1169,7 @@ uns_metric_ids <- c(
   "ctdeconvolute_rmse",
   "ctdeconvolute_jsd",
   "crosscor_cosine",
-  "crosscor_mantel",
-  "clustering_ari",
-  "clustering_nmi"
+  "crosscor_mantel"
 )
 
 uns_metric_values <- c(
@@ -1198,9 +1178,7 @@ uns_metric_values <- c(
   ctdeconvolute_rmse,
   ctdeconvolute_jsd,
   crosscor_cosine,
-  crosscor_mantel,
-  clustering_ari,
-  clustering_nmi
+  crosscor_mantel
 )
 
 cat("Writing output AnnData to file\\n")

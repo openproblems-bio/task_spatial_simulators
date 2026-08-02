@@ -1,7 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/openproblems-bio/common_resources/main/schemas/results_v4/method_info.json",
-  "x-schema-version": "4.0.0",
+  "$id": "https://openproblems.bio/schemas/results_v4/method_info.json",
   "title": "Method info",
   "description": "Information about methods in a task",
   "type": "array",
@@ -50,10 +49,10 @@
         "type": "string"
       },
       "authors": {
-        "$ref": "https://raw.githubusercontent.com/openproblems-bio/common_resources/main/schemas/results_v4/core.json#/$defs/authors"
+        "$ref": "https://openproblems.bio/schemas/results_v4/core.json#/$defs/authors"
       },
       "references": {
-        "$ref": "https://raw.githubusercontent.com/openproblems-bio/common_resources/main/schemas/results_v4/core.json#/$defs/references"
+        "$ref": "https://openproblems.bio/schemas/results_v4/core.json#/$defs/references"
       },
       "additional_info": {
         "description": "Additional information from the method config",

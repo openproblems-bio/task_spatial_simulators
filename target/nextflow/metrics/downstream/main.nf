@@ -3465,38 +3465,6 @@ meta = [
   "info" : {
     "metrics" : [
       {
-        "name" : "clustering_ari",
-        "label" : "Adjusted Rand index",
-        "summary" : "Adjusted rand index (ARI) measures the similarity between two clusters in real and simulated datasets.",
-        "description" : "Adjusted Rand Index used in spatial clustering to measure the similarity between two data clusterings, adjusted for chance.\n",
-        "references" : {
-          "doi" : "10.1145/1553374.1553511"
-        },
-        "links" : {
-          "documentation" : "https://cran.r-project.org/web/packages/aricode/index.html",
-          "repository" : "https://github.com/jchiquet/aricode"
-        },
-        "min" : -1,
-        "max" : 1,
-        "maximize" : true
-      },
-      {
-        "name" : "clustering_nmi",
-        "label" : "Normalised mutual information",
-        "summary" : "Normalized mutual information (NMI) measures of the mutual dependence between the real and simulated spatial clusters.",
-        "description" : "Normalized Mutual Information used in spatial clustering to measure the agreement between two different clusterings, scaled to [0, 1].\n",
-        "references" : {
-          "doi" : "10.1145/1553374.1553511"
-        },
-        "links" : {
-          "documentation" : "https://cran.r-project.org/web/packages/aricode/index.html",
-          "repository" : "https://github.com/jchiquet/aricode"
-        },
-        "min" : 0,
-        "max" : 1,
-        "maximize" : true
-      },
-      {
         "name" : "svg_recall",
         "label" : "SVG recall",
         "summary" : "Recall measures the proportion of real SVG correctly identified in the simulated dataset.",
@@ -3664,7 +3632,6 @@ meta = [
         {
           "type" : "r",
           "cran" : [
-            "aricode",
             "anndata",
             "reshape2",
             "dplyr",
@@ -3696,7 +3663,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/downstream",
     "viash_version" : "0.9.7",
-    "git_commit" : "f0fab8d44097c92d7c820394274998fbefc5e9cb",
+    "git_commit" : "d4fc24eb78cd9efd179255a304109450e5606053",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3886,24 +3853,6 @@ sim_moransI <- generate_moransI(input_simulated_sp)
 crosscor_cosine <- generate_cosine(real_moransI, sim_moransI)
 crosscor_mantel <- generate_mantel(real_moransI, sim_moransI)
 
-cat("spatial clustering evaluation\\\\n")
-# the simulated clustering was already computed by
-# process_datasets/generate_sim_spatialcluster; recomputing it here would give a
-# different answer every time, since BayesSpace is stochastic and unseeded
-real_cluster <- input_real_sp\\$obs[["spatial_cluster"]]
-sim_cluster <- input_simulated_sp\\$obs[["spatial_cluster"]]
-
-if (is.null(sim_cluster)) {
-  stop(
-    "The simulated dataset has no 'spatial_cluster' column. ",
-    "Did it pass through process_datasets/generate_sim_spatialcluster?"
-  )
-}
-
-# ARI and NMI
-clustering_ari <- aricode::ARI(real_cluster, sim_cluster)
-clustering_nmi <- aricode::NMI(real_cluster, sim_cluster)
-
 cat("Combining metric values\\\\n")
 uns_metric_ids <- c(
   "svg_precision",
@@ -3911,9 +3860,7 @@ uns_metric_ids <- c(
   "ctdeconvolute_rmse",
   "ctdeconvolute_jsd",
   "crosscor_cosine",
-  "crosscor_mantel",
-  "clustering_ari",
-  "clustering_nmi"
+  "crosscor_mantel"
 )
 
 uns_metric_values <- c(
@@ -3922,9 +3869,7 @@ uns_metric_values <- c(
   ctdeconvolute_rmse,
   ctdeconvolute_jsd,
   crosscor_cosine,
-  crosscor_mantel,
-  clustering_ari,
-  clustering_nmi
+  crosscor_mantel
 )
 
 cat("Writing output AnnData to file\\\\n")

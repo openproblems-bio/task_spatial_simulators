@@ -296,34 +296,6 @@ test_resources:
   dest: "resources_test/spatialsimbench_mobnew"
 info:
   metrics:
-  - name: "clustering_ari"
-    label: "Adjusted Rand index"
-    summary: "Adjusted rand index (ARI) measures the similarity between two clusters\
-      \ in real and simulated datasets."
-    description: "Adjusted Rand Index used in spatial clustering to measure the similarity\
-      \ between two data clusterings, adjusted for chance.\n"
-    references:
-      doi: "10.1145/1553374.1553511"
-    links:
-      documentation: "https://cran.r-project.org/web/packages/aricode/index.html"
-      repository: "https://github.com/jchiquet/aricode"
-    min: -1
-    max: 1
-    maximize: true
-  - name: "clustering_nmi"
-    label: "Normalised mutual information"
-    summary: "Normalized mutual information (NMI) measures of the mutual dependence\
-      \ between the real and simulated spatial clusters."
-    description: "Normalized Mutual Information used in spatial clustering to measure\
-      \ the agreement between two different clusterings, scaled to [0, 1].\n"
-    references:
-      doi: "10.1145/1553374.1553511"
-    links:
-      documentation: "https://cran.r-project.org/web/packages/aricode/index.html"
-      repository: "https://github.com/jchiquet/aricode"
-    min: 0
-    max: 1
-    maximize: true
   - name: "svg_recall"
     label: "SVG recall"
     summary: "Recall measures the proportion of real SVG correctly identified in the\
@@ -462,7 +434,6 @@ engines:
   setup:
   - type: "r"
     cran:
-    - "aricode"
     - "anndata"
     - "reshape2"
     - "dplyr"
@@ -490,7 +461,7 @@ build_info:
   output: "target/nextflow/metrics/downstream"
   executable: "target/nextflow/metrics/downstream/main.nf"
   viash_version: "0.9.7"
-  git_commit: "f0fab8d44097c92d7c820394274998fbefc5e9cb"
+  git_commit: "d4fc24eb78cd9efd179255a304109450e5606053"
   git_remote: "https://github.com/openproblems-bio/task_spatial_simulators"
 package_config:
   name: "task_spatial_simulators"
