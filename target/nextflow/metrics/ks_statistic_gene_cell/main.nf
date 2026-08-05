@@ -3461,174 +3461,6 @@ meta = [
   "info" : {
     "metrics" : [
       {
-        "name" : "ks_statistic_frac_zero_genes_zstat",
-        "label" : "Fraction of zeros per gene",
-        "summary" : "Kernel density two-sample statistic of the fraction of zeros per gene.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the fraction of zeros per gene in the real datasets versus the fraction of zeros per gene in the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_frac_zero_cells_zstat",
-        "label" : "Fraction of zeros per cell",
-        "summary" : "Kernel density two-sample statistic of the fraction of zeros per spot (cell).",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the fraction of zeros per spot (cell) in the real datasets versus the fraction of zeros per spot (cell) in the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_lib_size_cells_zstat",
-        "label" : "Library size",
-        "summary" : "Kernel density two-sample statistic of the library size.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the total sum of UMI counts across all genes in the real datasets versus the total sum of UMI counts across all genes in the simmulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_efflib_size_cells_zstat",
-        "label" : "Effective library size",
-        "summary" : "Kernel density two-sample statistic of the effective library size.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the effective library size of the real datasets versus the effective library size of the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_tmm_cells_zstat",
-        "label" : "TMM",
-        "summary" : "Kernel density two-sample statistic of the weight trimmed mean of M-values normalization factor (TMM).",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the weight trimmed mean of M-values normalization factor for the real datasets versus the weight trimmed mean of M-values normalization factor for the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_scaled_var_cells_zstat",
-        "label" : "Scaled variance cell",
-        "summary" : "Kernel density two-sample statistic of the spot- (or cell-) level scaled variance of the expression matrix.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the spot-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_scaled_mean_cells_zstat",
-        "label" : "Scaled mean cells",
-        "summary" : "Kernel density two-sample statistic of the spot- (or cell-) level scaled mean of the expression matrix.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_lib_fraczero_cells_zstat",
-        "label" : "Library size vs fraction zero",
-        "summary" : "Kernel density two-sample statistic of the relationship between library size and the proportion of zeros per spot (cell).",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the relationship between library size and the proportion of zeros per spot (cell) in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_pearson_cells_zstat",
-        "label" : "Sample Pearson correlation",
-        "summary" : "Kernel density two-sample statistic of the sample Pearson correlation.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the sample Pearson correlation of the real datasets versus the sample Pearson correlation of the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_scaled_var_genes_zstat",
-        "label" : "Scaled variance genes",
-        "summary" : "Kernel density two-sample statistic of the gene-level scaled variance of the expression matrix.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the gene-level z-score standardization of the variance of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_scaled_mean_genes_zstat",
-        "label" : "Scaled mean genes",
-        "summary" : "Kernel density two-sample statistic of the gene-level scaled mean of the expression matrix.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the gene-level z-score standardization of the mean of expression matrix in terms of log2(CPM) in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_pearson_genes_zstat",
-        "label" : "Gene Pearson correlation",
-        "summary" : "Kernel density two-sample statistic of the gene Pearson correlation.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the gene Pearson correlation of the real datasets versus the gene Pearson correlation of the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_mean_var_genes_zstat",
-        "label" : "Mean vs variance",
-        "summary" : "Kernel density two-sample statistic of the relationship between mean expression and variance expression.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the relationship between mean expression and variance expression in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
-        "name" : "ks_statistic_mean_fraczero_genes_zstat",
-        "label" : "Mean vs fraction zero",
-        "summary" : "Kernel density two-sample statistic of the relationship between mean expression and the proportion of zero per gene.",
-        "description" : "The kernel density based global two-sample statistic (`ks::kde.test`) comparing the relationship between mean expression and the proportion of zero per gene in the real datasets versus the simulated datasets.\n",
-        "min" : "-Inf",
-        "max" : "+Inf",
-        "maximize" : false,
-        "references" : {
-          "doi" : "10.1201/9780429485572"
-        }
-      },
-      {
         "name" : "ks_statistic_frac_zero_genes_tstat",
         "label" : "Fraction of zeros per gene",
         "summary" : "Kernel density two-sample statistic of the fraction of zeros per gene.",
@@ -3898,7 +3730,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_gene_cell",
     "viash_version" : "0.9.7",
-    "git_commit" : "d4fc24eb78cd9efd179255a304109450e5606053",
+    "git_commit" : "4b8434634cc91d1aa73c75ace8d57262f8a6d4e8",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -4363,21 +4195,6 @@ ks_statistic_mean_fraczero_genes <- try_kde_test(
 
 cat("Combining metric values\\\\n")
 uns_metric_ids <- c(
-  "ks_statistic_frac_zero_genes_zstat",
-  "ks_statistic_frac_zero_cells_zstat",
-  "ks_statistic_lib_size_cells_zstat",
-  "ks_statistic_efflib_size_cells_zstat",
-  "ks_statistic_tmm_cells_zstat",
-  "ks_statistic_scaled_var_cells_zstat",
-  "ks_statistic_scaled_mean_cells_zstat",
-  "ks_statistic_lib_fraczero_cells_zstat",
-  "ks_statistic_pearson_cells_zstat",
-  "ks_statistic_scaled_var_genes_zstat",
-  "ks_statistic_scaled_mean_genes_zstat",
-  "ks_statistic_pearson_genes_zstat",
-  "ks_statistic_mean_var_genes_zstat",
-  "ks_statistic_mean_fraczero_genes_zstat",
-
   "ks_statistic_frac_zero_genes_tstat",
   "ks_statistic_frac_zero_cells_tstat",
   "ks_statistic_lib_size_cells_tstat",
@@ -4394,21 +4211,6 @@ uns_metric_ids <- c(
   "ks_statistic_mean_fraczero_genes_tstat"
 )
 uns_metric_values <- c(
-  ks_statistic_frac_zero_genes\\$zstat,
-  ks_statistic_frac_zero_cells\\$zstat,
-  ks_statistic_lib_size_cells\\$zstat,
-  ks_statistic_efflib_size_cells\\$zstat,
-  ks_statistic_tmm_cells\\$zstat,
-  ks_statistic_scaled_var_cells\\$zstat,
-  ks_statistic_scaled_mean_cells\\$zstat,
-  ks_statistic_lib_fraczero_cells\\$zstat,
-  ks_statistic_pearson_cells\\$zstat,
-  ks_statistic_scaled_var_genes\\$zstat,
-  ks_statistic_scaled_mean_genes\\$zstat,
-  ks_statistic_pearson_genes\\$zstat,
-  ks_statistic_mean_var_genes\\$zstat,
-  ks_statistic_mean_fraczero_genes\\$zstat,
-
   ks_statistic_frac_zero_genes\\$Tstat,
   ks_statistic_frac_zero_cells\\$Tstat,
   ks_statistic_lib_size_cells\\$Tstat,

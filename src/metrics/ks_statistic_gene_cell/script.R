@@ -326,21 +326,6 @@ ks_statistic_mean_fraczero_genes <- try_kde_test(
 
 cat("Combining metric values\n")
 uns_metric_ids <- c(
-  "ks_statistic_frac_zero_genes_zstat",
-  "ks_statistic_frac_zero_cells_zstat",
-  "ks_statistic_lib_size_cells_zstat",
-  "ks_statistic_efflib_size_cells_zstat",
-  "ks_statistic_tmm_cells_zstat",
-  "ks_statistic_scaled_var_cells_zstat",
-  "ks_statistic_scaled_mean_cells_zstat",
-  "ks_statistic_lib_fraczero_cells_zstat",
-  "ks_statistic_pearson_cells_zstat",
-  "ks_statistic_scaled_var_genes_zstat",
-  "ks_statistic_scaled_mean_genes_zstat",
-  "ks_statistic_pearson_genes_zstat",
-  "ks_statistic_mean_var_genes_zstat",
-  "ks_statistic_mean_fraczero_genes_zstat",
-
   "ks_statistic_frac_zero_genes_tstat",
   "ks_statistic_frac_zero_cells_tstat",
   "ks_statistic_lib_size_cells_tstat",
@@ -357,21 +342,6 @@ uns_metric_ids <- c(
   "ks_statistic_mean_fraczero_genes_tstat"
 )
 uns_metric_values <- c(
-  ks_statistic_frac_zero_genes$zstat,
-  ks_statistic_frac_zero_cells$zstat,
-  ks_statistic_lib_size_cells$zstat,
-  ks_statistic_efflib_size_cells$zstat,
-  ks_statistic_tmm_cells$zstat,
-  ks_statistic_scaled_var_cells$zstat,
-  ks_statistic_scaled_mean_cells$zstat,
-  ks_statistic_lib_fraczero_cells$zstat,
-  ks_statistic_pearson_cells$zstat,
-  ks_statistic_scaled_var_genes$zstat,
-  ks_statistic_scaled_mean_genes$zstat,
-  ks_statistic_pearson_genes$zstat,
-  ks_statistic_mean_var_genes$zstat,
-  ks_statistic_mean_fraczero_genes$zstat,
-
   ks_statistic_frac_zero_genes$Tstat,
   ks_statistic_frac_zero_cells$Tstat,
   ks_statistic_lib_size_cells$Tstat,

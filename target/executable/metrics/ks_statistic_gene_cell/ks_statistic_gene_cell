@@ -452,9 +452,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_cran(c("ks", "resample", "reshape2", "proxyC"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_gene_cell"
-LABEL org.opencontainers.image.created="2026-08-02T07:58:53Z"
+LABEL org.opencontainers.image.created="2026-08-05T03:38:04Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks"
-LABEL org.opencontainers.image.revision="d4fc24eb78cd9efd179255a304109450e5606053"
+LABEL org.opencontainers.image.revision="4b8434634cc91d1aa73c75ace8d57262f8a6d4e8"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1435,21 +1435,6 @@ ks_statistic_mean_fraczero_genes <- try_kde_test(
 
 cat("Combining metric values\\n")
 uns_metric_ids <- c(
-  "ks_statistic_frac_zero_genes_zstat",
-  "ks_statistic_frac_zero_cells_zstat",
-  "ks_statistic_lib_size_cells_zstat",
-  "ks_statistic_efflib_size_cells_zstat",
-  "ks_statistic_tmm_cells_zstat",
-  "ks_statistic_scaled_var_cells_zstat",
-  "ks_statistic_scaled_mean_cells_zstat",
-  "ks_statistic_lib_fraczero_cells_zstat",
-  "ks_statistic_pearson_cells_zstat",
-  "ks_statistic_scaled_var_genes_zstat",
-  "ks_statistic_scaled_mean_genes_zstat",
-  "ks_statistic_pearson_genes_zstat",
-  "ks_statistic_mean_var_genes_zstat",
-  "ks_statistic_mean_fraczero_genes_zstat",
-
   "ks_statistic_frac_zero_genes_tstat",
   "ks_statistic_frac_zero_cells_tstat",
   "ks_statistic_lib_size_cells_tstat",
@@ -1466,21 +1451,6 @@ uns_metric_ids <- c(
   "ks_statistic_mean_fraczero_genes_tstat"
 )
 uns_metric_values <- c(
-  ks_statistic_frac_zero_genes\$zstat,
-  ks_statistic_frac_zero_cells\$zstat,
-  ks_statistic_lib_size_cells\$zstat,
-  ks_statistic_efflib_size_cells\$zstat,
-  ks_statistic_tmm_cells\$zstat,
-  ks_statistic_scaled_var_cells\$zstat,
-  ks_statistic_scaled_mean_cells\$zstat,
-  ks_statistic_lib_fraczero_cells\$zstat,
-  ks_statistic_pearson_cells\$zstat,
-  ks_statistic_scaled_var_genes\$zstat,
-  ks_statistic_scaled_mean_genes\$zstat,
-  ks_statistic_pearson_genes\$zstat,
-  ks_statistic_mean_var_genes\$zstat,
-  ks_statistic_mean_fraczero_genes\$zstat,
-
   ks_statistic_frac_zero_genes\$Tstat,
   ks_statistic_frac_zero_cells\$Tstat,
   ks_statistic_lib_size_cells\$Tstat,
