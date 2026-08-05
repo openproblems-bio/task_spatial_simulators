@@ -456,9 +456,9 @@ RUN Rscript -e 'options(warn = 2); if (!requireNamespace("remotes", quietly = TR
   Rscript -e 'options(warn = 2); remotes::install_github(c("xuranw/MuSiC", "YingMa0107/CARD", "SydneyBioX/scFeatures"), repos = "https://cran.rstudio.com")'
 
 LABEL org.opencontainers.image.description="Companion container for running component metrics ks_statistic_sc_features"
-LABEL org.opencontainers.image.created="2026-08-05T03:38:04Z"
+LABEL org.opencontainers.image.created="2026-08-05T03:44:41Z"
 LABEL org.opencontainers.image.source="https://cran.r-project.org/web/packages/ks/"
-LABEL org.opencontainers.image.revision="4b8434634cc91d1aa73c75ace8d57262f8a6d4e8"
+LABEL org.opencontainers.image.revision="8a1466a505d6c6aed4cc2b70f078210afb92832c"
 LABEL org.opencontainers.image.version="build_main"
 
 VIASHDOCKER
@@ -1296,17 +1296,17 @@ try_kde_test <- function(x1, x2) {
 
   if (length(x1) == 0 || length(x2) == 0) {
     warning("No finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   if (is.matrix(x1) && (nrow(x1) < 2 || nrow(x2) < 2)) {
     warning("Not enough finite rows available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   if (!is.matrix(x1) && (length(x1) < 2 || length(x2) < 2)) {
     warning("Not enough finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   last_error <- NULL
@@ -1341,7 +1341,7 @@ try_kde_test <- function(x1, x2) {
     last_error\$message,
     "\\n\\nReturning NA for this metric."
   )
-  list(zstat = NA_real_, tstat = NA_real_)
+  list(zstat = NA_real_, Tstat = NA_real_)
 }
 
 safe_scfeatures <- function(aligned_inputs, label, feat_types) {
@@ -1424,10 +1424,10 @@ uns_metric_ids <- c(
 )
 
 uns_metric_values <- c(
-  ks_statistic_L_stats\$zstat,
+  ks_statistic_L_stats\$Tstat,
   
-  ks_statistic_nn_correlation\$zstat,
-  ks_statistic_morans_I\$zstat
+  ks_statistic_nn_correlation\$Tstat,
+  ks_statistic_morans_I\$Tstat
 )
 
 cat("Writing output AnnData to file\\n")

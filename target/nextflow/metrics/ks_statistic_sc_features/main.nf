@@ -3612,7 +3612,7 @@ meta = [
     "engine" : "docker",
     "output" : "target/nextflow/metrics/ks_statistic_sc_features",
     "viash_version" : "0.9.7",
-    "git_commit" : "4b8434634cc91d1aa73c75ace8d57262f8a6d4e8",
+    "git_commit" : "8a1466a505d6c6aed4cc2b70f078210afb92832c",
     "git_remote" : "https://github.com/openproblems-bio/task_spatial_simulators"
   },
   "package_config" : {
@@ -3934,17 +3934,17 @@ try_kde_test <- function(x1, x2) {
 
   if (length(x1) == 0 || length(x2) == 0) {
     warning("No finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   if (is.matrix(x1) && (nrow(x1) < 2 || nrow(x2) < 2)) {
     warning("Not enough finite rows available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   if (!is.matrix(x1) && (length(x1) < 2 || length(x2) < 2)) {
     warning("Not enough finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   last_error <- NULL
@@ -3979,7 +3979,7 @@ try_kde_test <- function(x1, x2) {
     last_error\\$message,
     "\\\\n\\\\nReturning NA for this metric."
   )
-  list(zstat = NA_real_, tstat = NA_real_)
+  list(zstat = NA_real_, Tstat = NA_real_)
 }
 
 safe_scfeatures <- function(aligned_inputs, label, feat_types) {
@@ -4062,10 +4062,10 @@ uns_metric_ids <- c(
 )
 
 uns_metric_values <- c(
-  ks_statistic_L_stats\\$zstat,
+  ks_statistic_L_stats\\$Tstat,
   
-  ks_statistic_nn_correlation\\$zstat,
-  ks_statistic_morans_I\\$zstat
+  ks_statistic_nn_correlation\\$Tstat,
+  ks_statistic_morans_I\\$Tstat
 )
 
 cat("Writing output AnnData to file\\\\n")
