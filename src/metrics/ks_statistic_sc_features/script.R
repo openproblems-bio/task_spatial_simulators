@@ -174,17 +174,17 @@ try_kde_test <- function(x1, x2) {
 
   if (length(x1) == 0 || length(x2) == 0) {
     warning("No finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   if (is.matrix(x1) && (nrow(x1) < 2 || nrow(x2) < 2)) {
     warning("Not enough finite rows available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   if (!is.matrix(x1) && (length(x1) < 2 || length(x2) < 2)) {
     warning("Not enough finite values available for ks::kde.test; returning NA.")
-    return(list(zstat = NA_real_, tstat = NA_real_))
+    return(list(zstat = NA_real_, Tstat = NA_real_))
   }
 
   last_error <- NULL
@@ -219,7 +219,7 @@ try_kde_test <- function(x1, x2) {
     last_error$message,
     "\n\nReturning NA for this metric."
   )
-  list(zstat = NA_real_, tstat = NA_real_)
+  list(zstat = NA_real_, Tstat = NA_real_)
 }
 
 safe_scfeatures <- function(aligned_inputs, label, feat_types) {
@@ -302,10 +302,10 @@ uns_metric_ids <- c(
 )
 
 uns_metric_values <- c(
-  ks_statistic_L_stats$zstat,
+  ks_statistic_L_stats$Tstat,
   
-  ks_statistic_nn_correlation$zstat,
-  ks_statistic_morans_I$zstat
+  ks_statistic_nn_correlation$Tstat,
+  ks_statistic_morans_I$Tstat
 )
 
 cat("Writing output AnnData to file\n")
