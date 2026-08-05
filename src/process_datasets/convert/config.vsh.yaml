@@ -1,0 +1,22 @@
+__merge__: /src/api/comp_process_datasets.yaml
+
+name: convert
+namespace: process_datasets
+description: Transform the figshare rds into an HDF5-backed AnnData file.
+
+resources:
+  - type: r_script
+    path: script.R
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: r
+        bioc: [SingleCellExperiment]
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime,midmem,midcpu]

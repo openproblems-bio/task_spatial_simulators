@@ -1,0 +1,43 @@
+name: precompute_downstream
+namespace: process_datasets
+description: Precompute values for the downstream analysis
+argument_groups:
+  - name: Inputs
+    arguments:
+      - name: --input_sp
+        description: Raw spatial dataset
+        required: true
+        __merge__: /src/api/file_dataset_sp.yaml
+
+  - name: Outputs
+    arguments:
+      - type: file
+        name: --output_sp
+        description: Processed spatial dataset
+        example: dataset_sp.h5ad
+        direction: output
+        required: true
+
+resources:
+  - type: r_script
+    path: script.R
+  - path: /src/helpers/utils.R
+
+test_resources:
+  - path: /resources_test/spatialsimbench_mobnew
+    dest: resources_test/spatialsimbench_mobnew
+  - type: python_script
+    path: /common/component_tests/run_and_check_output.py
+
+engines:
+  - type: docker
+    image: openproblems/base_r:1
+    setup:
+      - type: r
+        github: [xzhoulab/SPARK, stevexniu/spots]
+
+runners:
+  - type: executable
+  - type: nextflow
+    directives:
+      label: [midtime,midmem,midcpu]

@@ -1,0 +1,37 @@
+
+
+## VIASH START
+par <- list(
+  # inputs
+  input_sp = "resources_test/spatialsimbench_mobnew/dataset_sp.h5ad",
+  input_sp_sim = "resources_test/spatialsimbench_mobnew/simulated_dataset_processed.h5ad",
+  # outputs
+  output_sp = "resources_test/spatialsimbench_mobnew/simulated_dataset.h5ad"
+)
+meta <- list(
+  resources_dir = "target/executable/process_datasets/generate_sim_spatialcluster"
+)
+## VIASH END
+
+source(file.path(meta$resources_dir, "utils.R"))
+
+cat("Read input files\n")
+input_real_sp <- anndataR::read_h5ad(par$input_sp)
+input_simulated_sp <- anndataR::read_h5ad(par$input_sp_sim)
+
+# every method's output passes through here on its way to the metrics, so this
+# is the one place worth checking that it still lines up with the real dataset
+check_alignment(input_simulated_sp, input_real_sp)
+
+cat("add spatial cluster in simulated dataset:\n")
+sim_cluster <- generate_sim_spatialCluster(input_real_sp, input_simulated_sp)
+
+# need reclassify again
+real_cluster <- input_real_sp$obs[, c("spatial_cluster")]
+location <- rownames(input_simulated_sp)
+sim_new_cluster <- reclassify_simsce(location, real_cluster, sim_cluster)
+
+input_simulated_sp$obs$spatial_cluster <- sim_new_cluster
+
+cat("Writing output to file\n")
+input_simulated_sp$write_h5ad(par$output_sp, compression = "gzip")
